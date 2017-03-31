@@ -1,0 +1,882 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="python,ML,Programming Collective Intelligence,札记," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="数据聚类（data clustering）是一种用以寻找紧密相关的事、人或观点，并将其可视化的方法。聚类经常被用于数据量很大（data-intensive）的应用中。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Data Clustering ---《Programming Collective Intelligence》">
+<meta property="og:url" content="http:www.rootlu.com/blog/2016/12/20/DataClustering.html/index.html">
+<meta property="og:site_name" content="ROOTLu">
+<meta property="og:description" content="数据聚类（data clustering）是一种用以寻找紧密相关的事、人或观点，并将其可视化的方法。聚类经常被用于数据量很大（data-intensive）的应用中。">
+<meta property="og:image" content="http:www.rootlu.com/img/HierarchicalClustering.jpg">
+<meta property="og:image" content="http:www.rootlu.com/img/BlogData.jpg">
+<meta property="og:image" content="http:www.rootlu.com/img/KMeansClustering.jpg">
+<meta property="og:updated_time" content="2017-01-25T05:02:36.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Data Clustering ---《Programming Collective Intelligence》">
+<meta name="twitter:description" content="数据聚类（data clustering）是一种用以寻找紧密相关的事、人或观点，并将其可视化的方法。聚类经常被用于数据量很大（data-intensive）的应用中。">
+<meta name="twitter:image" content="http:www.rootlu.com/img/HierarchicalClustering.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http:www.rootlu.com/blog/2016/12/20/DataClustering.html/"/>
+
+
+  <title> Data Clustering ---《Programming Collective Intelligence》 | ROOTLu </title>
+</head>
+
+<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">ROOTLu</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Do Better, For Better!</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="/life" rel="section">
+            
+            拾荒
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Data Clustering ---《Programming Collective Intelligence》
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-12-20T20:22:31+08:00" content="2016-12-20">
+              2016-12-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/blog/2016/12/20/DataClustering.html/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/12/20/DataClustering.html/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/blog/2016/12/20/DataClustering.html/" class="leancloud_visitors" data-flag-title="Data Clustering ---《Programming Collective Intelligence》">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><strong>数据聚类（data clustering）</strong>是一种用以寻找紧密相关的事、人或观点，并将其可视化的方法。聚类经常被用于数据量很大（data-intensive）的应用中。<br><a id="more"></a><br>聚类是一种<strong>无监督学习（unsupervised learing）</strong>，无监督学习的目的是在一组数据中找到某种结构，而这些数据本身并没是我们要找的答案。聚类算法的目标是采集数据，然后从中找出不同的群组。</p>
+<h2 id="1、分级聚类（Hierarchical-Clustering）"><a href="#1、分级聚类（Hierarchical-Clustering）" class="headerlink" title="1、分级聚类（Hierarchical Clustering）"></a>1、分级聚类（Hierarchical Clustering）</h2><p>分级聚类通过连续不断地将最为相似的群组两两合并，构造出一个群组的层级结构，其中的每个群群组都是从单一元素开始的。分级聚类算法的思想是：<strong>在每次迭代的过程中，计算每两个群组间的距离，并将距离最近的两个群组合并成一个新的群组，直至只剩下一个群组为止</strong>。分级聚类过程示意图如下如所示：<br><img src="/img/HierarchicalClustering.jpg" alt=""><br>在上图中，A、B、C、D、E分别为单一元素，分级聚类开始时，单一元素即为一个群组，每两个群组之间的距离就是通过它们之间的相对位置来体现的。两个元素距离越近，它们就越相似。两个元素合并成一个新群组后，新群组的位置位于两个元素的中间。</p>
+<h3 id="1-1-处理数据集"><a href="#1-1-处理数据集" class="headerlink" title="1.1 处理数据集"></a>1.1 处理数据集</h3><p>以博客数据集为例，对其进行数据聚类，以构造博客的层级结构。博客数据集格式如下图所示：<br><img src="/img/BlogData.jpg" alt=""><br>通过下面的程序加载博客数据集：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">read_file</span><span class="params">(file_name)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    加载数据文件</div><div class="line">    Blog    word1   word2   ...</div><div class="line">    blog1   b1_wc1  b1_wc2  ...</div><div class="line">    blog2   b2_wc1  b2_wc2  ...</div><div class="line">    ...</div><div class="line">    :param file_name:文件名</div><div class="line">    :return: 标题列表、行名列表、数据列表</div><div class="line">    """</div><div class="line">    lines = [line <span class="keyword">for</span> line <span class="keyword">in</span> file(file_name)]</div><div class="line">    <span class="comment"># 第一行是列标题</span></div><div class="line">    col_names = lines[<span class="number">0</span>].strip().split(<span class="string">'\t'</span>)[<span class="number">1</span>:]  <span class="comment"># 以'\t'分割lines[0]，第一个元素为'Blog',从第二个元素开始为单词</span></div><div class="line">    row_names = []</div><div class="line">    data = []  <span class="comment"># 每一项对应数据集中的一行数据</span></div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> lines[<span class="number">1</span>:]:  <span class="comment"># 从第二行开始循环</span></div><div class="line">        p = line.strip().split(<span class="string">'\t'</span>)</div><div class="line">        <span class="comment"># 每一行的第一列是行名</span></div><div class="line">        row_names.append(p[<span class="number">0</span>])</div><div class="line">        <span class="comment"># 剩余部分是该行对应的数据</span></div><div class="line">        data.append([float(x) <span class="keyword">for</span> x <span class="keyword">in</span> p[<span class="number">1</span>:]])</div><div class="line">    <span class="keyword">return</span> row_names, col_names, data</div></pre></td></tr></table></figure></p>
+<p>上述函数将数据集的头一行数据读入了一个代表列名的列表，并将最左边的一列读入了一个和代表行名列表，最后将剩下的所有数据放入一个大列表，其中的每一项对应于数据集中的一行数据。数据集中的任一单元格的计数值，都可以有一个行号和列好来唯一定位，此行号和列号同时还对应于列表rownames和colnames中的索引。</p>
+<h3 id="1-2-定义紧密度-closeness"><a href="#1-2-定义紧密度-closeness" class="headerlink" title="1.2 定义紧密度(closeness)"></a>1.2 定义紧密度(closeness)</h3><p>在博客<a href="">Collaborative Filetering — 《Programming Collective Intelligence》</a>一文中，讨论了两种相似度计算方式，在这里采用皮尔逊相关度方法来计算紧密度。相关代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">pearson</span><span class="params">(v1, v2)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    求v1和v2的皮尔逊相似度，介于-1 和1 之间</div><div class="line">    :param v1:数字列表</div><div class="line">    :param v2:</div><div class="line">    :return:</div><div class="line">    """</div><div class="line">    <span class="comment"># 简单求和</span></div><div class="line">    sum1 = sum(v1)</div><div class="line">    sum2 = sum(v2)</div><div class="line"></div><div class="line">    <span class="comment"># 求平方和</span></div><div class="line">    sum1_pow = sum([pow(v, <span class="number">2</span>) <span class="keyword">for</span> v <span class="keyword">in</span> v1])</div><div class="line">    sum2_pow = sum([pow(v, <span class="number">2</span>) <span class="keyword">for</span> v <span class="keyword">in</span> v2])</div><div class="line"></div><div class="line">    <span class="comment"># 求乘积之和</span></div><div class="line">    pearson_sum = sum([v1[i]*v2[i] <span class="keyword">for</span> i <span class="keyword">in</span> range(len(v1))])</div><div class="line"></div><div class="line">    <span class="comment"># 计算r （Peasrson score）</span></div><div class="line">    num = pearson_sum - (sum1 * sum2 / len(v1))  <span class="comment"># 乘积之和 - 和的乘积/数量</span></div><div class="line">    den = sqrt((sum1_pow-pow(sum1, <span class="number">2</span>)/len(v1)) * (sum2_pow-pow(sum2, <span class="number">2</span>)/len(v2)))</div><div class="line">    <span class="keyword">if</span> den == <span class="number">0</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    <span class="keyword">return</span> <span class="number">1.0</span> - num/den  <span class="comment"># 1-Pearson score,值越大，元素距离越小，介于0 到 1 之间，1表示两者完全匹配</span></div></pre></td></tr></table></figure></p>
+<p>分级聚类算法以一组对应与原始数据的聚类开始，循环计算每两个群组间的距离，并将距离最近的两个群组合并成一个新的群组，新群组中的数据等于两个旧的群组的数据均值，直至只剩下一个群组为止。函数实现过程中，可以将每个配对的相关度计算结果并保存，以达到减少计算量的效果。具体实现代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">hcluster</span><span class="params">(rows, similarity=pearson)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    分级聚类</div><div class="line">    :param rows:数据集</div><div class="line">    :param similarity: 距离计算方法，皮尔逊相关度</div><div class="line">    :return:聚类后的根节点</div><div class="line">    """</div><div class="line">    distances = &#123;&#125;</div><div class="line">    current_clust_id = <span class="number">-1</span></div><div class="line"></div><div class="line">    <span class="comment"># 最开始的聚类就是数据集中的每一行</span></div><div class="line">    clust = [Bicluster(rows[i], id=i) <span class="keyword">for</span> i <span class="keyword">in</span> range(len(rows))]</div><div class="line">    <span class="keyword">while</span> len(clust)&gt;<span class="number">1</span>:  <span class="comment"># 直至只剩下一个群组</span></div><div class="line">        lowest_pair = (<span class="number">0</span>, <span class="number">1</span>)  <span class="comment"># 初始的两个群组</span></div><div class="line">        closest = similarity(clust[<span class="number">0</span>].vec, clust[<span class="number">1</span>].vec)  <span class="comment"># 计算初始两个群组间的相似度 作为 初始的 最小距离</span></div><div class="line">        <span class="comment"># 遍历每一个配对，寻找最小距离</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(len(clust)):</div><div class="line">            <span class="keyword">for</span> j <span class="keyword">in</span> range(i+<span class="number">1</span>, len(clust)):  <span class="comment"># 从第i+1开始，计算 第i个群组 和 第i+1到最后一个群组 之间的距离</span></div><div class="line">                <span class="comment"># 用distances来缓存距离的计算值</span></div><div class="line">                <span class="keyword">if</span>(clust[i].id, clust[j].id) <span class="keyword">not</span> <span class="keyword">in</span> distances:  <span class="comment"># 还未计算i，j之间的距离</span></div><div class="line">                    distances[(clust[i].id, clust[j].id)] = similarity(clust[i].vec, clust[j].vec)</div><div class="line">                tmp_distance = distances[(clust[i].id, clust[j].id)]</div><div class="line"></div><div class="line">                <span class="keyword">if</span> tmp_distance &lt; closest:  <span class="comment"># 两个群组间的距离小于当前最小距离，重写最小距离</span></div><div class="line">                    closest = tmp_distance</div><div class="line">                    lowest_pair = (i, j)  <span class="comment"># 记录当前距离最近的两个群组</span></div><div class="line"></div><div class="line">        <span class="comment"># 计算两个聚类的平均值</span></div><div class="line">        merge_vec = [</div><div class="line">            (clust[lowest_pair[<span class="number">0</span>]].vec[i]+clust[lowest_pair[<span class="number">1</span>]].vec[i])/<span class="number">2.0</span></div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(len(clust[<span class="number">0</span>].vec))</div><div class="line">        ]</div><div class="line">        <span class="comment"># 建立新的聚类</span></div><div class="line">        new_cluster = Bicluster(merge_vec, left=clust[lowest_pair[<span class="number">0</span>]],</div><div class="line">                                right=clust[lowest_pair[<span class="number">1</span>]],</div><div class="line">                                distance=closest, id=current_clust_id)</div><div class="line"></div><div class="line">        <span class="comment"># 不在原始集合中的聚类，其ID为负数</span></div><div class="line">        current_clust_id -= <span class="number">1</span></div><div class="line">        <span class="keyword">del</span> clust[lowest_pair[<span class="number">1</span>]]</div><div class="line">        <span class="keyword">del</span> clust[lowest_pair[<span class="number">0</span>]]</div><div class="line">        clust.append(new_cluster)</div><div class="line">    <span class="keyword">return</span> clust[<span class="number">0</span>]</div></pre></td></tr></table></figure></p>
+<h2 id="2、列聚类（Column-Clustering）"><a href="#2、列聚类（Column-Clustering）" class="headerlink" title="2、列聚类（Column Clustering）"></a>2、列聚类（Column Clustering）</h2><p>列聚类。即是在数据集的列上对数据进行聚类，在博客数据集中，列代表的是单词，通过列聚类可以得到一些单词的常用组合。在分级聚类的基础上，可以很容易的实现列聚类，只需要阿精整个数据集转置(rotate)，使列（单词）变成行，其中的每一行对应于一组数字，这组数字指明了某个单词在每篇博客中出现的次数。实现代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">rotate_matrix</span><span class="params">(data)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    转置数据</div><div class="line">    :param data:</div><div class="line">    :return: 转置后的数据集</div><div class="line">    """</div><div class="line">    new_data = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(len(data[<span class="number">0</span>])):</div><div class="line">        new_row = [data[j][i] <span class="keyword">for</span> j <span class="keyword">in</span> range(len(data))]</div><div class="line">        new_data.append(new_row)</div><div class="line">    <span class="keyword">return</span> new_data</div></pre></td></tr></table></figure></p>
+<p>对转置后的新数据，进行分级聚类，即实现了列聚类。</p>
+<h2 id="3、K-均值聚类（K-Means-Clustering）"><a href="#3、K-均值聚类（K-Means-Clustering）" class="headerlink" title="3、K-均值聚类（K-Means Clustering）"></a>3、K-均值聚类（K-Means Clustering）</h2><p>K-均值聚类是另外一种高效的聚类算法，算法根据预先得知的聚类数量，结合数据结构状况，确定聚类的大小。算法思想是<strong>首先随机选择K个中心位置（位于空间中代表聚类中心的点），然后将各个数据项分配给最邻近的中心点，分配结束后，聚类中心会移动到聚类的所有节点的平均位置，然后重新开始分配</strong>。下图所示为包含两个聚类的K-均值聚类结果。<br><img src="/img/KMeansClustering.jpg" alt=""><br><strong>注意：</strong>图中的两个中心点是随机选择的。<br>K-均值聚类算法实现代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">kcluster</span><span class="params">(rows, similarity=pearson, k=<span class="number">4</span>)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line">    k-均值聚类</div><div class="line">    :param rows: 数据集</div><div class="line">    :param similarity:相似度算法</div><div class="line">    :param k: 期望的聚类数</div><div class="line">    :return:</div><div class="line">    """</div><div class="line">    <span class="comment"># 确定每一个点的最小值和最大值  每个单词在所有博客中出现的最多次数和最少次数</span></div><div class="line">    min_max_ranges = [(min([row[i] <span class="keyword">for</span> row <span class="keyword">in</span> rows]), max([row[i] <span class="keyword">for</span> row <span class="keyword">in</span> rows]))</div><div class="line">                      <span class="keyword">for</span> i <span class="keyword">in</span> range(len(rows[<span class="number">0</span>]))]  <span class="comment"># len(rows[0])即为单词数量</span></div><div class="line"></div><div class="line">    <span class="comment"># 随机创建k个中心点</span></div><div class="line">    k_clusters = [[random.random()*(min_max_ranges[i][<span class="number">1</span>]-min_max_ranges[i][<span class="number">0</span>]) + min_max_ranges[i][<span class="number">0</span>]</div><div class="line">                   <span class="keyword">for</span> i <span class="keyword">in</span> range(len(rows[<span class="number">0</span>]))] <span class="keyword">for</span> j <span class="keyword">in</span> range(k)]</div><div class="line"></div><div class="line">    last_matches = <span class="keyword">None</span></div><div class="line">    <span class="keyword">for</span> t <span class="keyword">in</span> range(<span class="number">100</span>):</div><div class="line">        <span class="keyword">print</span> <span class="string">'Iteration %d '</span> % t</div><div class="line">        best_matches_list = [[] <span class="keyword">for</span> i <span class="keyword">in</span> range(k)]</div><div class="line"></div><div class="line">        <span class="comment"># 在每一行中寻找距离最近的中心点</span></div><div class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> range(len(rows)):</div><div class="line">            row = rows[j]</div><div class="line">            best_match = <span class="number">0</span></div><div class="line">            <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</div><div class="line">                d =similarity(k_clusters[i], row)</div><div class="line">                <span class="keyword">if</span> d &lt; similarity(k_clusters[best_match], row):</div><div class="line">                    best_match = i</div><div class="line">            best_matches_list[best_match].append(j)</div><div class="line"></div><div class="line">        <span class="comment"># 如果结果与上一次相同，则整个过程结束</span></div><div class="line">        <span class="keyword">if</span> best_matches_list == last_matches:</div><div class="line">            <span class="keyword">break</span></div><div class="line">        last_matches = best_matches_list</div><div class="line"></div><div class="line">        <span class="comment"># 把中心转移到其他所有成员的平均位置处</span></div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(k):</div><div class="line">            avgs = [<span class="number">0.0</span>]*len(rows[<span class="number">0</span>])</div><div class="line">            <span class="keyword">if</span> len(best_matches_list[i])&gt;<span class="number">0</span>:</div><div class="line">                <span class="keyword">for</span> row_id <span class="keyword">in</span> best_matches_list[i]:</div><div class="line">                    <span class="keyword">for</span> m <span class="keyword">in</span> range(len(rows[row_id])):</div><div class="line">                        avgs[m] += rows[row_id][m]</div><div class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> range(len(avgs)):</div><div class="line">                    avgs[j] /=len(best_matches_list[i])</div><div class="line">                k_clusters[i] = avgs</div><div class="line">    <span class="keyword">return</span> best_matches_list</div></pre></td></tr></table></figure></p>
+<p><strong>注意：</strong>由于函数随机选择中心点，所以聚类返回结果的顺序几乎总是不同的。</p>
+<h2 id="4、小结"><a href="#4、小结" class="headerlink" title="4、小结"></a>4、小结</h2><p>分级聚类和列聚类可以通过绘制树状图，来观察聚类的结果，但是这两种聚类存在两个缺点：</p>
+<ul>
+<li>计算量巨大，因为聚类算法必须计算每两个配对之间的相关度，在合并两个聚类之后，这些相关度又要重新计算。</li>
+<li>树状图不能真正的将数据拆分成不同的组，如果想要做到这一点，还需要编写额外的代码。<br>K-均值聚类算法通过随机选择K个点作为中心点，进行数据聚类，最终返回K组序列，其中每个序列代表一个聚类，算法的迭代次数相较于分级聚类，次数非常少，效率自然也就更高一些。</li>
+</ul>
+<hr>
+<p>完整代码已上传<a href="https://github.com/rootlu/PCI" target="_blank" rel="external">github</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>写的还不错？那就来个红包吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat-reward-image.jpg" alt="YFLu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/alipay-reward-image.jpg" alt="YFLu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag">#python</a>
+          
+            <a href="/tags/ML/" rel="tag">#ML</a>
+          
+            <a href="/tags/Programming-Collective-Intelligence/" rel="tag">#Programming Collective Intelligence</a>
+          
+            <a href="/tags/札记/" rel="tag">#札记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2016/12/15/TheRoadLessTraveled-SelfDiscipline.html/" rel="next" title="少有人走的路---自律">
+                <i class="fa fa-chevron-left"></i> 少有人走的路---自律
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/01/04/Leetcode461.html/" rel="prev" title="leetcode461. Hamming Distance">
+                leetcode461. Hamming Distance <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="/blog/2016/12/20/DataClustering.html/"
+     data-title="Data Clustering ---《Programming Collective Intelligence》"
+     data-content=""
+     data-url="http:www.rootlu.com//blog/2016/12/20/DataClustering.html/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="/blog/2016/12/20/DataClustering.html/"
+           data-title="Data Clustering ---《Programming Collective Intelligence》" data-url="http:www.rootlu.com//blog/2016/12/20/DataClustering.html/" data-author-key="6">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="YFLu" />
+          <p class="site-author-name" itemprop="name">YFLu</p>
+          <p class="site-description motion-element" itemprop="description">一只程序猿养成记...</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">50</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">29</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rootlu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="www.rootlu.com" target="_blank" title="Weibo">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  Weibo
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、分级聚类（Hierarchical-Clustering）"><span class="nav-text">1、分级聚类（Hierarchical Clustering）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-处理数据集"><span class="nav-text">1.1 处理数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-定义紧密度-closeness"><span class="nav-text">1.2 定义紧密度(closeness)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、列聚类（Column-Clustering）"><span class="nav-text">2、列聚类（Column Clustering）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、K-均值聚类（K-Means-Clustering）"><span class="nav-text">3、K-均值聚类（K-Means Clustering）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、小结"><span class="nav-text">4、小结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YFLu</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"rootlu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz", "0hAkU75j3ti2wICPYsRit8R7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+
+</body>
+</html>
