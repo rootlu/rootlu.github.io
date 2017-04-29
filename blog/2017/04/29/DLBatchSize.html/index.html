@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Deep Learing," />
 
 
 
@@ -86,15 +86,16 @@
 
 
 
-<meta name="description" content="一只程序猿养成记...">
-<meta property="og:type" content="website">
-<meta property="og:title" content="ROOTLu">
-<meta property="og:url" content="http:www.rootlu.com/tags/DeepLearning/index.html">
+<meta name="description" content="在深度神将网络训练过程中，针对数据量的大小，有两种训练方式，一种是全数据集（Full-batch Learning）载入训练，一种是小批量数据集（Mini-batch Learning）载入训练。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习 之 batch_size 的设置">
+<meta property="og:url" content="http:www.rootlu.com/blog/2017/04/29/DLBatchSize.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
-<meta property="og:description" content="一只程序猿养成记...">
+<meta property="og:description" content="在深度神将网络训练过程中，针对数据量的大小，有两种训练方式，一种是全数据集（Full-batch Learning）载入训练，一种是小批量数据集（Mini-batch Learning）载入训练。">
+<meta property="og:updated_time" content="2017-04-29T08:22:12.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ROOTLu">
-<meta name="twitter:description" content="一只程序猿养成记...">
+<meta name="twitter:title" content="深度学习 之 batch_size 的设置">
+<meta name="twitter:description" content="在深度神将网络训练过程中，针对数据量的大小，有两种训练方式，一种是全数据集（Full-batch Learning）载入训练，一种是小批量数据集（Mini-batch Learning）载入训练。">
 
 
 
@@ -115,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="http:www.rootlu.com/tags/DeepLearning/"/>
+  <link rel="canonical" href="http:www.rootlu.com/blog/2017/04/29/DLBatchSize.html/"/>
 
 
-  <title> 标签: DeepLearning | ROOTLu </title>
+  <title> 深度学习 之 batch_size 的设置 | ROOTLu </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -149,7 +150,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-right  ">
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
@@ -237,53 +238,248 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        DeepLearning
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                深度学习 之 batch_size 的设置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-04-29T15:36:04+08:00" content="2017-04-29">
+              2017-04-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/blog/2017/04/29/DLBatchSize.html/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/04/29/DLBatchSize.html/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/blog/2017/04/29/DLBatchSize.html/" class="leancloud_visitors" data-flag-title="深度学习 之 batch_size 的设置">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="//schema.org/Article">
-    <header class="post-header">
+      
+        <p>在深度神将网络训练过程中，针对数据量的大小，有两种训练方式，一种是全数据集（Full-batch Learning）载入训练，一种是小批量数据集（Mini-batch Learning）载入训练。<br><a id="more"></a></p>
+<h3 id="全数据集训练"><a href="#全数据集训练" class="headerlink" title="全数据集训练"></a>全数据集训练</h3><p>在训练集数量比较小时，往往使用全数据集载入训练，这样有两个好处：</p>
+<ul>
+<li>全数据集确定的更新方向能偶更好地代表样本总体，从而更准确的朝向极值所在的方向；</li>
+<li>由于不同权重的梯度值差别较大，因此选取一个合适的全局学习率很困难，全数据集训练可以使用Rprop方法更新参数。</li>
+</ul>
+<h3 id="小批量数据集训练"><a href="#小批量数据集训练" class="headerlink" title="小批量数据集训练"></a>小批量数据集训练</h3><p>在训练数据集数量十分庞大时，完成一次数据更新，需要很长的时间和空间（内存），上述两个优点又变成了缺点：</p>
+<ul>
+<li>在深度学习中，通常使用GPU进行模型训练，而GPU的内存一般都比较小，因此一次性载入所有训练数据，比较困难；</li>
+<li>以Rprop方式更新参数，会由于各个batch之间的采样差异性，各次梯度修正值相互抵消，无法修正，这才有了后来的RMSProp的妥协方案。</li>
+</ul>
+<h3 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h3><p>在实际工程实践中，通常使用小批量数据梯度下降法（Miin-batch Gradient Descent），可以使用小批量数据替代总体数据的原因是，当训练集足够大时，训练集中的数据都是相关的，小批量数据的提督就是整体数据集梯度的一个近似值。</p>
+<h3 id="在合理范围内增大batch-size的好处"><a href="#在合理范围内增大batch-size的好处" class="headerlink" title="在合理范围内增大batch size的好处"></a>在合理范围内增大batch size的好处</h3><ul>
+<li>提高内存利用率</li>
+<li>跑完一次epoch(全数据集)所需的迭代次数减少，加快同一数据量的处理速度</li>
+<li>一般来说，batch size越大，其确定的参数更新方向越准，引起的训练震荡越小</li>
+</ul>
+<h3 id="盲目增大batch-size的坏处"><a href="#盲目增大batch-size的坏处" class="headerlink" title="盲目增大batch size的坏处"></a>盲目增大batch size的坏处</h3><ul>
+<li>容易导致内存溢出</li>
+<li>需要花费更多的时间达到相同的精度</li>
+</ul>
+<p>参考：<br><a href="https://www.zhihu.com/question/32673260" target="_blank" rel="external">程引-知乎回答</a></p>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/blog/2017/04/28/TensorflowUsage.html/" itemprop="url">
-              
-                <span itemprop="name">Tensorflow 使用记录</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>写的还不错？那就来个红包吧！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="/uploads/wechat-reward-image.jpg" alt="YFLu WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="/uploads/alipay-reward-image.jpg" alt="YFLu Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-04-28T18:46:52+08:00"
-              content="2017-04-28" >
-          04-28
-        </time>
-      </div>
 
-    </header>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Deep-Learing/" rel="tag">#Deep Learing</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/04/28/TensorflowUsage.html/" rel="next" title="Tensorflow 使用记录">
+                <i class="fa fa-chevron-left"></i> Tensorflow 使用记录
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+        <div class="ds-share flat" data-thread-key="/blog/2017/04/29/DLBatchSize.html/"
+     data-title="深度学习 之 batch_size 的设置"
+     data-content=""
+     data-url="http:www.rootlu.com//blog/2017/04/29/DLBatchSize.html/">
+  <div class="ds-share-inline">
+    <ul  class="ds-share-icons-16">
+
+      <li data-toggle="ds-share-icons-more"><a class="ds-more" href="javascript:void(0);">分享到：</a></li>
+      <li><a class="ds-weibo" href="javascript:void(0);" data-service="weibo">微博</a></li>
+      <li><a class="ds-qzone" href="javascript:void(0);" data-service="qzone">QQ空间</a></li>
+      <li><a class="ds-qqt" href="javascript:void(0);" data-service="qqt">腾讯微博</a></li>
+      <li><a class="ds-wechat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+
+    </ul>
+    <div class="ds-share-icons-more">
+    </div>
+  </div>
+</div>
+      
+    </div>
+  </div>
 
 
           </div>
           
 
+  <p>热评文章</p>
+  <div class="ds-top-threads" data-range="weekly" data-num-items="4"></div>
+
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="/blog/2017/04/29/DLBatchSize.html/"
+           data-title="深度学习 之 batch_size 的设置" data-url="http:www.rootlu.com//blog/2017/04/29/DLBatchSize.html/" data-author-key="6">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -303,8 +499,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -315,7 +520,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">54</span>
+              <span class="site-state-item-count">55</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -323,7 +528,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -332,7 +537,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">31</span>
+                <span class="site-state-item-count">32</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -408,6 +613,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#全数据集训练"><span class="nav-text">全数据集训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小批量数据集训练"><span class="nav-text">小批量数据集训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用建议"><span class="nav-text">使用建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在合理范围内增大batch-size的好处"><span class="nav-text">在合理范围内增大batch size的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#盲目增大batch-size的坏处"><span class="nav-text">盲目增大batch size的坏处</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -504,6 +720,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
