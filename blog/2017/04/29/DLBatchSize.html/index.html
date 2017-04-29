@@ -92,7 +92,7 @@
 <meta property="og:url" content="http:www.rootlu.com/blog/2017/04/29/DLBatchSize.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在深度神将网络训练过程中，针对数据量的大小，有两种训练方式，一种是全数据集（Full-batch Learning）载入训练，一种是小批量数据集（Mini-batch Learning）载入训练。">
-<meta property="og:updated_time" content="2017-04-29T08:22:12.000Z">
+<meta property="og:updated_time" content="2017-04-29T08:24:40.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="深度学习 之 batch_size 的设置">
 <meta name="twitter:description" content="在深度神将网络训练过程中，针对数据量的大小，有两种训练方式，一种是全数据集（Full-batch Learning）载入训练，一种是小批量数据集（Mini-batch Learning）载入训练。">
@@ -347,23 +347,23 @@
 
       
         <p>在深度神将网络训练过程中，针对数据量的大小，有两种训练方式，一种是全数据集（Full-batch Learning）载入训练，一种是小批量数据集（Mini-batch Learning）载入训练。<br><a id="more"></a></p>
-<h3 id="全数据集训练"><a href="#全数据集训练" class="headerlink" title="全数据集训练"></a>全数据集训练</h3><p>在训练集数量比较小时，往往使用全数据集载入训练，这样有两个好处：</p>
+<h3 id="1、全数据集训练"><a href="#1、全数据集训练" class="headerlink" title="1、全数据集训练"></a>1、全数据集训练</h3><p>在训练集数量比较小时，往往使用全数据集载入训练，这样有两个好处：</p>
 <ul>
 <li>全数据集确定的更新方向能偶更好地代表样本总体，从而更准确的朝向极值所在的方向；</li>
 <li>由于不同权重的梯度值差别较大，因此选取一个合适的全局学习率很困难，全数据集训练可以使用Rprop方法更新参数。</li>
 </ul>
-<h3 id="小批量数据集训练"><a href="#小批量数据集训练" class="headerlink" title="小批量数据集训练"></a>小批量数据集训练</h3><p>在训练数据集数量十分庞大时，完成一次数据更新，需要很长的时间和空间（内存），上述两个优点又变成了缺点：</p>
+<h3 id="2、小批量数据集训练"><a href="#2、小批量数据集训练" class="headerlink" title="2、小批量数据集训练"></a>2、小批量数据集训练</h3><p>在训练数据集数量十分庞大时，完成一次数据更新，需要很长的时间和空间（内存），上述两个优点又变成了缺点：</p>
 <ul>
 <li>在深度学习中，通常使用GPU进行模型训练，而GPU的内存一般都比较小，因此一次性载入所有训练数据，比较困难；</li>
 <li>以Rprop方式更新参数，会由于各个batch之间的采样差异性，各次梯度修正值相互抵消，无法修正，这才有了后来的RMSProp的妥协方案。</li>
 </ul>
-<h3 id="使用建议"><a href="#使用建议" class="headerlink" title="使用建议"></a>使用建议</h3><p>在实际工程实践中，通常使用小批量数据梯度下降法（Miin-batch Gradient Descent），可以使用小批量数据替代总体数据的原因是，当训练集足够大时，训练集中的数据都是相关的，小批量数据的提督就是整体数据集梯度的一个近似值。</p>
-<h3 id="在合理范围内增大batch-size的好处"><a href="#在合理范围内增大batch-size的好处" class="headerlink" title="在合理范围内增大batch size的好处"></a>在合理范围内增大batch size的好处</h3><ul>
+<h3 id="3、使用建议"><a href="#3、使用建议" class="headerlink" title="3、使用建议"></a>3、使用建议</h3><p>在实际工程实践中，通常使用小批量数据梯度下降法（Miin-batch Gradient Descent），可以使用小批量数据替代总体数据的原因是，当训练集足够大时，训练集中的数据都是相关的，小批量数据的提督就是整体数据集梯度的一个近似值。</p>
+<h3 id="4、在合理范围内增大batch-size的好处"><a href="#4、在合理范围内增大batch-size的好处" class="headerlink" title="4、在合理范围内增大batch size的好处"></a>4、在合理范围内增大batch size的好处</h3><ul>
 <li>提高内存利用率</li>
 <li>跑完一次epoch(全数据集)所需的迭代次数减少，加快同一数据量的处理速度</li>
 <li>一般来说，batch size越大，其确定的参数更新方向越准，引起的训练震荡越小</li>
 </ul>
-<h3 id="盲目增大batch-size的坏处"><a href="#盲目增大batch-size的坏处" class="headerlink" title="盲目增大batch size的坏处"></a>盲目增大batch size的坏处</h3><ul>
+<h3 id="5、盲目增大batch-size的坏处"><a href="#5、盲目增大batch-size的坏处" class="headerlink" title="5、盲目增大batch size的坏处"></a>5、盲目增大batch size的坏处</h3><ul>
 <li>容易导致内存溢出</li>
 <li>需要花费更多的时间达到相同的精度</li>
 </ul>
@@ -620,7 +620,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#全数据集训练"><span class="nav-text">全数据集训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小批量数据集训练"><span class="nav-text">小批量数据集训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用建议"><span class="nav-text">使用建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#在合理范围内增大batch-size的好处"><span class="nav-text">在合理范围内增大batch size的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#盲目增大batch-size的坏处"><span class="nav-text">盲目增大batch size的坏处</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、全数据集训练"><span class="nav-text">1、全数据集训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、小批量数据集训练"><span class="nav-text">2、小批量数据集训练</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、使用建议"><span class="nav-text">3、使用建议</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、在合理范围内增大batch-size的好处"><span class="nav-text">4、在合理范围内增大batch size的好处</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、盲目增大batch-size的坏处"><span class="nav-text">5、盲目增大batch size的坏处</span></a></li></ol></div>
             
           </div>
         </section>
