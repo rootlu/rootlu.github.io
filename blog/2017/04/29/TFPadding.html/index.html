@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="C++,QT," />
+  <meta name="keywords" content="TensorFlow,Deep Learning," />
 
 
 
@@ -86,16 +86,16 @@
 
 
 
-<meta name="description" content="代码实现滚动字幕效果。">
+<meta name="description" content="在使用TensorFlow搭建卷积神经网络时，卷积层函数">
 <meta property="og:type" content="article">
-<meta property="og:title" content="QT开发----滚动字幕">
-<meta property="og:url" content="http:www.rootlu.com/blog/2015/08/24/QtScrolling.html/index.html">
+<meta property="og:title" content="TensorFlow 之 卷积层Padding">
+<meta property="og:url" content="http:www.rootlu.com/blog/2017/04/29/TFPadding.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
-<meta property="og:description" content="代码实现滚动字幕效果。">
-<meta property="og:updated_time" content="2016-08-30T02:53:06.000Z">
+<meta property="og:description" content="在使用TensorFlow搭建卷积神经网络时，卷积层函数">
+<meta property="og:updated_time" content="2017-04-29T11:24:24.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="QT开发----滚动字幕">
-<meta name="twitter:description" content="代码实现滚动字幕效果。">
+<meta name="twitter:title" content="TensorFlow 之 卷积层Padding">
+<meta name="twitter:description" content="在使用TensorFlow搭建卷积神经网络时，卷积层函数">
 
 
 
@@ -116,10 +116,10 @@
 
 
 
-  <link rel="canonical" href="http:www.rootlu.com/blog/2015/08/24/QtScrolling.html/"/>
+  <link rel="canonical" href="http:www.rootlu.com/blog/2017/04/29/TFPadding.html/"/>
 
 
-  <title> QT开发----滚动字幕 | ROOTLu </title>
+  <title> TensorFlow 之 卷积层Padding | ROOTLu </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -259,7 +259,7 @@
             
             
               
-                QT开发----滚动字幕
+                TensorFlow 之 卷积层Padding
               
             
           </h1>
@@ -271,8 +271,8 @@
               <i class="fa fa-calendar-o"></i>
             </span>
             <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2015-08-24T16:40:55+08:00" content="2015-08-24">
-              2015-08-24
+            <time itemprop="dateCreated" datetime="2017-04-29T17:38:33+08:00" content="2017-04-29">
+              2017-04-29
             </time>
           </span>
 
@@ -285,8 +285,20 @@
               <span class="post-meta-item-text">分类于</span>
               
                 <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Project/" itemprop="url" rel="index">
-                    <span itemprop="name">Project</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/Deep-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Deep Learning</span>
                   </a>
                 </span>
 
@@ -301,8 +313,8 @@
             
               <span class="post-comments-count">
                 &nbsp; | &nbsp;
-                <a href="/blog/2015/08/24/QtScrolling.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2015/08/24/QtScrolling.html/" itemprop="commentsCount"></span>
+                <a href="/blog/2017/04/29/TFPadding.html/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/04/29/TFPadding.html/" itemprop="commentsCount"></span>
                 </a>
               </span>
             
@@ -312,7 +324,7 @@
 
           
           
-             <span id="/blog/2015/08/24/QtScrolling.html/" class="leancloud_visitors" data-flag-title="QT开发----滚动字幕">
+             <span id="/blog/2017/04/29/TFPadding.html/" class="leancloud_visitors" data-flag-title="TensorFlow 之 卷积层Padding">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -334,11 +346,17 @@
       
 
       
-        <p>代码实现滚动字幕效果。<br><a id="more"></a></p>
-<h2 id="1-构造函数中添加语句："><a href="#1-构造函数中添加语句：" class="headerlink" title="1. 构造函数中添加语句："></a>1. 构造函数中添加语句：</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> timer =new QTimer(<span class="name">this</span>)<span class="comment">;</span></div><div class="line">connect(<span class="name">timer</span>,SIGNAL(<span class="name">timeout</span>()),this,SLOT(<span class="name">TimeOut</span>()))<span class="comment">;//连接信号timeout()与槽函数TimeOut()    </span></div><div class="line">timer-&gt;start(<span class="number">500</span>)<span class="comment">;//时间设为500ms</span></div><div class="line">temp_str=<span class="string">"你要显示的字幕"</span><span class="comment">;//待显示字符串</span></div><div class="line">pos=0<span class="comment">;</span></div></pre></td></tr></table></figure>
-<h2 id="2-实现TimeOut-函数"><a href="#2-实现TimeOut-函数" class="headerlink" title="2. 实现TimeOut()函数"></a>2. 实现TimeOut()函数</h2><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">void 类名::TimeOut<span class="comment">()</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span><span class="comment">(pos&gt;temp_str.length()</span>)</div><div class="line">          pos=<span class="number">0</span>;</div><div class="line">    ui-&gt;showlabel-&gt;setText<span class="comment">(temp_str.substr(pos)</span>.c_str<span class="comment">()</span>);</div><div class="line">    pos++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="3-头文件添加语句："><a href="#3-头文件添加语句：" class="headerlink" title="3. 头文件添加语句："></a>3. 头文件添加语句：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//声明槽函数</span></div><div class="line"><span class="keyword">private</span> slots:</div><div class="line">         <span class="function"><span class="keyword">void</span> <span class="title">TimeOut</span><span class="params">()</span></span>;</div><div class="line"><span class="comment">//定义变量</span></div><div class="line">QTimer *timer;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">string</span> temp_str;</div><div class="line"><span class="keyword">int</span> pos;</div></pre></td></tr></table></figure>
-<p><strong>注意：一定要在头文件中添加<code>void TimeOut()</code>槽函数的声明</strong></p>
+        <p>在使用TensorFlow搭建卷积神经网络时，卷积层函数<br><a id="more"></a><br><code>tf.nn.conv2d(input,filter,strides,padding,use_cudnn_on_gpu=None,data_format=None,name=None)</code>中的参数padding指明零填充的算法，有两种方式可供选择：<strong>SAME</strong>, <strong>VALID</strong>。<br>为了方便对两种零填充算法的说明，定义以下符号：</p>
+<ul>
+<li>输入数据尺寸 W × H x D</li>
+<li>滤波器个数 K</li>
+<li>滤波器filter空间尺寸 F×F（卷积核）</li>
+<li>步长 stride值 S</li>
+<li>输出数据尺寸 out_W x out_H x out_D</li>
+</ul>
+<h3 id="1、padding-‘SAME’"><a href="#1、padding-‘SAME’" class="headerlink" title="1、padding = ‘SAME’"></a>1、padding = ‘SAME’</h3><p>SAME 代表保留边界处的卷积结果，通常会导致输出shape与输入shape相同。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">out_W</span> = W / S （结果向上取整）</div><div class="line"><span class="attr">out_H</span> = W / S （结果向上取整）</div><div class="line"><span class="attr">out_D</span> = K</div></pre></td></tr></table></figure></p>
+<h3 id="2、padding-‘VALID’"><a href="#2、padding-‘VALID’" class="headerlink" title="2、padding = ‘VALID’"></a>2、padding = ‘VALID’</h3><p>VALID 代表只进行有效的卷积，即对边界数据不处理。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">out_W</span> = (W – F + <span class="number">1</span>) / S （结果向上取整）</div><div class="line"><span class="attr">out_H</span> = (W – F + <span class="number">1</span>) / S （结果向上取整）</div><div class="line"><span class="attr">out_D</span> = K</div></pre></td></tr></table></figure></p>
+<p>参考：<br><a href="https://www.tensorflow.org/api_guides/python/nn#Convolution" target="_blank" rel="external">TensorFlow API</a></p>
 
       
     </div>
@@ -382,9 +400,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/C/" rel="tag">#C++</a>
+            <a href="/tags/TensorFlow/" rel="tag">#TensorFlow</a>
           
-            <a href="/tags/QT/" rel="tag">#QT</a>
+            <a href="/tags/Deep-Learning/" rel="tag">#Deep Learning</a>
           
         </div>
       
@@ -393,17 +411,13 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2015/08/21/2to3.html/" rel="next" title="今年夏天，大二升大三">
-                <i class="fa fa-chevron-left"></i> 今年夏天，大二升大三
+              <a href="/blog/2017/04/29/DLBatchSize.html/" rel="next" title="深度学习 之 batch_size 的设置">
+                <i class="fa fa-chevron-left"></i> 深度学习 之 batch_size 的设置
               </a>
             
           </div>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2015/08/25/QtFigure.html/" rel="prev" title="QT开发----绘制统计图">
-                QT开发----绘制统计图 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -418,10 +432,10 @@
 
     <div class="post-spread">
       
-        <div class="ds-share flat" data-thread-key="/blog/2015/08/24/QtScrolling.html/"
-     data-title="QT开发----滚动字幕"
+        <div class="ds-share flat" data-thread-key="/blog/2017/04/29/TFPadding.html/"
+     data-title="TensorFlow 之 卷积层Padding"
      data-content=""
-     data-url="http:www.rootlu.com//blog/2015/08/24/QtScrolling.html/">
+     data-url="http:www.rootlu.com//blog/2017/04/29/TFPadding.html/">
   <div class="ds-share-inline">
     <ul  class="ds-share-icons-16">
 
@@ -451,8 +465,8 @@
           
   <div class="comments" id="comments">
     
-      <div class="ds-thread" data-thread-key="/blog/2015/08/24/QtScrolling.html/"
-           data-title="QT开发----滚动字幕" data-url="http:www.rootlu.com//blog/2015/08/24/QtScrolling.html/" data-author-key="6">
+      <div class="ds-thread" data-thread-key="/blog/2017/04/29/TFPadding.html/"
+           data-title="TensorFlow 之 卷积层Padding" data-url="http:www.rootlu.com//blog/2017/04/29/TFPadding.html/" data-author-key="6">
       </div>
     
   </div>
@@ -597,7 +611,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-构造函数中添加语句："><span class="nav-text">1. 构造函数中添加语句：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-实现TimeOut-函数"><span class="nav-text">2. 实现TimeOut()函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-头文件添加语句："><span class="nav-text">3. 头文件添加语句：</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、padding-‘SAME’"><span class="nav-text">1、padding = ‘SAME’</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、padding-‘VALID’"><span class="nav-text">2、padding = ‘VALID’</span></a></li></ol></div>
             
           </div>
         </section>

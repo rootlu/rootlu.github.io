@@ -88,13 +88,13 @@
 
 <meta name="description" content="记录在使用TensorFlow过程中遇到的一些问题，不断更新…">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tensorflow 使用记录">
+<meta property="og:title" content="TensorFlow 使用记录">
 <meta property="og:url" content="http:www.rootlu.com/blog/2017/04/28/TensorflowUsage.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="记录在使用TensorFlow过程中遇到的一些问题，不断更新…">
-<meta property="og:updated_time" content="2017-04-29T08:24:58.000Z">
+<meta property="og:updated_time" content="2017-04-29T09:59:55.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tensorflow 使用记录">
+<meta name="twitter:title" content="TensorFlow 使用记录">
 <meta name="twitter:description" content="记录在使用TensorFlow过程中遇到的一些问题，不断更新…">
 
 
@@ -119,7 +119,7 @@
   <link rel="canonical" href="http:www.rootlu.com/blog/2017/04/28/TensorflowUsage.html/"/>
 
 
-  <title> Tensorflow 使用记录 | ROOTLu </title>
+  <title> TensorFlow 使用记录 | ROOTLu </title>
 </head>
 
 <body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
@@ -259,7 +259,7 @@
             
             
               
-                Tensorflow 使用记录
+                TensorFlow 使用记录
               
             
           </h1>
@@ -324,7 +324,7 @@
 
           
           
-             <span id="/blog/2017/04/28/TensorflowUsage.html/" class="leancloud_visitors" data-flag-title="Tensorflow 使用记录">
+             <span id="/blog/2017/04/28/TensorflowUsage.html/" class="leancloud_visitors" data-flag-title="TensorFlow 使用记录">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -355,7 +355,11 @@
   <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 进入一个交互式 TensorFlow 会话.</span></div><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line">sess = tf.InteractiveSession()</div><div class="line"></div><div class="line">x = tf.Variable([<span class="number">1.0</span>, <span class="number">2.0</span>])</div><div class="line">a = tf.constant([<span class="number">3.0</span>, <span class="number">3.0</span>])</div><div class="line"></div><div class="line"><span class="comment"># 使用初始化器 initializer op 的 run() 方法初始化 'x' </span></div><div class="line">x.initializer.run()</div><div class="line"></div><div class="line"><span class="comment"># 增加一个减法 sub op, 从 'x' 减去 'a'. 运行减法 op, 输出结果 </span></div><div class="line">sub = tf.sub(x, a)</div><div class="line"><span class="keyword">print</span> sub.eval()</div><div class="line"><span class="comment"># ==&gt; [-2. -1.]</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
-<h3 id="2、待更新…"><a href="#2、待更新…" class="headerlink" title="2、待更新…"></a>2、待更新…</h3><p>参考：<br><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/get_started/basic_usage.html" target="_blank" rel="external">极客学院-TensorFlow官方文档</a></p>
+<h3 id="2、reshape-操作"><a href="#2、reshape-操作" class="headerlink" title="2、reshape()操作"></a>2、reshape()操作</h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow as tf</div><div class="line">tf.<span class="built_in">reshape</span>(tensor, <span class="built_in">shape</span>, <span class="keyword">name</span>=<span class="keyword">None</span>)</div></pre></td></tr></table></figure>
+<p>函数将张量tensor变换为参数shape的形式，shape是一个列表形式，列表中可以存在-1，-1代表不需要人为指定这一维度的大小，函数会自动计算，但列表中只能存在一个-1。</p>
+<h3 id="3、gather-和gather-nd"><a href="#3、gather-和gather-nd" class="headerlink" title="3、gather()和gather_nd()"></a>3、gather()和gather_nd()</h3><p><strong>gather函数原型：</strong><br><code>gather(params, indices, validate_indices=None, name=None)</code><br>函数根据indices对params进行切片，indices必须是一个任意维度的整型tensor（通常为标量或向量），返回大小为indices.shape + params.shape[1:]的tensor<br>示例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line">temp = tf.range(<span class="number">0</span>,<span class="number">10</span>)*<span class="number">10</span> + tf.constant(<span class="number">1</span>,shape=[<span class="number">10</span>])</div><div class="line">temp2 = tf.gather(temp,[<span class="number">1</span>,<span class="number">5</span>,<span class="number">9</span>])</div><div class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">    <span class="keyword">print</span> sess.run(temp)</div><div class="line">    <span class="keyword">print</span> sess.run(temp2)</div><div class="line"></div><div class="line"><span class="comment"># 输出：</span></div><div class="line">[ <span class="number">1</span> <span class="number">11</span> <span class="number">21</span> <span class="number">31</span> <span class="number">41</span> <span class="number">51</span> <span class="number">61</span> <span class="number">71</span> <span class="number">81</span> <span class="number">91</span>] </div><div class="line">[<span class="number">11</span> <span class="number">51</span> <span class="number">91</span>]</div></pre></td></tr></table></figure></p>
+<p><strong>gather_nd函数原型：</strong><br><code>gather_nd(params, indices, name=None)</code><br>函数也是根据indices对params进行切片，但是indices必须是一个shape为[d<em>0, …, d</em>{Q-2}, K]的整型tensor，其中P为params的最大下标，Q为indices的下标，0<k<=p 示例：="" <figure="" class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># ex1</span></div><div class="line">indices = [[<span class="number">0</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">1</span>]]</div><div class="line">params = [[<span class="string">'a'</span>, <span class="string">'b'</span>], [<span class="string">'c'</span>, <span class="string">'d'</span>]]</div><div class="line">output = [<span class="string">'a'</span>, <span class="string">'d'</span>]</div><div class="line"><span class="comment"># ex2</span></div><div class="line">indices = [[<span class="number">1</span>], [<span class="number">0</span>]]</div><div class="line">params = [[<span class="string">'a'</span>, <span class="string">'b'</span>], [<span class="string">'c'</span>, <span class="string">'d'</span>]]</div><div class="line">output = [[<span class="string">'c'</span>, <span class="string">'d'</span>], [<span class="string">'a'</span>, <span class="string">'b'</span>]]</div></pre></td></tr></table></k<=p></p>
+<h3 id="待更新…"><a href="#待更新…" class="headerlink" title="待更新…"></a>待更新…</h3><p>参考：<br><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/get_started/basic_usage.html" target="_blank" rel="external">极客学院-TensorFlow官方文档</a></p>
 
       
     </div>
@@ -436,7 +440,7 @@
     <div class="post-spread">
       
         <div class="ds-share flat" data-thread-key="/blog/2017/04/28/TensorflowUsage.html/"
-     data-title="Tensorflow 使用记录"
+     data-title="TensorFlow 使用记录"
      data-content=""
      data-url="http:www.rootlu.com//blog/2017/04/28/TensorflowUsage.html/">
   <div class="ds-share-inline">
@@ -469,7 +473,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="/blog/2017/04/28/TensorflowUsage.html/"
-           data-title="Tensorflow 使用记录" data-url="http:www.rootlu.com//blog/2017/04/28/TensorflowUsage.html/" data-author-key="6">
+           data-title="TensorFlow 使用记录" data-url="http:www.rootlu.com//blog/2017/04/28/TensorflowUsage.html/" data-author-key="6">
       </div>
     
   </div>
@@ -514,7 +518,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">55</span>
+              <span class="site-state-item-count">56</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -614,7 +618,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Session-与InteractiveSession"><span class="nav-text">1、Session()与InteractiveSession()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、待更新…"><span class="nav-text">2、待更新…</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Session-与InteractiveSession"><span class="nav-text">1、Session()与InteractiveSession()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、reshape-操作"><span class="nav-text">2、reshape()操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、gather-和gather-nd"><span class="nav-text">3、gather()和gather_nd()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#待更新…"><span class="nav-text">待更新…</span></a></li></ol></div>
             
           </div>
         </section>
