@@ -92,7 +92,7 @@
 <meta property="og:url" content="http:www.rootlu.com/blog/2017/04/28/TensorflowUsage.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="记录在使用TensorFlow过程中遇到的一些问题，不断更新…">
-<meta property="og:updated_time" content="2017-04-28T10:57:00.000Z">
+<meta property="og:updated_time" content="2017-04-29T06:50:28.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tensorflow 使用记录">
 <meta name="twitter:description" content="记录在使用TensorFlow过程中遇到的一些问题，不断更新…">
@@ -347,8 +347,15 @@
 
       
         <p>记录在使用TensorFlow过程中遇到的一些问题，不断更新…<br><a id="more"></a></p>
-<h3 id="Session-与InteractiveSession"><a href="#Session-与InteractiveSession" class="headerlink" title="Session()与InteractiveSession()"></a>Session()与InteractiveSession()</h3><p>### </p>
-
+<h3 id="Session-与InteractiveSession"><a href="#Session-与InteractiveSession" class="headerlink" title="Session()与InteractiveSession()"></a>Session()与InteractiveSession()</h3><ul>
+<li><p>创建Session对象，用于启动图，Session对象在使用完后需要关闭以释放资源. 除了显式调用 close 外, 也可以使用 “with” 代码块 来自动完成关闭动作。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"></div><div class="line"><span class="comment"># 创建一个常量 op, 产生一个 1x2 矩阵. 这个 op 被作为一个节点</span></div><div class="line"><span class="comment"># 加到默认图中.</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 构造器的返回值代表该常量 op 的返回值.</span></div><div class="line">matrix1 = tf.constant([[<span class="number">3.</span>, <span class="number">3.</span>]])</div><div class="line"></div><div class="line"><span class="comment"># 创建另外一个常量 op, 产生一个 2x1 矩阵.</span></div><div class="line">matrix2 = tf.constant([[<span class="number">2.</span>],[<span class="number">2.</span>]])</div><div class="line"></div><div class="line"><span class="comment"># 创建一个矩阵乘法 matmul op , 把 'matrix1' 和 'matrix2' 作为输入.</span></div><div class="line"><span class="comment"># 返回值 'product' 代表矩阵乘法的结果.</span></div><div class="line">product = tf.matmul(matrix1, matrix2)</div><div class="line"><span class="comment"># 启动默认图.</span></div><div class="line">sess = tf.Session()</div><div class="line"></div><div class="line"><span class="comment"># 调用 sess 的 'run()' 方法来执行矩阵乘法 op, 传入 'product' 作为该方法的参数. </span></div><div class="line"><span class="comment"># 上面提到, 'product' 代表了矩阵乘法 op 的输出, 传入它是向方法表明, 我们希望取回</span></div><div class="line"><span class="comment"># 矩阵乘法 op 的输出.</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 整个执行过程是自动化的, 会话负责传递 op 所需的全部输入. op 通常是并发执行的.</span></div><div class="line"><span class="comment"># </span></div><div class="line"><span class="comment"># 函数调用 'run(product)' 触发了图中三个 op (两个常量 op 和一个矩阵乘法 op) 的执行.</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 返回值 'result' 是一个 numpy `ndarray` 对象.</span></div><div class="line">result = sess.run(product)</div><div class="line"><span class="keyword">print</span> result</div><div class="line"><span class="comment"># ==&gt; [[ 12.]]</span></div><div class="line"></div><div class="line"><span class="comment"># 任务完成, 关闭会话.</span></div><div class="line">sess.close()</div></pre></td></tr></table></figure>
+</li>
+<li><p>为了便于使用诸如IPython之类的Python 交互环境，可以使用InteractiveSession 代替 Session类，使用Tensor.eval()和Operation.run() 方法代替Session.run()。这样可以避免使用一个变量来持有会话。</p>
+  <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 进入一个交互式 TensorFlow 会话.</span></div><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line">sess = tf.InteractiveSession()</div><div class="line"></div><div class="line">x = tf.Variable([<span class="number">1.0</span>, <span class="number">2.0</span>])</div><div class="line">a = tf.constant([<span class="number">3.0</span>, <span class="number">3.0</span>])</div><div class="line"></div><div class="line"><span class="comment"># 使用初始化器 initializer op 的 run() 方法初始化 'x' </span></div><div class="line">x.initializer.run()</div><div class="line"></div><div class="line"><span class="comment"># 增加一个减法 sub op, 从 'x' 减去 'a'. 运行减法 op, 输出结果 </span></div><div class="line">sub = tf.sub(x, a)</div><div class="line"><span class="keyword">print</span> sub.eval()</div><div class="line"><span class="comment"># ==&gt; [-2. -1.]</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="待更新…"><a href="#待更新…" class="headerlink" title="待更新…"></a>待更新…</h3>
       
     </div>
 
@@ -602,7 +609,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Session-与InteractiveSession"><span class="nav-text">Session()与InteractiveSession()</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Session-与InteractiveSession"><span class="nav-text">Session()与InteractiveSession()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#待更新…"><span class="nav-text">待更新…</span></a></li></ol></div>
             
           </div>
         </section>
