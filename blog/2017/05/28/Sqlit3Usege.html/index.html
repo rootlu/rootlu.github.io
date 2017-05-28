@@ -92,7 +92,7 @@
 <meta property="og:url" content="http:www.rootlu.com/blog/2017/05/28/Sqlit3Usege.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="记录在使用sqlite3过程中，遇到的一些问题，不定期更新…">
-<meta property="og:updated_time" content="2017-05-28T13:25:03.000Z">
+<meta property="og:updated_time" content="2017-05-28T14:09:31.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="sqlit3使用杂记">
 <meta name="twitter:description" content="记录在使用sqlite3过程中，遇到的一些问题，不定期更新…">
@@ -336,7 +336,8 @@
       
         <p>记录在使用sqlite3过程中，遇到的一些问题，不定期更新…<br><a id="more"></a></p>
 <h3 id="1、OperationalError"><a href="#1、OperationalError" class="headerlink" title="1、OperationalError"></a>1、OperationalError</h3><p>在使用python操作sqlit3数据库时，报错信息：</p>
-<figure class="highlight plain"><figcaption><span>Could not decode to UTF-8 column```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">出现这个错误的原因是：在查询数据库时候，数据库对文本的信息自动编码为utf-8格式，在文本中如果出现一些字符无法进行utf-8编码，则会报错，处理方法如下：</div><div class="line">```python</div><div class="line">conn = sqlite3.connect(&apos;test.db&apos;)</div><div class="line">conn.text_factory = str</div></pre></td></tr></table></figure>
+<p><code>sqlite3.OperationalError: Could not decode to UTF-8 column</code><br>出现这个错误的原因是：在查询数据库时候，数据库对文本的信息自动编码为utf-8格式，在文本中如果出现一些字符无法进行utf-8编码，则会报错，处理方法如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">conn = sqlite3.connect(<span class="string">'test.db'</span>)</div><div class="line">conn.text_factory = str</div></pre></td></tr></table></figure>
 <p>参考资料：<br><a href="https://stackoverflow.com/questions/22751363/sqlite3-operationalerror-could-not-decode-to-utf-8-column" target="_blank" rel="external">sqlite3.OperationalError-Stackoverflow</a></p>
 
       
@@ -496,7 +497,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">59</span>
+              <span class="site-state-item-count">60</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -513,7 +514,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-count">34</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
