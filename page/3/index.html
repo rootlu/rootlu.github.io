@@ -1,20 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -63,9 +73,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -74,12 +84,10 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
 
 
 
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -98,44 +106,53 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http:www.rootlu.com/page/3/"/>
 
 
-  <title> ROOTLu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
+
+  <title>ROOTLu</title>
   
 
 
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+
+
+  <script type="text/javascript">
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -143,37 +160,47 @@
 
 
 
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">ROOTLu</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
   </div>
-  <p class="site-subtitle">Do Better, For Better!</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -183,42 +210,32 @@
     <ul id="menu" class="menu">
       
         
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-life">
-          <a href="/life" rel="section">
-            
-            拾荒
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-            关于
           </a>
         </li>
       
@@ -229,6 +246,8 @@
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -243,13 +262,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/12/08/CollaborativeFiltering.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -257,38 +290,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/12/08/CollaborativeFiltering.html/" itemprop="url">
-                  Collaborative Filetering --- 《Programming Collective Intelligence》
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/12/08/CollaborativeFiltering.html/" itemprop="url">Collaborative Filetering --- 《Programming Collective Intelligence》</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-12-08T19:55:32+08:00" content="2016-12-08">
-              2016-12-08
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-08T19:55:32+08:00">
+                2016-12-08
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Machine Learning</span>
                   </a>
@@ -296,7 +333,6 @@
 
                 
                 
-
               
             </span>
           
@@ -304,34 +340,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/12/08/CollaborativeFiltering.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/12/08/CollaborativeFiltering.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/12/08/CollaborativeFiltering.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/12/08/CollaborativeFiltering.html/" class="leancloud_visitors" data-flag-title="Collaborative Filetering --- 《Programming Collective Intelligence》">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -340,24 +375,29 @@
       
         
           <p>协同过滤分析用户兴趣，在用户群中找到指定用户的相似（兴趣）用户，综合这些相似用户对某一信息的评价，形成系统对该指定用户对此信息的喜好程度预测。一个协同型过滤（collaborative filtering）算法通常的做法是对一大群人进行搜索，并从中找出与我们品味相近的一小群人。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/12/08/CollaborativeFiltering.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -367,6 +407,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -374,13 +418,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/11/30/PythonDatime.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -388,38 +446,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/11/30/PythonDatime.html/" itemprop="url">
-                  Python 日期时间处理函数 ---转载
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/11/30/PythonDatime.html/" itemprop="url">Python 日期时间处理函数 ---转载</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-30T19:10:51+08:00" content="2016-11-30">
-              2016-11-30
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-30T19:10:51+08:00">
+                2016-11-30
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Python/" itemprop="url" rel="index">
                     <span itemprop="name">Python</span>
                   </a>
@@ -427,7 +489,6 @@
 
                 
                 
-
               
             </span>
           
@@ -435,34 +496,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/11/30/PythonDatime.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/11/30/PythonDatime.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/11/30/PythonDatime.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/11/30/PythonDatime.html/" class="leancloud_visitors" data-flag-title="Python 日期时间处理函数 ---转载">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -471,24 +531,29 @@
       
         
           <p>Python 对于日期、时间的处理，主要使用datetime包。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/11/30/PythonDatime.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -498,6 +563,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -505,13 +574,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/11/23/GitHttp.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -519,38 +602,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/11/23/GitHttp.html/" itemprop="url">
-                  Git https免密码push
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/11/23/GitHttp.html/" itemprop="url">Git https免密码push</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-23T09:38:47+08:00" content="2016-11-23">
-              2016-11-23
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-23T09:38:47+08:00">
+                2016-11-23
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Git/" itemprop="url" rel="index">
                     <span itemprop="name">Git</span>
                   </a>
@@ -558,7 +645,6 @@
 
                 
                 
-
               
             </span>
           
@@ -566,34 +652,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/11/23/GitHttp.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/11/23/GitHttp.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/11/23/GitHttp.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/11/23/GitHttp.html/" class="leancloud_visitors" data-flag-title="Git https免密码push">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -602,24 +687,29 @@
       
         
           <p>熟悉git的人都知道，每次使用<code>git push</code>提交代码时候，都需要输入密码，极简主义根本忍不了！！！针对git提交代码，有两种方式，一种是以ssh协议的方式，用ssh公钥设置免登陆，这种方式官网有详细说明。还有一种方式是https协议提交代码，下面主要介绍https协议如何实现push免密码。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/11/23/GitHttp.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -629,6 +719,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -636,13 +730,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/11/14/Python编码.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -650,38 +758,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/11/14/Python编码.html/" itemprop="url">
-                  浅谈 Python 编码问题
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/11/14/Python编码.html/" itemprop="url">浅谈 Python 编码问题</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-11-14T21:15:09+08:00" content="2016-11-14">
-              2016-11-14
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-11-14T21:15:09+08:00">
+                2016-11-14
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Python/" itemprop="url" rel="index">
                     <span itemprop="name">Python</span>
                   </a>
@@ -689,7 +801,6 @@
 
                 
                 
-
               
             </span>
           
@@ -697,34 +808,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/11/14/Python编码.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/11/14/Python编码.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/11/14/Python编码.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/11/14/Python编码.html/" class="leancloud_visitors" data-flag-title="浅谈 Python 编码问题">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -733,24 +843,29 @@
       
         
           <p>Python之所以受到程序猿&amp;会写程序的非程序猿的热捧，很大一部分原因是因为其对字符串等数据流的方便快捷处理方式，但是，凡事有利必有弊，python2.x在处理数据过程中，尤其是在处理<del>无比蛋疼</del>博大精深的中文时，最大的困难就是<strong>编码问题</strong>，这也是每一个新手(比如我)都会遇到的遇到的一道大坎儿。。。要想坚持<em>人生苦短，我用python</em>的<del>洗脑</del>崇高信念，就必须大步向前，跨过这道坎儿。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/11/14/Python编码.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -760,6 +875,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -767,13 +886,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/10/12/PythonRegex.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -781,38 +914,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/10/12/PythonRegex.html/" itemprop="url">
-                  Python 之 正则表达式入门---转载
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/10/12/PythonRegex.html/" itemprop="url">Python 之 正则表达式入门---转载</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-10-12T09:30:41+08:00" content="2016-10-12">
-              2016-10-12
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-10-12T09:30:41+08:00">
+                2016-10-12
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Python/" itemprop="url" rel="index">
                     <span itemprop="name">Python</span>
                   </a>
@@ -820,7 +957,6 @@
 
                 
                 
-
               
             </span>
           
@@ -828,34 +964,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/10/12/PythonRegex.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/10/12/PythonRegex.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/10/12/PythonRegex.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/10/12/PythonRegex.html/" class="leancloud_visitors" data-flag-title="Python 之 正则表达式入门---转载">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -864,24 +999,29 @@
       
         
           <p>正则表达式是Python中处理字符串的一大利器，使用方便，功能强大。本文转载自<a href="http://deerchao.net/tutorials/regex/regex.htm">正则表达式30分钟入门教程</a>。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/10/12/PythonRegex.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -891,6 +1031,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -898,13 +1042,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/09/17/DockerSwarm.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -912,38 +1070,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/09/17/DockerSwarm.html/" itemprop="url">
-                  Docker 集群管理工具 Swarm 的安装配置
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/09/17/DockerSwarm.html/" itemprop="url">Docker 集群管理工具 Swarm 的安装配置</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-17T10:22:19+08:00" content="2016-09-17">
-              2016-09-17
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-17T10:22:19+08:00">
+                2016-09-17
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Cloud-Computing/" itemprop="url" rel="index">
                     <span itemprop="name">Cloud Computing</span>
                   </a>
@@ -953,9 +1115,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Cloud-Computing/Docker/" itemprop="url" rel="index">
                     <span itemprop="name">Docker</span>
                   </a>
@@ -963,7 +1124,6 @@
 
                 
                 
-
               
             </span>
           
@@ -971,34 +1131,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/09/17/DockerSwarm.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/DockerSwarm.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/DockerSwarm.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/09/17/DockerSwarm.html/" class="leancloud_visitors" data-flag-title="Docker 集群管理工具 Swarm 的安装配置">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1007,24 +1166,29 @@
       
         
           <p>Swarm是Docker公司在2014年12月初新发布的容器管理工具，，用以管理Docker集群，使得Docker集群暴露给用户时相当于一个虚拟的整体。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/09/17/DockerSwarm.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1034,6 +1198,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1041,13 +1209,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/09/17/DockerExamples.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1055,38 +1237,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/09/17/DockerExamples.html/" itemprop="url">
-                  Docker 实例
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/09/17/DockerExamples.html/" itemprop="url">Docker 实例</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-17T10:12:28+08:00" content="2016-09-17">
-              2016-09-17
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-17T10:12:28+08:00">
+                2016-09-17
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Cloud-Computing/" itemprop="url" rel="index">
                     <span itemprop="name">Cloud Computing</span>
                   </a>
@@ -1096,9 +1282,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Cloud-Computing/Docker/" itemprop="url" rel="index">
                     <span itemprop="name">Docker</span>
                   </a>
@@ -1106,7 +1291,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1114,34 +1298,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/09/17/DockerExamples.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/DockerExamples.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/DockerExamples.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/09/17/DockerExamples.html/" class="leancloud_visitors" data-flag-title="Docker 实例">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1150,24 +1333,29 @@
       
         
           <p>几个Docker简单实例。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/09/17/DockerExamples.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1177,6 +1365,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1184,13 +1376,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/09/17/GitlabVSgogs.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1198,38 +1404,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/09/17/GitlabVSgogs.html/" itemprop="url">
-                  GitLab与Gogs的比较
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/09/17/GitlabVSgogs.html/" itemprop="url">GitLab与Gogs的比较</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-17T10:06:29+08:00" content="2016-09-17">
-              2016-09-17
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-17T10:06:29+08:00">
+                2016-09-17
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Git/" itemprop="url" rel="index">
                     <span itemprop="name">Git</span>
                   </a>
@@ -1237,7 +1447,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1245,34 +1454,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/09/17/GitlabVSgogs.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/GitlabVSgogs.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/GitlabVSgogs.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/09/17/GitlabVSgogs.html/" class="leancloud_visitors" data-flag-title="GitLab与Gogs的比较">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1281,24 +1489,29 @@
       
         
           <p>GitLab和Gogs都是类似GitHub的版本管理工具，GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库，Gogs (Go Git Service) 是一款使用Go语言编写的，极易搭建的自助 Git 服务。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/09/17/GitlabVSgogs.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1308,6 +1521,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1315,13 +1532,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/09/17/DockerGitlab.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1329,38 +1560,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/09/17/DockerGitlab.html/" itemprop="url">
-                  利用Dcoker搭建GitLab版本管理服务
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/09/17/DockerGitlab.html/" itemprop="url">利用Dcoker搭建GitLab版本管理服务</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-17T09:53:41+08:00" content="2016-09-17">
-              2016-09-17
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-17T09:53:41+08:00">
+                2016-09-17
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Cloud-Computing/" itemprop="url" rel="index">
                     <span itemprop="name">Cloud Computing</span>
                   </a>
@@ -1370,9 +1605,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Cloud-Computing/Docker/" itemprop="url" rel="index">
                     <span itemprop="name">Docker</span>
                   </a>
@@ -1380,7 +1614,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1388,34 +1621,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/09/17/DockerGitlab.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/DockerGitlab.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/DockerGitlab.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/09/17/DockerGitlab.html/" class="leancloud_visitors" data-flag-title="利用Dcoker搭建GitLab版本管理服务">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1424,24 +1656,29 @@
       
         
           <p>GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库。GitLab拥有与GitHub类似的功能，能够浏览源代码，管理缺陷和注释，可以管理团队对仓库的访问，还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/09/17/DockerGitlab.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1451,6 +1688,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1458,13 +1699,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/09/17/DockerRepository.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1472,38 +1727,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/09/17/DockerRepository.html/" itemprop="url">
-                  Docker 私有仓库
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/09/17/DockerRepository.html/" itemprop="url">Docker 私有仓库</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-09-17T09:42:16+08:00" content="2016-09-17">
-              2016-09-17
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-17T09:42:16+08:00">
+                2016-09-17
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Cloud-Computing/" itemprop="url" rel="index">
                     <span itemprop="name">Cloud Computing</span>
                   </a>
@@ -1513,9 +1772,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Cloud-Computing/Docker/" itemprop="url" rel="index">
                     <span itemprop="name">Docker</span>
                   </a>
@@ -1523,7 +1781,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1531,34 +1788,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/09/17/DockerRepository.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/DockerRepository.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/09/17/DockerRepository.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/09/17/DockerRepository.html/" class="leancloud_visitors" data-flag-title="Docker 私有仓库">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1567,24 +1823,29 @@
       
         
           <p>DockerHub作为Docker的官方镜像仓库，存放了许多热门及常用镜像，但由于GFW的原因，国内很难从DockerHub上拉取镜像。虽然国内也有Daocloud之类的镜像仓库，但有些时候似乎还是不能满足我们的需求。。。因此，搭建Docker 私有仓库就显得十分必要，私有仓库不仅可以提高下载速度，还可以个性化定制镜像，并持续化使用。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/09/17/DockerRepository.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1594,6 +1855,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1626,31 +1891,39 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
+               src="/images/avatar.gif"
                alt="YFLu" />
           <p class="site-author-name" itemprop="name">YFLu</p>
-          <p class="site-description motion-element" itemprop="description">一只程序猿养成记...</p>
+           
+              <p class="site-description motion-element" itemprop="description">一只程序猿养成记...</p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">64</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1658,8 +1931,10 @@
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1669,44 +1944,8 @@
         </nav>
 
         
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
 
         <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/rootlu" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎">
-                  
-                    <i class="fa fa-fw fa-zhihu"></i>
-                  
-                  知乎
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/412404179" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
-                </a>
-              </span>
-            
           
         </div>
 
@@ -1715,26 +1954,13 @@
 
         
         
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              友情链接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
-                </li>
-              
-            </ul>
-          </div>
+
         
 
+
       </section>
+
+      
 
       
 
@@ -1750,13 +1976,14 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2015 - 
+  &copy; 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">YFLu</span>
 </div>
+
 
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
@@ -1765,9 +1992,10 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
+
 
         
 
@@ -1775,9 +2003,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1797,6 +2029,15 @@
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1822,21 +2063,25 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
-  
-
   
 
   
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+  
+
+  
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
@@ -1861,126 +2106,9 @@
 
   
     
+    
     <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
-
-
-
-
-
-
-  
-  
-
-  
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz", "0hAkU75j3ti2wICPYsRit8R7");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    <script src="/js/src/hook-duoshuo.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -1998,6 +2126,24 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
 
 
 
@@ -2005,6 +2151,13 @@
 
   
 
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

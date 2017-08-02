@@ -1,20 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -63,9 +73,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -74,12 +84,10 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
 
 
 
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -98,44 +106,53 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http:www.rootlu.com/"/>
 
 
-  <title> ROOTLu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
+
+  <title>ROOTLu</title>
   
 
 
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+
+
+  <script type="text/javascript">
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -143,37 +160,47 @@
 
 
 
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">ROOTLu</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
   </div>
-  <p class="site-subtitle">Do Better, For Better!</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -183,42 +210,32 @@
     <ul id="menu" class="menu">
       
         
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-life">
-          <a href="/life" rel="section">
-            
-            拾荒
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-            关于
           </a>
         </li>
       
@@ -229,6 +246,8 @@
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -243,13 +262,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/08/01/DeepWalk.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -257,38 +290,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/08/01/DeepWalk.html/" itemprop="url">
-                  DeepWalk---论文笔记
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/08/01/DeepWalk.html/" itemprop="url">DeepWalk---论文笔记</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-08-01T23:32:12+08:00" content="2017-08-01">
-              2017-08-01
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-01T23:32:12+08:00">
+                2017-08-01
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Machine Learning</span>
                   </a>
@@ -298,9 +335,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Machine-Learning/Representation-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Representation Learning</span>
                   </a>
@@ -308,7 +344,6 @@
 
                 
                 
-
               
             </span>
           
@@ -316,34 +351,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/08/01/DeepWalk.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/08/01/DeepWalk.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/08/01/DeepWalk.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/08/01/DeepWalk.html/" class="leancloud_visitors" data-flag-title="DeepWalk---论文笔记">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -352,24 +386,29 @@
       
         
           <p>论文《DeepWalk Online Learning of Social Representations》是KDD‘14年的一篇文章，目前谷歌引用量已达到400多次。论文的创新点在于首次将语言模型中的SkipGram应用于图结构的表示学习中，并基于随机游走，将随机游走的路径是做语言模型中的句子。</p>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/08/01/DeepWalk.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -379,6 +418,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -386,13 +429,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/05/30/PythonMatplotlib.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -400,38 +457,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/05/30/PythonMatplotlib.html/" itemprop="url">
-                  Python绘制直方图和折线图
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/05/30/PythonMatplotlib.html/" itemprop="url">Python绘制直方图和折线图</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-30T16:39:42+08:00" content="2017-05-30">
-              2017-05-30
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-30T16:39:42+08:00">
+                2017-05-30
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Python/" itemprop="url" rel="index">
                     <span itemprop="name">Python</span>
                   </a>
@@ -439,7 +500,6 @@
 
                 
                 
-
               
             </span>
           
@@ -447,34 +507,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/05/30/PythonMatplotlib.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/30/PythonMatplotlib.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/30/PythonMatplotlib.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/05/30/PythonMatplotlib.html/" class="leancloud_visitors" data-flag-title="Python绘制直方图和折线图">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -483,24 +542,29 @@
       
         
           <p>最近在写毕设论文，需要画一些实验结果的图，一开始用excel画的，被导师嘲讽为“不专业”，于是投奔了python大法。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/05/30/PythonMatplotlib.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -510,6 +574,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -517,13 +585,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/05/29/MyUniversity.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -531,38 +613,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/05/29/MyUniversity.html/" itemprop="url">
-                  大学，GAME OVER。
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/05/29/MyUniversity.html/" itemprop="url">大学，GAME OVER。</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-29T10:20:09+08:00" content="2017-05-29">
-              2017-05-29
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-29T10:20:09+08:00">
+                2017-05-29
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/杂记/" itemprop="url" rel="index">
                     <span itemprop="name">杂记</span>
                   </a>
@@ -570,7 +656,6 @@
 
                 
                 
-
               
             </span>
           
@@ -578,34 +663,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/05/29/MyUniversity.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/29/MyUniversity.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/29/MyUniversity.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/05/29/MyUniversity.html/" class="leancloud_visitors" data-flag-title="大学，GAME OVER。">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -614,24 +698,29 @@
       
         
           <p>本来一直打算写点东西，好歹纪念一下大学四年的生活，但是无奈是个拖延症重度患者，要不是陈老师抬举我，让我写点东西留给学弟学妹，估计这篇文章就拖得没影儿了…<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/05/29/MyUniversity.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -641,6 +730,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -648,13 +741,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/05/29/PythonTime.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -662,38 +769,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/05/29/PythonTime.html/" itemprop="url">
-                  Python 之 打印当前时间
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/05/29/PythonTime.html/" itemprop="url">Python 之 打印当前时间</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-29T10:04:30+08:00" content="2017-05-29">
-              2017-05-29
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-29T10:04:30+08:00">
+                2017-05-29
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Python/" itemprop="url" rel="index">
                     <span itemprop="name">Python</span>
                   </a>
@@ -701,7 +812,6 @@
 
                 
                 
-
               
             </span>
           
@@ -709,34 +819,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/05/29/PythonTime.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/29/PythonTime.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/29/PythonTime.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/05/29/PythonTime.html/" class="leancloud_visitors" data-flag-title="Python 之 打印当前时间">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -745,24 +854,29 @@
       
         
           <p>在python中，time包可以实现打印当前系统时间的功能，但<code>time.time()</code>返回的结果是一个时间间隔，好像是从1970年至今的时间间隔。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/05/29/PythonTime.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -772,6 +886,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -779,13 +897,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/05/28/GPUSetup.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -793,38 +925,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/05/28/GPUSetup.html/" itemprop="url">
-                  设置TensorFlow占用GPU显存
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/05/28/GPUSetup.html/" itemprop="url">设置TensorFlow占用GPU显存</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-28T22:17:34+08:00" content="2017-05-28">
-              2017-05-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-28T22:17:34+08:00">
+                2017-05-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Machine Learning</span>
                   </a>
@@ -834,9 +970,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Machine-Learning/Deep-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Deep Learning</span>
                   </a>
@@ -844,7 +979,6 @@
 
                 
                 
-
               
             </span>
           
@@ -852,34 +986,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/05/28/GPUSetup.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/28/GPUSetup.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/28/GPUSetup.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/05/28/GPUSetup.html/" class="leancloud_visitors" data-flag-title="设置TensorFlow占用GPU显存">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -888,24 +1021,29 @@
       
         
           <p>在做毕设过程中，由于需要使用GPU跑模型，而实验室的GPU还有师兄师姐要用，所以需要限制一下程序占用GPU显存的大小。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/05/28/GPUSetup.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -915,6 +1053,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -922,13 +1064,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/05/28/PythonDivision.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -936,38 +1092,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/05/28/PythonDivision.html/" itemprop="url">
-                  Python 之 多种除法计算
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/05/28/PythonDivision.html/" itemprop="url">Python 之 多种除法计算</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-28T21:26:28+08:00" content="2017-05-28">
-              2017-05-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-28T21:26:28+08:00">
+                2017-05-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Python/" itemprop="url" rel="index">
                     <span itemprop="name">Python</span>
                   </a>
@@ -975,7 +1135,6 @@
 
                 
                 
-
               
             </span>
           
@@ -983,34 +1142,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/05/28/PythonDivision.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/28/PythonDivision.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/28/PythonDivision.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/05/28/PythonDivision.html/" class="leancloud_visitors" data-flag-title="Python 之 多种除法计算">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1019,24 +1177,29 @@
       
         
           <p>在python中不需要定义数据类型，在进行除法计算，会根据所使用的不同除法运算方式，计算得出不同的结果。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/05/28/PythonDivision.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1046,6 +1209,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1053,13 +1220,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/05/28/Sqlit3Usege.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1067,38 +1248,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/05/28/Sqlit3Usege.html/" itemprop="url">
-                  sqlit3使用杂记
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/05/28/Sqlit3Usege.html/" itemprop="url">sqlit3使用杂记</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-05-28T20:54:51+08:00" content="2017-05-28">
-              2017-05-28
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-28T20:54:51+08:00">
+                2017-05-28
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Python/" itemprop="url" rel="index">
                     <span itemprop="name">Python</span>
                   </a>
@@ -1106,7 +1291,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1114,34 +1298,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/05/28/Sqlit3Usege.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/28/Sqlit3Usege.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/05/28/Sqlit3Usege.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/05/28/Sqlit3Usege.html/" class="leancloud_visitors" data-flag-title="sqlit3使用杂记">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1150,24 +1333,29 @@
       
         
           <p>记录在使用sqlite3过程中，遇到的一些问题，不定期更新…<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/05/28/Sqlit3Usege.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1177,6 +1365,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1184,13 +1376,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/04/29/TheRoadLessTraveled-Love.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1198,38 +1404,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/04/29/TheRoadLessTraveled-Love.html/" itemprop="url">
-                  少有人走的路---爱
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/04/29/TheRoadLessTraveled-Love.html/" itemprop="url">少有人走的路---爱</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-29T19:36:31+08:00" content="2017-04-29">
-              2017-04-29
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-29T19:36:31+08:00">
+                2017-04-29
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/杂碎/" itemprop="url" rel="index">
                     <span itemprop="name">杂碎</span>
                   </a>
@@ -1237,7 +1447,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1245,34 +1454,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/04/29/TheRoadLessTraveled-Love.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/04/29/TheRoadLessTraveled-Love.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/04/29/TheRoadLessTraveled-Love.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/04/29/TheRoadLessTraveled-Love.html/" class="leancloud_visitors" data-flag-title="少有人走的路---爱">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1281,24 +1489,29 @@
       
         
           <p>爱，是为了促进自己和他人心智成熟，而不断拓展自我界限，实现自我完善的一种意境。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/04/29/TheRoadLessTraveled-Love.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1308,6 +1521,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1315,13 +1532,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/04/29/TFPadding.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1329,38 +1560,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/04/29/TFPadding.html/" itemprop="url">
-                  TensorFlow 之 卷积层Padding
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/04/29/TFPadding.html/" itemprop="url">TensorFlow 之 卷积层Padding</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-29T17:38:33+08:00" content="2017-04-29">
-              2017-04-29
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-29T17:38:33+08:00">
+                2017-04-29
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Machine Learning</span>
                   </a>
@@ -1370,9 +1605,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Machine-Learning/Deep-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Deep Learning</span>
                   </a>
@@ -1380,7 +1614,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1388,34 +1621,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/04/29/TFPadding.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/04/29/TFPadding.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/04/29/TFPadding.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/04/29/TFPadding.html/" class="leancloud_visitors" data-flag-title="TensorFlow 之 卷积层Padding">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1424,24 +1656,29 @@
       
         
           <p>在使用TensorFlow搭建卷积神经网络时，卷积层函数<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/04/29/TFPadding.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1451,6 +1688,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1458,13 +1699,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2017/04/29/DLBatchSize.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1472,38 +1727,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2017/04/29/DLBatchSize.html/" itemprop="url">
-                  深度学习 之 batch_size 的设置
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2017/04/29/DLBatchSize.html/" itemprop="url">深度学习 之 batch_size 的设置</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2017-04-29T15:36:04+08:00" content="2017-04-29">
-              2017-04-29
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-29T15:36:04+08:00">
+                2017-04-29
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Machine Learning</span>
                   </a>
@@ -1513,9 +1772,8 @@
                 
                   ， 
                 
-
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Machine-Learning/Deep-Learning/" itemprop="url" rel="index">
                     <span itemprop="name">Deep Learning</span>
                   </a>
@@ -1523,7 +1781,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1531,34 +1788,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2017/04/29/DLBatchSize.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/04/29/DLBatchSize.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2017/04/29/DLBatchSize.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2017/04/29/DLBatchSize.html/" class="leancloud_visitors" data-flag-title="深度学习 之 batch_size 的设置">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1567,24 +1823,29 @@
       
         
           <p>在深度神将网络训练过程中，针对数据量的大小，有两种训练方式，一种是全数据集（Full-batch Learning）载入训练，一种是小批量数据集（Mini-batch Learning）载入训练。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2017/04/29/DLBatchSize.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1594,6 +1855,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1626,31 +1891,39 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
+               src="/images/avatar.gif"
                alt="YFLu" />
           <p class="site-author-name" itemprop="name">YFLu</p>
-          <p class="site-description motion-element" itemprop="description">一只程序猿养成记...</p>
+           
+              <p class="site-description motion-element" itemprop="description">一只程序猿养成记...</p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">64</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1658,8 +1931,10 @@
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1669,44 +1944,8 @@
         </nav>
 
         
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
 
         <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/rootlu" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎">
-                  
-                    <i class="fa fa-fw fa-zhihu"></i>
-                  
-                  知乎
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/412404179" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
-                </a>
-              </span>
-            
           
         </div>
 
@@ -1715,26 +1954,13 @@
 
         
         
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              友情链接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
-                </li>
-              
-            </ul>
-          </div>
+
         
 
+
       </section>
+
+      
 
       
 
@@ -1750,13 +1976,14 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2015 - 
+  &copy; 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">YFLu</span>
 </div>
+
 
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
@@ -1765,9 +1992,10 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
+
 
         
 
@@ -1775,9 +2003,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1797,6 +2029,15 @@
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1822,21 +2063,25 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
-  
-
   
 
   
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+  
+
+  
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
@@ -1861,126 +2106,9 @@
 
   
     
+    
     <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
-
-
-
-
-
-
-  
-  
-
-  
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz", "0hAkU75j3ti2wICPYsRit8R7");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    <script src="/js/src/hook-duoshuo.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -1998,6 +2126,24 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
 
 
 
@@ -2005,6 +2151,13 @@
 
   
 
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>

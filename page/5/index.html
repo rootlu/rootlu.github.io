@@ -1,20 +1,30 @@
-<!doctype html>
+<!DOCTYPE html>
 
 
 
   
 
 
-<html class="theme-next mist use-motion">
+<html class="theme-next muse use-motion" lang="zh-Hans">
 <head>
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
 
 
 
 <meta http-equiv="Cache-Control" content="no-transform" />
 <meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
 
 
 
@@ -63,9 +73,9 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
 
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
   <meta name="keywords" content="Hexo, NexT" />
@@ -74,12 +84,10 @@
 
 
 
-  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
 
 
 
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
 
 
 
@@ -98,44 +106,53 @@
 
 
 
-<script type="text/javascript" id="hexo.configuration">
+<script type="text/javascript" id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"right","display":"post"},
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
+    tabs: true,
     motion: true,
     duoshuo: {
       userId: '0',
       author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
     }
   };
 </script>
 
 
 
-
   <link rel="canonical" href="http:www.rootlu.com/page/5/"/>
 
 
-  <title> ROOTLu </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head>
 
-<body itemscope itemtype="//schema.org/WebPage" lang="zh-Hans">
 
+
+  <title>ROOTLu</title>
   
 
 
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><script type="text/javascript">
+
+
+  <script type="text/javascript">
     var _hmt = _hmt || [];
     (function() {
       var hm = document.createElement("script");
-      hm.src = "//hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
       var s = document.getElementsByTagName("script")[0];
       s.parentNode.insertBefore(hm, s);
     })();
-  </script>
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 
 
@@ -143,37 +160,47 @@
 
 
 
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
 
   
   
     
   
 
-  <div class="container one-collumn sidebar-position-right 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
    page-home 
  ">
     <div class="headband"></div>
 
-    <header id="header" class="header" itemscope itemtype="//schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
 
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">ROOTLu</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
   </div>
-  <p class="site-subtitle">Do Better, For Better!</p>
-</div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
 </div>
 
 <nav class="site-nav">
@@ -183,42 +210,32 @@
     <ul id="menu" class="menu">
       
         
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
             
             归档
           </a>
         </li>
       
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-            分类
-          </a>
-        </li>
-      
-        
         <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
             
             标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-life">
-          <a href="/life" rel="section">
-            
-            拾荒
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-            关于
           </a>
         </li>
       
@@ -229,6 +246,8 @@
 
   
 </nav>
+
+
 
  </div>
     </header>
@@ -243,13 +262,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/08/16/SizeofStruct.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -257,38 +290,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/08/16/SizeofStruct.html/" itemprop="url">
-                  结构体的sizeof
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/08/16/SizeofStruct.html/" itemprop="url">结构体的sizeof</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-16T22:31:32+08:00" content="2016-08-16">
-              2016-08-16
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-08-16T22:31:32+08:00">
+                2016-08-16
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C-C/" itemprop="url" rel="index">
                     <span itemprop="name">C/C++</span>
                   </a>
@@ -296,7 +333,6 @@
 
                 
                 
-
               
             </span>
           
@@ -304,34 +340,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/08/16/SizeofStruct.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/08/16/SizeofStruct.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/08/16/SizeofStruct.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/08/16/SizeofStruct.html/" class="leancloud_visitors" data-flag-title="结构体的sizeof">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -340,24 +375,29 @@
       
         
           <p>sizeof是C/C++中的一个操作符（operator），简单的说其作用就是返回一个对象或者类型所占的内存字节数，其返回值类型为size_t<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/08/16/SizeofStruct.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -367,6 +407,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -374,13 +418,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/07/19/Pointer.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -388,38 +446,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/07/19/Pointer.html/" itemprop="url">
-                  指针
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/07/19/Pointer.html/" itemprop="url">指针</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-19T21:31:45+08:00" content="2016-07-19">
-              2016-07-19
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-19T21:31:45+08:00">
+                2016-07-19
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C-C/" itemprop="url" rel="index">
                     <span itemprop="name">C/C++</span>
                   </a>
@@ -427,7 +489,6 @@
 
                 
                 
-
               
             </span>
           
@@ -435,34 +496,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/07/19/Pointer.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/07/19/Pointer.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/07/19/Pointer.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/07/19/Pointer.html/" class="leancloud_visitors" data-flag-title="指针">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -471,24 +531,29 @@
       
         
           <p>指针是指向（point to）另外一种类型的复合类型，它实现了对其他对象的间接访问，它和引用有类似之处，又有很大的不同。在C++中，灵活运用指针有时候能够事半功倍，但有时也会事倍功半。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/07/19/Pointer.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -498,6 +563,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -505,13 +574,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/07/19/ConstStatic.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -519,38 +602,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/07/19/ConstStatic.html/" itemprop="url">
-                  const与static
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/07/19/ConstStatic.html/" itemprop="url">const与static</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-19T21:28:12+08:00" content="2016-07-19">
-              2016-07-19
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-19T21:28:12+08:00">
+                2016-07-19
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C-C/" itemprop="url" rel="index">
                     <span itemprop="name">C/C++</span>
                   </a>
@@ -558,7 +645,6 @@
 
                 
                 
-
               
             </span>
           
@@ -566,34 +652,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/07/19/ConstStatic.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/07/19/ConstStatic.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/07/19/ConstStatic.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/07/19/ConstStatic.html/" class="leancloud_visitors" data-flag-title="const与static">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -602,24 +687,29 @@
       
         
           <p>const和static是C++中的两种修饰符，const限定变量的值不可改变，即将变量定义为了一个常量，static修饰的变量则表示该变量是静态的，它被用来控制变量的存贮方式和可见性。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/07/19/ConstStatic.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -629,6 +719,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -636,13 +730,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/07/17/PassRefVal.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -650,38 +758,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/07/17/PassRefVal.html/" itemprop="url">
-                  传引用与传值
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/07/17/PassRefVal.html/" itemprop="url">传引用与传值</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-17T21:04:13+08:00" content="2016-07-17">
-              2016-07-17
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-17T21:04:13+08:00">
+                2016-07-17
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C-C/" itemprop="url" rel="index">
                     <span itemprop="name">C/C++</span>
                   </a>
@@ -689,7 +801,6 @@
 
                 
                 
-
               
             </span>
           
@@ -697,34 +808,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/07/17/PassRefVal.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/07/17/PassRefVal.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/07/17/PassRefVal.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/07/17/PassRefVal.html/" class="leancloud_visitors" data-flag-title="传引用与传值">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -733,24 +843,29 @@
       
         
           <p>C++中有两种主要的参数传递方式，一种是传引用，一种是传值。当形参是引用类型时，它对应的实参被<strong>引用传递（passed by reference）</strong>或者函数被传引用调用（called by reference）。当实参的值被拷贝给形参时，形参和实参是两个相互独立的对象，这样的实参被<strong>值传递（passed by value）</strong>或者函数被传值调用（called by value）.<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/07/17/PassRefVal.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -760,6 +875,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -767,13 +886,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/07/11/Memory.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -781,38 +914,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/07/11/Memory.html/" itemprop="url">
-                  C++内存管理
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/07/11/Memory.html/" itemprop="url">C++内存管理</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-11T22:59:10+08:00" content="2016-07-11">
-              2016-07-11
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-07-11T22:59:10+08:00">
+                2016-07-11
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/C-C/" itemprop="url" rel="index">
                     <span itemprop="name">C/C++</span>
                   </a>
@@ -820,7 +957,6 @@
 
                 
                 
-
               
             </span>
           
@@ -828,34 +964,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/07/11/Memory.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/07/11/Memory.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/07/11/Memory.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/07/11/Memory.html/" class="leancloud_visitors" data-flag-title="C++内存管理">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -864,24 +999,29 @@
       
         
           <p>内存泄漏几乎在每个C++程序中都会发生，如何管理好内存是一件令C++程序猿非常头疼的事情，稍有不慎就会收获意想不到的“惊(jing)喜(xia)”，因此要想驾驭好C++这匹野马，就必须充分理解运用好内存管理这一有力的缰绳。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/07/11/Memory.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -891,6 +1031,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -898,13 +1042,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/05/21/JobSchedule.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -912,38 +1070,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/05/21/JobSchedule.html/" itemprop="url">
-                  操作系统----处理器调度
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/05/21/JobSchedule.html/" itemprop="url">操作系统----处理器调度</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-05-21T19:37:15+08:00" content="2016-05-21">
-              2016-05-21
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-05-21T19:37:15+08:00">
+                2016-05-21
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/OperatingSystem/" itemprop="url" rel="index">
                     <span itemprop="name">OperatingSystem</span>
                   </a>
@@ -951,7 +1113,6 @@
 
                 
                 
-
               
             </span>
           
@@ -959,34 +1120,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/05/21/JobSchedule.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/05/21/JobSchedule.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/05/21/JobSchedule.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/05/21/JobSchedule.html/" class="leancloud_visitors" data-flag-title="操作系统----处理器调度">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -995,24 +1155,29 @@
       
         
           <p>处理器调度，即CPU调度，是操作系统通过在不同进程之间切换CPU以达到提高计算机效率的操作。CPU调度是多道程序操作系统的基础，通过在进程之间切换CPU，操作系统可以提高计算机的吞吐率。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/05/21/JobSchedule.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1022,6 +1187,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1029,13 +1198,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/04/21/ProcessThread.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1043,38 +1226,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/04/21/ProcessThread.html/" itemprop="url">
-                  操作系统----进程与线程
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/04/21/ProcessThread.html/" itemprop="url">操作系统----进程与线程</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T19:26:21+08:00" content="2016-04-21">
-              2016-04-21
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-21T19:26:21+08:00">
+                2016-04-21
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/OperatingSystem/" itemprop="url" rel="index">
                     <span itemprop="name">OperatingSystem</span>
                   </a>
@@ -1082,7 +1269,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1090,34 +1276,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/04/21/ProcessThread.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/04/21/ProcessThread.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/04/21/ProcessThread.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/04/21/ProcessThread.html/" class="leancloud_visitors" data-flag-title="操作系统----进程与线程">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1126,24 +1311,29 @@
       
         
           <p>进程和线程都是由操作系统所体会的程序运行的基本单元，系统利用该基本单元实现系统对应用的并发性。两者的区别是各种面试笔试都会涉及的内容，应届党还是有必要好好了解一下的…<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/04/21/ProcessThread.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1153,6 +1343,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1160,13 +1354,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/04/21/OsUserMode.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1174,38 +1382,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/04/21/OsUserMode.html/" itemprop="url">
-                  操作系统----用户态和内核态
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/04/21/OsUserMode.html/" itemprop="url">操作系统----用户态和内核态</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-21T17:26:15+08:00" content="2016-04-21">
-              2016-04-21
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-21T17:26:15+08:00">
+                2016-04-21
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/OperatingSystem/" itemprop="url" rel="index">
                     <span itemprop="name">OperatingSystem</span>
                   </a>
@@ -1213,7 +1425,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1221,34 +1432,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/04/21/OsUserMode.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/04/21/OsUserMode.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/04/21/OsUserMode.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/04/21/OsUserMode.html/" class="leancloud_visitors" data-flag-title="操作系统----用户态和内核态">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1257,24 +1467,29 @@
       
         
           <p>在处理器的存储保护中，主要有两种权限状态，一种是核心态（管态），也被称为特权态（内核态）；一种是用户态（目态）。核心态是操作系统内核所运行的模式，运行在该模式的代码，可以无限制地对系统存储、外部设备进行访问。在操作系统的设计中，用户态指非特权的执行状态。内核禁止此状态下的代码进行潜在危险的操作，比如写入系统配置文件、杀掉其他用户的进程、重启系统等。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/04/21/OsUserMode.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1284,6 +1499,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1291,13 +1510,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/04/10/TcpIp.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1305,38 +1538,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/04/10/TcpIp.html/" itemprop="url">
-                  TCP/IP协议
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/04/10/TcpIp.html/" itemprop="url">TCP/IP协议</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-10T16:59:27+08:00" content="2016-04-10">
-              2016-04-10
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-10T16:59:27+08:00">
+                2016-04-10
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/NetWork/" itemprop="url" rel="index">
                     <span itemprop="name">NetWork</span>
                   </a>
@@ -1344,7 +1581,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1352,34 +1588,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/04/10/TcpIp.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/04/10/TcpIp.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/04/10/TcpIp.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/04/10/TcpIp.html/" class="leancloud_visitors" data-flag-title="TCP/IP协议">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1388,24 +1623,29 @@
       
         
           <p>TCP/IP协议族（TCP/IP Protocol Suite），简称TCP/IP，这个协议家族有两个核心协议，包括TCP（传输控制协议）和IP（网际协议）。TCP/IP提供点对点的链接机制，将数据应该如何封装、定址、传输、路由以及在目的地如何接收，都加以标准化。它将软件通信过程抽象化为四个抽象层，采取协议堆栈的方式，分别实现出不同通信协议。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/04/10/TcpIp.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1415,6 +1655,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1422,13 +1666,27 @@
       
 
   
-  
 
   
   
   
 
-  <article class="post post-type-normal " itemscope itemtype="//schema.org/Article">
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http:www.rootlu.com/blog/2016/04/07/安装Python.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
 
     
       <header class="post-header">
@@ -1436,38 +1694,42 @@
         
         
           <h1 class="post-title" itemprop="name headline">
-            
-            
-              
                 
-                <a class="post-title-link" href="/blog/2016/04/07/安装Python.html/" itemprop="url">
-                  安装 Python
-                </a>
-              
-            
-          </h1>
+                <a class="post-title-link" href="/blog/2016/04/07/安装Python.html/" itemprop="url">安装 Python</a></h1>
         
 
         <div class="post-meta">
           <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-04-07T22:02:43+08:00" content="2016-04-07">
-              2016-04-07
-            </time>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-04-07T22:02:43+08:00">
+                2016-04-07
+              </time>
+            
+
+            
+
+            
           </span>
 
           
             <span class="post-category" >
-              &nbsp; | &nbsp;
+            
+              <span class="post-meta-divider">|</span>
+            
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
-              <span class="post-meta-item-text">分类于</span>
               
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
                   <a href="/categories/Python/" itemprop="url" rel="index">
                     <span itemprop="name">Python</span>
                   </a>
@@ -1475,7 +1737,6 @@
 
                 
                 
-
               
             </span>
           
@@ -1483,34 +1744,33 @@
           
             
               <span class="post-comments-count">
-                &nbsp; | &nbsp;
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
                 <a href="/blog/2016/04/07/安装Python.html/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/04/07/安装Python.html/" itemprop="commentsCount"></span>
+                  <span class="post-comments-count ds-thread-count" data-thread-key="/blog/2016/04/07/安装Python.html/" itemprop="commentCount"></span>
                 </a>
               </span>
             
           
 
           
-
-          
-          
-             <span id="/blog/2016/04/07/安装Python.html/" class="leancloud_visitors" data-flag-title="安装 Python">
-               &nbsp; | &nbsp;
-               <span class="post-meta-item-icon">
-                 <i class="fa fa-eye"></i>
-               </span>
-               <span class="post-meta-item-text">阅读次数 </span>
-               <span class="leancloud-visitors-count"></span>
-              </span>
           
 
           
+
+          
+
+          
+
         </div>
       </header>
     
 
-
+    
+    
+    
     <div class="post-body" itemprop="articleBody">
 
       
@@ -1519,24 +1779,29 @@
       
         
           <p>Python是一门简单易学，功能强大的解释性语言，它没有编译和链接，但具有高效的高级数据结构和简单而有效的面向对象编程方法。Python优雅的语法和动态类型以及其解释性的性质，使它在许多领域和大多数平台成为编写脚本和快速应用程序开发的理想语言。<br>
-          <div class="post-more-link text-center">
+          <!--noindex-->
+          <div class="post-button text-center">
             <a class="btn" href="/blog/2016/04/07/安装Python.html/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
+          <!--/noindex-->
         
       
     </div>
+    
+    
+    
 
-    <div>
-      
-    </div>
+    
 
-    <div>
-      
-    </div>
+    
+
+    
 
     <footer class="post-footer">
+      
+
       
 
       
@@ -1546,6 +1811,10 @@
         <div class="post-eof"></div>
       
     </footer>
+  </div>
+  
+  
+  
   </article>
 
 
@@ -1578,31 +1847,39 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
+    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="//schema.org/Person">
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
-               src="/uploads/avatar.png"
+               src="/images/avatar.gif"
                alt="YFLu" />
           <p class="site-author-name" itemprop="name">YFLu</p>
-          <p class="site-description motion-element" itemprop="description">一只程序猿养成记...</p>
+           
+              <p class="site-description motion-element" itemprop="description">一只程序猿养成记...</p>
+          
         </div>
         <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">64</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
 
           
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">64</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
             <div class="site-state-item site-state-categories">
-              <a href="/categories">
+              <a href="/categories/index.html">
                 <span class="site-state-item-count">14</span>
                 <span class="site-state-item-name">分类</span>
               </a>
@@ -1610,8 +1887,10 @@
           
 
           
+            
+            
             <div class="site-state-item site-state-tags">
-              <a href="/tags">
+              <a href="/tags/index.html">
                 <span class="site-state-item-count">37</span>
                 <span class="site-state-item-name">标签</span>
               </a>
@@ -1621,44 +1900,8 @@
         </nav>
 
         
-          <div class="feed-link motion-element">
-            <a href="/atom.xml" rel="alternate">
-              <i class="fa fa-rss"></i>
-              RSS
-            </a>
-          </div>
-        
 
         <div class="links-of-author motion-element">
-          
-            
-              <span class="links-of-author-item">
-                <a href="https://github.com/rootlu" target="_blank" title="GitHub">
-                  
-                    <i class="fa fa-fw fa-github"></i>
-                  
-                  GitHub
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎">
-                  
-                    <i class="fa fa-fw fa-zhihu"></i>
-                  
-                  知乎
-                </a>
-              </span>
-            
-              <span class="links-of-author-item">
-                <a href="http://weibo.com/412404179" target="_blank" title="Weibo">
-                  
-                    <i class="fa fa-fw fa-weibo"></i>
-                  
-                  Weibo
-                </a>
-              </span>
-            
           
         </div>
 
@@ -1667,26 +1910,13 @@
 
         
         
-          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
-            <div class="links-of-blogroll-title">
-              <i class="fa  fa-fw fa-globe"></i>
-              友情链接
-            </div>
-            <ul class="links-of-blogroll-list">
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
-                </li>
-              
-                <li class="links-of-blogroll-item">
-                  <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
-                </li>
-              
-            </ul>
-          </div>
+
         
 
+
       </section>
+
+      
 
       
 
@@ -1702,13 +1932,14 @@
       <div class="footer-inner">
         <div class="copyright" >
   
-  &copy;  2015 - 
+  &copy; 
   <span itemprop="copyrightYear">2017</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">YFLu</span>
 </div>
+
 
 <div class="powered-by">
   由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
@@ -1717,9 +1948,10 @@
 <div class="theme-info">
   主题 -
   <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
+    NexT.Muse
   </a>
 </div>
+
 
         
 
@@ -1727,9 +1959,13 @@
       </div>
     </footer>
 
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
   </div>
 
   
@@ -1749,6 +1985,15 @@
 
 
   
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1774,21 +2019,25 @@
   
 
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
 
 
 
   
-  
-
   
 
   
+    <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+  
+
+  
 
 
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
 
 
 
@@ -1813,126 +2062,9 @@
 
   
     
+    
     <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
-    <script src="/js/src/hook-duoshuo.js"></script>
-  
-
-
-
-
-
-
-  
-  
-
-  
-
-  
-
-  
-  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
-  <script>AV.initialize("qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz", "0hAkU75j3ti2wICPYsRit8R7");</script>
-  <script>
-    function showTime(Counter) {
-      var query = new AV.Query(Counter);
-      var entries = [];
-      var $visitors = $(".leancloud_visitors");
-
-      $visitors.each(function () {
-        entries.push( $(this).attr("id").trim() );
-      });
-
-      query.containedIn('url', entries);
-      query.find()
-        .done(function (results) {
-          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
-
-          if (results.length === 0) {
-            $visitors.find(COUNT_CONTAINER_REF).text(0);
-            return;
-          }
-
-          for (var i = 0; i < results.length; i++) {
-            var item = results[i];
-            var url = item.get('url');
-            var time = item.get('time');
-            var element = document.getElementById(url);
-
-            $(element).find(COUNT_CONTAINER_REF).text(time);
-          }
-          for(var i = 0; i < entries.length; i++) {
-            var url = entries[i];
-            var element = document.getElementById(url);
-            var countSpan = $(element).find(COUNT_CONTAINER_REF);
-            if( countSpan.text() == '') {
-              countSpan.text(0);
-            }
-          }
-        })
-        .fail(function (object, error) {
-          console.log("Error: " + error.code + " " + error.message);
-        });
-    }
-
-    function addCount(Counter) {
-      var $visitors = $(".leancloud_visitors");
-      var url = $visitors.attr('id').trim();
-      var title = $visitors.attr('data-flag-title').trim();
-      var query = new AV.Query(Counter);
-
-      query.equalTo("url", url);
-      query.find({
-        success: function(results) {
-          if (results.length > 0) {
-            var counter = results[0];
-            counter.fetchWhenSave(true);
-            counter.increment("time");
-            counter.save(null, {
-              success: function(counter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(counter.get('time'));
-              },
-              error: function(counter, error) {
-                console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+    <script src="/js/src/hook-duoshuo.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -1950,6 +2082,24 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
 
 
 
@@ -1957,6 +2107,13 @@
 
   
 
+  
+
+  
+
+  
+
+  
 
 </body>
 </html>
