@@ -411,7 +411,7 @@
         <p>GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库。GitLab拥有与GitHub类似的功能，能够浏览源代码，管理缺陷和注释，可以管理团队对仓库的访问，还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。<br><a id="more"></a><br>利用docker搭建GitLab服务，可以很方便地部署迁移。在DockerHub中已经存在由GitLab官方提供的Docker<a href="https://hub.docker.com/r/gitlab/gitlab-ce/" target="_blank" rel="external">镜像</a>，可以直接拉取使用。在本文中，介绍手动创建gitlab服务镜像，并导出导入使用。</p>
 <h2 id="1、创建容器"><a href="#1、创建容器" class="headerlink" title="1、创建容器"></a>1、创建容器</h2><p><code>docker run -i -t -p :80:80 --name gitlab ubuntu /bin/bash</code><br><img src="/img/runGit.jpg" alt=""></p>
 <ul>
-<li>添加端口映射为80—&gt;80 ，未添加ip，默认映射所有接口地址</li>
+<li>添加端口映射为80–&gt;80 ，未添加ip，默认映射所有接口地址</li>
 <li><code>-t</code> 让Docker分配一个伪终端并绑定到容器的标准输入上</li>
 <li><code>-i</code> 保持容器的标准输入打开</li>
 </ul>

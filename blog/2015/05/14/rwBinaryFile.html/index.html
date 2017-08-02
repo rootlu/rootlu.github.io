@@ -384,7 +384,7 @@
 
       
         <p>二进制文件与文本文件的不同，二进制文件不是以ASCII 代码存放数据的，文件中的信息不是字符数据，而是字节中的二进制形式的信息，又称为内存数据的映像文件，或字节文件。<br><a id="more"></a></p>
-<h2 id="1-打开文件"><a href="#1-打开文件" class="headerlink" title="1. 打开文件"></a>1. 打开文件</h2><p>用ios::binary指定为以二进制形式传送和存储，否则文件会以ASCII方式打开<br>文件打开模式:<br>ios::app       ——以追加的方式打开文件<br>ios::ate        ——打开文件并找到文件尾<br>ios::binary   ——以二进制模式打开<br>ios::in          ——只读打开<br>ios:out        ——以写方式打开<br>ios::trunc    ——将文件截为0长度(还没用过。。。)</p>
+<h2 id="1-打开文件"><a href="#1-打开文件" class="headerlink" title="1. 打开文件"></a>1. 打开文件</h2><p>用ios::binary指定为以二进制形式传送和存储，否则文件会以ASCII方式打开<br>文件打开模式:<br>ios::app       —-以追加的方式打开文件<br>ios::ate        —-打开文件并找到文件尾<br>ios::binary   —-以二进制模式打开<br>ios::in          —-只读打开<br>ios:out        —-以写方式打开<br>ios::trunc    —-将文件截为0长度(还没用过。。。)</p>
 <h2 id="2-读写二进制文件"><a href="#2-读写二进制文件" class="headerlink" title="2. 读写二进制文件"></a>2. 读写二进制文件</h2><p>read()函数读文件，原型：<code>iostream &amp; read(char *buffer,int len);</code><br>write()函数写文件，原型：<code>iostream &amp; write(const char *buffer,int len);</code><br>buffer指向内存中的一段存储空间，len是读写的字节数。</p>
 
       
