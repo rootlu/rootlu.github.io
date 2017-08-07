@@ -104,7 +104,7 @@
 <meta property="og:description" content="本文是清华刘知远老师组发表在15年IJCAI会议上的一个工作，论文在DeepWalk基础上进行了创新拓展，主要亮点在于：证明了DeepWalk等同于矩阵分解，并且在此基础上，将图节点的文本特征引入DeepWalk中，进一步学习到了网络结构的表示特征。">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/textdeepwalk1.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/textdeepwalk2.png">
-<meta property="og:updated_time" content="2017-08-07T06:40:32.000Z">
+<meta property="og:updated_time" content="2017-08-07T06:50:33.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Network Representation Learning with Rich Text Information---论文笔记">
 <meta name="twitter:description" content="本文是清华刘知远老师组发表在15年IJCAI会议上的一个工作，论文在DeepWalk基础上进行了创新拓展，主要亮点在于：证明了DeepWalk等同于矩阵分解，并且在此基础上，将图节点的文本特征引入DeepWalk中，进一步学习到了网络结构的表示特征。">
@@ -401,7 +401,7 @@
 <a id="more"></a>
 <h5 id="1、Introduction"><a href="#1、Introduction" class="headerlink" title="1、Introduction"></a>1、Introduction</h5><p>网络表示学习，即是<strong>学习网络中的每个节点的向量表示</strong>。传统的网络表示学习从<strong>网络结构</strong>中学习网络节点的表示特征，包括DeepWalk方法同样是以网络的结构作为输入，来学习网络的表示特征。</p>
 <p>网络结构中的节点往往包含丰富的文本信息和其他元数据，这些数据的特征都可以作为网络表示学习的输入特征。一种简单的想法就是，分别独立的学习网络结构特征和文本特征，然后简单的叠加两个表示特征，但是这种方法容易忽略文本信息与网络结构之间的联系。</p>
-<h5 id="2、DeepWalk-as-Matrix-Factorization"><a href="#2、DeepWalk-as-Matrix-Factorization" class="headerlink" title="2、DeepWalk as Matrix Factorization"></a>2、DeepWalk as Matrix Factorization</h5><p>将DeepWalk理解为矩阵分解，矩阵$M_{ij}∈R^{|V|<em>|V|}$表示网络中节点$v_i$经过固定步长$s$随机游走到节点$v_j$的平均概率对数，将其分解为两个低维度的矩阵$W∈R^{k</em>|V|}，H∈R^{k*|V|}$，其中$W$作为节点的表示特征。</p>
+<h5 id="2、DeepWalk-as-Matrix-Factorization"><a href="#2、DeepWalk-as-Matrix-Factorization" class="headerlink" title="2、DeepWalk as Matrix Factorization"></a>2、DeepWalk as Matrix Factorization</h5><p>将DeepWalk理解为矩阵分解，矩阵$M_{ij}∈R^{|V|<em>|V|}​$表示网络中节点$v_i​$经过固定步长$s​$随机游走到节点$v_j​$的平均概率对数，将其分解为两个低维度的矩阵$W∈R^{k</em>|V|}，H∈R^{k*|V|}​$，其中$W​$作为节点的表示特征。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/textdeepwalk1.png" alt="tadw1">DeepWalk通过随机游走，生成一个节点序列$S={v_1,v_2,…..v_{|S|}}$，$v∈{v_{i-t},…,v_{i+t}}$表示中心节点$v_i$的上下文，窗口大小为$t$。基于语言模型中的Skip-Gram，DeepWalk的优化目标定义为：<strong>最大化随机游走路径中，所有中心节点-上下文节点对的平均对数概率</strong>，损失函数定义如下：<br>$$<br>\frac{1}{|S|}\sum_{i=1}^{|s|}\sum_{-t\le{j}\le{t},j\ne{0}}logp(v_{i+j}|v_i)<br>$$</p>
 <p>$$<br>p(v_j|v_i)=\frac{e^{(c_{v_j}^Tr_{v_j})}}{\sum_{v\in{V}}e^{(c_v^Tr_{v_i})}}<br>$$</p>
 <p>其中$r_{v_i}，c_{v_j}$分别表示中心节点$v_i$和它的上下文节点$v_j$的表示向量，也就是说图结构中的每个节点都有两个表示向量：当节点$v$是中心节点时，其表示向量是$r_v$；当节点$v$是上下文节点时，其表示向量是$c_v$。</p>
