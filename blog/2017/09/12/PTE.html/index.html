@@ -96,16 +96,19 @@
 
 
 
-<meta name="description" content="PTE模型是LINE的扩展，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。">
+<meta name="description" content="PTE模型是LINE的扩展，也是唐建老师发表在KDD‘15上的一篇论文，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="PTE ---论文笔记">
+<meta property="og:title" content="PTE:Predictive Text Embedding through Large-scale ---论文笔记">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/09/12/PTE.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
-<meta property="og:description" content="PTE模型是LINE的扩展，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。">
-<meta property="og:updated_time" content="2017-09-15T03:49:27.000Z">
+<meta property="og:description" content="PTE模型是LINE的扩展，也是唐建老师发表在KDD‘15上的一篇论文，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。">
+<meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/PTE2.png">
+<meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/PTE3.png">
+<meta property="og:updated_time" content="2017-09-15T13:46:18.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="PTE ---论文笔记">
-<meta name="twitter:description" content="PTE模型是LINE的扩展，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。">
+<meta name="twitter:title" content="PTE:Predictive Text Embedding through Large-scale ---论文笔记">
+<meta name="twitter:description" content="PTE模型是LINE的扩展，也是唐建老师发表在KDD‘15上的一篇论文，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。">
+<meta name="twitter:image" content="http://ou5bxfpku.bkt.clouddn.com/PTE2.png">
 
 
 
@@ -140,7 +143,7 @@
 
 
 
-  <title>PTE ---论文笔记 | ROOTLu</title>
+  <title>PTE:Predictive Text Embedding through Large-scale ---论文笔记 | ROOTLu</title>
   
 
 
@@ -300,7 +303,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">PTE ---论文笔记</h1>
+          <h1 class="post-title" itemprop="name headline">PTE:Predictive Text Embedding through Large-scale ---论文笔记</h1>
         
 
         <div class="post-meta">
@@ -330,7 +333,7 @@
 
           
           
-             <span id="/blog/2017/09/12/PTE.html/" class="leancloud_visitors" data-flag-title="PTE ---论文笔记">
+             <span id="/blog/2017/09/12/PTE.html/" class="leancloud_visitors" data-flag-title="PTE:Predictive Text Embedding through Large-scale ---论文笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -361,7 +364,27 @@
       
 
       
-        <p>PTE模型是LINE的扩展，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。</p>
+        <p>PTE模型是LINE的扩展，也是唐建老师发表在KDD‘15上的一篇论文，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。</p>
+<a id="more"></a>
+<p>模型首先将有标签数据和不同级别的共生单词表示为一个大规模的异质文本网络，然后将该网络降维到一个低维度的向量空间，得到文本的特征表示。</p>
+<h4 id="1、Introduction-amp-Related-Work"><a href="#1、Introduction-amp-Related-Work" class="headerlink" title="1、Introduction &amp; Related Work"></a>1、Introduction &amp; Related Work</h4><p>论文简介部分介绍了文本数据的表示学习的重要性，指出深度神经网络虽然在学习文本表示特征时候的效果更好一些，但是它也让存在一些问题，比如：计算量大，需要大量有标签的数据以及繁杂的调参过程。相对于深度神经网络，文本嵌入方法（例如Skip_gram）往往更加高效，更易实现。</p>
+<p>论文提出的PTE<strong>采纳了无监督文本嵌入的优点，同时也利用有标签信息进行表示学习</strong>。模型从有限的有标签数据和大量无标签数据中学习得到一个低维度的向量表示，然后利用表示特征进行特定的任务。</p>
+<p>网络对<strong>词与词、词与文本以及词与标签</strong>之间不同级别的共生信息进行编码，然后将该网络嵌入到低维度向量空间，文本的特征表示可以简单的看作是词的特征表示的均值。</p>
+<p>PTE是LINE工作的一个扩展，LINE模型是用于多种类型的信息网络，包括有向图、无向图、是否带权图等，它的目标函数既保留了网络结构的局部特征也保留了全局特征。<strong>PTE将LINE扩展到处理异质网络，网络中有多种类型的节点和边。</strong></p>
+<h4 id="2、Predictive-Text-Embedding-PTE"><a href="#2、Predictive-Text-Embedding-PTE" class="headerlink" title="2、Predictive Text Embedding (PTE)"></a>2、Predictive Text Embedding (PTE)</h4><h5 id="2-1、Probelm-Definition"><a href="#2-1、Probelm-Definition" class="headerlink" title="2.1、Probelm Definition"></a>2.1、Probelm Definition</h5><h6 id="Word-Word-Network"><a href="#Word-Word-Network" class="headerlink" title="Word-Word Network"></a>Word-Word Network</h6><p>$G_{ww}=(V,E_{ww})$表示词与词的共生网络，$V$表示单词的词汇表，$E_{ww}$表示单词之间的边的集合，单词$v_i$和单词$v_j$间边的权重$w_{ij}$定义为：两个单词共同出现在给定窗口大小的上下文窗口中的次数。</p>
+<h6 id="Word-Document-Network"><a href="#Word-Document-Network" class="headerlink" title="Word-Document Network"></a>Word-Document Network</h6><p>$G_{wd}=(V\cup{D},E_{wd})$表示词与文档的二分网络，$V$表示词语的集合，$D$表示文档的集合，$E_{wd}$表示单词和文档之间的边的集合，单词$v_i$和文档$d_j$间边的权重$w_{ij}$定义为：单词$v_i$共同出现在文档$d_j$中的次数。</p>
+<h6 id="Word-Label-Network"><a href="#Word-Label-Network" class="headerlink" title="Word-Label Network"></a>Word-Label Network</h6><p>$ G_{wl}=(V\cup{L},E_{wl})$表示词与文档类别标签的二分网络，$V$表示词语的集合，$L$表示文档类别标签的集合，$E_{wl}$表示单词和标签之间的边的集合，单词$v_i$和类别标签$c_j$间边的权重$w_{ij}$定义为：$w_{ij}=\sum_{(d:l_d=j)}{n_{di}}$，其中$n_di$表示单词$v_i$在文档$d$中的词频，$l_d$表示文档d的类别标签。</p>
+<p><img src="http://ou5bxfpku.bkt.clouddn.com/PTE2.png" alt=""></p>
+<h6 id="PTE"><a href="#PTE" class="headerlink" title="PTE"></a>PTE</h6><p>论文基于LINE(2nd)模型，对每个子网络分别进行建模，模型假设有相同邻居的节点是相似的，有相似的特征表示。模型的目标函数定义为：<br>$$<br>O=-\sum_{(i,j)\inE}{w_{ij}logp(v_j|v_i)}<br>$$<br>目标函数使用边采样和负采样技术，基于随机梯度下降方法进行优化。</p>
+<p>异质文本网络嵌入通过简单的讲三个二分网络的目标函数想加，得到目标函数，<br>$$<br>O_{pte}=O_{wd}+O_{wd}+O_{wl}<br>$$<br>其中，<br>$$<br>O_{ww}=-\sum_{(i,j)\in{E_{ww}}}{w_{ij}logp(v_i|v_j)}<br>$$</p>
+<p>$$<br>O_{wd}=-\sum_{(i,j)\in{E_{wd}}}{w_{ij}logp(v_j|d_j)}<br>$$</p>
+<p>$$<br>O_{wl}=-\sum_{(i,j)\in{E_{wl}}}{w_{ij}logp(v_i|l_j)}<br>$$</p>
+<p>针对目标函数（2）的优化，论文提出了两种方案，一种是采用joint training的方式训练，即同时训练有标签数据和无标签数据 ，另一种是先训练无标签数据，再训练有标签数据。</p>
+<p><img src="http://ou5bxfpku.bkt.clouddn.com/PTE3.png" alt=""></p>
+<p>通过优化上面的模型，可以学习的到词的向量表示，而文本的特征表示就可以直接取词向量的均值。</p>
+<h4 id="3、Experiment"><a href="#3、Experiment" class="headerlink" title="3、Experiment"></a>3、Experiment</h4><h4 id="4、Conclusion"><a href="#4、Conclusion" class="headerlink" title="4、Conclusion"></a>4、Conclusion</h4><p>PTE作为LINE工作的一个扩展，同时利用有标签数据和无标签数据，以半监督的方式学习文本的嵌入表示。它通过将异质文本网络嵌入到一个低维度的向量空间中，学习到文本的表示分布。</p>
+<h4 id="5、Summary"><a href="#5、Summary" class="headerlink" title="5、Summary"></a>5、Summary</h4><p>个人认为，论文最大的亮点在于同时利用有标签数据和无标签数据进行表示学习，既保留了无监督文本嵌入的优点，同时也学习有标签数据中的特征。论文把文本数据转换到三个子网络中，构成大的异质文本网络，然后将其嵌入到一个低纬度的向量空间，学习文本的表示特征。</p>
+<h4 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h4><p><em>[1] Tang J, Qu M, Wang M, et al. Line: Large-scale information network embedding[C]//Proceedings of the 24th International Conference on World Wide Web. International World Wide Web Conferences Steering Committee, 2015: 1067-1077.</em></p>
 
       
     </div>
@@ -411,7 +434,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/09/12/PTE.html/" title="PTE ---论文笔记">http://www.rootlu.com//blog/2017/09/12/PTE.html/</a>
+    <a href="http://www.rootlu.com//blog/2017/09/12/PTE.html/" title="PTE:Predictive Text Embedding through Large-scale ---论文笔记">http://www.rootlu.com//blog/2017/09/12/PTE.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -443,8 +466,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/09/12/LINE.html/" rel="next" title="LINE ---论文笔记">
-                <i class="fa fa-chevron-left"></i> LINE ---论文笔记
+              <a href="/blog/2017/09/12/LINE.html/" rel="next" title="LINE Large-scale Information Network Embedding ---论文笔记">
+                <i class="fa fa-chevron-left"></i> LINE Large-scale Information Network Embedding ---论文笔记
               </a>
             
           </div>
@@ -505,8 +528,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -628,6 +660,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Introduction-amp-Related-Work"><span class="nav-text">1、Introduction & Related Work</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Predictive-Text-Embedding-PTE"><span class="nav-text">2、Predictive Text Embedding (PTE)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1、Probelm-Definition"><span class="nav-text">2.1、Probelm Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Word-Network"><span class="nav-text">Word-Word Network</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Document-Network"><span class="nav-text">Word-Document Network</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Label-Network"><span class="nav-text">Word-Label Network</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#PTE"><span class="nav-text">PTE</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Experiment"><span class="nav-text">3、Experiment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Conclusion"><span class="nav-text">4、Conclusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、Summary"><span class="nav-text">5、Summary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
