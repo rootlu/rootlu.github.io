@@ -98,13 +98,13 @@
 
 <meta name="description" content="最近实验室在做一个基于Django框架的开发项目，我也在里面打打杂儿，在开发过程中，需要将项目部署到服务器上，然后在远程机器上访问。因为之前从未接触过Django，所以一开始并不知道如何解决这个问题，好在有师兄给出了一些指导，在此做个记录。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DjangoServer">
+<meta property="og:title" content="远程访问Django服务">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/10/08/DjangoServer.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="最近实验室在做一个基于Django框架的开发项目，我也在里面打打杂儿，在开发过程中，需要将项目部署到服务器上，然后在远程机器上访问。因为之前从未接触过Django，所以一开始并不知道如何解决这个问题，好在有师兄给出了一些指导，在此做个记录。">
-<meta property="og:updated_time" content="2017-10-08T01:49:28.000Z">
+<meta property="og:updated_time" content="2017-10-08T01:52:11.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DjangoServer">
+<meta name="twitter:title" content="远程访问Django服务">
 <meta name="twitter:description" content="最近实验室在做一个基于Django框架的开发项目，我也在里面打打杂儿，在开发过程中，需要将项目部署到服务器上，然后在远程机器上访问。因为之前从未接触过Django，所以一开始并不知道如何解决这个问题，好在有师兄给出了一些指导，在此做个记录。">
 
 
@@ -140,7 +140,7 @@
 
 
 
-  <title>DjangoServer | ROOTLu</title>
+  <title>远程访问Django服务 | ROOTLu</title>
   
 
 
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DjangoServer</h1>
+          <h1 class="post-title" itemprop="name headline">远程访问Django服务</h1>
         
 
         <div class="post-meta">
@@ -330,7 +330,7 @@
 
           
           
-             <span id="/blog/2017/10/08/DjangoServer.html/" class="leancloud_visitors" data-flag-title="DjangoServer">
+             <span id="/blog/2017/10/08/DjangoServer.html/" class="leancloud_visitors" data-flag-title="远程访问Django服务">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -367,8 +367,7 @@
 <p>但是，如果我们在服务器上部署我们的项目，并按照上述命令启动服务，别人无法通过<code>http://127.0.0.1:8000</code>地址访问我们的项目，因此我们需要<strong>指定一个ip地址和端口号，并关闭对应端口的防火墙</strong>，具体命令如下：</p>
 <p><code>python manage.py runserver 0.0.0.0:8090</code></p>
 <p><code>0.0.0.0</code>这个ip地址表示服务器需要监听所有网络接口，完成上述设置后，即可以在其他机器上访问<code>ip:端口号</code>来访问服务器上的项目了，如：<code>http://192.168.1.108:8090</code>。</p>
-<p>Reference:</p>
-<p><a href="http://www.it610.com/article/2666738.htm" target="_blank" rel="external">http://www.it610.com/article/2666738.htm</a></p>
+<p>Reference:<br><a href="http://www.it610.com/article/2666738.htm" target="_blank" rel="external">http://www.it610.com/article/2666738.htm</a></p>
 
       
     </div>
@@ -418,7 +417,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/10/08/DjangoServer.html/" title="DjangoServer">http://www.rootlu.com//blog/2017/10/08/DjangoServer.html/</a>
+    <a href="http://www.rootlu.com//blog/2017/10/08/DjangoServer.html/" title="远程访问Django服务">http://www.rootlu.com//blog/2017/10/08/DjangoServer.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
