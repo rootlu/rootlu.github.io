@@ -105,7 +105,7 @@
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/Node2vec1.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/Node2vec2.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/Node2vec3.png">
-<meta property="og:updated_time" content="2017-10-07T03:01:36.000Z">
+<meta property="og:updated_time" content="2017-10-10T00:07:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《node2vec:Scable Feature Learning for Network》—论文笔记">
 <meta name="twitter:description" content="node2vec是16年KDD的一个工作，论文提出了一种学习网络节点的特征表示的算法框架。论文定义了一个网络节点邻居的灵活概念，并设计了一个带偏置的随机游走过程来获得不同邻居节点。论文的亮点主要在：采用深度优先搜索（DFS）和宽度优先搜索（BFS）两种策略，随机游走生成节点的邻居节点集合。">
@@ -378,12 +378,12 @@
 <h5 id="1-1、Search-Strategies"><a href="#1-1、Search-Strategies" class="headerlink" title="1.1、Search Strategies"></a>1.1、Search Strategies</h5><p>论文把对接点邻居的采样看作一种局部搜索，分别利用深度优先和宽度优先搜索，构造源节点的邻居节点集合，集合的大小固定。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/Node2vec1.png" alt=""></p>
 <ul>
-<li><p>宽度优先搜索（BFS）</p>
+<li><p>宽度优先采样（BFS）</p>
 <p>与源节点u直接相连接的节点，例如上图中的$s_1，s_2，s_3$。</p>
 </li>
 </ul>
 <ul>
-<li><p>深度优先搜索（DFS）</p>
+<li><p>深度优先采样（DFS）</p>
 <p>搜索与源节点距离递增的节点序列，如上图中的$s_4，s_5，s_6$。</p>
 </li>
 </ul>
