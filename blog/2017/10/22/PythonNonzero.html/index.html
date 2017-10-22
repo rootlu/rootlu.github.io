@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,Linux," />
+  <meta name="keywords" content="python," />
 
 
 
@@ -96,16 +96,16 @@
 
 
 
-<meta name="description" content="在做实验过程中，经常使用到python的matplotlib包进行绘图，但是因为很多程序需要在服务器（linux系统）上运行，所以在linux系统下使用matplotlib模块来画图会遇到一个问题：“could not open display”，查了一些资料，找到了一个解决办法，以此记录。">
+<meta name="description" content="在使用python的numpy包进行矩阵运算时候，有时候需要获得矩阵中元素值不为0的下标，numpy包中的numpy.nonzero()函数可以实现这一功能。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="在Linux中使用matplotlib绘图遇到的问题">
-<meta property="og:url" content="http://www.rootlu.com/blog/2017/10/08/MatplotlibInLinux.html/index.html">
+<meta property="og:title" content="python中获取数组（矩阵）值不为0的元素下标">
+<meta property="og:url" content="http://www.rootlu.com/blog/2017/10/22/PythonNonzero.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
-<meta property="og:description" content="在做实验过程中，经常使用到python的matplotlib包进行绘图，但是因为很多程序需要在服务器（linux系统）上运行，所以在linux系统下使用matplotlib模块来画图会遇到一个问题：“could not open display”，查了一些资料，找到了一个解决办法，以此记录。">
-<meta property="og:updated_time" content="2017-10-08T02:06:14.000Z">
+<meta property="og:description" content="在使用python的numpy包进行矩阵运算时候，有时候需要获得矩阵中元素值不为0的下标，numpy包中的numpy.nonzero()函数可以实现这一功能。">
+<meta property="og:updated_time" content="2017-10-22T12:24:57.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="在Linux中使用matplotlib绘图遇到的问题">
-<meta name="twitter:description" content="在做实验过程中，经常使用到python的matplotlib包进行绘图，但是因为很多程序需要在服务器（linux系统）上运行，所以在linux系统下使用matplotlib模块来画图会遇到一个问题：“could not open display”，查了一些资料，找到了一个解决办法，以此记录。">
+<meta name="twitter:title" content="python中获取数组（矩阵）值不为0的元素下标">
+<meta name="twitter:description" content="在使用python的numpy包进行矩阵运算时候，有时候需要获得矩阵中元素值不为0的下标，numpy包中的numpy.nonzero()函数可以实现这一功能。">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://www.rootlu.com/blog/2017/10/08/MatplotlibInLinux.html/"/>
+  <link rel="canonical" href="http://www.rootlu.com/blog/2017/10/22/PythonNonzero.html/"/>
 
 
 
 
 
-  <title>在Linux中使用matplotlib绘图遇到的问题 | ROOTLu</title>
+  <title>python中获取数组（矩阵）值不为0的元素下标 | ROOTLu</title>
   
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2017/10/08/MatplotlibInLinux.html/">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2017/10/22/PythonNonzero.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YFLu">
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">在Linux中使用matplotlib绘图遇到的问题</h1>
+          <h1 class="post-title" itemprop="name headline">python中获取数组（矩阵）值不为0的元素下标</h1>
         
 
         <div class="post-meta">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-08T09:53:15+08:00">
-                2017-10-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-22T19:51:08+08:00">
+                2017-10-22
               </time>
             
 
@@ -352,7 +352,7 @@
 
           
           
-             <span id="/blog/2017/10/08/MatplotlibInLinux.html/" class="leancloud_visitors" data-flag-title="在Linux中使用matplotlib绘图遇到的问题">
+             <span id="/blog/2017/10/22/PythonNonzero.html/" class="leancloud_visitors" data-flag-title="python中获取数组（矩阵）值不为0的元素下标">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -383,11 +383,14 @@
       
 
       
-        <p>在做实验过程中，经常使用到python的matplotlib包进行绘图，但是因为很多程序需要在服务器（linux系统）上运行，所以在linux系统下使用matplotlib模块来画图会遇到一个问题：“could not open display”，查了一些资料，找到了一个解决办法，以此记录。</p>
+        <p>在使用python的numpy包进行矩阵运算时候，有时候需要获得<strong>矩阵中元素值不为0的下标</strong>，numpy包中的<code>numpy.nonzero()</code>函数可以实现这一功能。</p>
 <a id="more"></a>
-<p>在python源文件开始处添加如下代码：（<strong>注意先后顺序</strong>）</p>
-<figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib</div><div class="line">matplotlib.use(<span class="string">'Agg'</span>)</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div></pre></td></tr></table></figure>
-<p>如果依然不能弹出生成图片的对话框，可以先把绘制的图片保存，然后导出到本地查看，在代码中添加<code>plt.savefig(&quot;pic.png&quot;)</code>，然后再进行<code>plt.show()</code>，虽然方法笨了一些，但是也是可以解决问题～</p>
+<p>定义 <code>import numpy as np</code>，<code>m=np.array(...)</code>，即m是numpy数组（矩阵），<code>np.nonzeros(m)</code>返回m中<strong>值不为零的元素的下标</strong>，返回值是一个长度为<code>m.ndim</code>（m的轴数）的元组。元组的每个元素都是一个整数数组，其值为非零元素的下标在对应轴上的值。</p>
+<h4 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h4><p>对于一维数组m1，<code>np.nonzero(m1)</code>所得到的是一个长度为1的元组，它表示m1[0]、m1[1]和m1[3]的值不为0。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>m1=np.array([<span class="number">3</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">9</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.nonzero(m1)</div><div class="line">(array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>]),)</div></pre></td></tr></table></figure>
+<h4 id="多维数组（矩阵）"><a href="#多维数组（矩阵）" class="headerlink" title="多维数组（矩阵）"></a>多维数组（矩阵）</h4><p>以二维数组为例，对于二维数组m2，<code>np.nonzero(m2)</code>所得到的是一个长度为2的元组。它的第0个元素是数组m2中值不为0的元素的第0轴的下标，第1个元素则是第1轴的下标。</p>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; m2=np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">4</span>,<span class="number">3</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</div><div class="line">&gt;&gt;&gt; m2</div><div class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>],</div><div class="line">       [<span class="number">0</span>, <span class="number">4</span>, <span class="number">3</span>],</div><div class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]])</div><div class="line">&gt;&gt;&gt; np.nonzero(m2)</div><div class="line">(array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]), array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]))</div></pre></td></tr></table></figure>
+<p>返回结果表示：矩阵m2中的(0, 0)、(0, 1)、(1, 1)、(1, 2)元素不为0。</p>
 
       
     </div>
@@ -437,7 +440,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/10/08/MatplotlibInLinux.html/" title="在Linux中使用matplotlib绘图遇到的问题">http://www.rootlu.com//blog/2017/10/08/MatplotlibInLinux.html/</a>
+    <a href="http://www.rootlu.com//blog/2017/10/22/PythonNonzero.html/" title="python中获取数组（矩阵）值不为0的元素下标">http://www.rootlu.com//blog/2017/10/22/PythonNonzero.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -454,8 +457,6 @@
           
             <a href="/tags/python/" rel="tag"># python</a>
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
-          
         </div>
       
 
@@ -467,8 +468,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/10/08/DjangoServer.html/" rel="next" title="远程访问Django服务">
-                <i class="fa fa-chevron-left"></i> 远程访问Django服务
+              <a href="/blog/2017/10/13/Metapath2vec.html/" rel="next" title="《metapath2vec:Scalable Representation Learning for Heterogeneous Networks》---读书笔记">
+                <i class="fa fa-chevron-left"></i> 《metapath2vec:Scalable Representation Learning for Heterogeneous Networks》---读书笔记
               </a>
             
           </div>
@@ -477,8 +478,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2017/10/13/Metapath2vec.html/" rel="prev" title="《metapath2vec:Scalable Representation Learning for Heterogeneous Networks》---读书笔记">
-                《metapath2vec:Scalable Representation Learning for Heterogeneous Networks》---读书笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2017/10/22/PythonAstype.html/" rel="prev" title="python中替换数组（矩阵）中指定元素">
+                python中替换数组（矩阵）中指定元素 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -533,8 +534,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -671,6 +681,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#一维数组"><span class="nav-text">一维数组</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多维数组（矩阵）"><span class="nav-text">多维数组（矩阵）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
