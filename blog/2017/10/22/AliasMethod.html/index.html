@@ -97,30 +97,24 @@
 
 
 <meta name="description" content="本文转载自天空的城。
-在图的随机游走中，有一块需要随机取样， 比如当前到达v节点，那么下一次随机会到达哪个节点。这种问题其实就是离散分布的随机变量的取样问题。 查了一些资料， 发现Alias Method是一种很高效的方式。在初始好之后，每次取样的复杂度为O(1)O(1)。 下面介绍下这种方法的使用，具体原理暂时没有深究，有兴趣转Darts,Dice, and coids。
-
-Alias-Meth">
+在图的随机游走中，有一块需要随机取样， 比如当前到达v节点，那么下一次随机会到达哪个节点。这种问题其实就是离散分布的随机变量的取样问题。 查了一些资料， 发现Alias Method是一种很高效的方式。在初始好之后，每次取样的复杂度为O(1)O(1)。 下面介绍下这种方法的使用，具体原理暂时没有深究，有兴趣转Darts,Dice, and coids。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="转载—--Alias Method离散分布随机取样">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/10/22/AliasMethod.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="本文转载自天空的城。
-在图的随机游走中，有一块需要随机取样， 比如当前到达v节点，那么下一次随机会到达哪个节点。这种问题其实就是离散分布的随机变量的取样问题。 查了一些资料， 发现Alias Method是一种很高效的方式。在初始好之后，每次取样的复杂度为O(1)O(1)。 下面介绍下这种方法的使用，具体原理暂时没有深究，有兴趣转Darts,Dice, and coids。
-
-Alias-Meth">
+在图的随机游走中，有一块需要随机取样， 比如当前到达v节点，那么下一次随机会到达哪个节点。这种问题其实就是离散分布的随机变量的取样问题。 查了一些资料， 发现Alias Method是一种很高效的方式。在初始好之后，每次取样的复杂度为O(1)O(1)。 下面介绍下这种方法的使用，具体原理暂时没有深究，有兴趣转Darts,Dice, and coids。">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/alias-method-1.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/alias-method-2.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/alias-method-3.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/alias-method-4.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/alias-method-5.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/alias-method-6.png">
-<meta property="og:updated_time" content="2017-10-22T13:07:45.000Z">
+<meta property="og:updated_time" content="2017-10-22T13:09:43.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="转载—--Alias Method离散分布随机取样">
 <meta name="twitter:description" content="本文转载自天空的城。
-在图的随机游走中，有一块需要随机取样， 比如当前到达v节点，那么下一次随机会到达哪个节点。这种问题其实就是离散分布的随机变量的取样问题。 查了一些资料， 发现Alias Method是一种很高效的方式。在初始好之后，每次取样的复杂度为O(1)O(1)。 下面介绍下这种方法的使用，具体原理暂时没有深究，有兴趣转Darts,Dice, and coids。
-
-Alias-Meth">
+在图的随机游走中，有一块需要随机取样， 比如当前到达v节点，那么下一次随机会到达哪个节点。这种问题其实就是离散分布的随机变量的取样问题。 查了一些资料， 发现Alias Method是一种很高效的方式。在初始好之后，每次取样的复杂度为O(1)O(1)。 下面介绍下这种方法的使用，具体原理暂时没有深究，有兴趣转Darts,Dice, and coids。">
 <meta name="twitter:image" content="http://ou5bxfpku.bkt.clouddn.com/alias-method-1.png">
 
 
@@ -401,7 +395,7 @@ Alias-Meth">
       
         <p>本文转载自<a href="http://shomy.top/2017/05/09/alias-method-sampling/" target="_blank" rel="external">天空的城</a>。</p>
 <p>在图的随机游走中，有一块需要随机取样， 比如当前到达v节点，那么下一次随机会到达哪个节点。这种问题其实就是离散分布的随机变量的取样问题。 查了一些资料， 发现<a href="https://en.wikipedia.org/wiki/Alias_method" target="_blank" rel="external">Alias Method</a>是一种很高效的方式。在初始好之后，每次取样的复杂度为O(1)O(1)。 下面介绍下这种方法的使用，具体原理暂时没有深究，有兴趣转<a href="http://www.keithschwarz.com/darts-dice-coins/" target="_blank" rel="external">Darts,Dice, and coids</a>。</p>
-<!---->
+<a id="more"></a>
 <h4 id="Alias-Method-原理"><a href="#Alias-Method-原理" class="headerlink" title="Alias-Method 原理"></a>Alias-Method 原理</h4><p>大部分资料都会以这个例子讲解：游戏中经常遇到按一定的掉落概率来随机掉落指定物品的情况，例如掉落 银币25%，金币20%, 钻石10%，装备5%，饰品40%。现在要求下一个掉落的物品类型，或者说一个掉落的随机序列，要求符合上述概率。</p>
 <p>其实方法很简单，最直接的方法就是直接取样，先构建一个<strong>累加</strong>概率分布列表:<code>[0.25,0.45,0.55, 0.60, 1.0]</code>，之后产生一个随机数(0-1)，假设为0.7，那么在列表中找到第一个大于0.7的数为1.0,对应的类别是第5类。 这种方法很简单直接，但是每次取样复杂度为$O(K)$，使用二分搜索之后，降为$O(\log K)$。</p>
 <p>论文中经常使用的是另一种很巧妙的方法: Alias Method，它在初始化之后每次随机取样的复杂度为O(1)。 下面以<a href="http://www.keithschwarz.com/darts-dice-coins/" target="_blank" rel="external">Darts,Dice, and coids</a>文中例子用图示说明整个步骤，原理太繁杂，不做介绍，参考博客即可:</p>
