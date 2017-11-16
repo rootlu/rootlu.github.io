@@ -103,7 +103,7 @@
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="Python之所以受到程序猿&amp;amp;会写程序的非程序猿的热捧，很大一部分原因是因为其对字符串等数据流的方便快捷处理方式，但是，凡事有利必有弊，python2.x在处理数据过程中，尤其是在处理无比蛋疼博大精深的中文时，最大的困难就是编码问题，这也是每一个新手(比如我)都会遇到的遇到的一道大坎儿。。。要想坚持人生苦短，我用python的洗脑崇高信念，就必须大步向前，跨过这道坎儿。">
 <meta property="og:image" content="http://www.rootlu.com/img/python-coding.jpg">
-<meta property="og:updated_time" content="2017-01-25T04:44:52.000Z">
+<meta property="og:updated_time" content="2017-11-06T15:38:36.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浅谈 Python 编码问题">
 <meta name="twitter:description" content="Python之所以受到程序猿&amp;amp;会写程序的非程序猿的热捧，很大一部分原因是因为其对字符串等数据流的方便快捷处理方式，但是，凡事有利必有弊，python2.x在处理数据过程中，尤其是在处理无比蛋疼博大精深的中文时，最大的困难就是编码问题，这也是每一个新手(比如我)都会遇到的遇到的一道大坎儿。。。要想坚持人生苦短，我用python的洗脑崇高信念，就必须大步向前，跨过这道坎儿。">
@@ -401,7 +401,7 @@
 <h3 id="2-2-程序输入数据编码"><a href="#2-2-程序输入数据编码" class="headerlink" title="2.2 程序输入数据编码"></a>2.2 程序输入数据编码</h3><p>在处理数据（如，网页html）时，数据编码格式的不同往往会导致处理模块的异常，针对这种情况，首先调用<strong>detect函数</strong>检测其原始编码方式，然后进行decode解码，最后再encode编码成需要的格式。<br>detect函数使用：</p>
 <ul>
 <li>引入chardet包 <code>import chardet</code>，如果未安装，到<a href="https://pypi.python.org/pypi/chardet/" target="_blank" rel="external">这里</a>下载，解压后进入文件夹，执行命令<code>python setup.py install</code></li>
-<li>调用函数，结果返回一个字典<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> chardet</div><div class="line">result = chartdet.detect(response_html)</div><div class="line"><span class="keyword">print</span> result  <span class="comment"># &#123;'confidence': 0.99, 'encoding': 'utf-8'&#125;</span></div></pre></td></tr></table></figure>
+<li>调用函数，结果返回一个字典<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> chardet</div><div class="line">result = chardet.detect(response_html)</div><div class="line"><span class="keyword">print</span> result  <span class="comment"># &#123;'confidence': 0.99, 'encoding': 'utf-8'&#125;</span></div></pre></td></tr></table></figure>
 </li>
 </ul>
 <h3 id="2-3-str和unicode"><a href="#2-3-str和unicode" class="headerlink" title="2.3 str和unicode"></a>2.3 <code>str</code>和<code>unicode</code></h3><ul>
@@ -590,7 +590,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">77</span>
+                <span class="site-state-item-count">78</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
