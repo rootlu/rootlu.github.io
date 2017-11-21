@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="札记," />
+  <meta name="keywords" content="Network Embedding,Representation Learning,PaperNote," />
 
 
 
@@ -96,18 +96,23 @@
 
 
 
-<meta name="description" content="自律是解决人生问题最主要的工具，也是消除人生痛苦最重要的方法。">
+<meta name="description" content="HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。
+论文提出了一种针对异质信息网络的表示学习框架HIN2Vec，不同于之前很多基于Skip-gram语言模型的工作，HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="少有人走的路---自律">
-<meta property="og:url" content="http://www.rootlu.com/blog/2016/12/15/TheRoadLessTraveled-SelfDiscipline.html/index.html">
+<meta property="og:title" content="《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记">
+<meta property="og:url" content="http://www.rootlu.com/blog/2017/11/16/HIN2Vec.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
-<meta property="og:description" content="自律是解决人生问题最主要的工具，也是消除人生痛苦最重要的方法。">
-<meta property="og:image" content="http://www.rootlu.com/img/SelfDiscipline2.jpg">
-<meta property="og:updated_time" content="2017-01-24T13:20:10.000Z">
+<meta property="og:description" content="HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。
+论文提出了一种针对异质信息网络的表示学习框架HIN2Vec，不同于之前很多基于Skip-gram语言模型的工作，HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。">
+<meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec1.png">
+<meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec2.png">
+<meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec3.png">
+<meta property="og:updated_time" content="2017-11-21T14:49:36.692Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="少有人走的路---自律">
-<meta name="twitter:description" content="自律是解决人生问题最主要的工具，也是消除人生痛苦最重要的方法。">
-<meta name="twitter:image" content="http://www.rootlu.com/img/SelfDiscipline2.jpg">
+<meta name="twitter:title" content="《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记">
+<meta name="twitter:description" content="HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。
+论文提出了一种针对异质信息网络的表示学习框架HIN2Vec，不同于之前很多基于Skip-gram语言模型的工作，HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。">
+<meta name="twitter:image" content="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec1.png">
 
 
 
@@ -136,13 +141,13 @@
 
 
 
-  <link rel="canonical" href="http://www.rootlu.com/blog/2016/12/15/TheRoadLessTraveled-SelfDiscipline.html/"/>
+  <link rel="canonical" href="http://www.rootlu.com/blog/2017/11/16/HIN2Vec.html/"/>
 
 
 
 
 
-  <title>少有人走的路---自律 | ROOTLu</title>
+  <title>《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记 | ROOTLu</title>
   
 
 
@@ -285,7 +290,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2016/12/15/TheRoadLessTraveled-SelfDiscipline.html/">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2017/11/16/HIN2Vec.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YFLu">
@@ -302,7 +307,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">少有人走的路---自律</h1>
+          <h1 class="post-title" itemprop="name headline">《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记</h1>
         
 
         <div class="post-meta">
@@ -314,8 +319,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-12-15T19:52:15+08:00">
-                2016-12-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-16T22:54:26+08:00">
+                2017-11-16
               </time>
             
 
@@ -337,8 +342,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/杂碎/" itemprop="url" rel="index">
-                    <span itemprop="name">杂碎</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/Representation-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Representation Learning</span>
                   </a>
                 </span>
 
@@ -354,7 +370,7 @@
 
           
           
-             <span id="/blog/2016/12/15/TheRoadLessTraveled-SelfDiscipline.html/" class="leancloud_visitors" data-flag-title="少有人走的路---自律">
+             <span id="/blog/2017/11/16/HIN2Vec.html/" class="leancloud_visitors" data-flag-title="《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -385,25 +401,39 @@
       
 
       
-        <p>自律是解决人生问题最主要的工具，也是消除人生痛苦最重要的方法。<br><a id="more"></a></p>
-<hr>
-<p>人生苦难重重。先苦后甜。</p>
-<hr>
-<p>人生是一个不断面对问题，解决问题的过程。</p>
-<hr>
-<p>所谓自律，就是主动要求自己以积极的态度去承受痛苦，解决问题。</p>
-<hr>
-<p>神经官能症患者为自己强加责任，人格失调症患者则不愿承担原本属于自己的责任。</p>
-<hr>
-<p>你不能解决问题，你就会成为问题。</p>
-<hr>
-<p>绘制人生地图的艰难，不在于我们需要从头开始，而在于需要不断修订。</p>
-<hr>
-<p>人之为人，或许就在于我们可以改变本性，超越本性。</p>
-<hr>
-<p>大脑的高级中枢－判断力，必须约束低级中枢－情绪。</p>
-<hr>
-<center><img src="/img/SelfDiscipline2.jpg" alt=""></center>
+        <p>HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。</p>
+<p>论文提出了一种针<strong>对异质信息网络的表示学习框架HIN2Vec</strong>，不同于之前很多基于Skip-gram语言模型的工作，<strong>HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示</strong>。</p>
+<a id="more"></a>
+<p>同时论文还对异质信息网络中表示学习的一些问题做了研究实验，例如：<strong>元路径向量的正则化</strong>、<strong>负采样</strong>过程中节点的选择以及随机游走中的<strong>循环序列</strong>问题。</p>
+<h4 id="1、Introduction"><a href="#1、Introduction" class="headerlink" title="1、Introduction"></a>1、Introduction</h4><p>论文首先指出了现有模型存在的一些问题，之前的很多工作仅仅局限于同质信息网络，而且往往只考虑节点之间的整合的信息或者限制类型的关系。虽然ESim模型考虑了节点间的不同关系，但是该模型过于依赖人为定义的元路径以及每条元路径人为设置的权重。</p>
+<p>基于现有模型存在的问题，论文提出了HIN2Vec模型，通过研究节点之间不同类型的关系和网络结构，学习异质信息网络中丰富的信息。由于<strong>不同的元路径可能有不同的语义信息</strong>，所以作者认为<strong>对嵌入在元路径和整个网络结构中的丰富信息进行编码，有助于学习更有意义的表示</strong>。</p>
+<p>和之前的一些模型相比，HIN2Vec模型<strong>保留了更多的上下文信息</strong>，不仅假设<strong>存在关系的两个节点是相关的</strong>，而且还<strong>区分节点之间的不同关系</strong>，并通过共同<strong>学习关系向量</strong>区别对待。</p>
+<p>论文的主要贡献：</p>
+<ul>
+<li>证明了节点间不同类型的关系能够更好的捕获更多嵌入在网络结构中的细节信息，因此通过捕获节点间各种不同类型的关系，有助于网络的表示学习。</li>
+<li>提出了HIN2Vec模型，包括两部分：首先，<strong>基于随机游走和负采样生成训练数据</strong>，然后，设计<strong>逻辑二元分类器用于预测两个给定的节点是否存在特定的关系</strong>。同时，考虑了循环序列、负采样和正则化问题。</li>
+<li>实验很充分，包括多标签分类和链路预测，同时实验研究了循环序列、负采样以及正则化对实验分类结果的影响。</li>
+</ul>
+<h4 id="2、HIN2Vec"><a href="#2、HIN2Vec" class="headerlink" title="2、HIN2Vec"></a>2、HIN2Vec</h4><h5 id="2-1、Framework"><a href="#2-1、Framework" class="headerlink" title="2.1、Framework"></a>2.1、Framework</h5><p>HIN2Vec模型分为两部分：基于随机游走的数据生成部分和表示学习部分。数据生成部分，基于随机游走和负采样生成符合目标关系的数据，以用于表示学习。表示学习部分是一个神经网络模型，通过最大化预测节点之间关系的可能性，<strong>同时学习节点和关系的表示向量</strong>，模型的整体框架可以见下图。</p>
+<p><img src="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec1.png" alt=""></p>
+<p>值得注意的是，HIN2Vec模型同时学习了<strong>节点和关系（元路径）的表示向量</strong>，这种<strong>多任务学习</strong>（multi-task learning）方法能够把不同关系的丰富信息和整体网络结构联合嵌入到节点向量中。</p>
+<h5 id="2-2、Representation-Learning"><a href="#2-2、Representation-Learning" class="headerlink" title="2.2、Representation Learning"></a>2.2、Representation Learning</h5><p>HIN2Vec模型的基本想法是<strong>对于多个预测任务，每个任务对应于一条元路径，联合学习一个模型，学到每个节点的向量表示</strong>，所以一个简单的想法就是构建一个神经网络模型，<strong>预测任意给定节点对之间的一组目标关系</strong>。</p>
+<p>论文最初的想法是一个多分类模型，即给定两个节点和一个目标关系集合，通过下图2的神经网络模型训练预测概率值$P(r_i|x,y), (i=1…|R|)$，但是对于这样的一个模型的训练数据的获取是非常复杂的，因为<strong>对于一个复杂网络而言，获取网络中两个节点的所有关系是很困难</strong>的。</p>
+<p><img src="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec2.png" alt=""></p>
+<p>所以论文退而求其次，将问题简化成<strong>二分类问题</strong>，即<strong>给定两个节点$x, y$，预测节点间是否存在确定的关系$r$</strong>，这样就避免了遍历网络中的所有关系，图3所示就是HIN2Vec的神经网络模型。</p>
+<p><img src="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec3.png" alt=""></p>
+<p>模型的输入层是三个one-hot编码的向量$\vec{x},\vec{y},\vec{r}$，经过隐层层转换到隐含向量$W’_X\vec{x}, W_Y’\vec{y}, f_{01}(W_R’\vec{r})$，值得注意的是，因为关系和节点的语义含义是不同的，所以论文<strong>对关系向量$r$做了正则化处理</strong>，这种处理方式限制了关系向量的值在0到1之间。然后，模型对三个隐含向量运用一个Hadamard函数（例如，对应元素相乘），对乘积再运用一个线性激活函数，最后输出层对成绩求和后的值进行一个sigmoid非线性转换。</p>
+<p>模型的训练数据集是以四元组的形式给出的，形如$<x,y,r,l(x,y,r)>$，其中$L(x,y,r)$指示$x,y$之间是否存在关系$r$。具体的，<br>$$<br>O_{x,y,r}(x,y,r)=<br>\begin{cases}<br>P(r|x,y)&amp; \text{if L(x,y,r)} = 1 \\<br>1-P(r|x,y)&amp; \text{if L(x,y,r) = 0}<br>\end{cases}<br>$$</x,y,r,l(x,y,r)></p>
+<p>$$<br>\log O_{x,y,r}(x,y,r)=L(x,y,r)\log{P(r|x,y)}+[1-L(x,y,r)]\log [1-P(r|x,y)]<br>$$</p>
+<p>$$<br>P(r|x,y)=sigmoid(\sum{W’_X\vec{x}\odot{W’_Y\vec{y}}\odot{f_{01}(W_R’\vec{r})}})<br>$$</p>
+<h5 id="2-5、Traning-Data-Preparation"><a href="#2-5、Traning-Data-Preparation" class="headerlink" title="2.5、Traning Data Preparation"></a>2.5、Traning Data Preparation</h5><p>论文采用随机游走的方式生成节点序列，但是需要注意的是，<strong>不同于metapath2vec[1]按照给定元路径模式游走的方式，HIN2Vec模型完全随机选择游走节点，只要节点有连接均可游走</strong>。例如，随机游走得到序列$P_1,P_2,A_1,P_3,A_1$，那么对于节点$P_1$，可以产生训练数据$<p_1,p_2,p-p>$和$<p_1,a_1,p-p-a>$。</p_1,a_1,p-p-a></p_1,p_2,p-p></p>
+<p>在论文中，作者讨论了随机游走过程中可能出现的<strong>循环</strong>的情况，提出通过检查重复节点的方式消除循环，并在实验部分分析了是否消环对实验结果的影响，但是个人认为这个地方的原理性介绍比较欠缺，对于消除循环的具体做法没有给出很详细的说明解释，循环的检测是根据前面已生成的所有节点还是部分节点，也没有给出说明。</p>
+<p>论文还讨论了训练数据集中负样本的选择，论文也是采用word2vec中的负采样的方法产生负样本。对于一个正样本$<x,y,r>$，通过随机替换$x,y,r$中的任意一个，生成负样本$<x'',y'',r''>$，其中$x’’$和$y’’$之间不一定有确定的关系$r’’$。</x'',y'',r''></x,y,r></p>
+<p>但是，由于网络中的关系数量是很少的，节点的数量远远大于关系的数量，这样就很容易产生<strong>错误的负样本</strong>（其实是可能正样本），所以论文采用<strong>只随机替换$x$或$y$中的一个，而保持$r$是不变的，同时保持$x$或$y$的类型不变。</strong></p>
+<h4 id="3、Summary"><a href="#3、Summary" class="headerlink" title="3、Summary"></a>3、Summary</h4><p>总体来说，论文的想法还是很新颖的，<strong>把节点和节点间的关系作为一种二分类问题考虑，给定两个节点$x,y$，通过预测节点之间是否存在确定的关系$r$，同时学习到了节点和关系的向量表示</strong>。此外，论文考虑到了节点和关系的语义是不同的，因此它们的表示空间也应该不通，所以论文对关系向量运用了一个正则函数。对于随机游走过程中可能会出现循环节点的问题，论文也给出了实验分析，同时阐述了负采样时候节点及节点类型的选择。</p>
+<p>个人认为，论文的不足之处在于随机游走过程中如何消除循环，没有给出较为详细的说明。此外，对于学习到的关系的表示如何应用到实际的数据挖掘任务中，论文也没有给出实验分析。</p>
+<h6 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h6><p><em>[1] Dong Y, Chawla N V, Swami A. metapath2vec: Scalable representation learning for heterogeneous networks[C]//Proceedings of the 23rd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining. ACM, 2017: 135-144.</em></p>
+
       
     </div>
     
@@ -452,7 +482,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/12/15/TheRoadLessTraveled-SelfDiscipline.html/" title="少有人走的路---自律">http://www.rootlu.com//blog/2016/12/15/TheRoadLessTraveled-SelfDiscipline.html/</a>
+    <a href="http://www.rootlu.com//blog/2017/11/16/HIN2Vec.html/" title="《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记">http://www.rootlu.com//blog/2017/11/16/HIN2Vec.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -467,7 +497,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/札记/" rel="tag"># 札记</a>
+            <a href="/tags/Network-Embedding/" rel="tag"># Network Embedding</a>
+          
+            <a href="/tags/Representation-Learning/" rel="tag"># Representation Learning</a>
+          
+            <a href="/tags/PaperNote/" rel="tag"># PaperNote</a>
           
         </div>
       
@@ -480,8 +514,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2016/12/14/PythonDictSort.html/" rel="next" title="Python 之 字典（dict）排序">
-                <i class="fa fa-chevron-left"></i> Python 之 字典（dict）排序
+              <a href="/blog/2017/11/14/SDNE.html/" rel="next" title="《Structural Deep Network Embedding》---论文笔记">
+                <i class="fa fa-chevron-left"></i> 《Structural Deep Network Embedding》---论文笔记
               </a>
             
           </div>
@@ -489,10 +523,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2016/12/20/DataClustering.html/" rel="prev" title="Data Clustering ---《Programming Collective Intelligence》">
-                Data Clustering ---《Programming Collective Intelligence》 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -546,8 +576,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/uploads/avatar.png"
@@ -684,6 +723,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Introduction"><span class="nav-text">1、Introduction</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、HIN2Vec"><span class="nav-text">2、HIN2Vec</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1、Framework"><span class="nav-text">2.1、Framework</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2、Representation-Learning"><span class="nav-text">2.2、Representation Learning</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-5、Traning-Data-Preparation"><span class="nav-text">2.5、Traning Data Preparation</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Summary"><span class="nav-text">3、Summary</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
