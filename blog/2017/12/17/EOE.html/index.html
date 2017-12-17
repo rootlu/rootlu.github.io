@@ -103,7 +103,9 @@
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="EOE是17年WSDM会议上的一篇工作，论文提出了一种针对异质信息网络的表示学习方法EOE，模型将异质网络拆分成两个同质网络，在两个网络中分别优化，使得网络内相连接的节点有相近的向量表示，同时，通过引入一个嵌入矩阵，使得跨网络的有边连接的节点也有相近的向量表示。">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-16%2020.27.49.png">
-<meta property="og:updated_time" content="2017-12-17T09:18:37.317Z">
+<meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/EOE3.png">
+<meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/EOE2.png">
+<meta property="og:updated_time" content="2017-12-17T09:20:21.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Embedding of Embedding (EOE) Joint Embedding for Coupled Heterogeneous Networks》---论文笔记">
 <meta name="twitter:description" content="EOE是17年WSDM会议上的一篇工作，论文提出了一种针对异质信息网络的表示学习方法EOE，模型将异质网络拆分成两个同质网络，在两个网络中分别优化，使得网络内相连接的节点有相近的向量表示，同时，通过引入一个嵌入矩阵，使得跨网络的有边连接的节点也有相近的向量表示。">
@@ -401,6 +403,23 @@
 <p>在同一网络内，<strong>如果两个节点有连接，则最大化节点表示向量乘积的$sigmoid$函数</strong>，如果没有连接边，则最大化节点表示向量乘积的<strong>负值的$sigmoid$函数</strong>。在不同网络中，引入一个<strong>嵌入矩阵M</strong>，如果节点有边连接，最大化节点表示向量和嵌入矩阵的乘积的sigmoid函数。</p>
 <h4 id="1、Introdcution"><a href="#1、Introdcution" class="headerlink" title="1、Introdcution"></a>1、Introdcution</h4><p>网络嵌入的基本思想是：<strong>通过使相连的节点的表示是相近的来保留网络的结构特性</strong>，但是现有的很多工作仅仅是针对单一的网络，很少有工作分析复杂的网络数据。论文定义了一个<strong>耦合的异质网络（coupled heterogeneous network）</strong>，该网络<strong>由两个不同的但是相关的子网络组成，这些子网络通过网络间的链路连接</strong>。文中给出了一个学术合作网络的一个简单例子，可以见下图。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-16%2020.27.49.png" alt=""></p>
+<p>对于单一的作者网络或者词网络，现有的很多方法可以学习到网络的节点表示，但是这些方法几乎都不能直接应用于由作者网络和词网络共同构成的耦合异质网络。其中最主要的挑战在于：<strong>两个不同网络的异质性，这可能会导致两个异质隐含空间。</strong>针对这一问题，论文提出了EOE模型，通过利用一个<strong>嵌入矩阵（embedding matrix），进一步将一个隐含空间的表示嵌入到另一个嵌入空间</strong>。EOE模型和现有方法的关键不同在于在两个子网络中<strong>有三种边和两种类型的隐含空间</strong>。</p>
+<p>论文的主要贡献是：</p>
+<ul>
+<li>第一次提出了耦合网络的联合嵌入问题，并提出了一个<strong>利用嵌入矩阵进一步嵌入只编码了网络内部边的向量表示的EOE模型</strong>。</li>
+<li>提出了一种<strong>交替优化算法</strong>来解决EOE的学习目标，在这种学习目标中，学习目标是<strong>针对一种类型的变量一次优化直到收敛。</strong></li>
+<li>实验充分。</li>
+</ul>
+<h4 id="2、The-EOE-Model"><a href="#2、The-EOE-Model" class="headerlink" title="2、The EOE Model"></a>2、The EOE Model</h4><p>论文用符号$G_{uv}(G_u,E_{uv},W_{u,v},G_v)$表示耦合异质网络，其中$G_u(U,E_u,W_u)$、$G_v(V,E_v,W_v)$分别表示两个子网络，$U$和$V$表示节点集合，$E_u, E_v$表示子网络内部边集合，$E_{uv}$表示跨越两个子网络之间的连接边集合。$W_u,W_v$分别表示子网络中边的权重，$W_{uv}$表示跨网络边的权重。</p>
+<p>论文定义：<strong>如果两个节点之间存在边连接的概率非常大，那么它们在隐含向量空间的表示应该也是很相近的</strong>，而节点间有边连接的概率定义为：<br>$$<br>p(u_i,u_j)=\frac{1}{1+exp(-u_i^Tu_j)}<br>$$<br>其中$u_i,u_j$表示两个同类型节点的向量表示（在同一子网络内）。</p>
+<p>针对跨网络的节点，论文定义节点间有边连接的概率为：<br>$$<br>p(u_i,v_j)=\frac{1}{1+exp(-u_i^TMv_j)}<br>$$<br>其中，M定义为一个大小为$d_u\times{d_v}$的<strong>harmonious embnedding matrix（和谐的嵌入矩阵？）</strong>，$d_u,d_v$分别是隐含特征U，V的大小。</p>
+<p>EOE模型<strong>不仅保证有边连接的节点对在隐含向量空间中的表示是相近的，而且还保证没有边连接的节点对在隐含向量空间中的表示是相距甚远的</strong>。基于此，模型的损失函数可以由两部分组成，对于有边连接的节点对的损失定义为（以一个子网络U为例）：<br>$$<br>L(U)=-\sum_{(i,j)\in{E_u}}{(w_u)_{ij}\times{\log(p(u_i,u_j))}}<br>$$<br>对于没有边连接的节点对的损失函数定义为：<br>$$<br>L(U)=-\sum_{(h,k)\notin{E_u}}{\log(1-p(u_h,u_k))}<br>$$<br>两部分损失函数，保证了对于<strong>大概率连接（有边）的情况，损失值是很小的，对于小概率的连接（无边）的情况，损失值很大</strong>。</p>
+<p>因此，EOE模型的整体损失函数定义为：</p>
+<p><img src="http://ou5bxfpku.bkt.clouddn.com/EOE3.png" alt=""></p>
+<p>针对上述的损失函数，论文给出了一种优化方案：基于梯度，一次只优化一种类型的参数，直到当前变量收敛，在优化下一个参数。算法伪代码如下图。</p>
+<p><img src="http://ou5bxfpku.bkt.clouddn.com/EOE2.png" alt=""></p>
+<h4 id="3、Summary"><a href="#3、Summary" class="headerlink" title="3、Summary"></a>3、Summary</h4><p>总体来说，EOE模型想法还是挺有新意的，能够把异质网络考虑我哦两个同质的子网络，然后分而治之，针对<strong>同一网络内的相连接节点对有相近的向量表示</strong>，同时，通过引入一个<strong>嵌入矩阵</strong>，使得<strong>跨网络的有边连接的节点也有相近的向量表示</strong>。</p>
+<p>个人感觉，论文最大的亮点在于：通过定义两个节点间有边连接的概率，不仅保证<strong>有边连接的节点对在隐含向量空间中的表示是相近的，而且还保证没有边连接的节点对在隐含向量空间中的表示是相距甚远的</strong>，这一点恰当的体现在损失函数的定义中。</p>
 
       
     </div>
@@ -690,7 +709,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Introdcution"><span class="nav-text">1、Introdcution</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Introdcution"><span class="nav-text">1、Introdcution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、The-EOE-Model"><span class="nav-text">2、The EOE Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Summary"><span class="nav-text">3、Summary</span></a></li></ol></div>
             
 
           </div>
