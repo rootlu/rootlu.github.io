@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Network Embedding,Representation Learning,PaperNote," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="EOE是17年WSDM会议上的一篇工作，论文提出了一种针对异质信息网络的表示学习方法EOE，模型将异质网络拆分成两个同质网络，在两个网络中分别优化，使得网络内相连接的节点有相近的向量表示，同时，通过引入一个嵌入矩阵，使得跨网络的有边连接的节点也有相近的向量表示。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Embedding of Embedding (EOE) Joint Embedding for Coupled Heterogeneous Networks》---论文笔记">
+<meta property="og:url" content="http://www.rootlu.com/blog/2017/12/16/EOE.html/index.html">
+<meta property="og:site_name" content="ROOTLu">
+<meta property="og:description" content="EOE是17年WSDM会议上的一篇工作，论文提出了一种针对异质信息网络的表示学习方法EOE，模型将异质网络拆分成两个同质网络，在两个网络中分别优化，使得网络内相连接的节点有相近的向量表示，同时，通过引入一个嵌入矩阵，使得跨网络的有边连接的节点也有相近的向量表示。">
+<meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-16%2020.27.49.png">
+<meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/EOE2.png">
+<meta property="og:updated_time" content="2017-12-17T08:37:11.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Embedding of Embedding (EOE) Joint Embedding for Coupled Heterogeneous Networks》---论文笔记">
+<meta name="twitter:description" content="EOE是17年WSDM会议上的一篇工作，论文提出了一种针对异质信息网络的表示学习方法EOE，模型将异质网络拆分成两个同质网络，在两个网络中分别优化，使得网络内相连接的节点有相近的向量表示，同时，通过引入一个嵌入矩阵，使得跨网络的有边连接的节点也有相近的向量表示。">
+<meta name="twitter:image" content="http://ou5bxfpku.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-16%2020.27.49.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.rootlu.com/blog/2017/12/16/EOE.html/"/>
+
+
+
+
+
+  <title>《Embedding of Embedding (EOE) Joint Embedding for Coupled Heterogeneous Networks》---论文笔记 | ROOTLu</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="/life" rel="section">
+            
+            拾荒
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2017/12/16/EOE.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《Embedding of Embedding (EOE) Joint Embedding for Coupled Heterogeneous Networks》---论文笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-16T19:39:24+08:00">
+                2017-12-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/Representation-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Representation Learning</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/2017/12/16/EOE.html/" class="leancloud_visitors" data-flag-title="《Embedding of Embedding (EOE) Joint Embedding for Coupled Heterogeneous Networks》---论文笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>EOE是17年WSDM会议上的一篇工作，论文提出了一种针对异质信息网络的表示学习方法EOE，模型将异质网络拆分成两个同质网络，在两个网络中分别优化，使得<strong>网络内相连接的节点有相近的向量表示，同时，通过引入一个嵌入矩阵，使得跨网络的有边连接的节点也有相近的向量表示</strong>。</p>
+<a id="more"></a>
+<p>在同一网络内，<strong>如果两个节点有连接，则最大化节点表示向量乘积的$sigmoid$函数</strong>，如果没有连接边，则最大化节点表示向量乘积的<strong>负值的$sigmoid$函数</strong>。在不同网络中，引入一个<strong>嵌入矩阵M</strong>，如果节点有边连接，最大化节点表示向量和嵌入矩阵的乘积的sigmoid函数。</p>
+<h4 id="1、Introdcution"><a href="#1、Introdcution" class="headerlink" title="1、Introdcution"></a>1、Introdcution</h4><p>网络嵌入的基本思想是：<strong>通过使相连的节点的表示是相近的来保留网络的结构特性</strong>，但是现有的很多工作仅仅是针对单一的网络，很少有工作分析复杂的网络数据。论文定义了一个<strong>耦合的异质网络（coupled heterogeneous network）</strong>，该网络<strong>由两个不同的但是相关的子网络组成，这些子网络通过网络间的链路连接</strong>。文中给出了一个学术合作网络的一个简单例子，可以见下图。</p>
+<p><img src="http://ou5bxfpku.bkt.clouddn.com/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202017-12-16%2020.27.49.png" alt=""></p>
+<p>对于单一的作者网络或者词网络，现有的很多方法可以学习到网络的节点表示，但是这些方法几乎都不能直接应用于由作者网络和词网络共同构成的耦合异质网络。其中最主要的挑战在于：<strong>两个不同网络的异质性，这可能会导致两个异质隐含空间。</strong>针对这一问题，论文提出了EOE模型，通过利用一个<strong>嵌入矩阵（embedding matrix），进一步将一个隐含空间的表示嵌入到另一个嵌入空间</strong>。EOE模型和现有方法的关键不同在于在两个子网络中<strong>有三种边和两种类型的隐含空间</strong>。</p>
+<p>论文的主要贡献是：</p>
+<ul>
+<li>第一次提出了耦合网络的联合嵌入问题，并提出了一个<strong>利用嵌入矩阵进一步嵌入只编码了网络内部边的向量表示的EOE模型</strong>。</li>
+<li>提出了一种<strong>交替优化算法</strong>来解决EOE的学习目标，在这种学习目标中，学习目标是<strong>针对一种类型的变量一次优化直到收敛。</strong></li>
+<li>实验充分。</li>
+</ul>
+<h4 id="2、The-EOE-Model"><a href="#2、The-EOE-Model" class="headerlink" title="2、The EOE Model"></a>2、The EOE Model</h4><p>论文用符号$G_{uv}(G_u,E_{uv},W_{u,v},G_v)$表示耦合异质网络，其中$G_u(U,E_u,W_u)$、$G_v(V,E_v,W_v)$分别表示两个子网络，$U$和$V$表示节点集合，$E_u, E_v$表示子网络内部边集合，$E_{uv}$表示跨越两个子网络之间的连接边集合。$W_u,W_v$分别表示子网络中边的权重，$W_{uv}$表示跨网络边的权重。</p>
+<p>论文定义：<strong>如果两个节点之间存在边连接的概率非常大，那么它们在隐含向量空间的表示应该也是很相近的</strong>，而节点间有边连接的概率定义为：<br>$$<br>p(u_i,u_j)=\frac{1}{1+exp(-u_i^Tu_j)}<br>$$<br>其中$u_i,u_j$表示两个同类型节点的向量表示（在同一子网络内）。</p>
+<p>针对跨网络的节点，论文定义节点间有边连接的概率为：<br>$$<br>p(u_i,v_j)=\frac{1}{1+exp(-u_i^TMv_j)}<br>$$<br>其中，M定义为一个大小为$d_u\times{d_v}$的<strong>harmonious embnedding matrix（和谐的嵌入矩阵？）</strong>，$d_u,d_v$分别是隐含特征U，V的大小。</p>
+<p>EOE模型<strong>不仅保证有边连接的节点对在隐含向量空间中的表示是相近的，而且还保证没有边连接的节点对在隐含向量空间中的表示是相距甚远的</strong>。基于此，模型的损失函数可以由两部分组成，对于有边连接的节点对的损失定义为（以一个子网络U为例）：<br>$$<br>L(U)=-\sum_{(i,j)\in{E_u}}{(w_u)_{ij}\times{\log(p(u_i,u_j))}}<br>$$<br>对于没有边连接的节点对的损失函数定义为：<br>$$<br>L(U)=-\sum_{(h,k)\notin{E_u}}{\log(1-p(u_h,u_k))}<br>$$<br>两部分损失函数，保证了对于<strong>大概率连接（有边）的情况，损失值是很小的，对于小概率的连接（无边）的情况，损失值很大</strong>。</p>
+<p>因此，EOE模型的整体损失函数定义为：<br>$$<br>L(U,M,V)= \\</p>
+<ul>
+<li>\sum_{(i,j)\in{E_u}}{(w_u)_{ij}\times{\log(p(u_i,u_j))}}+\sum_{(i,j)\in{E_{uv}}}{(w_{uv})_{ij}\times{\log(p(u_i,v_j))}}+\sum_{(i,j)\in{E_v}}{(w_v)_{ij}\times{\log(p(v_i,v_j))}}] \\ </li>
+<li>[\sum_{(h,k)\notin{E_u}}{\log(1-p(u_h,u_k))}+\sum_{(h,k)\notin{E_{uv}}}{\log(1-p(u_h,v_k))}+\sum_{(h,k)\notin{E_v}}{\log(1-p(v_h,v_k))}] \\<br>+\lambda{\sum_{n=1}^{N_u}{||u_n||_2}}+\beta{||M||}+\eta\sum_{n=1}^{N_v}{||v_n||_2}<br>$$<br>针对上述的损失函数，论文给出了一种优化方案：基于梯度，一次只优化一种类型的参数，直到当前变量收敛，在优化下一个参数。算法伪代码如下图。</li>
+</ul>
+<p><img src="http://ou5bxfpku.bkt.clouddn.com/EOE2.png" alt=""></p>
+<h4 id="3、Summary"><a href="#3、Summary" class="headerlink" title="3、Summary"></a>3、Summary</h4><p>总体来说，EOE模型想法还是挺有新意的，能够把异质网络考虑我哦两个同质的子网络，然后分而治之，针对<strong>同一网络内的相连接节点对有相近的向量表示</strong>，同时，通过引入一个<strong>嵌入矩阵</strong>，使得<strong>跨网络的有边连接的节点也有相近的向量表示</strong>。</p>
+<p>个人感觉，论文最大的亮点在于：通过定义两个节点间有边连接的概率，不仅保证<strong>有边连接的节点对在隐含向量空间中的表示是相近的，而且还保证没有边连接的节点对在隐含向量空间中的表示是相距甚远的</strong>，这一点恰当的体现在损失函数的定义中。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的还不错？那就来个红包吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechat-reward-image.jpg" alt="YFLu WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay-reward-image.jpg" alt="YFLu Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    YFLu
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.rootlu.com//blog/2017/12/16/EOE.html/" title="《Embedding of Embedding (EOE) Joint Embedding for Coupled Heterogeneous Networks》---论文笔记">http://www.rootlu.com//blog/2017/12/16/EOE.html/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Network-Embedding/" rel="tag"># Network Embedding</a>
+          
+            <a href="/tags/Representation-Learning/" rel="tag"># Representation Learning</a>
+          
+            <a href="/tags/PaperNote/" rel="tag"># PaperNote</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/12/04/ClassificationReport.html/" rel="next" title="多分类报告准确率+召回率+F1值+均值+样本数">
+                <i class="fa fa-chevron-left"></i> 多分类报告准确率+召回率+F1值+均值+样本数
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTkxMi82NDc3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="YFLu" />
+          <p class="site-author-name" itemprop="name">YFLu</p>
+           
+              <p class="site-description motion-element" itemprop="description">NUPTer、BUPTer、MachineLearning、DataMining、伪文青</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">82</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rootlu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                    
+                      知乎
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.paperweekly.site/user/YFLu" target="_blank" title="PaperWeekly">
+                  
+                    <i class="fa fa-fw fa-paperweekly"></i>
+                  
+                    
+                      PaperWeekly
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.paperweekly.site/home" title="PaperWeekly" target="_blank">PaperWeekly</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Introdcution"><span class="nav-text">1、Introdcution</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、The-EOE-Model"><span class="nav-text">2、The EOE Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Summary"><span class="nav-text">3、Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YFLu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz", "0hAkU75j3ti2wICPYsRit8R7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
