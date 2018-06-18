@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="python,slite3," />
+  <meta name="keywords" content="Network Embedding,Representation Learning,PaperNote," />
 
 
 
@@ -96,16 +96,18 @@
 
 
 
-<meta name="description" content="记录在使用sqlite3过程中，遇到的一些问题，不定期更新…">
+<meta name="description" content="论文是清华cui peng老师组发表在TKDE18年的一篇文章，基本思路是基于他们组内KDD16年的文章《Asymmetric Transitivity Preserving Graph Embedding》，在此基础上扩展为动态网络embedding。论文基于广义SVD分解（GSVD）和矩阵摄动理论（matrix perturbation），在保留高阶相似性的同时，动态更新动态网络的节点表示。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="sqlit3使用杂记">
-<meta property="og:url" content="http://www.rootlu.com/blog/2017/05/28/Sqlit3Usege.html/index.html">
+<meta property="og:title" content="《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记">
+<meta property="og:url" content="http://www.rootlu.com/blog/2018/06/17/DynHPE.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
-<meta property="og:description" content="记录在使用sqlite3过程中，遇到的一些问题，不定期更新…">
-<meta property="og:updated_time" content="2017-05-28T14:09:31.000Z">
+<meta property="og:description" content="论文是清华cui peng老师组发表在TKDE18年的一篇文章，基本思路是基于他们组内KDD16年的文章《Asymmetric Transitivity Preserving Graph Embedding》，在此基础上扩展为动态网络embedding。论文基于广义SVD分解（GSVD）和矩阵摄动理论（matrix perturbation），在保留高阶相似性的同时，动态更新动态网络的节点表示。">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fsekfodfjaj30ak04274v.jpg">
+<meta property="og:updated_time" content="2018-06-17T15:00:49.610Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="sqlit3使用杂记">
-<meta name="twitter:description" content="记录在使用sqlite3过程中，遇到的一些问题，不定期更新…">
+<meta name="twitter:title" content="《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记">
+<meta name="twitter:description" content="论文是清华cui peng老师组发表在TKDE18年的一篇文章，基本思路是基于他们组内KDD16年的文章《Asymmetric Transitivity Preserving Graph Embedding》，在此基础上扩展为动态网络embedding。论文基于广义SVD分解（GSVD）和矩阵摄动理论（matrix perturbation），在保留高阶相似性的同时，动态更新动态网络的节点表示。">
+<meta name="twitter:image" content="https://ws3.sinaimg.cn/large/006tNc79ly1fsekfodfjaj30ak04274v.jpg">
 
 
 
@@ -134,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://www.rootlu.com/blog/2017/05/28/Sqlit3Usege.html/"/>
+  <link rel="canonical" href="http://www.rootlu.com/blog/2018/06/17/DynHPE.html/"/>
 
 
 
 
 
-  <title>sqlit3使用杂记 | ROOTLu</title>
+  <title>《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记 | ROOTLu</title>
   
 
 
@@ -283,7 +285,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2017/05/28/Sqlit3Usege.html/">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2018/06/17/DynHPE.html/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="YFLu">
@@ -300,7 +302,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">sqlit3使用杂记</h1>
+          <h1 class="post-title" itemprop="name headline">《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记</h1>
         
 
         <div class="post-meta">
@@ -312,8 +314,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-28T20:54:51+08:00">
-                2017-05-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-17T15:58:21+08:00">
+                2018-06-17
               </time>
             
 
@@ -335,8 +337,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Python/" itemprop="url" rel="index">
-                    <span itemprop="name">Python</span>
+                  <a href="/categories/Machine-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Machine Learning</span>
+                  </a>
+                </span>
+
+                
+                
+                  ， 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Machine-Learning/Representation-Learning/" itemprop="url" rel="index">
+                    <span itemprop="name">Representation Learning</span>
                   </a>
                 </span>
 
@@ -352,7 +365,7 @@
 
           
           
-             <span id="/blog/2017/05/28/Sqlit3Usege.html/" class="leancloud_visitors" data-flag-title="sqlit3使用杂记">
+             <span id="/blog/2018/06/17/DynHPE.html/" class="leancloud_visitors" data-flag-title="《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -383,12 +396,35 @@
       
 
       
-        <p>记录在使用sqlite3过程中，遇到的一些问题，不定期更新…<br><a id="more"></a></p>
-<h3 id="1、OperationalError"><a href="#1、OperationalError" class="headerlink" title="1、OperationalError"></a>1、OperationalError</h3><p>在使用python操作sqlit3数据库时，报错信息：</p>
-<p><code>sqlite3.OperationalError: Could not decode to UTF-8 column</code><br>出现这个错误的原因是：在查询数据库时候，数据库对文本的信息自动编码为utf-8格式，在文本中如果出现一些字符无法进行utf-8编码，则会报错，处理方法如下：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">conn = sqlite3.connect(<span class="string">'test.db'</span>)</div><div class="line">conn.text_factory = str</div></pre></td></tr></table></figure>
-<p>参考资料：<br><a href="https://stackoverflow.com/questions/22751363/sqlite3-operationalerror-could-not-decode-to-utf-8-column" target="_blank" rel="external">sqlite3.OperationalError-Stackoverflow</a></p>
-
+        <p>论文是清华cui peng老师组发表在TKDE18年的一篇文章，基本思路是基于他们组内KDD16年的文章《Asymmetric Transitivity Preserving Graph Embedding》，在此基础上扩展为动态网络embedding。论文基于<strong>广义SVD分解（GSVD）</strong>和<strong>矩阵摄动理论（matrix perturbation）</strong>，在<strong>保留高阶相似性</strong>的同时，<strong>动态更新动态网络的节点表示</strong>。</p>
+<a id="more"></a>
+<p>论文聚焦于：<strong>在保留网络高阶相似性的同时，当网络结构在下一时刻发生变化时候（增加/删除节点/边），如何快速有效的增量更新下一时刻节点的表示</strong>。论文通过把Katz相似性转化为一般化的SVD分解，建模网络的高阶相似性，然后基于矩阵摄动理论动态更新网络下一时刻的节点表示。</p>
+<h4 id="1、Movitation"><a href="#1、Movitation" class="headerlink" title="1、Movitation"></a>1、Movitation</h4><p>论文基于KDD16的文章，对于常用的相似性度量Katz指数，存在一般化的表示，可以通过广义SVD分解求得网络节点的embedding，而避免显式地计算高阶相似性矩阵。但是，对于动态网络embedding，如何利用GSVD有效快速<strong>更新变化后的网络节点embedding（增加/删除节点或边）</strong>还是一个待解决的问题。</p>
+<p>通过把GSVD问题转化为<strong><a href="http://fourier.eng.hmc.edu/e161/lectures/algebra/node7.html" target="_blank" rel="external">广义特征值问题（generalized eigenvalue problem）</a></strong>，论文基于矩阵摄动理论可以实现<strong>保留高阶相似性的同时，完成变化的网络节点的embedding的增量更新</strong>。</p>
+<h4 id="2、Model"><a href="#2、Model" class="headerlink" title="2、Model"></a>2、Model</h4><p>论文定义一个在t时刻的动态网络为$G^{(t)}={V^{(t)}, E^{(t)}}$，其中$V^{(t)}={v_1^{(t)},v_2^{(t)},…,v_N^{(t)}}$，节点数为N。论文的目标是保留动态网络的高阶相似性，同时对新增加或删除的节点或边，能够快速更新节点的表示。</p>
+<p>需要注意的是：<strong>在网络演变中，在每个时间步，把新增加或删除的节点看作孤立点，那么网络的变化就是边的变化，所以论文认为网络中节点的数量不变</strong>。</p>
+<p>论文将动态网络embedding分为两部分：<strong>静态模型保留网络节点间的高阶相似性</strong>；<strong>在每个时间步，动态更新节点的表示</strong>。论文分别给出了静态网络embedding和动态网络embedding的定义。其中静态网络embedding的定义比较常见，这里只介绍一下动态网络embedding。</p>
+<p>给定网络在$t+1$到$t+i$时间步的网络的邻接矩阵${A^{(t+1)}, A^{(t+2)},…,A^{(t+i)}}$，以及静态网络在t时刻的节点表示$U^{(t)}$，动态网络embeddin就是要输出在$t+1$到$t+i$时间步的节点表示${U^{(t+1)}, …, U^{(t+i)}}$。</p>
+<h5 id="2-1-静态网络embedding"><a href="#2-1-静态网络embedding" class="headerlink" title="2.1 静态网络embedding"></a>2.1 静态网络embedding</h5><p>论文基于KDD‘16的模型，对于网络高阶相似性的建模，定义如下的目标函数：<br>$$<br>\min ||S-UU’^T||^2_F<br>$$</p>
+<p>其中$U, U’\in{\mathbb{R}^{N*d}}$分别是基（basis）和坐标（coordinate）,论文以$U$作为节点的表示。$S$定义为高阶相似性矩阵，通过Katz Index计算得出。<br>$$<br>S^{Katz} = M_a^{-1}M_b<br>$$</p>
+<p>$$<br>M_a = (I-\beta{A}) , M_b = \beta{A}<br>$$</p>
+<p>根据KDD‘16模型，可以将问题转化为广义的SVD问题，S可以通过其特征值和特征向量近似得到，即：<br>$$<br>S=\sum{\sigma_i v_i v_i’}^T<br>$$</p>
+<p>所以U和U’可以计算得到：<br>$$<br>U=[\sqrt{\sigma_1}v_1^l,…,\sqrt{\sigma_d}v_d^l],   U’=[\sqrt{\sigma_1}v_1^r,…,\sqrt{\sigma_d}v_d^r]<br>$$</p>
+<p>但SVD过程需要计算相似性矩阵S，其中的计算复杂度很高（$O(N^3)$）考虑到S只是模型学习过程的中间产物，目标是学习节点的表示U，所以论文将SVD问题泛化为<strong>广义SVD问题</strong>，避免直接计算S。</p>
+<p>广义SVD可以定义为：<br>$$<br>S^{(t)} = {M_a^{(t)}}^{-1}M_b^{(t)} = V^{l(t)}\Sigma^{(t)}{V^{r(t)}}^T<br>$$<br>其中，$ V^{l(t)},  V^{r(t)}$是奇异向量构成的矩阵，$\Sigma^{(t)}=diag(\sigma_1^{(t)},…,\sigma_N^{(t)})$是奇异值构成对角阵。</p>
+<p>但其实完成GSVD依然存在$O(N^3)$的复杂度，考虑到只需要最大的d个特征值及其特征向量，所以不需要对M矩阵进行多项式计算，只需要<strong>对M矩阵乘以一个瘦长的矩阵</strong>就可以了，这个<strong>瘦长的矩阵大小为$N\times d$。</strong></p>
+<h5 id="2-2-动态模型更新embedding"><a href="#2-2-动态模型更新embedding" class="headerlink" title="2.2 动态模型更新embedding"></a>2.2 动态模型更新embedding</h5><p>在无向图中，邻接矩阵A和相似性矩阵S都是对称矩阵，所以可以将GSVD定义为<strong>广义特征值问题</strong>：<br>$$<br>\mathbf{M_a^{-1}M_bX=\Lambda X}<br>$$</p>
+<p>$$<br>\Lambda=diag(\lambda_1,…,\lambda_N), \lambda_i=\sigma_i\cdot{sgn(v_i^l\cdot{v_i^r})}, X=V^l<br>$$</p>
+<p>其中${\lambda_i}$是S的特征值，$X$是对应的特征向量构成的矩阵。</p>
+<p>上式等号左右乘以$M_a$，可以得到 （广义特征值问题的一般形式）<br>$$<br>\mathbf{M_b X=M_a\Lambda X}<br>$$</p>
+<p>因此，根据奇异值$\Sigma$和奇异向量$V^l,V^r$，可以推出广义特征值问题的解$\Lambda, X$，同样根据特征值和特征向量$\Lambda,X$，也可以推出GSVD的解$\Sigma, V^l$和$V^r$。<br>$$<br>v_i^l=x_i, \sigma_i=|\lambda_i|, v_i^r=x_i \cdot{\lambda_i}<br>$$<br>至此，网络动态更新的过程可以转变为 <strong>对特征向量$X^{(t)}$到$X^{(t+1)}$的更新。</strong></p>
+<p>在动态网络演变中，给定网络邻接矩阵的变化$\Delta A$，则矩阵$M_a$和 $M_b$的变化定义为：$\Delta M_a=-\beta \Delta A$和 $\Delta M_b=\beta \Delta A$。</p>
+<p>对于公式9，有如下形式：<br>$$<br>(M_b+\Delta M_b)(X+\Delta X) = (M_a+\Delta M_a)(\Lambda+\Delta \Lambda)(X+\Delta X)<br>$$</p>
+<p>化简，约去高阶项$\Delta M_b\Delta x_i, \lambda_i \Delta M_a \Delta x_i$，左乘一个$x_i^T$，得到：<br>$$<br>x_i^TM_b\Delta x_i + x_i^T \Delta M_bx_i = \lambda_i x_i^T M_a \Delta x_i + \lambda_ix_i^T\Delta M_ax_i + \Delta \lambda_ix_i^TM_ax_i<br>$$</p>
+<p>又因为 $M_a, M_b$是对称的，所以有：<br>$$<br>x_i^TM_b=\lambda_ix_i^TM_a<br>$$<br>公式12可以化简为：<br>$$<br>x_i^T\Delta M_bx_i = \lambda_ix_i^T \Delta M_ax_i + \Delta\lambda_ix_i^TM_ax_i<br>$$<br>可以求解得出:<br>$$<br>\Delta \lambda_i = \frac{x_i^T \Delta M_bx_i-\lambda_ix_i^T \Delta M_ax_i}{x_i^T M_ax_i}<br>$$<br>为了简化书写，论文定义：</p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNc79ly1fsekfodfjaj30ak04274v.jpg" alt=""></p>
+<p>所以有<br>$$<br>\Delta \lambda_i = \frac{H_b(i,i)-\lambda_iH_a(i,i)}{F_a(i,i)}<br>$$<br>下面计算$\Delta x_i$，论文<strong>假设网络的演变是平滑的，每两个时间步之间的变化比较小</strong>。基于矩阵摄动理论，可以假设<strong>特征向量的变化$\Delta x_i$是和前d和特征值成线性关系的</strong>。<br>$$<br>\Delta x_i = \sum_{j=1,j\neq i}^d{\alpha_{ij}x_j}<br>$$<br>其中，$\alpha _{ij}$表示特征向量$x_j$对特征向量变化的贡献，可以通过计算得出，这里不再详细介绍，具体计算可以参考论文。</p>
+<h4 id="3、-Experiments"><a href="#3、-Experiments" class="headerlink" title="3、 Experiments"></a>3、 Experiments</h4><h4 id="4、-SUmmary"><a href="#4、-SUmmary" class="headerlink" title="4、 SUmmary"></a>4、 SUmmary</h4>
       
     </div>
     
@@ -437,7 +473,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/05/28/Sqlit3Usege.html/" title="sqlit3使用杂记">http://www.rootlu.com//blog/2017/05/28/Sqlit3Usege.html/</a>
+    <a href="http://www.rootlu.com//blog/2018/06/17/DynHPE.html/" title="《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记">http://www.rootlu.com//blog/2018/06/17/DynHPE.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -452,9 +488,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/python/" rel="tag"># python</a>
+            <a href="/tags/Network-Embedding/" rel="tag"># Network Embedding</a>
           
-            <a href="/tags/slite3/" rel="tag"># slite3</a>
+            <a href="/tags/Representation-Learning/" rel="tag"># Representation Learning</a>
+          
+            <a href="/tags/PaperNote/" rel="tag"># PaperNote</a>
           
         </div>
       
@@ -467,8 +505,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/04/29/TheRoadLessTraveled-Love.html/" rel="next" title="少有人走的路---爱">
-                <i class="fa fa-chevron-left"></i> 少有人走的路---爱
+              <a href="/blog/2018/06/13/DynamicTriad.html/" rel="next" title="《Dynamic Network Embedding by Moding Tridaic Closure Process》— 论文笔记">
+                <i class="fa fa-chevron-left"></i> 《Dynamic Network Embedding by Moding Tridaic Closure Process》— 论文笔记
               </a>
             
           </div>
@@ -476,10 +514,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/blog/2017/05/28/PythonDivision.html/" rel="prev" title="Python 之 多种除法计算">
-                Python 之 多种除法计算 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -679,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、OperationalError"><span class="nav-text">1、OperationalError</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Movitation"><span class="nav-text">1、Movitation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Model"><span class="nav-text">2、Model</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1-静态网络embedding"><span class="nav-text">2.1 静态网络embedding</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-2-动态模型更新embedding"><span class="nav-text">2.2 动态模型更新embedding</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、-Experiments"><span class="nav-text">3、 Experiments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、-SUmmary"><span class="nav-text">4、 SUmmary</span></a></li></ol></div>
             
 
           </div>
