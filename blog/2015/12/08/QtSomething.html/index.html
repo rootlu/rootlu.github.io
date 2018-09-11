@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="C++,QT," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="开发过程中遇到的一些零零碎碎的东西，做个简单记录，不断更新…">
+<meta name="keywords" content="C++,QT">
+<meta property="og:type" content="article">
+<meta property="og:title" content="QT开发----杂碎">
+<meta property="og:url" content="http://www.rootlu.com/blog/2015/12/08/QtSomething.html/index.html">
+<meta property="og:site_name" content="ROOTLu">
+<meta property="og:description" content="开发过程中遇到的一些零零碎碎的东西，做个简单记录，不断更新…">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2016-08-30T02:40:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="QT开发----杂碎">
+<meta name="twitter:description" content="开发过程中遇到的一些零零碎碎的东西，做个简单记录，不断更新…">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: 'undefined',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://www.rootlu.com/blog/2015/12/08/QtSomething.html/"/>
+
+
+
+
+
+  <title>QT开发----杂碎 | ROOTLu</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-life">
+          <a href="/life" rel="section">
+            
+            拾荒
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2015/12/08/QtSomething.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">QT开发----杂碎</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2015-12-08T16:33:29+08:00">
+                2015-12-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Project/" itemprop="url" rel="index">
+                    <span itemprop="name">Project</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/2015/12/08/QtSomething.html/" class="leancloud_visitors" data-flag-title="QT开发----杂碎">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数 </span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>开发过程中遇到的一些零零碎碎的东西，做个简单记录，不断更新…<br><a id="more"></a></p>
+<h2 id="1-Qt中如何干掉窗口最小化-最大化级关闭按钮"><a href="#1-Qt中如何干掉窗口最小化-最大化级关闭按钮" class="headerlink" title="1. Qt中如何干掉窗口最小化 最大化级关闭按钮"></a>1. Qt中如何干掉窗口最小化 最大化级关闭按钮</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">MainWindow w;</span><br><span class="line"><span class="comment">//干掉最小化按钮</span></span><br><span class="line">w.setWindowFlags(w.windowFlags() &amp;~ Qt::WindowMinMaxButtonsHint);</span><br><span class="line"><span class="comment">//干掉关闭按钮</span></span><br><span class="line">w.setWindowFlags(w.windowFlags() &amp;~ Qt::WindowCloseButtonHint);</span><br><span class="line"><span class="comment">//干掉最大化按钮</span></span><br><span class="line">w.setWindowFlags(w.windowFlags() &amp;~Qt::WindowMaximizeButtonHint);<span class="comment">//好像这条语句可省略</span></span><br><span class="line">w. setFixedSize(<span class="number">600</span>, <span class="number">500</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="2-窗口居中于屏幕显示"><a href="#2-窗口居中于屏幕显示" class="headerlink" title="2. 窗口居中于屏幕显示"></a>2. 窗口居中于屏幕显示</h2><p>包含头文件:<code>include&lt;QDesktopWidget&gt;</code><br>在构造函数中添加如下语句:<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">QDesktopWidget* desktop = QApplication::desktop();   </span><br><span class="line">move((desktop-&gt;width() - <span class="keyword">this</span>-&gt;width())/<span class="number">2</span>, (desktop-&gt;height() - <span class="keyword">this</span>-&gt;height())/<span class="number">2</span>);</span><br></pre></td></tr></table></figure></p>
+<h2 id="3-布局管理-使控件适应窗口变化-还待补充完善"><a href="#3-布局管理-使控件适应窗口变化-还待补充完善" class="headerlink" title="3. 布局管理,使控件适应窗口变化(还待补充完善)"></a>3. 布局管理,使控件适应窗口变化(<em>还待补充完善</em>)</h2><p>在控件的SizePolicy属性中,有一项窗口部件大小策略的设置,可以用来控制布局管理中的控件的尺寸自适应方式。<br>水平和垂直策略常用的值有:</p>
+<ul>
+<li>Fixed：控件不能放大或者缩小，控件的大小就是它的sizeHint;</li>
+<li>Minimum：控件的sizeHint为控件的最小尺寸。控件不能小于这个sizeHint，但是可以放大;</li>
+<li>Maximum：控件的sizeHint为控件的最大尺寸，控件不能放大，但是可以缩小到它的最小的允许尺寸;</li>
+<li>Preferred：控件的sizeHint是它的sizeHint，但是可以放大或者缩小;</li>
+<li>Expandint：控件可以自行增大或者缩小.<br>注：sizeHint（布局管理中的控件默认尺寸，如果控件不在布局管理中就为无效的值）</li>
+</ul>
+<h2 id="4-解决-LNK2019-无法解析的外部符号-错误"><a href="#4-解决-LNK2019-无法解析的外部符号-错误" class="headerlink" title="4. 解决 LNK2019: 无法解析的外部符号 错误"></a>4. 解决 LNK2019: 无法解析的外部符号 错误</h2><p>删除Debug文件夹，make clean后重新编译！</p>
+<h2 id="5-解决error-C2512-“Ui-Login”-没有合适的默认构造函数可用-错误"><a href="#5-解决error-C2512-“Ui-Login”-没有合适的默认构造函数可用-错误" class="headerlink" title="5. 解决error: C2512: “Ui::Login”: 没有合适的默认构造函数可用 错误"></a>5. 解决error: C2512: “Ui::Login”: 没有合适的默认构造函数可用 错误</h2><p>原因是由于ui中的objectName被修改，与<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">namespace</span> Ui</span><br><span class="line"> &#123;</span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Widget</span></span></span><br><span class="line"><span class="class">&#125;</span></span><br></pre></td></tr></table></figure></p>
+<p>中的“Widget”名称不一致引起的：<br>将ui中的objectName 改成 “Widget”，就不会出现这个问题</p>
+<h2 id="6-更改工程项目名称"><a href="#6-更改工程项目名称" class="headerlink" title="6. 更改工程项目名称"></a>6. 更改工程项目名称</h2><ul>
+<li>1.右击工程项目文件夹，重命名；</li>
+<li>2.在xxx.pro文件中，更改语句<code>TARGET = xxx TEMPLATE = app</code>，其中xxx指工程新名称</li>
+<li>3.更改过后，有可能会报错：＂没有xxx.exe文件”，可以根据错误信息，找到该文件所在位置（应该在Debug文件夹中），重命名该文件为新名称.</li>
+</ul>
+<h2 id="7-报错-error-C1083-无法打开包括文件-“QtNetwork”-No-such-file-or-directory"><a href="#7-报错-error-C1083-无法打开包括文件-“QtNetwork”-No-such-file-or-directory" class="headerlink" title="7. 报错 error: C1083: 无法打开包括文件: “QtNetwork”: No such file or directory"></a>7. 报错 error: C1083: 无法打开包括文件: “QtNetwork”: No such file or directory</h2><ul>
+<li>1.在.pro文件中加上QT += network</li>
+<li>2.写成<code>#include&lt;QtNetwork/QtNetwork&gt;</code></li>
+</ul>
+<h2 id="8-文件读写"><a href="#8-文件读写" class="headerlink" title="8. 文件读写"></a>8. 文件读写</h2><p>包含头文件<code>#include&lt;QFile&gt;</code></p>
+<ul>
+<li><p>写文件</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QFile <span class="title">file</span><span class="params">(<span class="string">"E:\\test.txt"</span>)</span></span>;</span><br><span class="line"><span class="keyword">if</span>(!file.open(QIODevice::WriteOnly|QIODevice::Text|QIODevice::Append))</span><br><span class="line">&#123;</span><br><span class="line">  <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Open file failed"</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">QTextStream <span class="title">out</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line">QString t=<span class="string">"hello"</span>;</span><br><span class="line">out&lt;&lt;t;</span><br><span class="line">file.close();</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>读文件</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">QFile <span class="title">file</span><span class="params">(<span class="string">"E:\\test.txt"</span>)</span></span>;</span><br><span class="line"><span class="keyword">if</span>(!file.open(QIODevice::ReadOnly|QIODevice::Text))</span><br><span class="line">&#123;</span><br><span class="line">      <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;<span class="string">"Open failed."</span>&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function">QTextStream <span class="title">in</span><span class="params">(&amp;file)</span></span>;</span><br><span class="line">QString str;</span><br><span class="line"><span class="keyword">while</span>(!in.atEnd())</span><br><span class="line">&#123;</span><br><span class="line">        str=in.readLine();</span><br><span class="line">        <span class="built_in">std</span>::<span class="built_in">cout</span>&lt;&lt;str&lt;&lt;<span class="built_in">endl</span>;</span><br><span class="line">&#125;</span><br><span class="line">file.close();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>open()函数里的参数指明打开方式：<br>QIODevice::NotOpen  ——  未打开；<br>QIODevice::ReadOnly ——  以只读的方式打开<br>QIODevice::WriteOnly ——  以只写的方式打开<br>QIODevice::ReadWrite ——  以读写的方式打开<br>QIODevice::Append     ——  以追加的方式打开，新增加的内容将被追加到文件末尾<br>QIODevice::Truncate    ——  以重写的方式打开，在写入新数据会将原有数据全部清除，游标设置在文件开头<br>QIODevice::Text             ——-  在读取的时候，将结束符转换为\n；在写入时，将行结束符转换成本地格式，例如Win32是\r\n<br>QIODevice::Unbuffered  ——-   忽略缓存<br><em>注：在文件写入时，默认的是重写文件内容<br>文件名需要使用‘/’转义：”E:\\Do it\\Experience\\QT\\DataBackup\\log.txt”</em></p>
+<h2 id="9-Qt中中文处理问题"><a href="#9-Qt中中文处理问题" class="headerlink" title="9. Ｑt中中文处理问题"></a>9. Ｑt中中文处理问题</h2><p>添加头文件<code>#include&lt;QTextCodec&gt;</code><br>在程序中添加代码：<br><code>QTextCodec::setCodecForLocale(QTextCodec::codecForName(“GB2312”));</code><br>或：<code>QTextCodec::setCodecForLocale(QTextCodec::codecForName(“UTF-8”));</code></p>
+<h2 id="10-Qt中在单行文本框中输入密码，显示‘-’或者‘·’"><a href="#10-Qt中在单行文本框中输入密码，显示‘-’或者‘·’" class="headerlink" title="10. Qt中在单行文本框中输入密码，显示‘*’或者‘·’"></a>10. Qt中在单行文本框中输入密码，显示‘*’或者‘·’</h2><p>在构造函数中添加语句：<code>ui-&gt;pWordText-&gt;setEchoMode( QLineEdit::Password );</code>(pWordText是文本框名称)</p>
+<h2 id="11-Qt中socket编程获取客户端IP"><a href="#11-Qt中socket编程获取客户端IP" class="headerlink" title="11. Qt中socket编程获取客户端IP:"></a>11. Qt中socket编程获取客户端IP:</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">QSocket *socket=<span class="keyword">new</span> QSocket(<span class="keyword">this</span>);</span><br><span class="line">QStrign IP;</span><br><span class="line">IP=(socket-&gt;peerAddress()).toString();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的还不错？那就来个红包吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechat-reward-image.jpg" alt="YFLu WeChat Pay"/>
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay-reward-image.jpg" alt="YFLu Alipay"/>
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    YFLu
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://www.rootlu.com/blog/2015/12/08/QtSomething.html/" title="QT开发----杂碎">http://www.rootlu.com/blog/2015/12/08/QtSomething.html/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C/" rel="tag"># C++</a>
+          
+            <a href="/tags/QT/" rel="tag"># QT</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2015/12/08/QtTableWidget.html/" rel="next" title="QT开发----QTableWidget">
+                <i class="fa fa-chevron-left"></i> QT开发----QTableWidget
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2016/04/02/OsStore.html/" rel="prev" title="操作系统----存储管理">
+                操作系统----存储管理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTkxMi82NDc3"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/uploads/avatar.png"
+               alt="YFLu" />
+          <p class="site-author-name" itemprop="name">YFLu</p>
+           
+              <p class="site-description motion-element" itemprop="description">NUPTer、BUPTer、MachineLearning、DataMining、伪文青</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">84</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">38</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/rootlu" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                    
+                      GitHub
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-zhihu"></i>
+                  
+                    
+                      知乎
+                    
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.paperweekly.site/user/YFLu" target="_blank" title="PaperWeekly">
+                  
+                    <i class="fa fa-fw fa-paperweekly"></i>
+                  
+                    
+                      PaperWeekly
+                    
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              友情链接
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.paperweekly.site/home" title="PaperWeekly" target="_blank">PaperWeekly</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-Qt中如何干掉窗口最小化-最大化级关闭按钮"><span class="nav-text">1. Qt中如何干掉窗口最小化 最大化级关闭按钮</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-窗口居中于屏幕显示"><span class="nav-text">2. 窗口居中于屏幕显示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-布局管理-使控件适应窗口变化-还待补充完善"><span class="nav-text">3. 布局管理,使控件适应窗口变化(还待补充完善)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-解决-LNK2019-无法解析的外部符号-错误"><span class="nav-text">4. 解决 LNK2019: 无法解析的外部符号 错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-解决error-C2512-“Ui-Login”-没有合适的默认构造函数可用-错误"><span class="nav-text">5. 解决error: C2512: “Ui::Login”: 没有合适的默认构造函数可用 错误</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-更改工程项目名称"><span class="nav-text">6. 更改工程项目名称</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-报错-error-C1083-无法打开包括文件-“QtNetwork”-No-such-file-or-directory"><span class="nav-text">7. 报错 error: C1083: 无法打开包括文件: “QtNetwork”: No such file or directory</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-文件读写"><span class="nav-text">8. 文件读写</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Qt中中文处理问题"><span class="nav-text">9. Ｑt中中文处理问题</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Qt中在单行文本框中输入密码，显示‘-’或者‘·’"><span class="nav-text">10. Qt中在单行文本框中输入密码，显示‘*’或者‘·’</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#11-Qt中socket编程获取客户端IP"><span class="nav-text">11. Qt中socket编程获取客户端IP:</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2015 - 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YFLu</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+    <script type="text/javascript">
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz", "0hAkU75j3ti2wICPYsRit8R7");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+  
+
+
+  
+
+  
+
+</body>
+</html>
