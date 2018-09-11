@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="内存泄漏几乎在每个C++程序中都会发生，如何管理好内存是一件令C++程序猿非常头疼的事情，稍有不慎就会收获意想不到的“惊(jing)喜(xia)”，因此要想驾驭好C++这匹野马，就必须充分理解运用好内存管理这一有力的缰绳。">
+<meta name="keywords" content="C++">
 <meta property="og:type" content="article">
 <meta property="og:title" content="C++内存管理">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/07/11/Memory.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="内存泄漏几乎在每个C++程序中都会发生，如何管理好内存是一件令C++程序猿非常头疼的事情，稍有不慎就会收获意想不到的“惊(jing)喜(xia)”，因此要想驾驭好C++这匹野马，就必须充分理解运用好内存管理这一有力的缰绳。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-08-30T12:50:52.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++内存管理">
@@ -432,7 +434,7 @@
 <li>堆 向上生长，向着内存地址增加方向</li>
 <li>栈 向下生长，向着内存地址减小方向</li>
 </ul>
-<h2 id="3-sizeof内存容量"><a href="#3-sizeof内存容量" class="headerlink" title="3. sizeof内存容量"></a>3. sizeof内存容量</h2><p>举个栗子<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">char</span> a[]=<span class="string">"hello world"</span>;</div><div class="line"><span class="keyword">char</span> *p;</div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(a)&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//12字节</span></div><div class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(p)&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//4字节</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">char</span> a[<span class="number">100</span>])</span></span>&#123;</div><div class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(a)&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//4字节</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="3-sizeof内存容量"><a href="#3-sizeof内存容量" class="headerlink" title="3. sizeof内存容量"></a>3. sizeof内存容量</h2><p>举个栗子<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[]=<span class="string">"hello world"</span>;</span><br><span class="line"><span class="keyword">char</span> *p;</span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(a)&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//12字节</span></span><br><span class="line"><span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(p)&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//4字节</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">func</span><span class="params">(<span class="keyword">char</span> a[<span class="number">100</span>])</span></span>&#123;</span><br><span class="line">	<span class="built_in">cout</span>&lt;&lt;<span class="keyword">sizeof</span>(a)&lt;&lt;<span class="built_in">endl</span>;	<span class="comment">//4字节</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>原因：<code>sizeof(a)</code>值为12，字符数组后面还有一个<code>\0</code>；<code>sizeof(p)</code>值为4，是指一个指针变量的字节数，相当于<code>sizeof(char *)</code>，不是p所指的内存容量；当数组作为函数的参数进行传递时，该数组自动退化为同类型的指针，所以<code>sizeof(a)</code>值为4，相当于<code>sizeof(char *)</code></p>
 
       
@@ -483,7 +485,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/07/11/Memory.html/" title="C++内存管理">http://www.rootlu.com//blog/2016/07/11/Memory.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/07/11/Memory.html/" title="C++内存管理">http://www.rootlu.com/blog/2016/07/11/Memory.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1060,7 +1062,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

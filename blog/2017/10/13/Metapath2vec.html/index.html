@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="metapath2vec是2017年KDD上的一个工作，提出了对异质网络的表示学习算法metapath2vec和metapath2vec++。论文的主要亮点在于：通过元路径来指导随机游走，从而构造出节点的邻居节点集合，然后基于异质的skip-gram模型进行节点embedding。">
+<meta name="keywords" content="Network Embedding,Representation Learning,PaperNote">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《metapath2vec:Scalable Representation Learning for Heterogeneous Networks》—论文笔记">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/10/13/Metapath2vec.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="metapath2vec是2017年KDD上的一个工作，提出了对异质网络的表示学习算法metapath2vec和metapath2vec++。论文的主要亮点在于：通过元路径来指导随机游走，从而构造出节点的邻居节点集合，然后基于异质的skip-gram模型进行节点embedding。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/metapath2vec_1.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/metapath2vec_2.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/metapath2vec_3.png">
@@ -409,7 +411,7 @@
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/metapath2vec_1.png" alt=""></p>
 <h4 id="2、metapath2vec"><a href="#2、metapath2vec" class="headerlink" title="2、metapath2vec"></a>2、metapath2vec</h4><p>论文同样是基于随机游走和Skip-gram模型进行改进，将其用于异质网络的表示学习，提出了<strong>异质的Skip-gram</strong>和<strong>基于元路径的随机游走</strong>。</p>
 <p>异质的Skip-gram其实就是在原始Skip-gram模型的基础上，添加了对不同节点类型的叠加。对于节点类型数量大于1（$|T_V|&gt;1$）的异质网络，给定节点$v$的上下文节点$N_t(v)$，最大化如下的概率：<br>$$<br>\arg \max_\theta \sum_{v\in{V}}{\sum_{t\in{T_V}}{\sum_{c_t\in{N_t(v)}}{\log p(c_t|v;\theta)}}}<br>$$<br>其中，$N_t(v)$表示节点$v$的邻居节点集合，类型为$t$，$p(c_t|v;\theta)=\frac{e^{X_{c_t}\cdot{X_v}}}{\sum_{u\in{V}}{e^{X_u\cdot{X_v}}}}$定义为softmax函数，$X_v$表示节点$v$的表示特征。论文同样采用负采样的方法更新公式（1），定义为：$\log \sigma(X_{c_t},X_v)+\sum_{m=1}^M{E_{u^m\sim{P(u)}}[\log \sigma{-X_{u^m}\cdot{X_v}}]}$。</p>
-<p>从上面的公式定义可以看出，其实metapath和DeepWalk、node2vec基本类似，softmax归一化时同样没有考虑节点的类型，分母也是对图中的所有节点的特征表示求和。唯一的区别在于：<strong>metapath通过元路径来指导随机游走的节点跳转</strong>，在给定元路径模式$\mathcal{P}: V_1\to^{R_1}{V_2}\to^{R_2}{…}\to{V_t}\to^{R_t}{V_{t+1}}\to{…}\to^{R_{l-1}}{V_l}$，跳转概率定义为：<br>$$<br>p(v^{i+1}|v^i_t,\mathcal{P}) =<br>\begin{cases}<br>\frac{1}{|N_{t+1}(v_t^i)|}&amp;    (v^{i+1},v_t^i)\in{E},\phi(v^{i+1})=t+1 \\<br>0&amp;     (v^{i+1},v_t^i)\in{E},\phi(v^{i+1})\neq{t+1}\\<br>0&amp;     (v^{i+1},v_t^i)\notin{E}<br>\end{cases}<br>$$<br>公式中$i​$表示第i步，$v_t^i\in{V_t}​$表示在第i 步的类型为t的节点，$N_{t+1}(v_t^i)​$表示节点$v_t^i​$的类型为$t+1​$的邻居节点。</p>
+<p>从上面的公式定义可以看出，其实metapath和DeepWalk、node2vec基本类似，softmax归一化时同样没有考虑节点的类型，分母也是对图中的所有节点的特征表示求和。唯一的区别在于：<strong>metapath通过元路径来指导随机游走的节点跳转</strong>，在给定元路径模式$\mathcal{P}: V_1\to^{R_1}{V_2}\to^{R_2}{…}\to{V_t}\to^{R_t}{V_{t+1}}\to{…}\to^{R_{l-1}}{V_l}$，跳转概率定义为：<br>$$<br>p(v^{i+1}|v^i_t,\mathcal{P}) =<br>\begin{cases}<br>\frac{1}{|N_{t+1}(v_t^i)|}&amp;    (v^{i+1},v_t^i)\in{E},\phi(v^{i+1})=t+1 \<br>0&amp;     (v^{i+1},v_t^i)\in{E},\phi(v^{i+1})\neq{t+1}\<br>0&amp;     (v^{i+1},v_t^i)\notin{E}<br>\end{cases}<br>$$<br>公式中$i​$表示第i步，$v_t^i\in{V_t}​$表示在第i 步的类型为t的节点，$N_{t+1}(v_t^i)​$表示节点$v_t^i​$的类型为$t+1​$的邻居节点。</p>
 <p>如果下一节点$v^{i+1}$和当前节点$v_t^i$之间有边连接（$(v^{i+1},v_t^i)\in{E}$），而且$v^{i+1}$的类型符合元路径模式所定义的下一节点类型（$\phi(v^{i+1})=t+1$），那么随机游走到节点$v^{i+1}$的概率就是节点$v_t^i$的邻居节点且类型为$t+1$的节点的个数的倒数（均匀分布）。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/metapath2vec_2.png" alt=""></p>
 <h4 id="3、metapath2vec"><a href="#3、metapath2vec" class="headerlink" title="3、metapath2vec++"></a>3、metapath2vec++</h4><p>在metapath2vec中，softmax归一化没有考虑节点的类型，分母是对图中的所有节点的特征表示求和，其实本质上和DeepWalk、node2vec差不多，因此论文又在此基础上提出了metapath2vec++，不同于metapath2vec的softmax函数，metapath2vec++用不同类型节点的特征表示进行归一化，softmax函数定义如下：<br>$$<br>p(c_t|v;\theta)=\frac{e^{X_{c_t}\cdot{X_v}}}{\sum_{u_t\in{V_t}}{e^{X_{u_t}\cdot{X_v}}}}<br>$$<br><strong>metapath2vec++对每种类型节点指定不同的一组多项式分布</strong>，相当于在输出层根据节点类型，把异质网络分解成不同的同质网络，同样采用负采用的方法简化计算.</p>
@@ -468,7 +470,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/10/13/Metapath2vec.html/" title="《metapath2vec:Scalable Representation Learning for Heterogeneous Networks》—论文笔记">http://www.rootlu.com//blog/2017/10/13/Metapath2vec.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/10/13/Metapath2vec.html/" title="《metapath2vec:Scalable Representation Learning for Heterogeneous Networks》—论文笔记">http://www.rootlu.com/blog/2017/10/13/Metapath2vec.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1049,7 +1051,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

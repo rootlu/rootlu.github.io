@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="数根是将一正整数的各个位数相加（即横向相加），若加完后的值大于10的话，则继续将各位数进行横向相加直到其值小于十为止[1]，或是，将一数字重复做数字和，直到其值小于十为止，则所得的值为该数的数根。">
+<meta name="keywords" content="leetcode,acm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode258. Add Digits">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/08/30/Leetcode258.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="数根是将一正整数的各个位数相加（即横向相加），若加完后的值大于10的话，则继续将各位数进行横向相加直到其值小于十为止[1]，或是，将一数字重复做数字和，直到其值小于十为止，则所得的值为该数的数根。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-04T04:21:58.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode258. Add Digits">
@@ -386,8 +388,8 @@
         <p>数根是将一正整数的各个位数相加（即横向相加），若加完后的值大于10的话，则继续将各位数进行横向相加直到其值小于十为止[1]，或是，将一数字重复做数字和，直到其值小于十为止，则所得的值为该数的数根。<br><a id="more"></a></p>
 <p>Given a non-negative integer num, repeatedly add all its digits until the result has only one digit.<br>For example:<br>Given num = 38, the process is like: 3 + 8 = 11, 1 + 1 = 2. Since 2 has only one digit, return it.</p>
 <p>直接套用公式：<code>1 + (num - 1) % 9</code></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">addDigits</span><span class="params">(<span class="keyword">int</span> num)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> <span class="number">1</span> + (num - <span class="number">1</span>) % <span class="number">9</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>传送门：<a href="https://leetcode.com/problems/add-digits/" target="_blank" rel="external">leetcode258</a></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">addDigits</span><span class="params">(<span class="keyword">int</span> num)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> <span class="number">1</span> + (num - <span class="number">1</span>) % <span class="number">9</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>传送门：<a href="https://leetcode.com/problems/add-digits/" target="_blank" rel="noopener">leetcode258</a></p>
 
       
     </div>
@@ -437,7 +439,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/08/30/Leetcode258.html/" title="leetcode258. Add Digits">http://www.rootlu.com//blog/2016/08/30/Leetcode258.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/08/30/Leetcode258.html/" title="leetcode258. Add Digits">http://www.rootlu.com/blog/2016/08/30/Leetcode258.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -991,7 +993,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

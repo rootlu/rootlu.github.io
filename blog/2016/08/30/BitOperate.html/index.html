@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="在计算机中所有数据都是以二进制的形式储存的，位操作是程序设计中对位模式按位或二进制数的一元和二元操作，位运算其实就是直接对在内存中的二进制数据进行操作，因此处理数据的速度非常快。">
+<meta name="keywords" content="算法,位操作">
 <meta property="og:type" content="article">
 <meta property="og:title" content="位操作">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/08/30/BitOperate.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在计算机中所有数据都是以二进制的形式储存的，位操作是程序设计中对位模式按位或二进制数的一元和二元操作，位运算其实就是直接对在内存中的二进制数据进行操作，因此处理数据的速度非常快。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-04T04:21:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="位操作">
@@ -399,17 +401,17 @@
 <li>位操作的优先级非常低，最好使用括号确保其运算顺序</li>
 </ul>
 <h2 id="3-几个栗子"><a href="#3-几个栗子" class="headerlink" title="3.几个栗子"></a>3.几个栗子</h2><h3 id="3-1-判断奇偶"><a href="#3-1-判断奇偶" class="headerlink" title="3.1 判断奇偶"></a>3.1 判断奇偶</h3><p>根据最后一位是0还是1决定是偶数还是奇数<br>判断a是否为偶数，<code>if((a&amp;1)==0)</code>等价于`if(a%2==0)</p>
-<h3 id="3-2-不用第三方变量，交换两数"><a href="#3-2-不用第三方变量，交换两数" class="headerlink" title="3.2 不用第三方变量，交换两数"></a>3.2 不用第三方变量，交换两数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">if</span>(a!=b)&#123;</div><div class="line">		a^=b;	<span class="comment">//a=a^b</span></div><div class="line">		b^=a;	<span class="comment">//b=b^(a^b)=b^b^a=0^a=a</span></div><div class="line">		a^=b;	<span class="comment">//a=a^b=a^b^a=b</span></div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="3-3-交换符号"><a href="#3-3-交换符号" class="headerlink" title="3.3 交换符号"></a>3.3 交换符号</h3><p>正数变负数，负数变正数<br><strong>取反加一</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">SignReversal</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">return</span> ~a+<span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="3-4-求绝对值"><a href="#3-4-求绝对值" class="headerlink" title="3.4 求绝对值"></a>3.4 求绝对值</h3><p>任何数与0异或不变，与-1(0xFFFFFFFF)异或相当于取反<br>求绝对值就是把a与i异或后再减i，i=-1或0，即异或后加0或加1<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">abs</span><span class="params">(<span class="keyword">int</span> a)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> i=a&gt;&gt;<span class="number">31</span>;	<span class="comment">//0或者-1</span></div><div class="line">	<span class="keyword">return</span> ((a^i)-i);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="3-2-不用第三方变量，交换两数"><a href="#3-2-不用第三方变量，交换两数" class="headerlink" title="3.2 不用第三方变量，交换两数"></a>3.2 不用第三方变量，交换两数</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> &amp;a, <span class="keyword">int</span> &amp;b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(a!=b)&#123;</span><br><span class="line">		a^=b;	<span class="comment">//a=a^b</span></span><br><span class="line">		b^=a;	<span class="comment">//b=b^(a^b)=b^b^a=0^a=a</span></span><br><span class="line">		a^=b;	<span class="comment">//a=a^b=a^b^a=b</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="3-3-交换符号"><a href="#3-3-交换符号" class="headerlink" title="3.3 交换符号"></a>3.3 交换符号</h3><p>正数变负数，负数变正数<br><strong>取反加一</strong><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">SignReversal</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> ~a+<span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-4-求绝对值"><a href="#3-4-求绝对值" class="headerlink" title="3.4 求绝对值"></a>3.4 求绝对值</h3><p>任何数与0异或不变，与-1(0xFFFFFFFF)异或相当于取反<br>求绝对值就是把a与i异或后再减i，i=-1或0，即异或后加0或加1<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">abs</span><span class="params">(<span class="keyword">int</span> a)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i=a&gt;&gt;<span class="number">31</span>;	<span class="comment">//0或者-1</span></span><br><span class="line">	<span class="keyword">return</span> ((a^i)-i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="3-5-求两数之和，之差"><a href="#3-5-求两数之和，之差" class="headerlink" title="3.5 求两数之和，之差"></a>3.5 求两数之和，之差</h3><p>加法运算<br>一位二进制加法就是异或的结果，进位则为与的结果<br>int getSum(int a,int b)<br>{<br>    int sum=a;<br>    while(b!=0){<br>        sum=a^b;    //加法第一步，不算进位<br>        b=(a&amp;b)&lt;&lt;1;    /进位<br>        a=sum;<br>    }<br>    return sum;<br>}</p>
 <p>减法运算</p>
 <ul>
 <li>取反加一</li>
-<li>上一步所得值和被减数相加<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">getSub</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></div><div class="line">&#123;</div><div class="line">	<span class="keyword">int</span> subtrahend=getSum(~b,<span class="number">1</span>);</div><div class="line">	<span class="keyword">int</span> sub=add(a,subtrahend);</div><div class="line">	<span class="keyword">return</span> sub;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<li>上一步所得值和被减数相加<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">getSub</span><span class="params">(<span class="keyword">int</span> a,<span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> subtrahend=getSum(~b,<span class="number">1</span>);</span><br><span class="line">	<span class="keyword">int</span> sub=add(a,subtrahend);</span><br><span class="line">	<span class="keyword">return</span> sub;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<p>参考:<br><a href="http://blog.csdn.net/morewindows/article/details/7354571" target="_blank" rel="external">http://blog.csdn.net/morewindows/article/details/7354571</a></p>
+<p>参考:<br><a href="http://blog.csdn.net/morewindows/article/details/7354571" target="_blank" rel="noopener">http://blog.csdn.net/morewindows/article/details/7354571</a></p>
 
       
     </div>
@@ -459,7 +461,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/08/30/BitOperate.html/" title="位操作">http://www.rootlu.com//blog/2016/08/30/BitOperate.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/08/30/BitOperate.html/" title="位操作">http://www.rootlu.com/blog/2016/08/30/BitOperate.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1038,7 +1040,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

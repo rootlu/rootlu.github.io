@@ -97,12 +97,14 @@
 
 
 <meta name="description" content="Python中字典是一种很有用的数据结构，以键值对的形式存储任意类型对象。字典的每个键值(key=&amp;gt;value)对用冒号 : 分割，每个对之间用逗号 , 分割，整个字典包括在花括号 { }中。">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 之 字典（dict）排序">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/12/14/PythonDictSort.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="Python中字典是一种很有用的数据结构，以键值对的形式存储任意类型对象。字典的每个键值(key=&amp;gt;value)对用冒号 : 分割，每个对之间用逗号 , 分割，整个字典包括在花括号 { }中。">
-<meta property="og:updated_time" content="2016-12-14T08:00:16.000Z">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-07-12T03:36:25.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 之 字典（dict）排序">
 <meta name="twitter:description" content="Python中字典是一种很有用的数据结构，以键值对的形式存储任意类型对象。字典的每个键值(key=&amp;gt;value)对用冒号 : 分割，每个对之间用逗号 , 分割，整个字典包括在花括号 { }中。">
@@ -384,8 +386,8 @@
 
       
         <p>Python中字典是一种很有用的数据结构，以键值对的形式存储任意类型对象。字典的每个键值(key=&gt;value)对用冒号 <code>:</code> 分割，每个对之间用逗号 <code>,</code> 分割，整个字典包括在花括号 <code>{ }</code>中。<br><a id="more"></a><br>在使用字典的过程中，经常需要对字典的键或值进行排序操作，下面将从两种方式说明字典排序操作。</p>
-<h2 id="1、按键key排序"><a href="#1、按键key排序" class="headerlink" title="1、按键key排序"></a>1、按键key排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">test_dict = &#123;<span class="string">'h'</span>:<span class="number">2</span>, <span class="string">'b'</span>:<span class="number">5</span>, <span class="string">'d'</span>:<span class="number">3</span>, <span class="string">'c'</span>:<span class="number">4</span>, <span class="string">'e'</span>:<span class="number">7</span>&#125;</div><div class="line"><span class="comment"># iteritems() 迭代输出键值，sorted函数按key参数值排序，此处为d[0]，即为字典的键</span></div><div class="line">sort_dict= sorted(test_dict.iteritems(), key = <span class="keyword">lambda</span> d:d[<span class="number">0</span>])  </div><div class="line"><span class="keyword">print</span> sort_dict</div><div class="line"><span class="comment"># 输出 '[('b', 5), ('c', 4), ('d', 3), ('e', 7), ('h', 2)]'，按字幕顺序从小到大排序</span></div></pre></td></tr></table></figure>
-<h2 id="2、按值value排序"><a href="#2、按值value排序" class="headerlink" title="2、按值value排序"></a>2、按值value排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">test_dict = &#123;<span class="string">'h'</span>:<span class="number">2</span>, <span class="string">'b'</span>:<span class="number">5</span>, <span class="string">'d'</span>:<span class="number">3</span>, <span class="string">'c'</span>:<span class="number">4</span>, <span class="string">'e'</span>:<span class="number">7</span>&#125;</div><div class="line"><span class="comment"># iteritems() 迭代输出键值，sorted函数按key参数值排序，此处为d[1]，即为字典的值</span></div><div class="line">sort_dict= sorted(test_dict.iteritems(), key = <span class="keyword">lambda</span> d:d[<span class="number">1</span>])  </div><div class="line"><span class="keyword">print</span> sort_dict</div><div class="line"><span class="comment"># 输出 '[('b', 5), ('c', 4), ('d', 3), ('e', 7), ('h', 2)]'，按字幕顺序从小到大排序</span></div></pre></td></tr></table></figure>
+<h2 id="1、按键key排序"><a href="#1、按键key排序" class="headerlink" title="1、按键key排序"></a>1、按键key排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test_dict = &#123;<span class="string">'h'</span>:<span class="number">2</span>, <span class="string">'b'</span>:<span class="number">5</span>, <span class="string">'d'</span>:<span class="number">3</span>, <span class="string">'c'</span>:<span class="number">4</span>, <span class="string">'e'</span>:<span class="number">7</span>&#125;</span><br><span class="line"><span class="comment"># iteritems() 迭代输出键值，sorted函数按key参数值排序，此处为d[0]，即为字典的键</span></span><br><span class="line">sort_dict= sorted(test_dict.iteritems(), key = <span class="keyword">lambda</span> d:d[<span class="number">0</span>])  </span><br><span class="line"><span class="keyword">print</span> sort_dict</span><br><span class="line"><span class="comment"># 输出 '[('b', 5), ('c', 4), ('d', 3), ('e', 7), ('h', 2)]'，按字母顺序从小到大排序</span></span><br></pre></td></tr></table></figure>
+<h2 id="2、按值value排序"><a href="#2、按值value排序" class="headerlink" title="2、按值value排序"></a>2、按值value排序</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">test_dict = &#123;<span class="string">'h'</span>:<span class="number">2</span>, <span class="string">'b'</span>:<span class="number">5</span>, <span class="string">'d'</span>:<span class="number">3</span>, <span class="string">'c'</span>:<span class="number">4</span>, <span class="string">'e'</span>:<span class="number">7</span>&#125;</span><br><span class="line"><span class="comment"># iteritems() 迭代输出键值，sorted函数按key参数值排序，此处为d[1]，即为字典的值</span></span><br><span class="line">sort_dict= sorted(test_dict.iteritems(), key = <span class="keyword">lambda</span> d:d[<span class="number">1</span>])  </span><br><span class="line"><span class="keyword">print</span> sort_dict</span><br><span class="line"><span class="comment"># 输出 '[('h', 2),('d', 3), ('c', 4), ('b', 5), ('e', 7), ]'，按数值顺序从小到大排序</span></span><br></pre></td></tr></table></figure>
       
     </div>
     
@@ -434,7 +436,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/12/14/PythonDictSort.html/" title="Python 之 字典（dict）排序">http://www.rootlu.com//blog/2016/12/14/PythonDictSort.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/12/14/PythonDictSort.html/" title="Python 之 字典（dict）排序">http://www.rootlu.com/blog/2016/12/14/PythonDictSort.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1011,7 +1013,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

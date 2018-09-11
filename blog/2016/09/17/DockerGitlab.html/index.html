@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库。GitLab拥有与GitHub类似的功能，能够浏览源代码，管理缺陷和注释，可以管理团队对仓库的访问，还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。">
+<meta name="keywords" content="Docker,GitLab">
 <meta property="og:type" content="article">
 <meta property="og:title" content="利用Dcoker搭建GitLab版本管理服务">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/09/17/DockerGitlab.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库。GitLab拥有与GitHub类似的功能，能够浏览源代码，管理缺陷和注释，可以管理团队对仓库的访问，还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.rootlu.com/img/runGit.jpg">
 <meta property="og:image" content="http://www.rootlu.com/img/dependencies.jpg">
 <meta property="og:image" content="http://www.rootlu.com/img/successDependencies.jpg">
@@ -408,7 +410,7 @@
       
 
       
-        <p>GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库。GitLab拥有与GitHub类似的功能，能够浏览源代码，管理缺陷和注释，可以管理团队对仓库的访问，还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。<br><a id="more"></a><br>利用docker搭建GitLab服务，可以很方便地部署迁移。在DockerHub中已经存在由GitLab官方提供的Docker<a href="https://hub.docker.com/r/gitlab/gitlab-ce/" target="_blank" rel="external">镜像</a>，可以直接拉取使用。在本文中，介绍手动创建gitlab服务镜像，并导出导入使用。</p>
+        <p>GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库。GitLab拥有与GitHub类似的功能，能够浏览源代码，管理缺陷和注释，可以管理团队对仓库的访问，还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。<br><a id="more"></a><br>利用docker搭建GitLab服务，可以很方便地部署迁移。在DockerHub中已经存在由GitLab官方提供的Docker<a href="https://hub.docker.com/r/gitlab/gitlab-ce/" target="_blank" rel="noopener">镜像</a>，可以直接拉取使用。在本文中，介绍手动创建gitlab服务镜像，并导出导入使用。</p>
 <h2 id="1、创建容器"><a href="#1、创建容器" class="headerlink" title="1、创建容器"></a>1、创建容器</h2><p><code>docker run -i -t -p :80:80 --name gitlab ubuntu /bin/bash</code><br><img src="/img/runGit.jpg" alt=""></p>
 <ul>
 <li>添加端口映射为80–&gt;80 ，未添加ip，默认映射所有接口地址</li>
@@ -421,7 +423,7 @@
 <li>安装成功</li>
 </ul>
 <p><img src="/img/successDependencies.jpg" alt=""></p>
-<h2 id="3、安装gitlab"><a href="#3、安装gitlab" class="headerlink" title="3、安装gitlab"></a>3、安装gitlab</h2><p>有多种安装方式，可参考<a href="https://about.gitlab.com/downloads/#ubuntu1604" target="_blank" rel="external">官网</a><br>这里采用先下载deb，然后安装的方式。<br><code>dpkg -i gitlab-ce_8.10.5-ce.0_amd64.deb</code><br><img src="/img/dpkgGit.jpg" alt=""></p>
+<h2 id="3、安装gitlab"><a href="#3、安装gitlab" class="headerlink" title="3、安装gitlab"></a>3、安装gitlab</h2><p>有多种安装方式，可参考<a href="https://about.gitlab.com/downloads/#ubuntu1604" target="_blank" rel="noopener">官网</a><br>这里采用先下载deb，然后安装的方式。<br><code>dpkg -i gitlab-ce_8.10.5-ce.0_amd64.deb</code><br><img src="/img/dpkgGit.jpg" alt=""></p>
 <h2 id="4、配置gitlab"><a href="#4、配置gitlab" class="headerlink" title="4、配置gitlab"></a>4、配置gitlab</h2><p>进入<code>/etc/gitlab</code>目录，修改gitlab.rb配置文件，把external_url修改为gitlab的webUI访问地址，默认开放80端口<br><img src="/img/gitlabRb.jpg" alt=""></p>
 <h2 id="5、启动gitlab"><a href="#5、启动gitlab" class="headerlink" title="5、启动gitlab"></a>5、启动gitlab</h2><ul>
 <li><code>gitlab-ctl reconfigure</code><br>过程中需要等一会…</li>
@@ -494,7 +496,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/09/17/DockerGitlab.html/" title="利用Dcoker搭建GitLab版本管理服务">http://www.rootlu.com//blog/2016/09/17/DockerGitlab.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/09/17/DockerGitlab.html/" title="利用Dcoker搭建GitLab版本管理服务">http://www.rootlu.com/blog/2016/09/17/DockerGitlab.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1073,7 +1075,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

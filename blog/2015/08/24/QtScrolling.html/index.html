@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="代码实现滚动字幕效果。">
+<meta name="keywords" content="C++,QT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QT开发----滚动字幕">
 <meta property="og:url" content="http://www.rootlu.com/blog/2015/08/24/QtScrolling.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="代码实现滚动字幕效果。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-08-30T02:53:06.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="QT开发----滚动字幕">
@@ -384,9 +386,9 @@
 
       
         <p>代码实现滚动字幕效果。<br><a id="more"></a></p>
-<h2 id="1-构造函数中添加语句："><a href="#1-构造函数中添加语句：" class="headerlink" title="1. 构造函数中添加语句："></a>1. 构造函数中添加语句：</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"> timer =new QTimer(<span class="name">this</span>)<span class="comment">;</span></div><div class="line">connect(<span class="name">timer</span>,SIGNAL(<span class="name">timeout</span>()),this,SLOT(<span class="name">TimeOut</span>()))<span class="comment">;//连接信号timeout()与槽函数TimeOut()    </span></div><div class="line">timer-&gt;start(<span class="number">500</span>)<span class="comment">;//时间设为500ms</span></div><div class="line">temp_str=<span class="string">"你要显示的字幕"</span><span class="comment">;//待显示字符串</span></div><div class="line">pos=0<span class="comment">;</span></div></pre></td></tr></table></figure>
-<h2 id="2-实现TimeOut-函数"><a href="#2-实现TimeOut-函数" class="headerlink" title="2. 实现TimeOut()函数"></a>2. 实现TimeOut()函数</h2><figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">void 类名::TimeOut<span class="comment">()</span></div><div class="line">&#123;</div><div class="line">    <span class="keyword">if</span><span class="comment">(pos&gt;temp_str.length()</span>)</div><div class="line">          pos=<span class="number">0</span>;</div><div class="line">    ui-&gt;showlabel-&gt;setText<span class="comment">(temp_str.substr(pos)</span>.c_str<span class="comment">()</span>);</div><div class="line">    pos++;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="3-头文件添加语句："><a href="#3-头文件添加语句：" class="headerlink" title="3. 头文件添加语句："></a>3. 头文件添加语句：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//声明槽函数</span></div><div class="line"><span class="keyword">private</span> slots:</div><div class="line">         <span class="function"><span class="keyword">void</span> <span class="title">TimeOut</span><span class="params">()</span></span>;</div><div class="line"><span class="comment">//定义变量</span></div><div class="line">QTimer *timer;</div><div class="line"><span class="built_in">std</span>::<span class="built_in">string</span> temp_str;</div><div class="line"><span class="keyword">int</span> pos;</div></pre></td></tr></table></figure>
+<h2 id="1-构造函数中添加语句："><a href="#1-构造函数中添加语句：" class="headerlink" title="1. 构造函数中添加语句："></a>1. 构造函数中添加语句：</h2><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"> timer =new QTimer(<span class="name">this</span>)<span class="comment">;</span></span><br><span class="line">connect(<span class="name">timer</span>,SIGNAL(<span class="name">timeout</span>()),this,SLOT(<span class="name">TimeOut</span>()))<span class="comment">;//连接信号timeout()与槽函数TimeOut()    </span></span><br><span class="line">timer-&gt;start(<span class="number">500</span>)<span class="comment">;//时间设为500ms</span></span><br><span class="line">temp_str=<span class="string">"你要显示的字幕"</span><span class="comment">;//待显示字符串</span></span><br><span class="line">pos=0<span class="comment">;</span></span><br></pre></td></tr></table></figure>
+<h2 id="2-实现TimeOut-函数"><a href="#2-实现TimeOut-函数" class="headerlink" title="2. 实现TimeOut()函数"></a>2. 实现TimeOut()函数</h2><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">void 类名::TimeOut<span class="comment">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span><span class="comment">(pos&gt;temp_str.length()</span>)</span><br><span class="line">          pos=<span class="number">0</span>;</span><br><span class="line">    ui-&gt;showlabel-&gt;setText<span class="comment">(temp_str.substr(pos)</span>.c_str<span class="comment">()</span>);</span><br><span class="line">    pos++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-头文件添加语句："><a href="#3-头文件添加语句：" class="headerlink" title="3. 头文件添加语句："></a>3. 头文件添加语句：</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//声明槽函数</span></span><br><span class="line"><span class="keyword">private</span> slots:</span><br><span class="line">         <span class="function"><span class="keyword">void</span> <span class="title">TimeOut</span><span class="params">()</span></span>;</span><br><span class="line"><span class="comment">//定义变量</span></span><br><span class="line">QTimer *timer;</span><br><span class="line"><span class="built_in">std</span>::<span class="built_in">string</span> temp_str;</span><br><span class="line"><span class="keyword">int</span> pos;</span><br></pre></td></tr></table></figure>
 <p><strong>注意：一定要在头文件中添加<code>void TimeOut()</code>槽函数的声明</strong></p>
 
       
@@ -437,7 +439,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2015/08/24/QtScrolling.html/" title="QT开发----滚动字幕">http://www.rootlu.com//blog/2015/08/24/QtScrolling.html/</a>
+    <a href="http://www.rootlu.com/blog/2015/08/24/QtScrolling.html/" title="QT开发----滚动字幕">http://www.rootlu.com/blog/2015/08/24/QtScrolling.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1016,7 +1018,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

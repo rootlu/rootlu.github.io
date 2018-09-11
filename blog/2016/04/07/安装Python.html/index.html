@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="Python是一门简单易学，功能强大的解释性语言，它没有编译和链接，但具有高效的高级数据结构和简单而有效的面向对象编程方法。Python优雅的语法和动态类型以及其解释性的性质，使它在许多领域和大多数平台成为编写脚本和快速应用程序开发的理想语言。">
+<meta name="keywords" content="python,教程">
 <meta property="og:type" content="article">
 <meta property="og:title" content="安装 Python">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/04/07/安装Python.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="Python是一门简单易学，功能强大的解释性语言，它没有编译和链接，但具有高效的高级数据结构和简单而有效的面向对象编程方法。Python优雅的语法和动态类型以及其解释性的性质，使它在许多领域和大多数平台成为编写脚本和快速应用程序开发的理想语言。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.rootlu.com/img/python.org.jpg">
 <meta property="og:image" content="http://www.rootlu.com/img/python_features.jpg">
 <meta property="og:image" content="http://www.rootlu.com/img/python_setup.jpg">
@@ -389,7 +391,7 @@
 
       
         <p>Python是一门简单易学，功能强大的解释性语言，它没有编译和链接，但具有高效的高级数据结构和简单而有效的面向对象编程方法。Python优雅的语法和动态类型以及其解释性的性质，使它在许多领域和大多数平台成为编写脚本和快速应用程序开发的理想语言。<br><a id="more"></a></p>
-<h2 id="1、下载Python"><a href="#1、下载Python" class="headerlink" title="1、下载Python"></a>1、下载Python</h2><p>学习Python，首先需要把Python安装到电脑中，目前Python有两个版本，一个是2.x版本，一个是3.x版本，这两个版本有不兼容的，存在很大区别，用官方的介绍为<a href="https://wiki.python.org/moin/Python2orPython3" target="_blank" rel="external">‘Python 2.x is legacy, Python 3.x is the present and future of the language’!</a>，因此现在Python正在向3.x进化，但到目前为止，仍然还有一些第三方的库不能使用，同时，针对Python 2.x的相关资料更全面，为方便学习使用，建议安装2.x版本。当然，具体版本还要根据需求确定。<br>我的电脑（windows）上安装的是Python2.7版本，所以下面的一系列教程均以2.7版本为基础，Python2.7版本可以在<a href="https://www.python.org/downloads/" target="_blank" rel="external">官网</a>上找到，如下图所示。<br><img src="/img/python.org.jpg" alt=""></p>
+<h2 id="1、下载Python"><a href="#1、下载Python" class="headerlink" title="1、下载Python"></a>1、下载Python</h2><p>学习Python，首先需要把Python安装到电脑中，目前Python有两个版本，一个是2.x版本，一个是3.x版本，这两个版本有不兼容的，存在很大区别，用官方的介绍为<a href="https://wiki.python.org/moin/Python2orPython3" target="_blank" rel="noopener">‘Python 2.x is legacy, Python 3.x is the present and future of the language’!</a>，因此现在Python正在向3.x进化，但到目前为止，仍然还有一些第三方的库不能使用，同时，针对Python 2.x的相关资料更全面，为方便学习使用，建议安装2.x版本。当然，具体版本还要根据需求确定。<br>我的电脑（windows）上安装的是Python2.7版本，所以下面的一系列教程均以2.7版本为基础，Python2.7版本可以在<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">官网</a>上找到，如下图所示。<br><img src="/img/python.org.jpg" alt=""></p>
 <h2 id="2、安装Python"><a href="#2、安装Python" class="headerlink" title="2、安装Python"></a>2、安装Python</h2><p>官网下载下来的安装程序是<code>.msi</code>格式的，双击即可安装。<br>安装过程中需要注意的是，在选择安装组件时，最好所有组件都勾选安装，特别是pip组件和<code>Add python.exe to Path</code>。pip是python中的包管理工具，python中许多包的安装都可以通过pip命令在线便捷安装，具体使用方法后续内容会讲到。<code>Add python.exe to Path</code>是自动添加python路径到环境变量中，简便我们手动添加环境变量的麻烦。<br>选择组件示意图：<br><img src="/img/python_features.jpg" alt=""><br>安装完成示意图：<br><img src="/img/python_setup.jpg" alt=""></p>
 <h2 id="3、测试Python"><a href="#3、测试Python" class="headerlink" title="3、测试Python"></a>3、测试Python</h2><p>python默认会安装到C:\Python27目录下，安装完成后，打开命令提示符窗口，敲入python，界面如下图所示，即表示python已经安装成功啦。<br><img src="/img/python_setup_success.jpg" alt=""></p>
 <p><strong>可能出现的错误</strong><br>命令行输入python后，返回<code>‘python’不是内部或外部命令，也不是可运行的程序或批处理文件。</code>，说明python的路径没有添加到环境变量中。有两种解决办法，一种是自己手动添加<code>python.exe</code>的路径到Path环境变量中，一种是重新运行安装程序，即<code>.msi</code>文件，切记在选择组件时，勾选<code>Add python.exe to Path</code>。</p>
@@ -442,7 +444,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/04/07/安装Python.html/" title="安装 Python">http://www.rootlu.com//blog/2016/04/07/安装Python.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/04/07/安装Python.html/" title="安装 Python">http://www.rootlu.com/blog/2016/04/07/安装Python.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1021,7 +1023,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

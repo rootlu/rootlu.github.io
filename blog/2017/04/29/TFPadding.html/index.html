@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="在使用TensorFlow搭建卷积神经网络时，卷积层函数">
+<meta name="keywords" content="Deep Learning,TensorFlow">
 <meta property="og:type" content="article">
 <meta property="og:title" content="TensorFlow 之 卷积层Padding">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/04/29/TFPadding.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在使用TensorFlow搭建卷积神经网络时，卷积层函数">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-04-29T11:24:24.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TensorFlow 之 卷积层Padding">
@@ -402,9 +404,9 @@
 <li>步长 stride值 S</li>
 <li>输出数据尺寸 out_W x out_H x out_D</li>
 </ul>
-<h3 id="1、padding-‘SAME’"><a href="#1、padding-‘SAME’" class="headerlink" title="1、padding = ‘SAME’"></a>1、padding = ‘SAME’</h3><p>SAME 代表保留边界处的卷积结果，通常会导致输出shape与输入shape相同。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">out_W</span> = W / S （结果向上取整）</div><div class="line"><span class="attr">out_H</span> = W / S （结果向上取整）</div><div class="line"><span class="attr">out_D</span> = K</div></pre></td></tr></table></figure></p>
-<h3 id="2、padding-‘VALID’"><a href="#2、padding-‘VALID’" class="headerlink" title="2、padding = ‘VALID’"></a>2、padding = ‘VALID’</h3><p>VALID 代表只进行有效的卷积，即对边界数据不处理。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="attr">out_W</span> = (W – F + <span class="number">1</span>) / S （结果向上取整）</div><div class="line"><span class="attr">out_H</span> = (W – F + <span class="number">1</span>) / S （结果向上取整）</div><div class="line"><span class="attr">out_D</span> = K</div></pre></td></tr></table></figure></p>
-<p>参考：<br><a href="https://www.tensorflow.org/api_guides/python/nn#Convolution" target="_blank" rel="external">TensorFlow API</a></p>
+<h3 id="1、padding-‘SAME’"><a href="#1、padding-‘SAME’" class="headerlink" title="1、padding = ‘SAME’"></a>1、padding = ‘SAME’</h3><p>SAME 代表保留边界处的卷积结果，通常会导致输出shape与输入shape相同。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">out_W</span> = W / S （结果向上取整）</span><br><span class="line"><span class="attr">out_H</span> = W / S （结果向上取整）</span><br><span class="line"><span class="attr">out_D</span> = K</span><br></pre></td></tr></table></figure></p>
+<h3 id="2、padding-‘VALID’"><a href="#2、padding-‘VALID’" class="headerlink" title="2、padding = ‘VALID’"></a>2、padding = ‘VALID’</h3><p>VALID 代表只进行有效的卷积，即对边界数据不处理。<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">out_W</span> = (W – F + <span class="number">1</span>) / S （结果向上取整）</span><br><span class="line"><span class="attr">out_H</span> = (W – F + <span class="number">1</span>) / S （结果向上取整）</span><br><span class="line"><span class="attr">out_D</span> = K</span><br></pre></td></tr></table></figure></p>
+<p>参考：<br><a href="https://www.tensorflow.org/api_guides/python/nn#Convolution" target="_blank" rel="noopener">TensorFlow API</a></p>
 
       
     </div>
@@ -454,7 +456,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/04/29/TFPadding.html/" title="TensorFlow 之 卷积层Padding">http://www.rootlu.com//blog/2017/04/29/TFPadding.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/04/29/TFPadding.html/" title="TensorFlow 之 卷积层Padding">http://www.rootlu.com/blog/2017/04/29/TFPadding.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1033,7 +1035,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="位操作是程序设计中对位模式按位或二进制数的一元和二元操作，位运算其实就是直接对在内存中的二进制数据进行操作，因此处理数据的速度非常快。更详细介绍参考这里">
+<meta name="keywords" content="位操作,leetcode,acm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode461. Hamming Distance">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/01/04/Leetcode461.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="位操作是程序设计中对位模式按位或二进制数的一元和二元操作，位运算其实就是直接对在内存中的二进制数据进行操作，因此处理数据的速度非常快。更详细介绍参考这里">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-13T12:03:34.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode461. Hamming Distance">
@@ -383,11 +385,11 @@
       
 
       
-        <p>位操作是程序设计中对位模式按位或二进制数的一元和二元操作，位运算其实就是直接对在内存中的二进制数据进行操作，因此处理数据的速度非常快。更详细介绍参考<a href="http://rootlu.com/blog/2016/08/30/BitOperate.html/" target="_blank" rel="external">这里</a><br><a id="more"></a></p>
+        <p>位操作是程序设计中对位模式按位或二进制数的一元和二元操作，位运算其实就是直接对在内存中的二进制数据进行操作，因此处理数据的速度非常快。更详细介绍参考<a href="http://rootlu.com/blog/2016/08/30/BitOperate.html/" target="_blank" rel="noopener">这里</a><br><a id="more"></a></p>
 <p>The Hamming distance between two integers is the number of positions at which the corresponding bits are different.<br>Given two integers x and y, calculate the Hamming distance.（0 ≤ x, y &lt; 2^31）</p>
 <p>这道题目看明白题目，其实非常简单，就是对两个数进行<strong>异或</strong>，然后判断异或结果后二进制表示中<strong>1的个数</strong>。可能存在的难点是如何判断一个数（n）的二进制表示中1的个数，可以仍然使用位操作，每次计算n和n-1的<strong>与值</strong>，指导结果为0，循环次数即为n中1的个数。</p>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hammingDistance</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</div><div class="line">        <span class="keyword">int</span> result=<span class="number">0</span>;</div><div class="line">        <span class="keyword">int</span> n=x^y;</div><div class="line">        <span class="keyword">while</span>(n)&#123;</div><div class="line">            result++;</div><div class="line">            n&amp;=n<span class="number">-1</span>;  <span class="comment">//判断n中1的个数</span></div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> result;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<p>传送门：<a href="https://leetcode.com/problems/hamming-distance/" target="_blank" rel="external">leetcode258</a></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">hammingDistance</span><span class="params">(<span class="keyword">int</span> x, <span class="keyword">int</span> y)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> result=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">int</span> n=x^y;</span><br><span class="line">        <span class="keyword">while</span>(n)&#123;</span><br><span class="line">            result++;</span><br><span class="line">            n&amp;=n<span class="number">-1</span>;  <span class="comment">//判断n中1的个数</span></span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>传送门：<a href="https://leetcode.com/problems/hamming-distance/" target="_blank" rel="noopener">leetcode258</a></p>
 
       
     </div>
@@ -437,7 +439,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/01/04/Leetcode461.html/" title="leetcode461. Hamming Distance">http://www.rootlu.com//blog/2017/01/04/Leetcode461.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/01/04/Leetcode461.html/" title="leetcode461. Hamming Distance">http://www.rootlu.com/blog/2017/01/04/Leetcode461.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -993,7 +995,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

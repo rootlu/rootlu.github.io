@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="在做实验过程中，经常使用到python的matplotlib包进行绘图，但是因为很多程序需要在服务器（linux系统）上运行，所以在linux系统下使用matplotlib模块来画图会遇到一个问题：“could not open display”，查了一些资料，找到了一个解决办法，以此记录。">
+<meta name="keywords" content="python,Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在Linux中使用matplotlib绘图遇到的问题">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/10/08/MatplotlibInLinux.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在做实验过程中，经常使用到python的matplotlib包进行绘图，但是因为很多程序需要在服务器（linux系统）上运行，所以在linux系统下使用matplotlib模块来画图会遇到一个问题：“could not open display”，查了一些资料，找到了一个解决办法，以此记录。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-08T02:06:14.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在Linux中使用matplotlib绘图遇到的问题">
@@ -386,7 +388,7 @@
         <p>在做实验过程中，经常使用到python的matplotlib包进行绘图，但是因为很多程序需要在服务器（linux系统）上运行，所以在linux系统下使用matplotlib模块来画图会遇到一个问题：“could not open display”，查了一些资料，找到了一个解决办法，以此记录。</p>
 <a id="more"></a>
 <p>在python源文件开始处添加如下代码：（<strong>注意先后顺序</strong>）</p>
-<figure class="highlight xl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> matplotlib</div><div class="line">matplotlib.use(<span class="string">'Agg'</span>)</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div></pre></td></tr></table></figure>
+<figure class="highlight xl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.use(<span class="string">'Agg'</span>)</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br></pre></td></tr></table></figure>
 <p>如果依然不能弹出生成图片的对话框，可以先把绘制的图片保存，然后导出到本地查看，在代码中添加<code>plt.savefig(&quot;pic.png&quot;)</code>，然后再进行<code>plt.show()</code>，虽然方法笨了一些，但是也是可以解决问题～</p>
 
       
@@ -437,7 +439,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/10/08/MatplotlibInLinux.html/" title="在Linux中使用matplotlib绘图遇到的问题">http://www.rootlu.com//blog/2017/10/08/MatplotlibInLinux.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/10/08/MatplotlibInLinux.html/" title="在Linux中使用matplotlib绘图遇到的问题">http://www.rootlu.com/blog/2017/10/08/MatplotlibInLinux.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -991,7 +993,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

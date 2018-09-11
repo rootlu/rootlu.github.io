@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="在进行多分类任务时，我们通常需要输出每个类别的准确率、召回率、F1值、样本数量以及整体均值，在sklearn包中提供了classification_report函数可以实现这一功能。">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="多分类报告准确率+召回率+F1值+均值+样本数">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/11/04/ClassificationReport.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在进行多分类任务时，我们通常需要输出每个类别的准确率、召回率、F1值、样本数量以及整体均值，在sklearn包中提供了classification_report函数可以实现这一功能。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2018-06-16T13:08:34.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="多分类报告准确率+召回率+F1值+均值+样本数">
@@ -386,9 +388,9 @@
         <p>在进行多分类任务时，我们通常需要输出每个类别的准确率、召回率、F1值、样本数量以及整体均值，在sklearn包中提供了<code>classification_report</code>函数可以实现这一功能。</p>
 <a id="more"></a>
 <p>具体用法如下。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</div><div class="line">y_true = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">0</span>]</div><div class="line">y_pred = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">0</span>]</div><div class="line">target_names = [<span class="string">'class 0'</span>, <span class="string">'class 1'</span>, <span class="string">'class 2'</span>]</div><div class="line">print(classification_report(y_true, y_pred, target_names=target_names))</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.metrics <span class="keyword">import</span> classification_report</span><br><span class="line">y_true = [<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">0</span>]</span><br><span class="line">y_pred = [<span class="number">0</span>, <span class="number">0</span>, <span class="number">2</span>, <span class="number">2</span>, <span class="number">0</span>]</span><br><span class="line">target_names = [<span class="string">'class 0'</span>, <span class="string">'class 1'</span>, <span class="string">'class 2'</span>]</span><br><span class="line">print(classification_report(y_true, y_pred, target_names=target_names))</span><br></pre></td></tr></table></figure>
 <p>输出结果为：</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">             precision    recall  f1-score   support</div><div class="line"></div><div class="line">    class <span class="number">0</span>       <span class="number">0.67</span>      <span class="number">1.00</span>      <span class="number">0.80</span>         <span class="number">2</span></div><div class="line">    class <span class="number">1</span>       <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>         <span class="number">1</span></div><div class="line">    class <span class="number">2</span>       <span class="number">1.00</span>      <span class="number">1.00</span>      <span class="number">1.00</span>         <span class="number">2</span></div><div class="line"></div><div class="line">avg / total       <span class="number">0.67</span>      <span class="number">0.80</span>      <span class="number">0.72</span>         <span class="number">5</span></div></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">             precision    recall  f1-score   support</span><br><span class="line"></span><br><span class="line">    class <span class="number">0</span>       <span class="number">0.67</span>      <span class="number">1.00</span>      <span class="number">0.80</span>         <span class="number">2</span></span><br><span class="line">    class <span class="number">1</span>       <span class="number">0.00</span>      <span class="number">0.00</span>      <span class="number">0.00</span>         <span class="number">1</span></span><br><span class="line">    class <span class="number">2</span>       <span class="number">1.00</span>      <span class="number">1.00</span>      <span class="number">1.00</span>         <span class="number">2</span></span><br><span class="line"></span><br><span class="line">avg / total       <span class="number">0.67</span>      <span class="number">0.80</span>      <span class="number">0.72</span>         <span class="number">5</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -438,7 +440,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/11/04/ClassificationReport.html/" title="多分类报告准确率+召回率+F1值+均值+样本数">http://www.rootlu.com//blog/2017/11/04/ClassificationReport.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/11/04/ClassificationReport.html/" title="多分类报告准确率+召回率+F1值+均值+样本数">http://www.rootlu.com/blog/2017/11/04/ClassificationReport.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -990,7 +992,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

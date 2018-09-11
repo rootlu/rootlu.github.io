@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="QTableWidget是QT程序中常用的显示数据表格的控件，QTableWidget是QTableView的子类，主要的区别是QTableView可以使用自定义的数据模型来显示内容(也就是先要通过setModel来绑定数据源)，而QTableWidget则只能使用标准的数据模型，并且其单元格数据是QTableWidgetItem的对象来实现的(也就是不需要数据源，将逐个单元格内的信息填好即可)。">
+<meta name="keywords" content="C++,QT">
 <meta property="og:type" content="article">
 <meta property="og:title" content="QT开发----QTableWidget">
 <meta property="og:url" content="http://www.rootlu.com/blog/2015/12/08/QtTableWidget.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="QTableWidget是QT程序中常用的显示数据表格的控件，QTableWidget是QTableView的子类，主要的区别是QTableView可以使用自定义的数据模型来显示内容(也就是先要通过setModel来绑定数据源)，而QTableWidget则只能使用标准的数据模型，并且其单元格数据是QTableWidgetItem的对象来实现的(也就是不需要数据源，将逐个单元格内的信息填好即可)。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-08-30T02:41:22.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="QT开发----QTableWidget">
@@ -397,20 +399,20 @@
 <li>AllEditTrigers：以上条件都包含</li>
 </ul>
 <h2 id="4-整行（列）选择"><a href="#4-整行（列）选择" class="headerlink" title="4. 整行（列）选择"></a>4. 整行（列）选择</h2><p><code>ui-&gt;tableWidget-&gt;setSelectionBehavior(QAbstractItemView::SelectRows)</code><br><code>ui-&gt;tableWidget-&gt;setSelectionBehavior(QAbstractItemView::SelectColums)</code></p>
-<h2 id="5-隐藏表头"><a href="#5-隐藏表头" class="headerlink" title="5. 隐藏表头"></a>5. 隐藏表头</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ui-&gt;tableWidget-&gt;verticalHeader()-&gt;setVisible(<span class="literal">false</span>);           <span class="comment">//隐藏列表头</span></div><div class="line">ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setVisible(<span class="literal">false</span>);      <span class="comment">//隐藏行表头</span></div></pre></td></tr></table></figure>
+<h2 id="5-隐藏表头"><a href="#5-隐藏表头" class="headerlink" title="5. 隐藏表头"></a>5. 隐藏表头</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ui-&gt;tableWidget-&gt;verticalHeader()-&gt;setVisible(<span class="literal">false</span>);           <span class="comment">//隐藏列表头</span></span><br><span class="line">ui-&gt;tableWidget-&gt;horizontalHeader()-&gt;setVisible(<span class="literal">false</span>);      <span class="comment">//隐藏行表头</span></span><br></pre></td></tr></table></figure>
 <h2 id="6-设置表格边框"><a href="#6-设置表格边框" class="headerlink" title="6.设置表格边框"></a>6.设置表格边框</h2><p><code>ui-&gt;tableWidget-&gt;setFrameShape(QFrame::NoFrame);      //无边框</code></p>
 <h2 id="7-设置单元格宽度"><a href="#7-设置单元格宽度" class="headerlink" title="7. 设置单元格宽度"></a>7. 设置单元格宽度</h2><p><code>ui-&gt;tableWidget-&gt;setColumnWidth(0,90);                          //设置第0列宽度</code></p>
 <h2 id="8-设置单元格字体、颜色、背景、居中"><a href="#8-设置单元格字体、颜色、背景、居中" class="headerlink" title="8. 设置单元格字体、颜色、背景、居中"></a>8. 设置单元格字体、颜色、背景、居中</h2><ul>
 <li><p>法一：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">QTableWidgetItem *item = <span class="keyword">new</span> QTableWidgetItem(<span class="string">"Apple"</span>); </div><div class="line">item-&gt;setBackgroundColor(QColor(<span class="number">0</span>,<span class="number">60</span>,<span class="number">10</span>));                     <span class="comment">//单元格背景</span></div><div class="line">item-&gt;setTextColor(QColor(<span class="number">200</span>,<span class="number">111</span>,<span class="number">100</span>));                         <span class="comment">//单元格字体颜色</span></div><div class="line">item-&gt;setFont(QFont(<span class="string">"Microsoft YaHei"</span>));                         <span class="comment">//字体类型</span></div><div class="line">tableWidget-&gt;setItem(<span class="number">0</span>,<span class="number">3</span>,item);</div><div class="line">tableWidget-&gt;setTextAlignment(Qt::AlignCenter);              <span class="comment">//居中</span></div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">QTableWidgetItem *item = <span class="keyword">new</span> QTableWidgetItem(<span class="string">"Apple"</span>); </span><br><span class="line">item-&gt;setBackgroundColor(QColor(<span class="number">0</span>,<span class="number">60</span>,<span class="number">10</span>));                     <span class="comment">//单元格背景</span></span><br><span class="line">item-&gt;setTextColor(QColor(<span class="number">200</span>,<span class="number">111</span>,<span class="number">100</span>));                         <span class="comment">//单元格字体颜色</span></span><br><span class="line">item-&gt;setFont(QFont(<span class="string">"Microsoft YaHei"</span>));                         <span class="comment">//字体类型</span></span><br><span class="line">tableWidget-&gt;setItem(<span class="number">0</span>,<span class="number">3</span>,item);</span><br><span class="line">tableWidget-&gt;setTextAlignment(Qt::AlignCenter);              <span class="comment">//居中</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>法二：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ui-&gt;tableWidget-&gt;item(<span class="number">0</span>,<span class="number">1</span>)-&gt;setTextAlignment(Qt::AlignCenter);        <span class="comment">//0行1列单元格内容居中</span></div><div class="line">ui-&gt;tableWidget-&gt;item(<span class="number">0</span>,<span class="number">1</span>)-&gt;setForeground(Qt::darkMagenta);         <span class="comment">//0行1列单元格字体颜色</span></div></pre></td></tr></table></figure>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ui-&gt;tableWidget-&gt;item(<span class="number">0</span>,<span class="number">1</span>)-&gt;setTextAlignment(Qt::AlignCenter);        <span class="comment">//0行1列单元格内容居中</span></span><br><span class="line">ui-&gt;tableWidget-&gt;item(<span class="number">0</span>,<span class="number">1</span>)-&gt;setForeground(Qt::darkMagenta);         <span class="comment">//0行1列单元格字体颜色</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
-<h2 id="9-动态增加行-列-数"><a href="#9-动态增加行-列-数" class="headerlink" title="9.  动态增加行(列)数"></a>9.  动态增加行(列)数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ui-&gt;tableWidget-&gt;rowCount();                                            <span class="comment">//获取当前行数</span></div><div class="line">ui-&gt;tableWidget-&gt;insertRow(row);                                      <span class="comment">//在第row行下插入一行</span></div></pre></td></tr></table></figure>
+<h2 id="9-动态增加行-列-数"><a href="#9-动态增加行-列-数" class="headerlink" title="9.  动态增加行(列)数"></a>9.  动态增加行(列)数</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ui-&gt;tableWidget-&gt;rowCount();                                            <span class="comment">//获取当前行数</span></span><br><span class="line">ui-&gt;tableWidget-&gt;insertRow(row);                                      <span class="comment">//在第row行下插入一行</span></span><br></pre></td></tr></table></figure>
 <p>动态增加列类似。</p>
-<h2 id="10-清除表格内容"><a href="#10-清除表格内容" class="headerlink" title="10. 清除表格内容"></a>10. 清除表格内容</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> count = ui-&gt;timeinfotableWidget-&gt;rowCount();</div><div class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;count;i++)</div><div class="line">&#123;</div><div class="line">      ui-&gt;timeinfotableWidget-&gt;removeRow(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="10-清除表格内容"><a href="#10-清除表格内容" class="headerlink" title="10. 清除表格内容"></a>10. 清除表格内容</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> count = ui-&gt;timeinfotableWidget-&gt;rowCount();</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;count;i++)</span><br><span class="line">&#123;</span><br><span class="line">      ui-&gt;timeinfotableWidget-&gt;removeRow(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -460,7 +462,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2015/12/08/QtTableWidget.html/" title="QT开发----QTableWidget">http://www.rootlu.com//blog/2015/12/08/QtTableWidget.html/</a>
+    <a href="http://www.rootlu.com/blog/2015/12/08/QtTableWidget.html/" title="QT开发----QTableWidget">http://www.rootlu.com/blog/2015/12/08/QtTableWidget.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1039,7 +1041,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

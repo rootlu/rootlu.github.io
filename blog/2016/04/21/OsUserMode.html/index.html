@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="在处理器的存储保护中，主要有两种权限状态，一种是核心态（管态），也被称为特权态（内核态）；一种是用户态（目态）。核心态是操作系统内核所运行的模式，运行在该模式的代码，可以无限制地对系统存储、外部设备进行访问。在操作系统的设计中，用户态指非特权的执行状态。内核禁止此状态下的代码进行潜在危险的操作，比如写入系统配置文件、杀掉其他用户的进程、重启系统等。">
+<meta name="keywords" content="操作系统">
 <meta property="og:type" content="article">
 <meta property="og:title" content="操作系统----用户态和内核态">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/04/21/OsUserMode.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在处理器的存储保护中，主要有两种权限状态，一种是核心态（管态），也被称为特权态（内核态）；一种是用户态（目态）。核心态是操作系统内核所运行的模式，运行在该模式的代码，可以无限制地对系统存储、外部设备进行访问。在操作系统的设计中，用户态指非特权的执行状态。内核禁止此状态下的代码进行潜在危险的操作，比如写入系统配置文件、杀掉其他用户的进程、重启系统等。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-08-30T02:32:42.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统----用户态和内核态">
@@ -392,7 +394,7 @@
 <li>外围设备中断<br>当外围设备完成用户请求的操作后，会向CPU发出相应的中断信号，这时CPU会暂停执行下一条即将要执行的指令转而去执行与中断信号对应的处理程序，如果先前执行的指令是用户态下的程序，那么这个转换的过程自然也就发生了由用户态到内核态的切换。比如硬盘读写操作完成，系统会切换到硬盘读写的中断处理程序中执行后续操作等。</li>
 </ul>
 <p><em>这三种方式是系统在运行时由用户态转到内核态的最主要方式，其中系统调用是用户进程主动发起的，异常和外围设备是被动的</em></p>
-<p>参考资料：<br><a href="http://jakielong.iteye.com/blog/771663" target="_blank" rel="external">http://jakielong.iteye.com/blog/771663</a></p>
+<p>参考资料：<br><a href="http://jakielong.iteye.com/blog/771663" target="_blank" rel="noopener">http://jakielong.iteye.com/blog/771663</a></p>
 
       
     </div>
@@ -442,7 +444,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/04/21/OsUserMode.html/" title="操作系统----用户态和内核态">http://www.rootlu.com//blog/2016/04/21/OsUserMode.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/04/21/OsUserMode.html/" title="操作系统----用户态和内核态">http://www.rootlu.com/blog/2016/04/21/OsUserMode.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1019,7 +1021,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

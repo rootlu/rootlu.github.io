@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="Docker中一些常用的命令。">
+<meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker 常用命令">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/09/17/DockerCommand.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="Docker中一些常用的命令。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-11-23T01:37:16.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 常用命令">
@@ -460,7 +462,7 @@
 <li><strong>导出容器</strong><br><code>sudo docker export 容器ID &gt;导出文件名</code>(例：<code>sudo docker export 87816 &gt;test_contain.tar</code>)</li>
 <li>导入容器,成为镜像<br><code>cat test_contain.tar | sudo docker import - REPOSITORY:TAG</code></li>
 <li>查看到容器的相关信息<br><code>sudo docker inspect 容器id</code></li>
-<li>容器与主机间互传文件()<br>从主机到容器：<code>docker cp 文件名 容器名:容器内文件存放路径</code><br>从容器到主机：<code>docker cp 容器名:容器内文件存放路径 主机路径</code><br><em>注：以上两条命令都是在主机内执行</em><br><strong>建议使用<a href="http://rootlu.com/blog/2016/08/30/dockerInfo.html/" target="_blank" rel="external">数据卷</a></strong></li>
+<li>容器与主机间互传文件()<br>从主机到容器：<code>docker cp 文件名 容器名:容器内文件存放路径</code><br>从容器到主机：<code>docker cp 容器名:容器内文件存放路径 主机路径</code><br><em>注：以上两条命令都是在主机内执行</em><br><strong>建议使用<a href="http://rootlu.com/blog/2016/08/30/dockerInfo.html/" target="_blank" rel="noopener">数据卷</a></strong></li>
 </ul>
 <h2 id="2、区分save命令和export命令区别"><a href="#2、区分save命令和export命令区别" class="headerlink" title="2、区分save命令和export命令区别"></a>2、区分save命令和export命令区别</h2><ul>
 <li>Export命令用于持久化容器（不是镜像），导入导出的镜像会丢失历史数据</li>
@@ -515,7 +517,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/09/17/DockerCommand.html/" title="Docker 常用命令">http://www.rootlu.com//blog/2016/09/17/DockerCommand.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/09/17/DockerCommand.html/" title="Docker 常用命令">http://www.rootlu.com/blog/2016/09/17/DockerCommand.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1092,7 +1094,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

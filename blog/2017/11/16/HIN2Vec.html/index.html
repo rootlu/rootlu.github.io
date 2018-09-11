@@ -96,22 +96,21 @@
 
 
 
-<meta name="description" content="HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。
-论文提出了一种针对异质信息网络的表示学习框架HIN2Vec，不同于之前很多基于Skip-gram语言模型的工作，HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。">
+<meta name="description" content="HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。 论文提出了一种针对异质信息网络的表示学习框架HIN2Vec，不同于之前很多基于Skip-gram语言模型的工作，HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。">
+<meta name="keywords" content="Network Embedding,Representation Learning,PaperNote">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/11/16/HIN2Vec.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
-<meta property="og:description" content="HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。
-论文提出了一种针对异质信息网络的表示学习框架HIN2Vec，不同于之前很多基于Skip-gram语言模型的工作，HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。">
+<meta property="og:description" content="HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。 论文提出了一种针对异质信息网络的表示学习框架HIN2Vec，不同于之前很多基于Skip-gram语言模型的工作，HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec1.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec2.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec3.png">
 <meta property="og:updated_time" content="2017-11-23T08:10:54.966Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记">
-<meta name="twitter:description" content="HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。
-论文提出了一种针对异质信息网络的表示学习框架HIN2Vec，不同于之前很多基于Skip-gram语言模型的工作，HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。">
+<meta name="twitter:description" content="HIN2Vec是一篇关于异质信息网络中的表示学习的论文，发表在刚刚结束的2017CIKM会议上。这篇论文和我最近的工作有一些相似之处，一些想法甚至有些相同，同样有很多地方值得借鉴。 论文提出了一种针对异质信息网络的表示学习框架HIN2Vec，不同于之前很多基于Skip-gram语言模型的工作，HIN2Vec的核心是一个神经网络模型，不仅能够学习网络中节点的表示，同时还学到了关系（元路径）的表示。">
 <meta name="twitter:image" content="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec1.png">
 
 
@@ -423,9 +422,9 @@
 <p>所以论文退而求其次，将问题简化成<strong>二分类问题</strong>，即<strong>给定两个节点$x, y$，预测节点间是否存在确定的关系$r$</strong>，这样就避免了遍历网络中的所有关系，图3所示就是HIN2Vec的神经网络模型。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/HIN2Vec3.png" alt=""></p>
 <p>模型的输入层是三个one-hot编码的向量$\vec{x},\vec{y},\vec{r}$，经过隐层层转换到隐含向量$W’_X\vec{x}, W_Y’\vec{y}, f_{01}(W_R’\vec{r})$，值得注意的是，因为关系和节点的语义含义是不同的，所以论文<strong>对关系向量$r$做了正则化处理</strong>，这种处理方式限制了关系向量的值在0到1之间。然后，模型对三个隐含向量运用一个Hadamard函数（例如，对应元素相乘），对乘积再运用一个线性激活函数，最后输出层对成绩求和后的值进行一个sigmoid非线性转换。</p>
-<p>模型的训练数据集是以四元组的形式给出的，形如$(x,y,r,L(x,y,r))$，其中$L(x,y,r)$指示$x,y$之间是否存在关系$r$。具体的，<br>$$<br>O_{x,y,r}(x,y,r)=<br>\begin{cases}<br>P(r|x,y)&amp; \text{if L(x,y,r)} = 1 \\<br>1-P(r|x,y)&amp; \text{if L(x,y,r) = 0}<br>\end{cases}<br>$$</p>
+<p>模型的训练数据集是以四元组的形式给出的，形如$(x,y,r,L(x,y,r))$，其中$L(x,y,r)$指示$x,y$之间是否存在关系$r$。具体的，<br>$$<br>O_{x,y,r}(x,y,r)=<br>\begin{cases}<br>P(r|x,y)&amp; \text{if L(x,y,r)} = 1 \<br>1-P(r|x,y)&amp; \text{if L(x,y,r) = 0}<br>\end{cases}<br>$$</p>
 <p>$$<br>\log O_{x,y,r}(x,y,r)=L(x,y,r)\log{P(r|x,y)}+[1-L(x,y,r)]\log [1-P(r|x,y)]<br>$$</p>
-<p>$$<br>P(r|x,y)=sigmoid(\sum{W’_X\vec{x}\odot{W’_Y\vec{y}}\odot{f_{01}(W_R’\vec{r})}})<br>$$</p>
+<p>$$<br>P(r|x,y)=sigmoid(\sum{W’_X\vec{x}\odot{W’<em>Y\vec{y}}\odot{f</em>{01}(W_R’\vec{r})}})<br>$$</p>
 <h5 id="2-5、Traning-Data-Preparation"><a href="#2-5、Traning-Data-Preparation" class="headerlink" title="2.5、Traning Data Preparation"></a>2.5、Traning Data Preparation</h5><p>论文采用随机游走的方式生成节点序列，但是需要注意的是，<strong>不同于metapath2vec[1]按照给定元路径模式游走的方式，HIN2Vec模型完全随机选择游走节点，只要节点有连接均可游走</strong>。例如，随机游走得到序列$P_1,P_2,A_1,P_3,A_1$，那么对于节点$P_1$，可以产生训练数据$(P_1,P_2,P-P)$和$(P_1,A_1,P-P-A)$。</p>
 <p>在论文中，作者讨论了随机游走过程中可能出现的<strong>循环</strong>的情况，提出通过检查重复节点的方式消除循环，并在实验部分分析了是否消环对实验结果的影响，但是个人认为这个地方的原理性介绍比较欠缺，对于消除循环的具体做法没有给出很详细的说明解释，循环的检测是根据前面已生成的所有节点还是部分节点，也没有给出说明。</p>
 <p>论文还讨论了训练数据集中负样本的选择，论文也是采用word2vec中的负采样的方法产生负样本。对于一个正样本$(x,y,r)$，通过随机替换$x,y,r$中的任意一个，生成负样本$(x’’,y’’,r’’)$，其中$x’’$和$y’’$之间不一定有确定的关系$r’’$。</p>
@@ -482,7 +481,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/11/16/HIN2Vec.html/" title="《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记">http://www.rootlu.com//blog/2017/11/16/HIN2Vec.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/11/16/HIN2Vec.html/" title="《HIN2Vec Explore Meta-paths in Heterogeneous Information Networks for Representation Learning》---论文笔记">http://www.rootlu.com/blog/2017/11/16/HIN2Vec.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1063,7 +1062,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="node2vec是16年KDD的一个工作，论文提出了一种学习网络节点的特征表示的算法框架。论文定义了一个网络节点邻居的灵活概念，并设计了一个带偏置的随机游走过程来获得不同邻居节点。论文的亮点主要在：采用深度优先搜索（DFS）和宽度优先搜索（BFS）两种策略，随机游走生成节点的邻居节点集合。">
+<meta name="keywords" content="Network Embedding,Representation Learning,PaperNote">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《node2vec:Scable Feature Learning for Network》—论文笔记">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/09/28/Node2vec.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="node2vec是16年KDD的一个工作，论文提出了一种学习网络节点的特征表示的算法框架。论文定义了一个网络节点邻居的灵活概念，并设计了一个带偏置的随机游走过程来获得不同邻居节点。论文的亮点主要在：采用深度优先搜索（DFS）和宽度优先搜索（BFS）两种策略，随机游走生成节点的邻居节点集合。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/Node2vec1.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/Node2vec2.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/Node2vec3.png">
@@ -420,8 +422,8 @@
 <p>搜索与源节点距离递增的节点序列，如上图中的$s_4，s_5，s_6$。</p>
 </li>
 </ul>
-<h5 id="1-2、node2vec"><a href="#1-2、node2vec" class="headerlink" title="1.2、node2vec"></a>1.2、node2vec</h5><p>定义随机游走的开始节点为$c_0=u$，游走路径长度为$l$，路径中第i个节点的生成服从下面的分布：<br>$$<br>P(c_i=x|c_{i-1}=v) =<br>\begin{cases}<br>\frac{\pi_{vx}}{Z}&amp; \text{if(v,x)}\in{E} \\<br>0&amp; \text{otherwise}<br>\end{cases}<br>$$<br>其中，$\pi_{vx}$是节点$v$和节点$x$之间的未归一化的转移概率，$Z$是归一化常数。</p>
-<p>假设随机游走刚刚经过了边$(t,v)$，<strong>游走的当前节点是v</strong>，游走策略需要判断下一节点x的选择，因此论文将$\pi_{vx}$定义为$\pi_{vx}=\alpha_{pq}(t,x)\cdot{w_{vx}}$，其中，$\alpha_{pq}$表示搜索偏置，参数p和q用于指导随机游走下一节点的选择，具体定义为：<br>$$<br>\alpha_{pq}(t,x) =<br>\begin{cases}<br>\frac{1}{p}&amp;  \text{if }    d_{tx}=0 \\<br>1&amp;  \text{if  }    d_{tx}=1\\<br>\frac{1}{q}&amp; \text{if } d_{tx}=2<br>\end{cases}<br>$$<br>其中，$d_{tx}$表示节点t到节点x的最短距离，等于0时表示，下一节点x回跳到上一节点t；等于1表示下一节点x和上一节点t直接相连；等于2表示，下一节点x与上一节点t必须经由一个节点才能连接。【当前节点是v】</p>
+<h5 id="1-2、node2vec"><a href="#1-2、node2vec" class="headerlink" title="1.2、node2vec"></a>1.2、node2vec</h5><p>定义随机游走的开始节点为$c_0=u$，游走路径长度为$l$，路径中第i个节点的生成服从下面的分布：<br>$$<br>P(c_i=x|c_{i-1}=v) =<br>\begin{cases}<br>\frac{\pi_{vx}}{Z}&amp; \text{if(v,x)}\in{E} \<br>0&amp; \text{otherwise}<br>\end{cases}<br>$$<br>其中，$\pi_{vx}$是节点$v$和节点$x$之间的未归一化的转移概率，$Z$是归一化常数。</p>
+<p>假设随机游走刚刚经过了边$(t,v)$，<strong>游走的当前节点是v</strong>，游走策略需要判断下一节点x的选择，因此论文将$\pi_{vx}$定义为$\pi_{vx}=\alpha_{pq}(t,x)\cdot{w_{vx}}$，其中，$\alpha_{pq}$表示搜索偏置，参数p和q用于指导随机游走下一节点的选择，具体定义为：<br>$$<br>\alpha_{pq}(t,x) =<br>\begin{cases}<br>\frac{1}{p}&amp;  \text{if }    d_{tx}=0 \<br>1&amp;  \text{if  }    d_{tx}=1\<br>\frac{1}{q}&amp; \text{if } d_{tx}=2<br>\end{cases}<br>$$<br>其中，$d_{tx}$表示节点t到节点x的最短距离，等于0时表示，下一节点x回跳到上一节点t；等于1表示下一节点x和上一节点t直接相连；等于2表示，下一节点x与上一节点t必须经由一个节点才能连接。【当前节点是v】</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/Node2vec2.png" alt=""></p>
 <p>论文给出了程序的伪代码，算法分为三步：首先预处理计算转移概率，然后随机游走得到游走路径，最后使用SGD优化目标函数。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/Node2vec3.png" alt=""></p>
@@ -475,7 +477,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/09/28/Node2vec.html/" title="《node2vec:Scable Feature Learning for Network》—论文笔记">http://www.rootlu.com//blog/2017/09/28/Node2vec.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/09/28/Node2vec.html/" title="《node2vec:Scable Feature Learning for Network》—论文笔记">http://www.rootlu.com/blog/2017/09/28/Node2vec.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -507,8 +509,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/09/12/LINE.html/" rel="next" title="《LINE:Large-scale Information Network Embedding》 ---论文笔记">
-                <i class="fa fa-chevron-left"></i> 《LINE:Large-scale Information Network Embedding》 ---论文笔记
+              <a href="/blog/2017/09/12/PTE.html/" rel="next" title="《PTE:Predictive Text Embedding through Large-scale》 ---论文笔记">
+                <i class="fa fa-chevron-left"></i> 《PTE:Predictive Text Embedding through Large-scale》 ---论文笔记
               </a>
             
           </div>
@@ -1056,7 +1058,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

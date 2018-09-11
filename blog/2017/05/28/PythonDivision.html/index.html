@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="在python中不需要定义数据类型，在进行除法计算，会根据所使用的不同除法运算方式，计算得出不同的结果。">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python 之 多种除法计算">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/05/28/PythonDivision.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在python中不需要定义数据类型，在进行除法计算，会根据所使用的不同除法运算方式，计算得出不同的结果。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-05-28T13:57:18.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Python 之 多种除法计算">
@@ -385,23 +387,23 @@
       
         <p>在python中不需要定义数据类型，在进行除法计算，会根据所使用的不同除法运算方式，计算得出不同的结果。<br><a id="more"></a></p>
 <h3 id="1、普通除法-‘-‘"><a href="#1、普通除法-‘-‘" class="headerlink" title="1、普通除法 ‘/‘"></a>1、普通除法 ‘/‘</h3><p>根据操作数的类型，返回不同结果。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6</span>/<span class="number">4</span></div><div class="line"><span class="number">1</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6.0</span>/<span class="number">4.0</span></div><div class="line"><span class="number">1.5</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6.0</span>/<span class="number">4</span></div><div class="line"><span class="number">1.5</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6</span>/<span class="number">4</span></span><br><span class="line"><span class="number">1</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6.0</span>/<span class="number">4.0</span></span><br><span class="line"><span class="number">1.5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6.0</span>/<span class="number">4</span></span><br><span class="line"><span class="number">1.5</span></span><br></pre></td></tr></table></figure>
 <p>普通的除法操作，返回数据类型和被操作数的类型一致。若操作数都是整型，则返回整型数值；若操作数有一个是浮点型，则返回浮点型数值。</p>
 <h3 id="2、取整除法-‘-‘"><a href="#2、取整除法-‘-‘" class="headerlink" title="2、取整除法 ‘//‘"></a>2、取整除法 ‘//‘</h3><p>取整除法，返回结果是普通出发的整数部分，若操作数都是整数，返回值为整数；若操作数有一个是浮点数，返回值是浮点数。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6</span>//<span class="number">4</span></div><div class="line"><span class="number">1</span> </div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6.0</span>//<span class="number">4.0</span></div><div class="line"><span class="number">1.0</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6.0</span>//<span class="number">4</span></div><div class="line"><span class="number">1.0</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6</span>//<span class="number">4</span></span><br><span class="line"><span class="number">1</span> </span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6.0</span>//<span class="number">4.0</span></span><br><span class="line"><span class="number">1.0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6.0</span>//<span class="number">4</span></span><br><span class="line"><span class="number">1.0</span></span><br></pre></td></tr></table></figure>
 <p>在python中，对浮点数值还可以利用math包，进行向下／向上取整操作：</p>
 <ul>
 <li>向下取整</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> math</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>math.floor(<span class="number">1.4</span>)</div><div class="line"><span class="number">1</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> math</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>math.floor(<span class="number">1.4</span>)</span><br><span class="line"><span class="number">1</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>想上取整</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> math</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>math.ceil(<span class="number">1.4</span>)</div><div class="line"><span class="number">2</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> math</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>math.ceil(<span class="number">1.4</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
 <h3 id="3、四舍五入-‘round’"><a href="#3、四舍五入-‘round’" class="headerlink" title="3、四舍五入 ‘round’"></a>3、四舍五入 ‘round’</h3><p>python内置函数 round</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.2</span>)</div><div class="line"><span class="number">1</span></div><div class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.6</span>)</div><div class="line"><span class="number">2</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.2</span>)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>round(<span class="number">1.6</span>)</span><br><span class="line"><span class="number">2</span></span><br></pre></td></tr></table></figure>
 <h3 id="4、精确除法"><a href="#4、精确除法" class="headerlink" title="4、精确除法"></a>4、精确除法</h3><p>如果想到得到精确的除法结果，在python文件中引入包</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</div><div class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6</span>/<span class="number">4</span></div><div class="line"><span class="number">1.5</span></div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">from</span> __future__ <span class="keyword">import</span> division</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">6</span>/<span class="number">4</span></span><br><span class="line"><span class="number">1.5</span></span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -451,7 +453,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/05/28/PythonDivision.html/" title="Python 之 多种除法计算">http://www.rootlu.com//blog/2017/05/28/PythonDivision.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/05/28/PythonDivision.html/" title="Python 之 多种除法计算">http://www.rootlu.com/blog/2017/05/28/PythonDivision.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1028,7 +1030,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

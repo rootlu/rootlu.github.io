@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="最近《C++Primer》有些看不下去了，说是到了一个瓶颈吧，又不是，感觉好多东西还是不懂，仅仅是看过去了一些知识点，准备换换思路，看看机器学习的东西，毕竟很火…大概搜了一下，觉得自然语言处理这块还挺好玩，决定搭个python环境玩玩，然而并没有想的那么顺利…">
+<meta name="keywords" content="python,NLTK,NLP">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Python-NLTK安装">
 <meta property="og:url" content="http://www.rootlu.com/blog/2015/09/21/NLTK.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="最近《C++Primer》有些看不下去了，说是到了一个瓶颈吧，又不是，感觉好多东西还是不懂，仅仅是看过去了一些知识点，准备换换思路，看看机器学习的东西，毕竟很火…大概搜了一下，觉得自然语言处理这块还挺好玩，决定搭个python环境玩玩，然而并没有想的那么顺利…">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://www.rootlu.com/img/nltkBook.jpg">
 <meta property="og:image" content="http://www.rootlu.com/img/nltkDow.jpg">
 <meta property="og:image" content="http://www.rootlu.com/img/nltkSetup.jpg">
@@ -388,18 +390,18 @@
 
       
         <p>最近《C++Primer》有些看不下去了，说是到了一个瓶颈吧，又不是，感觉好多东西还是不懂，仅仅是看过去了一些知识点，准备换换思路，看看机器学习的东西，毕竟很火…大概搜了一下，觉得自然语言处理这块还挺好玩，决定搭个python环境玩玩，然而并没有想的那么顺利…<br><a id="more"></a></p>
-<h2 id="1-安装步骤"><a href="#1-安装步骤" class="headerlink" title="1. 安装步骤　"></a>1. 安装步骤　</h2><h3 id="1-1-下载python"><a href="#1-1-下载python" class="headerlink" title="1.1 下载python"></a>1.1 下载python</h3><p>传送门：<a href="http://www.python.org/getit/" target="_blank" rel="external">python</a><br>版本最好选择2.0+，我选择的是2.7，因为2.0+的版本比较稳定些，而且在后面安装nltk可能会避免很多错误。<br>安装时候选择intall just for me；然后一路next就行了。<br>安装结束后，如果没有修改路径，会在C盘下生成一个Python27的文件夹，该目录下有一个python.py应用程序，双击弹出以下界面就说明python已经安装好啦。<br><img src="/img/nltkBook.jpg" alt=""></p>
-<h3 id="1-2-下载nltk"><a href="#1-2-下载nltk" class="headerlink" title="1.2 下载nltk"></a>1.2 下载nltk</h3><p>传送门：<a href="http://pypi.python.org/pypi/nltk" target="_blank" rel="external">NLTK</a><br>现在官网上挂的是3.05版本，如果下载这个版本安装估计会出问题，我一开始就用的这个版本，在下一步dowload数据包时一直给我报错，无奈换了一个2.0版本的，可以到这里下载：<a href="http://download.csdn.net/my" target="_blank" rel="external">戳我</a></p>
-<h3 id="1-3-下载book资源"><a href="#1-3-下载book资源" class="headerlink" title="1.3 下载book资源"></a>1.3 下载book资源</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> nltk</div><div class="line">nltk.download()</div></pre></td></tr></table></figure>
+<h2 id="1-安装步骤"><a href="#1-安装步骤" class="headerlink" title="1. 安装步骤　"></a>1. 安装步骤　</h2><h3 id="1-1-下载python"><a href="#1-1-下载python" class="headerlink" title="1.1 下载python"></a>1.1 下载python</h3><p>传送门：<a href="http://www.python.org/getit/" target="_blank" rel="noopener">python</a><br>版本最好选择2.0+，我选择的是2.7，因为2.0+的版本比较稳定些，而且在后面安装nltk可能会避免很多错误。<br>安装时候选择intall just for me；然后一路next就行了。<br>安装结束后，如果没有修改路径，会在C盘下生成一个Python27的文件夹，该目录下有一个python.py应用程序，双击弹出以下界面就说明python已经安装好啦。<br><img src="/img/nltkBook.jpg" alt=""></p>
+<h3 id="1-2-下载nltk"><a href="#1-2-下载nltk" class="headerlink" title="1.2 下载nltk"></a>1.2 下载nltk</h3><p>传送门：<a href="http://pypi.python.org/pypi/nltk" target="_blank" rel="noopener">NLTK</a><br>现在官网上挂的是3.05版本，如果下载这个版本安装估计会出问题，我一开始就用的这个版本，在下一步dowload数据包时一直给我报错，无奈换了一个2.0版本的，可以到这里下载：<a href="http://download.csdn.net/my" target="_blank" rel="noopener">戳我</a></p>
+<h3 id="1-3-下载book资源"><a href="#1-3-下载book资源" class="headerlink" title="1.3 下载book资源"></a>1.3 下载book资源</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line">nltk.download()</span><br></pre></td></tr></table></figure>
 <p>跳出如下界面，选择book下载就行了。<br><img src="/img/nltkDow.jpg" alt=""></p>
 <h2 id="2-遇到的一些问题"><a href="#2-遇到的一些问题" class="headerlink" title="2. 遇到的一些问题"></a>2. 遇到的一些问题</h2><p>python安装的还算顺利，但是在安装nltk时卡了我一天…一开始报错UnicodeDecodeerror ascii codec can’t decode byte 0xd7 in position 9 ordinal not in range(128)…编码错误？好吧，python安装的编码方式是ascii，可能与nltk的编码方式不同，于是在网上找到了两种解决方案：</p>
-<h3 id="2-1-更改编码方式："><a href="#2-1-更改编码方式：" class="headerlink" title="2.1 更改编码方式："></a>2.1 更改编码方式：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> sys</div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</div></pre></td></tr></table></figure>
+<h3 id="2-1-更改编码方式："><a href="#2-1-更改编码方式：" class="headerlink" title="2.1 更改编码方式："></a>2.1 更改编码方式：</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line">reload(sys)</span><br><span class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</span><br></pre></td></tr></table></figure>
 <p>然而并没有什么卵用…依然报错</p>
-<h3 id="2-2-修改目录Python2-7-lib-下的mimetypes-py文件："><a href="#2-2-修改目录Python2-7-lib-下的mimetypes-py文件：" class="headerlink" title="2.2 修改目录Python2.7/lib/下的mimetypes.py文件："></a>2.2 修改目录Python2.7/lib/下的mimetypes.py文件：</h3><p>删除或注释掉以下语句：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">try</span>:</div><div class="line">    ctype = ctype.encode(default_encoding) </div><div class="line"><span class="keyword">except</span> UnicodeEncodeError:</div><div class="line">    <span class="keyword">pass</span></div></pre></td></tr></table></figure></p>
-<p>依然没解决问题…<br>后来在<a href="http://www.nltk.org/install.html" target="_blank" rel="external">官网</a>上找到一种安装步骤：<br><img src="/img/nltkSetup.jpg" alt=""><br>照着步骤走，重新安装python,nltk但是最后还是报了一个错：’ImportError: No module named six’<br>搜了一圈没找到合适答案，但找到一个一个2.0版本的nltk,决定按照《python自然语言处理》这本书上说的试试，用python2.7+nltk2.0。<br>import nltk 时报了一个错：ImportError: No module named yaml，下载了一个PyYAML-3.10win32-py2.7安装，再次import nltk 万事大吉。</p>
+<h3 id="2-2-修改目录Python2-7-lib-下的mimetypes-py文件："><a href="#2-2-修改目录Python2-7-lib-下的mimetypes-py文件：" class="headerlink" title="2.2 修改目录Python2.7/lib/下的mimetypes.py文件："></a>2.2 修改目录Python2.7/lib/下的mimetypes.py文件：</h3><p>删除或注释掉以下语句：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    ctype = ctype.encode(default_encoding) </span><br><span class="line"><span class="keyword">except</span> UnicodeEncodeError:</span><br><span class="line">    <span class="keyword">pass</span></span><br></pre></td></tr></table></figure></p>
+<p>依然没解决问题…<br>后来在<a href="http://www.nltk.org/install.html" target="_blank" rel="noopener">官网</a>上找到一种安装步骤：<br><img src="/img/nltkSetup.jpg" alt=""><br>照着步骤走，重新安装python,nltk但是最后还是报了一个错：’ImportError: No module named six’<br>搜了一圈没找到合适答案，但找到一个一个2.0版本的nltk,决定按照《python自然语言处理》这本书上说的试试，用python2.7+nltk2.0。<br>import nltk 时报了一个错：ImportError: No module named yaml，下载了一个PyYAML-3.10win32-py2.7安装，再次import nltk 万事大吉。</p>
 <p>所以，总结一句话：一定要下载合适的版本，互相搭配才能更好工作。</p>
-<p>资源搬运工：<br><a href="http://download.csdn.net/detail/rootluyf/9140643" target="_blank" rel="external">python2.7</a><br><a href="http://download.csdn.net/detail/rootluyf/9140545" target="_blank" rel="external">nltk2.0</a><br><a href="http://download.csdn.net/detail/rootluyf/9140649" target="_blank" rel="external">PyYAML-3.10win32-py2.7</a></p>
-<p>参考资料：<br><a href="http://www.cnblogs.com/huangcong/archive/2011/08/29/2157437.html" target="_blank" rel="external">http://www.cnblogs.com/huangcong/archive/2011/08/29/2157437.html</a><br><a href="http://www.xuebuyuan.com/512758.html" target="_blank" rel="external">http://www.xuebuyuan.com/512758.html</a></p>
+<p>资源搬运工：<br><a href="http://download.csdn.net/detail/rootluyf/9140643" target="_blank" rel="noopener">python2.7</a><br><a href="http://download.csdn.net/detail/rootluyf/9140545" target="_blank" rel="noopener">nltk2.0</a><br><a href="http://download.csdn.net/detail/rootluyf/9140649" target="_blank" rel="noopener">PyYAML-3.10win32-py2.7</a></p>
+<p>参考资料：<br><a href="http://www.cnblogs.com/huangcong/archive/2011/08/29/2157437.html" target="_blank" rel="noopener">http://www.cnblogs.com/huangcong/archive/2011/08/29/2157437.html</a><br><a href="http://www.xuebuyuan.com/512758.html" target="_blank" rel="noopener">http://www.xuebuyuan.com/512758.html</a></p>
 
       
     </div>
@@ -449,7 +451,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2015/09/21/NLTK.html/" title="Python-NLTK安装">http://www.rootlu.com//blog/2015/09/21/NLTK.html/</a>
+    <a href="http://www.rootlu.com/blog/2015/09/21/NLTK.html/" title="Python-NLTK安装">http://www.rootlu.com/blog/2015/09/21/NLTK.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1030,7 +1032,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

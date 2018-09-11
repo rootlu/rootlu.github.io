@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="DockerHub作为Docker的官方镜像仓库，存放了许多热门及常用镜像，但由于GFW的原因，国内很难从DockerHub上拉取镜像。虽然国内也有Daocloud之类的镜像仓库，但有些时候似乎还是不能满足我们的需求。。。因此，搭建Docker 私有仓库就显得十分必要，私有仓库不仅可以提高下载速度，还可以个性化定制镜像，并持续化使用。">
+<meta name="keywords" content="Docker">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Docker 私有仓库">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/09/17/DockerRepository.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="DockerHub作为Docker的官方镜像仓库，存放了许多热门及常用镜像，但由于GFW的原因，国内很难从DockerHub上拉取镜像。虽然国内也有Daocloud之类的镜像仓库，但有些时候似乎还是不能满足我们的需求。。。因此，搭建Docker 私有仓库就显得十分必要，私有仓库不仅可以提高下载速度，还可以个性化定制镜像，并持续化使用。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2016-11-21T12:19:12.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 私有仓库">
@@ -395,7 +397,7 @@
 
       
         <p>DockerHub作为Docker的官方镜像仓库，存放了许多热门及常用镜像，但由于GFW的原因，国内很难从DockerHub上拉取镜像。虽然国内也有Daocloud之类的镜像仓库，但有些时候似乎还是不能满足我们的需求。。。因此，搭建Docker 私有仓库就显得十分必要，私有仓库不仅可以提高下载速度，还可以个性化定制镜像，并持续化使用。<br><a id="more"></a></p>
-<h2 id="1、安装docker-registry"><a href="#1、安装docker-registry" class="headerlink" title="1、安装docker-registry"></a>1、安装docker-registry</h2><h3 id="1-1-运行容器"><a href="#1-1-运行容器" class="headerlink" title="1.1 运行容器"></a>1.1 运行容器</h3><p><code>sudo docker run --name registry -d -p port:5000 -v /opt/data/registry:/var/lib/registry registry</code><br>使用官方的registry镜像启动本地私有仓库，指定参数映射端口、挂载数据卷<br><strong>特别注意</strong>：默认拉取得私有仓库镜像是v2版本，还有一个v1版本，需要区别的是在挂载数据卷的时候路径不一样，网上多数资料是以v1为基础，所以需要根据实际情况确定容器内映射目录<br>具体区别参见<a href="https://docs.docker.com/registry/spec/api/" target="_blank" rel="external">官网API</a>及<a href="http://dockone.io/article/747" target="_blank" rel="external">Docker Registry V1 to V2</a></p>
+<h2 id="1、安装docker-registry"><a href="#1、安装docker-registry" class="headerlink" title="1、安装docker-registry"></a>1、安装docker-registry</h2><h3 id="1-1-运行容器"><a href="#1-1-运行容器" class="headerlink" title="1.1 运行容器"></a>1.1 运行容器</h3><p><code>sudo docker run --name registry -d -p port:5000 -v /opt/data/registry:/var/lib/registry registry</code><br>使用官方的registry镜像启动本地私有仓库，指定参数映射端口、挂载数据卷<br><strong>特别注意</strong>：默认拉取得私有仓库镜像是v2版本，还有一个v1版本，需要区别的是在挂载数据卷的时候路径不一样，网上多数资料是以v1为基础，所以需要根据实际情况确定容器内映射目录<br>具体区别参见<a href="https://docs.docker.com/registry/spec/api/" target="_blank" rel="noopener">官网API</a>及<a href="http://dockone.io/article/747" target="_blank" rel="noopener">Docker Registry V1 to V2</a></p>
 <h3 id="1-2-设置待上传镜像标签到本地私有镜像"><a href="#1-2-设置待上传镜像标签到本地私有镜像" class="headerlink" title="1.2 设置待上传镜像标签到本地私有镜像"></a>1.2 设置待上传镜像标签到本地私有镜像</h3><p><code>docker tag [原镜像ID] [仓库ip:port/镜像重命名]</code><br>例如上传本地镜像ubuntu到192.168.3.118:5000，映射端口同样为5000<br><code>docker tag ubuntu 192.168.3.118:5000/ubuntu</code></p>
 <h3 id="1-3-推送镜像"><a href="#1-3-推送镜像" class="headerlink" title="1.3 推送镜像"></a>1.3 推送镜像</h3><p><code>docker push 192.168.3.118:5000/ubuntu</code></p>
 <ul>
@@ -407,8 +409,8 @@
 <li>/etc/docker下添加文件daemon.json<br>文件内容：<br><code>{&quot;insecure-registries&quot;:[&quot;youregistry.example.com:5000&quot;]}</code></li>
 <li>重启docker<br><code>sudo service docker restart</code></li>
 </ul>
-<h2 id="3、查看仓库内容"><a href="#3、查看仓库内容" class="headerlink" title="3、查看仓库内容"></a>3、查看仓库内容</h2><p><a href="http://192.168.3.8:5000/v2/_catalog" target="_blank" rel="external">http://192.168.3.8:5000/v2/_catalog</a></p>
-<p>参考资料：<br><a href="https://yeasy.gitbooks.io/docker_practice/content/repository/local_repo.html" target="_blank" rel="external">https://yeasy.gitbooks.io/docker_practice/content/repository/local_repo.html</a></p>
+<h2 id="3、查看仓库内容"><a href="#3、查看仓库内容" class="headerlink" title="3、查看仓库内容"></a>3、查看仓库内容</h2><p><a href="http://192.168.3.8:5000/v2/_catalog" target="_blank" rel="noopener">http://192.168.3.8:5000/v2/_catalog</a></p>
+<p>参考资料：<br><a href="https://yeasy.gitbooks.io/docker_practice/content/repository/local_repo.html" target="_blank" rel="noopener">https://yeasy.gitbooks.io/docker_practice/content/repository/local_repo.html</a></p>
 
       
     </div>
@@ -458,7 +460,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/09/17/DockerRepository.html/" title="Docker 私有仓库">http://www.rootlu.com//blog/2016/09/17/DockerRepository.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/09/17/DockerRepository.html/" title="Docker 私有仓库">http://www.rootlu.com/blog/2016/09/17/DockerRepository.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1035,7 +1037,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="PTE模型是LINE的扩展，也是唐建老师发表在KDD‘15上的一篇论文，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。">
+<meta name="keywords" content="Network Embedding,Representation Learning,PaperNote">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《PTE:Predictive Text Embedding through Large-scale》 ---论文笔记">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/09/12/PTE.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="PTE模型是LINE的扩展，也是唐建老师发表在KDD‘15上的一篇论文，相较于LINE，PTE模型是一种半监督模型，针对大规模异质文本网络，根据有标签数据和无标签数据学习文本数据的网络表示。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/PTE2.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/PTE3.png">
 <meta property="og:updated_time" content="2017-10-15T05:25:05.000Z">
@@ -467,7 +469,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/09/12/PTE.html/" title="《PTE:Predictive Text Embedding through Large-scale》 ---论文笔记">http://www.rootlu.com//blog/2017/09/12/PTE.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/09/12/PTE.html/" title="《PTE:Predictive Text Embedding through Large-scale》 ---论文笔记">http://www.rootlu.com/blog/2017/09/12/PTE.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -499,8 +501,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/08/11/LatenRepresentationsHete.html/" rel="next" title="《Learning Latent Representations of Nodes for Classifying in Heterogeneous Social Networks》----论文笔记">
-                <i class="fa fa-chevron-left"></i> 《Learning Latent Representations of Nodes for Classifying in Heterogeneous Social Networks》----论文笔记
+              <a href="/blog/2017/09/12/LINE.html/" rel="next" title="《LINE:Large-scale Information Network Embedding》 ---论文笔记">
+                <i class="fa fa-chevron-left"></i> 《LINE:Large-scale Information Network Embedding》 ---论文笔记
               </a>
             
           </div>
@@ -509,8 +511,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2017/09/12/LINE.html/" rel="prev" title="《LINE:Large-scale Information Network Embedding》 ---论文笔记">
-                《LINE:Large-scale Information Network Embedding》 ---论文笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2017/09/28/Node2vec.html/" rel="prev" title="《node2vec:Scable Feature Learning for Network》—论文笔记">
+                《node2vec:Scable Feature Learning for Network》—论文笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -711,7 +713,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Introduction-amp-Related-Work"><span class="nav-text">1、Introduction & Related Work</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Predictive-Text-Embedding-PTE"><span class="nav-text">2、Predictive Text Embedding (PTE)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1、Probelm-Definition"><span class="nav-text">2.1、Probelm Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Word-Network"><span class="nav-text">Word-Word Network</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Document-Network"><span class="nav-text">Word-Document Network</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Label-Network"><span class="nav-text">Word-Label Network</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#PTE"><span class="nav-text">PTE</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Experiment"><span class="nav-text">3、Experiment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Conclusion"><span class="nav-text">4、Conclusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、Summary"><span class="nav-text">5、Summary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Introduction-amp-Related-Work"><span class="nav-text">1、Introduction &amp; Related Work</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Predictive-Text-Embedding-PTE"><span class="nav-text">2、Predictive Text Embedding (PTE)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#2-1、Probelm-Definition"><span class="nav-text">2.1、Probelm Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Word-Network"><span class="nav-text">Word-Word Network</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Document-Network"><span class="nav-text">Word-Document Network</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#Word-Label-Network"><span class="nav-text">Word-Label Network</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#PTE"><span class="nav-text">PTE</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Experiment"><span class="nav-text">3、Experiment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Conclusion"><span class="nav-text">4、Conclusion</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5、Summary"><span class="nav-text">5、Summary</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Reference"><span class="nav-text">Reference</span></a></li></ol></div>
             
 
           </div>
@@ -1048,7 +1050,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="在做毕设过程中，由于需要使用GPU跑模型，而实验室的GPU还有师兄师姐要用，所以需要限制一下程序占用GPU显存的大小。">
+<meta name="keywords" content="Deep Learning,TensorFlow,GPU">
 <meta property="og:type" content="article">
 <meta property="og:title" content="设置TensorFlow占用GPU显存">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/05/28/GPUSetup.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在做毕设过程中，由于需要使用GPU跑模型，而实验室的GPU还有师兄师姐要用，所以需要限制一下程序占用GPU显存的大小。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-08-05T04:22:07.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设置TensorFlow占用GPU显存">
@@ -399,13 +401,13 @@
 <ul>
 <li>如果使用keras作为TensorFlow的前端，可以在程序中作如下设置：</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="keyword">from</span> keras.backend.tensorflow_backend <span class="keyword">import</span> set_session</div><div class="line">config = tf.ConfigProto()</div><div class="line">config.gpu_options.per_process_gpu_memory_fraction = <span class="number">0.4</span>  <span class="comment"># 设置程序初始占用GPU显存比例</span></div><div class="line">config.gpu_options.allow_growth = <span class="keyword">True</span>  <span class="comment"># 设置tf模式为按需赠长模式</span></div><div class="line">set_session(tf.Session(config=config))</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"><span class="keyword">from</span> keras.backend.tensorflow_backend <span class="keyword">import</span> set_session</span><br><span class="line">config = tf.ConfigProto()</span><br><span class="line">config.gpu_options.per_process_gpu_memory_fraction = <span class="number">0.4</span>  <span class="comment"># 设置程序初始占用GPU显存比例</span></span><br><span class="line">config.gpu_options.allow_growth = <span class="keyword">True</span>  <span class="comment"># 设置tf模式为按需赠长模式</span></span><br><span class="line">set_session(tf.Session(config=config))</span><br></pre></td></tr></table></figure>
 <ul>
 <li>如果只是TensorFlow程序，可以作如下设置：</li>
 </ul>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">config = tf.ConfigProto()</div><div class="line">config.gpu_options.per_process_gpu_memory_fraction = <span class="number">0.4</span></div><div class="line">config.gpu_options.allow_growth = <span class="keyword">True</span>  <span class="comment"># 设置tf模式为按需赠长模式</span></div><div class="line">session = tf.Session(config=config, ...)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">config = tf.ConfigProto()</span><br><span class="line">config.gpu_options.per_process_gpu_memory_fraction = <span class="number">0.4</span></span><br><span class="line">config.gpu_options.allow_growth = <span class="keyword">True</span>  <span class="comment"># 设置tf模式为按需赠长模式</span></span><br><span class="line">session = tf.Session(config=config, ...)</span><br></pre></td></tr></table></figure>
 <h3 id="2、环境变量设置"><a href="#2、环境变量设置" class="headerlink" title="2、环境变量设置"></a>2、环境变量设置</h3><p>默认情况下，调用CUDA会遍历所有显卡，可以通过设置服务器的环境变量，在CUDA层面屏蔽其他显卡。<br>在终端键入<code>vim .bashrc</code>，在.bashrc文件中加入以下内容：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># use gpu1</span></div><div class="line"><span class="built_in">export</span> CUDA_VISIBLE_DEVICES=1 <span class="comment"># 只使用GPU1</span></div></pre></td></tr></table></figure>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># use gpu1</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">CUDA_VISIBLE_DEVICES</span>=1 # 只使用GPU1</span><br></pre></td></tr></table></figure>
 <p>等于号后面的编号表示几号显卡，也可以用逗号分隔，用以屏蔽多个显卡。</p>
 
       
@@ -456,7 +458,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/05/28/GPUSetup.html/" title="设置TensorFlow占用GPU显存">http://www.rootlu.com//blog/2017/05/28/GPUSetup.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/05/28/GPUSetup.html/" title="设置TensorFlow占用GPU显存">http://www.rootlu.com/blog/2017/05/28/GPUSetup.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1037,7 +1039,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

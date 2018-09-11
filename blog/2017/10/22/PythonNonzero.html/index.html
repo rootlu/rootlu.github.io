@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="在使用python的numpy包进行矩阵运算时候，有时候需要获得矩阵中元素值不为0的下标，numpy包中的numpy.nonzero()函数可以实现这一功能。">
+<meta name="keywords" content="python">
 <meta property="og:type" content="article">
 <meta property="og:title" content="python中获取数组（矩阵）值不为0的元素下标">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/10/22/PythonNonzero.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在使用python的numpy包进行矩阵运算时候，有时候需要获得矩阵中元素值不为0的下标，numpy包中的numpy.nonzero()函数可以实现这一功能。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-10-22T12:24:57.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python中获取数组（矩阵）值不为0的元素下标">
@@ -387,9 +389,9 @@
 <a id="more"></a>
 <p>定义 <code>import numpy as np</code>，<code>m=np.array(...)</code>，即m是numpy数组（矩阵），<code>np.nonzeros(m)</code>返回m中<strong>值不为零的元素的下标</strong>，返回值是一个长度为<code>m.ndim</code>（m的轴数）的元组。元组的每个元素都是一个整数数组，其值为非零元素的下标在对应轴上的值。</p>
 <h4 id="一维数组"><a href="#一维数组" class="headerlink" title="一维数组"></a>一维数组</h4><p>对于一维数组m1，<code>np.nonzero(m1)</code>所得到的是一个长度为1的元组，它表示m1[0]、m1[1]和m1[3]的值不为0。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&gt;&gt;&gt; </span>m1=np.array([<span class="number">3</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">9</span>])</div><div class="line"><span class="meta">&gt;&gt;&gt; </span>np.nonzero(m1)</div><div class="line">(array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>]),)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>m1=np.array([<span class="number">3</span>,<span class="number">6</span>,<span class="number">0</span>,<span class="number">9</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.nonzero(m1)</span><br><span class="line">(array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">3</span>]),)</span><br></pre></td></tr></table></figure>
 <h4 id="多维数组（矩阵）"><a href="#多维数组（矩阵）" class="headerlink" title="多维数组（矩阵）"></a>多维数组（矩阵）</h4><p>以二维数组为例，对于二维数组m2，<code>np.nonzero(m2)</code>所得到的是一个长度为2的元组。它的第0个元素是数组m2中值不为0的元素的第0轴的下标，第1个元素则是第1轴的下标。</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">&gt;&gt;&gt; m2=np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">4</span>,<span class="number">3</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</div><div class="line">&gt;&gt;&gt; m2</div><div class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>],</div><div class="line">       [<span class="number">0</span>, <span class="number">4</span>, <span class="number">3</span>],</div><div class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]])</div><div class="line">&gt;&gt;&gt; np.nonzero(m2)</div><div class="line">(array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]), array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]))</div></pre></td></tr></table></figure>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; m2=np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">0</span>],[<span class="number">0</span>,<span class="number">4</span>,<span class="number">3</span>],[<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>]])</span><br><span class="line">&gt;&gt;&gt; m2</span><br><span class="line">array([[<span class="number">1</span>, <span class="number">2</span>, <span class="number">0</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">4</span>, <span class="number">3</span>],</span><br><span class="line">       [<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]])</span><br><span class="line">&gt;&gt;&gt; np.nonzero(m2)</span><br><span class="line">(array([<span class="number">0</span>, <span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>]), array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>]))</span><br></pre></td></tr></table></figure>
 <p>返回结果表示：矩阵m2中的(0, 0)、(0, 1)、(1, 1)、(1, 2)元素不为0。</p>
 
       
@@ -440,7 +442,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/10/22/PythonNonzero.html/" title="python中获取数组（矩阵）值不为0的元素下标">http://www.rootlu.com//blog/2017/10/22/PythonNonzero.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/10/22/PythonNonzero.html/" title="python中获取数组（矩阵）值不为0的元素下标">http://www.rootlu.com/blog/2017/10/22/PythonNonzero.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1017,7 +1019,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

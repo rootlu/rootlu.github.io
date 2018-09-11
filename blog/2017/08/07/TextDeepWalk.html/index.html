@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="本文是清华刘知远老师组发表在15年IJCAI会议上的一个工作，论文在DeepWalk基础上进行了创新拓展，主要亮点在于：证明了DeepWalk等同于矩阵分解，并且在此基础上，将图节点的文本特征引入DeepWalk中，进一步学习到了网络结构的表示特征。">
+<meta name="keywords" content="Network Embedding,Representation Learning,PaperNote">
 <meta property="og:type" content="article">
 <meta property="og:title" content="《Network Representation Learning with Rich Text Information》---论文笔记">
 <meta property="og:url" content="http://www.rootlu.com/blog/2017/08/07/TextDeepWalk.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="本文是清华刘知远老师组发表在15年IJCAI会议上的一个工作，论文在DeepWalk基础上进行了创新拓展，主要亮点在于：证明了DeepWalk等同于矩阵分解，并且在此基础上，将图节点的文本特征引入DeepWalk中，进一步学习到了网络结构的表示特征。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/textdeepwalk1.png">
 <meta property="og:image" content="http://ou5bxfpku.bkt.clouddn.com/textdeepwalk2.png">
 <meta property="og:updated_time" content="2017-10-08T02:10:19.000Z">
@@ -406,10 +408,10 @@
 <p>$$<br>p(v_j|v_i)=\frac{e^{(c_{v_j}^Tr_{v_j})}}{\sum_{v\in{V}}e^{(c_v^Tr_{v_i})}}<br>$$</p>
 <p>其中$r_{v_i}，c_{v_j}$分别表示中心节点$v_i$和它的上下文节点$v_j$的表示向量，也就是说图结构中的每个节点都有两个表示向量：当节点$v$是中心节点时，其表示向量是$r_v$；当节点$v$是上下文节点时，其表示向量是$c_v$。</p>
 <h6 id="2-1、DeepWalk-MF"><a href="#2-1、DeepWalk-MF" class="headerlink" title="2.1、DeepWalk==MF"></a>2.1、DeepWalk==MF</h6><p>假设随机游走过程产生节点–上下文集合$D$，$D$中元素为节点-上下文对$(v,c)$，且$v\in{V}，c\in{V_C}$，通常情况下，$V=V_C$。在DeepWalk中，每个节点$v$被映射到k维的向量空间$r_v\in{R^k}$，同样的，上下文节点也被映射到k维的向量空间$c_v\in{R^k}$。定义矩阵$W\in{R^{k<em>|V|}}$，每一列表示节点$v_i$的向量表示$r_{v_i}$，矩阵$H\in{R^{k</em>|V_C|}}$，每一列表示上下文节点$v_j$的向量表示$c_{v_j}$，矩阵分解使得$M=W^TH$。</p>
-<p>定义$N(v,c)$表示节点对$(v,c)$出现在集合$D$中的<strong>次数</strong>，$N(v)=\sum_{c’\in{V_C}}{N(v,c’)}$，$N(c)=\sum_{v’\in{V}}{N(v’,c)}$，在文章^[1]^的启发下，本文直接给出了如下公式：<br>$$<br>M_{ij}=log\frac{N(v_i,c_j)}{N(v_i)}<br>$$<br>论文为了说明矩阵$M_{ij}$在DeepWalk中的含义，引入PageRank算法中的中间矩阵$A$，<br>$$<br>A=<br>\begin{cases}\frac{1}{d_i}&amp; (i,j)\in{E}\\<br>0 &amp; (i,j)\notin{E}<br>\end{cases}<br>$$<br>其中<strong>$d_i$表示节点$i$的度</strong>。同时，用$e_i$来表示$|V|$维的行向量，向量的第$i$元素为1，其余值为0，即是<strong>对$i$节点进行one-hot编码</strong>。</p>
+<p>定义$N(v,c)$表示节点对$(v,c)$出现在集合$D$中的<strong>次数</strong>，$N(v)=\sum_{c’\in{V_C}}{N(v,c’)}$，$N(c)=\sum_{v’\in{V}}{N(v’,c)}$，在文章^[1]^的启发下，本文直接给出了如下公式：<br>$$<br>M_{ij}=log\frac{N(v_i,c_j)}{N(v_i)}<br>$$<br>论文为了说明矩阵$M_{ij}$在DeepWalk中的含义，引入PageRank算法中的中间矩阵$A$，<br>$$<br>A=<br>\begin{cases}\frac{1}{d_i}&amp; (i,j)\in{E}\<br>0 &amp; (i,j)\notin{E}<br>\end{cases}<br>$$<br>其中<strong>$d_i$表示节点$i$的度</strong>。同时，用$e_i$来表示$|V|$维的行向量，向量的第$i$元素为1，其余值为0，即是<strong>对$i$节点进行one-hot编码</strong>。</p>
 <p>假设从节点$i$开始随机游走，$e_i$作为初始状态，那么<strong>$e_iA$表示所有节点的分布</strong>，<strong>$e_iA$的第$j$个元素表示节点$i$游走到节点$j$的概率</strong>，<strong>从节点$i$经过$t$步长随机游走到节点$j$的概率可以表示为$e_iA^t$</strong>，其中$A^t$表示$A$的$A$的$t$次方。因此有如下公式：<br>$$<br>\frac{N(v_i,v_j)}{N(v_i)}=\frac{[e_i(A+A^2+A^3+……+A^t)]}{t}<br>$$<br>其中$[e_i(A+A^2+A^3+……+A^t)]$表示节点$v_j$出现在节点$v_i$右邻居中的期望次数。</p>
 <p>综合公式(3)(5)，<strong>$M_{ij}$就是节点$i$经过$t$步长随机游走到节点$j$的平均对数概率</strong>，对矩阵$M_{ij}$进行矩阵分解，其优化目标与DeepWalk的优化目标一致，所以DeepWalk实际上就是矩阵分解。</p>
-<h5 id="3、Taxt-Associated-DeepWalk（TADW）"><a href="#3、Taxt-Associated-DeepWalk（TADW）" class="headerlink" title="3、Taxt-Associated DeepWalk（TADW）"></a>3、Taxt-Associated DeepWalk（TADW）</h5><p>文本特征矩阵定义为$T\in{R^{f_t<em>|V|}}$，论文设定<em>*随机游走步长$t=2$，即矩阵分解$M =(A+A^2)/2$</em></em>。</p>
+<h5 id="3、Taxt-Associated-DeepWalk（TADW）"><a href="#3、Taxt-Associated-DeepWalk（TADW）" class="headerlink" title="3、Taxt-Associated DeepWalk（TADW）"></a>3、Taxt-Associated DeepWalk（TADW）</h5><p>文本特征矩阵定义为$T\in{R^{f_t*|V|}}$，论文设定<strong>随机游走步长$t=2$，即矩阵分解$M =(A+A^2)/2$</strong>。</p>
 <center><br><br><img src="http://ou5bxfpku.bkt.clouddn.com/textdeepwalk2.png" alt="tadw2"><br><br></center>
 
 <p>优化目标：<br>$$<br>\min \limits_{W,H} ||M-W^THT||^2_F+\frac{\lambda}{2}(||W||^2_F+||H||^2_F)<br>$$<br>需要注意的是，不同于为了更好接近矩阵M的常规低秩矩阵分解，<strong>TADW的目标是在矩阵分解中引入文本特征矩阵，以获得更好的网络特征表示。</strong></p>
@@ -465,7 +467,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2017/08/07/TextDeepWalk.html/" title="《Network Representation Learning with Rich Text Information》---论文笔记">http://www.rootlu.com//blog/2017/08/07/TextDeepWalk.html/</a>
+    <a href="http://www.rootlu.com/blog/2017/08/07/TextDeepWalk.html/" title="《Network Representation Learning with Rich Text Information》---论文笔记">http://www.rootlu.com/blog/2017/08/07/TextDeepWalk.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -1046,7 +1048,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->

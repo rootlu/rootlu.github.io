@@ -97,11 +97,13 @@
 
 
 <meta name="description" content="计算二叉树的最大深度，递归解法，分别计算左右子树的最大深度，递归出口为到达叶子结点。">
+<meta name="keywords" content="leetcode,acm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode104. Maximum Depth of Binary Tree">
 <meta property="og:url" content="http://www.rootlu.com/blog/2016/09/04/Leetcode104.html/index.html">
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="计算二叉树的最大深度，递归解法，分别计算左右子树的最大深度，递归出口为到达叶子结点。">
+<meta property="og:locale" content="zh-Hans">
 <meta property="og:updated_time" content="2017-01-04T04:21:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode104. Maximum Depth of Binary Tree">
@@ -384,8 +386,8 @@
 
       
         <p>计算二叉树的最大深度，递归解法，分别计算左右子树的最大深度，递归出口为到达叶子结点。<br><a id="more"></a></p>
-<p>Given a binary tree, find its maximum depth.<br>The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Definition for a binary tree node.</div><div class="line"> * struct TreeNode &#123;</div><div class="line"> *     int val;</div><div class="line"> *     TreeNode *left;</div><div class="line"> *     TreeNode *right;</div><div class="line"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</div><div class="line"> * &#125;;</div><div class="line"> */</div><div class="line"><span class="keyword">class</span> Solution &#123;</div><div class="line"><span class="keyword">public</span>:</div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>)			<span class="comment">//递归出口，到达叶子结点</span></div><div class="line">            <span class="keyword">return</span> <span class="number">0</span>;		</div><div class="line">        <span class="keyword">int</span> maxLeft=maxDepth(root-&gt;left);		<span class="comment">//左右子树</span></div><div class="line">        <span class="keyword">int</span> maxRight=maxDepth(root-&gt;right);</div><div class="line">        <span class="keyword">return</span> (maxLeft&gt;maxRight)?maxLeft+<span class="number">1</span>:maxRight+<span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p>传送门：<a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" rel="external">leetcode104</a></p>
+<p>Given a binary tree, find its maximum depth.<br>The maximum depth is the number of nodes along the longest path from the root node down to the farthest leaf node.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * struct TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode *left;</span></span><br><span class="line"><span class="comment"> *     TreeNode *right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) : val(x), left(NULL), right(NULL) &#123;&#125;</span></span><br><span class="line"><span class="comment"> * &#125;;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">maxDepth</span><span class="params">(TreeNode* root)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(root==<span class="literal">NULL</span>)			<span class="comment">//递归出口，到达叶子结点</span></span><br><span class="line">            <span class="keyword">return</span> <span class="number">0</span>;		</span><br><span class="line">        <span class="keyword">int</span> maxLeft=maxDepth(root-&gt;left);		<span class="comment">//左右子树</span></span><br><span class="line">        <span class="keyword">int</span> maxRight=maxDepth(root-&gt;right);</span><br><span class="line">        <span class="keyword">return</span> (maxLeft&gt;maxRight)?maxLeft+<span class="number">1</span>:maxRight+<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>传送门：<a href="https://leetcode.com/problems/maximum-depth-of-binary-tree/" target="_blank" rel="noopener">leetcode104</a></p>
 
       
     </div>
@@ -435,7 +437,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://www.rootlu.com//blog/2016/09/04/Leetcode104.html/" title="leetcode104. Maximum Depth of Binary Tree">http://www.rootlu.com//blog/2016/09/04/Leetcode104.html/</a>
+    <a href="http://www.rootlu.com/blog/2016/09/04/Leetcode104.html/" title="leetcode104. Maximum Depth of Binary Tree">http://www.rootlu.com/blog/2016/09/04/Leetcode104.html/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -989,7 +991,7 @@
   });
 </script>
 
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
