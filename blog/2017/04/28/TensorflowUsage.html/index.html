@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="记录在使用TensorFlow过程中遇到的一些问题，不断更新…">
+<meta name="keywords" content="TensorFlow,Deep Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TensorFlow 使用记录">
+<meta property="og:url" content="http://www.rootlu.com/blog/2017/04/28/TensorflowUsage.html/index.html">
+<meta property="og:site_name" content="ROOTLu">
+<meta property="og:description" content="记录在使用TensorFlow过程中遇到的一些问题，不断更新…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://pic2.zhimg.com/50/v2-c92ac5c3a50e4bd3d60e29c2ddc4c5e9_hd.jpg">
+<meta property="og:updated_time" content="2017-12-04T15:27:29.726Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TensorFlow 使用记录">
+<meta name="twitter:description" content="记录在使用TensorFlow过程中遇到的一些问题，不断更新…">
+<meta name="twitter:image" content="https://pic2.zhimg.com/50/v2-c92ac5c3a50e4bd3d60e29c2ddc4c5e9_hd.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://www.rootlu.com/blog/2017/04/28/TensorflowUsage.html/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>TensorFlow 使用记录 | ROOTLu</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-life">
+    <a href="/life" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />拾荒</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2017/04/28/TensorflowUsage.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="NUPTer、BUPTer、MachineLearning、DataMining、伪文青">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TensorFlow 使用记录
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2017-04-28 18:46:52" itemprop="dateCreated datePublished" datetime="2017-04-28T18:46:52+08:00">2017-04-28</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2017-12-04 23:27:29" itemprop="dateModified" datetime="2017-12-04T23:27:29+08:00">2017-12-04</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/Deep-Learning/" itemprop="url" rel="index"><span itemprop="name">Deep Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/2017/04/28/TensorflowUsage.html/" class="leancloud_visitors" data-flag-title="TensorFlow 使用记录">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>记录在使用TensorFlow过程中遇到的一些问题，不断更新…<br><a id="more"></a></p>
+<h3 id="1、Session-与InteractiveSession"><a href="#1、Session-与InteractiveSession" class="headerlink" title="1、Session()与InteractiveSession()"></a>1、Session()与InteractiveSession()</h3><ul>
+<li><p>创建Session对象，用于启动图，Session对象在使用完后需要关闭以释放资源. 除了显式调用 close 外, 也可以使用 “with” 代码块 来自动完成关闭动作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个常量 op, 产生一个 1x2 矩阵. 这个 op 被作为一个节点</span></span><br><span class="line"><span class="comment"># 加到默认图中.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 构造器的返回值代表该常量 op 的返回值.</span></span><br><span class="line">matrix1 = tf.constant([[<span class="number">3.</span>, <span class="number">3.</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建另外一个常量 op, 产生一个 2x1 矩阵.</span></span><br><span class="line">matrix2 = tf.constant([[<span class="number">2.</span>],[<span class="number">2.</span>]])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个矩阵乘法 matmul op , 把 'matrix1' 和 'matrix2' 作为输入.</span></span><br><span class="line"><span class="comment"># 返回值 'product' 代表矩阵乘法的结果.</span></span><br><span class="line">product = tf.matmul(matrix1, matrix2)</span><br><span class="line"><span class="comment"># 启动默认图.</span></span><br><span class="line">sess = tf.Session()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调用 sess 的 'run()' 方法来执行矩阵乘法 op, 传入 'product' 作为该方法的参数. </span></span><br><span class="line"><span class="comment"># 上面提到, 'product' 代表了矩阵乘法 op 的输出, 传入它是向方法表明, 我们希望取回</span></span><br><span class="line"><span class="comment"># 矩阵乘法 op 的输出.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 整个执行过程是自动化的, 会话负责传递 op 所需的全部输入. op 通常是并发执行的.</span></span><br><span class="line"><span class="comment"># </span></span><br><span class="line"><span class="comment"># 函数调用 'run(product)' 触发了图中三个 op (两个常量 op 和一个矩阵乘法 op) 的执行.</span></span><br><span class="line"><span class="comment">#</span></span><br><span class="line"><span class="comment"># 返回值 'result' 是一个 numpy `ndarray` 对象.</span></span><br><span class="line">result = sess.run(product)</span><br><span class="line"><span class="keyword">print</span> result</span><br><span class="line"><span class="comment"># ==&gt; [[ 12.]]</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 任务完成, 关闭会话.</span></span><br><span class="line">sess.close()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>为了便于使用诸如IPython之类的Python 交互环境，可以使用InteractiveSession 代替 Session类，使用Tensor.eval()和Operation.run() 方法代替Session.run()。这样可以避免使用一个变量来持有会话。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 进入一个交互式 TensorFlow 会话.</span></span><br><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">sess = tf.InteractiveSession()</span><br><span class="line"></span><br><span class="line">x = tf.Variable([<span class="number">1.0</span>, <span class="number">2.0</span>])</span><br><span class="line">a = tf.constant([<span class="number">3.0</span>, <span class="number">3.0</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用初始化器 initializer op 的 run() 方法初始化 'x' </span></span><br><span class="line">x.initializer.run()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 增加一个减法 sub op, 从 'x' 减去 'a'. 运行减法 op, 输出结果 </span></span><br><span class="line">sub = tf.sub(x, a)</span><br><span class="line"><span class="keyword">print</span> sub.eval()</span><br><span class="line"><span class="comment"># ==&gt; [-2. -1.]</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="2、reshape-操作"><a href="#2、reshape-操作" class="headerlink" title="2、reshape()操作"></a>2、reshape()操作</h3><figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow as tf</span><br><span class="line">tf.<span class="built_in">reshape</span>(tensor, <span class="built_in">shape</span>, <span class="keyword">name</span>=<span class="keyword">None</span>)</span><br></pre></td></tr></table></figure>
+<p>函数将张量tensor变换为参数shape的形式，shape是一个列表形式，列表中可以存在-1，-1代表不需要人为指定这一维度的大小，函数会自动计算，但列表中只能存在一个-1。</p>
+<h3 id="3、gather-和gather-nd"><a href="#3、gather-和gather-nd" class="headerlink" title="3、gather()和gather_nd()"></a>3、gather()和gather_nd()</h3><p><strong>gather函数原型：</strong><br><code>gather(params, indices, validate_indices=None, name=None)</code><br>函数根据indices对params进行切片，indices必须是一个任意维度的整型tensor（通常为标量或向量），返回大小为indices.shape + params.shape[1:]的tensor<br>示例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</span><br><span class="line">temp = tf.range(<span class="number">0</span>,<span class="number">10</span>)*<span class="number">10</span> + tf.constant(<span class="number">1</span>,shape=[<span class="number">10</span>])</span><br><span class="line">temp2 = tf.gather(temp,[<span class="number">1</span>,<span class="number">5</span>,<span class="number">9</span>])</span><br><span class="line"><span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</span><br><span class="line">    <span class="keyword">print</span> sess.run(temp)</span><br><span class="line">    <span class="keyword">print</span> sess.run(temp2)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line">[ <span class="number">1</span> <span class="number">11</span> <span class="number">21</span> <span class="number">31</span> <span class="number">41</span> <span class="number">51</span> <span class="number">61</span> <span class="number">71</span> <span class="number">81</span> <span class="number">91</span>] </span><br><span class="line">[<span class="number">11</span> <span class="number">51</span> <span class="number">91</span>]</span><br></pre></td></tr></table></figure></p>
+<p><strong>gather_nd函数原型：</strong><br><code>gather_nd(params, indices, name=None)</code><br>函数也是根据indices对params进行切片，但是indices必须是一个shape为[d_0, …, d_{Q-2}, K]的整型tensor，其中P为params的最大下标，Q为indices的下标，0&lt;K&lt;=P<br>示例：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># ex1</span></span><br><span class="line">indices = [[<span class="number">0</span>, <span class="number">0</span>], [<span class="number">1</span>, <span class="number">1</span>]]</span><br><span class="line">params = [[<span class="string">'a'</span>, <span class="string">'b'</span>], [<span class="string">'c'</span>, <span class="string">'d'</span>]]</span><br><span class="line">output = [<span class="string">'a'</span>, <span class="string">'d'</span>]</span><br><span class="line"><span class="comment"># ex2</span></span><br><span class="line">indices = [[<span class="number">1</span>], [<span class="number">0</span>]]</span><br><span class="line">params = [[<span class="string">'a'</span>, <span class="string">'b'</span>], [<span class="string">'c'</span>, <span class="string">'d'</span>]]</span><br><span class="line">output = [[<span class="string">'c'</span>, <span class="string">'d'</span>], [<span class="string">'a'</span>, <span class="string">'b'</span>]]</span><br></pre></td></tr></table></figure></p>
+<h3 id="4、reduce-sum"><a href="#4、reduce-sum" class="headerlink" title="4、reduce_sum()"></a>4、reduce_sum()</h3><p><code>reduce_sum()</code>函数用于沿tensor的某一维度求和，参数reduction_indices表示沿哪些维度求和。<br>引用<a href="https://www.zhihu.com/question/51325408/answer/131354799" target="_blank" rel="noopener">知乎-凡心的回答</a>上一张图片说明：<br><img src="https://pic2.zhimg.com/50/v2-c92ac5c3a50e4bd3d60e29c2ddc4c5e9_hd.jpg" alt=""></p>
+<h3 id="5、类型转换函数tf-cast"><a href="#5、类型转换函数tf-cast" class="headerlink" title="5、类型转换函数tf.cast()"></a>5、类型转换函数tf.cast()</h3><p>在TensorFlow中，转换tensor类型需要特殊的函数，<code>tf.cast(x, dtype, name=None)</code>，参数x表示输入张量，dtype表示目标类型，name为名称，返回转换类型后的tensor，具体使用参考下例：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># tensor a is [3.3, 2.9], dtype=tf.float  </span></span><br><span class="line">tf.cast(a, tf.int32) ==&gt; [1, 2]  # dtype=tf.int32</span><br></pre></td></tr></table></figure>
+<h3 id="待更新…"><a href="#待更新…" class="headerlink" title="待更新…"></a>待更新…</h3><p>参考：<br><a href="http://wiki.jikexueyuan.com/project/tensorflow-zh/get_started/basic_usage.html" target="_blank" rel="noopener">极客学院-TensorFlow官方文档</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的还不错？那就来个红包吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechat-reward-image.jpg" alt="YFLu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay-reward-image.jpg" alt="YFLu 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TensorFlow/" rel="tag"># TensorFlow</a>
+          
+            <a href="/tags/Deep-Learning/" rel="tag"># Deep Learning</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/03/31/PythonNumpy.html/" rel="next" title="Python 之 numpy">
+                <i class="fa fa-chevron-left"></i> Python 之 numpy
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2017/04/29/DLBatchSize.html/" rel="prev" title="深度学习 之 batch_size 的设置">
+                深度学习 之 batch_size 的设置 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTkxMi82NDc3"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="YFLu" />
+            
+              <p class="site-author-name" itemprop="name">YFLu</p>
+              <p class="site-description motion-element" itemprop="description">NUPTer、BUPTer、MachineLearning、DataMining、伪文青</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/rootlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:luyfroot@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/yf.lu.946" target="_blank" title="Facebook"><i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎"><i class="fa fa-fw fa-Follow me on ZhiHu"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.paperweekly.site/user/YFLu" target="_blank" title="PaperWeekly"><i class="fa fa-fw fa-Follow me on PaperWeekly"></i>PaperWeekly</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.paperweekly.site/home" title="PaperWeekly" target="_blank">PaperWeekly</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、Session-与InteractiveSession"><span class="nav-text">1、Session()与InteractiveSession()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、reshape-操作"><span class="nav-text">2、reshape()操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、gather-和gather-nd"><span class="nav-text">3、gather()和gather_nd()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、reduce-sum"><span class="nav-text">4、reduce_sum()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、类型转换函数tf-cast"><span class="nav-text">5、类型转换函数tf.cast()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#待更新…"><span class="nav-text">待更新…</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YFLu</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '/blog/2017/04/28/TensorflowUsage.html/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz",
+                'X-LC-Key': "0hAkU75j3ti2wICPYsRit8R7",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

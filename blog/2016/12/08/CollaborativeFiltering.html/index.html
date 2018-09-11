@@ -1,0 +1,1164 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="协同过滤分析用户兴趣，在用户群中找到指定用户的相似（兴趣）用户，综合这些相似用户对某一信息的评价，形成系统对该指定用户对此信息的喜好程度预测。一个协同型过滤（collaborative filtering）算法通常的做法是对一大群人进行搜索，并从中找出与我们品味相近的一小群人。">
+<meta name="keywords" content="python,ML,Programming Collective Intelligence,札记">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Collaborative Filetering --- 《Programming Collective Intelligence》">
+<meta property="og:url" content="http://www.rootlu.com/blog/2016/12/08/CollaborativeFiltering.html/index.html">
+<meta property="og:site_name" content="ROOTLu">
+<meta property="og:description" content="协同过滤分析用户兴趣，在用户群中找到指定用户的相似（兴趣）用户，综合这些相似用户对某一信息的评价，形成系统对该指定用户对此信息的喜好程度预测。一个协同型过滤（collaborative filtering）算法通常的做法是对一大群人进行搜索，并从中找出与我们品味相近的一小群人。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.rootlu.com/img/pianhaokongjian.jpg">
+<meta property="og:image" content="http://www.rootlu.com/img/pearsoncorrelation.jpg">
+<meta property="og:image" content="http://www.rootlu.com/img/item-based-recommendations.jpg">
+<meta property="og:image" content="http://www.rootlu.com/img/user-based-recommendations.jpg">
+<meta property="og:updated_time" content="2017-04-29T07:41:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Collaborative Filetering --- 《Programming Collective Intelligence》">
+<meta name="twitter:description" content="协同过滤分析用户兴趣，在用户群中找到指定用户的相似（兴趣）用户，综合这些相似用户对某一信息的评价，形成系统对该指定用户对此信息的喜好程度预测。一个协同型过滤（collaborative filtering）算法通常的做法是对一大群人进行搜索，并从中找出与我们品味相近的一小群人。">
+<meta name="twitter:image" content="http://www.rootlu.com/img/pianhaokongjian.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://www.rootlu.com/blog/2016/12/08/CollaborativeFiltering.html/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Collaborative Filetering --- 《Programming Collective Intelligence》 | ROOTLu</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-life">
+    <a href="/life" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />拾荒</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2016/12/08/CollaborativeFiltering.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="NUPTer、BUPTer、MachineLearning、DataMining、伪文青">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Collaborative Filetering --- 《Programming Collective Intelligence》
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-12-08 19:55:32" itemprop="dateCreated datePublished" datetime="2016-12-08T19:55:32+08:00">2016-12-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2017-04-29 15:41:04" itemprop="dateModified" datetime="2017-04-29T15:41:04+08:00">2017-04-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/2016/12/08/CollaborativeFiltering.html/" class="leancloud_visitors" data-flag-title="Collaborative Filetering --- 《Programming Collective Intelligence》">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>协同过滤分析用户兴趣，在用户群中找到指定用户的相似（兴趣）用户，综合这些相似用户对某一信息的评价，形成系统对该指定用户对此信息的喜好程度预测。一个协同型过滤（collaborative filtering）算法通常的做法是对一大群人进行搜索，并从中找出与我们品味相近的一小群人。<br><a id="more"></a><br>协同过滤算法可以分为两个子类：基于用户的协同过滤（User-Based Collaborative Filtering），基于物品的协同过滤（Item-Based Collaborative Filtering）。</p>
+<h2 id="1、两种相似度评价值计算方法"><a href="#1、两种相似度评价值计算方法" class="headerlink" title="1、两种相似度评价值计算方法"></a>1、两种相似度评价值计算方法</h2><p>在拥有一定数据的前提下，我们需要一种方法来确定人们在品味方面的相似度。为此，我们可以将每个人与所有人进行对比，计算他们的相似度评价值，比较常用的两种相似度评价值方法有：<strong>欧几里德距离(Euclidean Distance Score)</strong>和<strong>皮尔逊相关度(Pearson Correlation Score)</strong>。</p>
+<h3 id="1-1-欧几里德距离-Euclidean-Distance-Score"><a href="#1-1-欧几里德距离-Euclidean-Distance-Score" class="headerlink" title="1.1 欧几里德距离(Euclidean Distance Score)"></a>1.1 欧几里德距离(Euclidean Distance Score)</h3><p>欧几里德距离评价方法以经过人们一致评价的商品为坐标轴，然后将参与评价的人绘制到图上，并计算他们彼此间的距离远近。<br><img src="/img/pianhaokongjian.jpg" alt=""><br>上图为处于<strong>“偏好空间”</strong>中人们的分布情况，该图只显示了二维空间内的两项评分，横纵坐标分别为两部电影。两个人在“偏好空间”中的距离越近，他们的兴趣偏好就越相似。计算两人的距离，就是计算两点之间的距离，例如要计算Toby和LaSalle之间的距离，可以计算出每一轴向上的差值，求平方后再相加，最后对总和取平方根。<br>偏好越相似，求得的距离值就越小，为了直观的反映偏好与距离之间的关系，我们可以将函数值加1（避免被0整除），并取其倒数。这样的函数返回值总是介于0到1之间，返回1则表示两人有一样的偏好。具体实现代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> math <span class="keyword">import</span> sqrt</span><br><span class="line"></span><br><span class="line"><span class="comment"># 数据集</span></span><br><span class="line">critics = &#123;<span class="string">'Lisa Rose'</span>: &#123;<span class="string">'Lady in the Water'</span>: <span class="number">2.5</span>, <span class="string">'Snakes on a Plane'</span>: <span class="number">3.5</span>, <span class="string">'Just My Luck'</span>: <span class="number">3.0</span>,</span><br><span class="line">                         <span class="string">'Superman Returns'</span>: <span class="number">3.5</span>, <span class="string">'You, Me and Dupree'</span>: <span class="number">2.5</span>, <span class="string">'The Night Listener'</span>: <span class="number">3.0</span>&#125;,</span><br><span class="line">           <span class="string">'Gene Seymour'</span>: &#123;<span class="string">'Lady in the Water'</span>: <span class="number">3.0</span>, <span class="string">'Snakes on a Plane'</span>: <span class="number">3.5</span>, <span class="string">'Just My Luck'</span>: <span class="number">1.5</span>,</span><br><span class="line">                            <span class="string">'Superman Returns'</span>: <span class="number">5.0</span>, <span class="string">'You, Me and Dupree'</span>: <span class="number">3.5</span>, <span class="string">'The Night Listener'</span>: <span class="number">3.0</span>&#125;,</span><br><span class="line">           <span class="string">'Michael Phillips'</span>: &#123;<span class="string">'Lady in the Water'</span>: <span class="number">2.5</span>, <span class="string">'Snakes on a Plane'</span>: <span class="number">3.0</span>,</span><br><span class="line">                                <span class="string">'Superman Returns'</span>: <span class="number">3.5</span>, <span class="string">'The Night Listener'</span>: <span class="number">4.0</span>&#125;,</span><br><span class="line">           <span class="string">'Claudia Puig'</span>: &#123;<span class="string">'Snakes on a Plane'</span>: <span class="number">3.5</span>, <span class="string">'Just My Luck'</span>: <span class="number">3.0</span>, <span class="string">'Superman Returns'</span>: <span class="number">4.0</span>,</span><br><span class="line">                            <span class="string">'You, Me and Dupree'</span>: <span class="number">2.5</span>, <span class="string">'The Night Listener'</span>: <span class="number">4.5</span>&#125;,</span><br><span class="line">           <span class="string">'Mick LaSalle'</span>: &#123;<span class="string">'Lady in the Water'</span>: <span class="number">3.0</span>, <span class="string">'Snakes on a Plane'</span>: <span class="number">4.0</span>, <span class="string">'Just My Luck'</span>: <span class="number">2.0</span>,</span><br><span class="line">                            <span class="string">'Superman Returns'</span>: <span class="number">3.0</span>, <span class="string">'You, Me and Dupree'</span>: <span class="number">2.0</span>, <span class="string">'The Night Listener'</span>: <span class="number">3.0</span>&#125;,</span><br><span class="line">           <span class="string">'Jack Matthews'</span>: &#123;<span class="string">'Lady in the Water'</span>: <span class="number">3.0</span>, <span class="string">'Snakes on a Plane'</span>: <span class="number">4.0</span>, <span class="string">'Superman Returns'</span>: <span class="number">5.0</span>,</span><br><span class="line">                             <span class="string">'You, Me and Dupree'</span>: <span class="number">3.5</span>, <span class="string">'The Night Listener'</span>: <span class="number">3.0</span>&#125;,</span><br><span class="line">           <span class="string">'Toby'</span>: &#123;<span class="string">'Snakes on a Plane'</span>: <span class="number">4.5</span>, <span class="string">'Superman Returns'</span>: <span class="number">4.0</span>, <span class="string">'You, Me and Dupree'</span>: <span class="number">1.0</span>&#125;&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sim_distance</span><span class="params">(prefs, person1, person2)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Euclidean distance 欧几里德距离</span></span><br><span class="line"><span class="string">    :param prefs:数据集</span></span><br><span class="line"><span class="string">    :param person1:</span></span><br><span class="line"><span class="string">    :param person2:</span></span><br><span class="line"><span class="string">    :return:Similarity evaluation based on distance，用户1和用户2基于距离德相似度评价，介于0到1，1表示两人的评价完全一致</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># get the list of shared_item</span></span><br><span class="line">    si = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> prefs[person1]:</span><br><span class="line">        <span class="keyword">if</span> item <span class="keyword">in</span> prefs[person2]:</span><br><span class="line">            si[item] = <span class="number">1</span>  <span class="comment"># 两人同时评论过的商品</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># if two persons have no commons, return 0</span></span><br><span class="line">    <span class="keyword">if</span> len(si) == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算所有差值的平方</span></span><br><span class="line">    sum_of_squares = sum([pow(prefs[person1][item] - prefs[person2][item], <span class="number">2</span>)</span><br><span class="line">                          <span class="keyword">for</span> item <span class="keyword">in</span> prefs[person1] <span class="keyword">if</span> item <span class="keyword">in</span> prefs[person2]])</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span> / (<span class="number">1</span> + sqrt(sum_of_squares))  <span class="comment"># 偏好越相近，相似度值越大</span></span><br></pre></td></tr></table></figure></p>
+<h3 id="1-2-皮尔逊相关度-Pearson-Correlation-Score"><a href="#1-2-皮尔逊相关度-Pearson-Correlation-Score" class="headerlink" title="1.2 皮尔逊相关度(Pearson Correlation Score)"></a>1.2 皮尔逊相关度(Pearson Correlation Score)</h3><p>皮尔逊相关度是判断两组数据与某一直线拟合程度的一种度量，相对于欧几里德距离，是一种更为复杂的度量方法，它在数据不是很规范（normalized）的时候，会倾向于给出更好的结果。<br><img src="/img/pearsoncorrelation.jpg" alt=""><br>上图中，横纵坐标分别为两位评论者名称，图中的点为影片名称。在图中，可以看到有一条直线，这条直线被称作<strong>最佳拟合先(best-fit line)</strong>，其绘制原理是尽可能的靠近图上的所有坐标点。如果两个人对所有影片的评分情况都相同，那么这条直线将成为对角线，并且与图上的所有坐标点都相交，从而得到一个结果为1的理想相关度评价。<br>皮尔逊相关度评价算法首先会找出两位评论者都曾评论过的商品，然后计算出两者的评分总和与平方和，并求得评分的乘积之和。最后，算法利用这些计算结果计算出皮尔逊相关系数。相关代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">sim_pearson</span><span class="params">(prefs, p1, p2)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Pearson correlation 皮尔逊相关度</span></span><br><span class="line"><span class="string">    :param prefs:数据集</span></span><br><span class="line"><span class="string">    :param p1:</span></span><br><span class="line"><span class="string">    :param p2:</span></span><br><span class="line"><span class="string">    :return: 介于-1到1之间的皮尔逊相关度值，1表示两人对每一件物品均有着完全一致的评价</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    si = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> prefs[p1]:</span><br><span class="line">        <span class="keyword">if</span> item <span class="keyword">in</span> prefs[p2]:</span><br><span class="line">            si[item] = <span class="number">1</span>  <span class="comment"># 两人同时评论过的商品</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># get the nums of si</span></span><br><span class="line">    n = len(si)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># if two persons has no commons, return 0</span></span><br><span class="line">    <span class="keyword">if</span> n == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 两人都评论过的商品，求其评分总和</span></span><br><span class="line">    sum1 = sum([prefs[p1][it] <span class="keyword">for</span> it <span class="keyword">in</span> si])</span><br><span class="line">    sum2 = sum([prefs[p2][it] <span class="keyword">for</span> it <span class="keyword">in</span> si])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 两人都评论过的商品，求其评分的平方和</span></span><br><span class="line">    sum1_sq = sum([pow(prefs[p1][it], <span class="number">2</span>) <span class="keyword">for</span> it <span class="keyword">in</span> si])</span><br><span class="line">    sum2_sq = sum([pow(prefs[p2][it], <span class="number">2</span>) <span class="keyword">for</span> it <span class="keyword">in</span> si])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 两人都评论过的商品，求评分乘积之和</span></span><br><span class="line">    p_sum = sum([prefs[p1][it] * prefs[p2][it] <span class="keyword">for</span> it <span class="keyword">in</span> si])</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 计算皮尔逊评价值</span></span><br><span class="line">    num = p_sum - (sum1 * sum2 / n)</span><br><span class="line">    den = sqrt((sum1_sq - pow(sum1, <span class="number">2</span>) / n) * (sum2_sq - pow(sum2, <span class="number">2</span>) / n))</span><br><span class="line">    <span class="keyword">if</span> den == <span class="number">0</span>:</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span></span><br><span class="line">    r = num / den</span><br><span class="line">    <span class="keyword">return</span> r</span><br></pre></td></tr></table></figure></p>
+<p>皮尔逊相关度计算公式：<br><figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">num</span>=评分乘积之和-评分总和乘积/共同评价商品数目</span><br><span class="line"><span class="attr">den</span>=开方（评分平方和-评分和的平方/共同评价商品数目）</span><br><span class="line"><span class="attr">result</span> = num/den</span><br></pre></td></tr></table></figure></p>
+<h2 id="2、基于用户的协同过滤-User-Based-Collaborative-Filtering"><a href="#2、基于用户的协同过滤-User-Based-Collaborative-Filtering" class="headerlink" title="2、基于用户的协同过滤(User-Based Collaborative Filtering)"></a>2、基于用户的协同过滤(User-Based Collaborative Filtering)</h2><p>基于用户的协同过滤，核心思想是<strong>以用户为中心，观察与该用户兴趣相似的一个用户的群体，将这个兴趣相似的用户群体所感兴趣的其他物品，推荐给该用户</strong>。基于用户的协同过滤推荐，不考虑用户、物品的属性（特征）信息，它主要是根据用户对物品的偏好（Preference）信息，发掘不同用户之间口味（Taste）的相似性，使用这种用户相似性来进行个性化推荐。<br>简言之，推荐 <strong>和你有相似兴趣爱好的用户所感兴趣的物品</strong>。</p>
+<h3 id="2-1-找到与你有相似兴趣的用户"><a href="#2-1-找到与你有相似兴趣的用户" class="headerlink" title="2.1 找到与你有相似兴趣的用户"></a>2.1 找到与你有相似兴趣的用户</h3><p>针对已有的数据，我们可以根据指定人员对每个人进行打分，并找出最为接近的匹配结果。利用第一节中的电影评价数据，我们可以寻找出与自己有相似品味的影评者。实现代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">top_matches</span><span class="params">(prefs, person, n=<span class="number">5</span>, similarity=sim_pearson)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    计算一个人员列表，这些人与某个指定的人员具有相近的品味</span></span><br><span class="line"><span class="string">    :param prefs:数据集</span></span><br><span class="line"><span class="string">    :param person:指定人员</span></span><br><span class="line"><span class="string">    :param n:最为相近的人数</span></span><br><span class="line"><span class="string">    :param similarity:相似性参数，指向一个实际算法函数</span></span><br><span class="line"><span class="string">    :return: top 5 matches persons 最为相近的n个人的列表</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    <span class="comment"># 计算指定人员与其他人员的相似度值</span></span><br><span class="line">    scores = [(similarity(prefs, person, other), other)</span><br><span class="line">              <span class="keyword">for</span> other <span class="keyword">in</span> prefs <span class="keyword">if</span> other != person]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># sort the list of scores, the highest score is at the front</span></span><br><span class="line">    scores.sort()</span><br><span class="line">    scores.reverse()</span><br><span class="line">    <span class="keyword">return</span> scores[<span class="number">0</span>:n]</span><br></pre></td></tr></table></figure></p>
+<p>该函数利用Python的<strong>列表推导式</strong>，传递参数<code>similarity=</code>，指明采用先前定义过的某种距离度量算法，将自身和数据字典中的其他每一位用户都进行比较，返回前n项。</p>
+<h3 id="2-2-加权推荐物品"><a href="#2-2-加权推荐物品" class="headerlink" title="2.2 加权推荐物品"></a>2.2 加权推荐物品</h3><p>推荐系统的终极目的是找到符合品味的商品，在2.1中已经实现了找到与自己兴趣相似的用户，可以利用相似度，经过加权计算，进行商品推荐。<br><img src="/img/item-based-recommendations.jpg" alt=""><br>上图是为Toby提供推荐的相关度评价值，表中列出了每位评论者的相关度评价值，以及他们对三部影片的评分情况。S.x列表示的是<strong>相似度与评价值的乘积</strong>，求得乘积之和，最后除以相似度之和，得到最终的评价值。具体实现代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_recommendations</span><span class="params">(prefs, person, similarity=sim_pearson)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    基于用户的协作型过滤（user-based collaborative filtering）</span></span><br><span class="line"><span class="string">    give recommendations for person 利用所有其他人的评价值的加权平均，为某人提供推荐</span></span><br><span class="line"><span class="string">    :param prefs:</span></span><br><span class="line"><span class="string">    :param person:</span></span><br><span class="line"><span class="string">    :param similarity:</span></span><br><span class="line"><span class="string">    :return:一个影片推荐列表</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    totals = &#123;&#125;</span><br><span class="line">    sima_sums = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> other <span class="keyword">in</span> prefs:  <span class="comment"># 不和自己比较</span></span><br><span class="line">        <span class="keyword">if</span> other == person:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        sim = similarity(prefs, person, other)  <span class="comment"># 计算两个人的相似度</span></span><br><span class="line">        <span class="keyword">if</span> sim &lt;= <span class="number">0</span>:  <span class="comment"># ignore the values which is below zero or equal to zero</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> prefs[other]:</span><br><span class="line">            <span class="comment"># only deal with the movies that person doesn't watch</span></span><br><span class="line">            <span class="keyword">if</span> item <span class="keyword">not</span> <span class="keyword">in</span> prefs[person] <span class="keyword">or</span> prefs[person][item] == <span class="number">0</span>:</span><br><span class="line">                totals.setdefault(item, <span class="number">0</span>)</span><br><span class="line">                totals[item] += prefs[other][item]*sim  <span class="comment"># scores * similarities</span></span><br><span class="line">                sima_sums.setdefault(item, <span class="number">0</span>)</span><br><span class="line">                sima_sums[item] += sim  <span class="comment"># sum of all persons' similarities</span></span><br><span class="line">    <span class="comment"># 归一化</span></span><br><span class="line">    rankings = [(total/sima_sums[item], item) <span class="keyword">for</span> item, total <span class="keyword">in</span> totals.items()]</span><br><span class="line"></span><br><span class="line">    rankings.sort()</span><br><span class="line">    rankings.reverse()</span><br><span class="line">    <span class="keyword">return</span> rankings</span><br></pre></td></tr></table></figure></p>
+<p>最终的评价值计算方法是：<strong>用每一项的评价值乘以相似度，并将所得累积累加起来，最后将每个总计值除以相似度之和</strong>。<br>函数返回一个经过排名的影片列表，同时还推测出了自己对每一步影片的评价情况。</p>
+<h2 id="3、基于物品的协同过滤-Item-Based-Collaborative-Filtering"><a href="#3、基于物品的协同过滤-Item-Based-Collaborative-Filtering" class="headerlink" title="3、基于物品的协同过滤(Item-Based Collaborative Filtering)"></a>3、基于物品的协同过滤(Item-Based Collaborative Filtering)</h2><p>基于物品的协同过滤推荐，核心思想是<strong>以物品为中心，通过观察用户对物品的偏好行为，将相似的物品计算出来，可以认为这些相似的物品属于特定的一组类别，然后根据某个用户的历史兴趣计算其所属的类别，然后看该类别是否属于这些成组类别中的一个，最后将属于成组类别所对应的物品推荐给该用户</strong>。基于物品的协同过滤，也不考虑用户、物品的属性（特征）信息，它也是根据用户对物品的偏好（Preference）信息，发掘不同物品之间的相似性。<br>简言之，推荐 <strong>与你感兴趣的物品相近的物品</strong>。</p>
+<h3 id="3-1-构造物品比较数据集"><a href="#3-1-构造物品比较数据集" class="headerlink" title="3.1 构造物品比较数据集"></a>3.1 构造物品比较数据集</h3><p>构造一个包含相似物品的完整数据集，只需要构造一次，不需要重复操作，构造完一次数据集之后，我们可以在需要的时候重复使用它。构造数据集的具体实现代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">transform_prefs</span><span class="params">(prefs)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    transform persons to things</span></span><br><span class="line"><span class="string">    :param prefs: 原始数据字典 &#123;人名1：&#123;电影1：评分，电影2：评分, ...&#125;，人名2：&#123;电影1：评分, ...&#125;...&#125;</span></span><br><span class="line"><span class="string">    :return: 物品和人员对调后的数据字典</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    result = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> person <span class="keyword">in</span> prefs:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> prefs[person]:  <span class="comment"># item表示person 评论的所有电影</span></span><br><span class="line">            result.setdefault(item, &#123;&#125;)</span><br><span class="line">            result[item][person] = prefs[person][item]  <span class="comment"># 讲物品和人员对调</span></span><br><span class="line">    <span class="keyword">return</span> result</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">calculate_similar_items</span><span class="params">(prefs, n=<span class="number">10</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    构造一个包含相近物品的完整数据集</span></span><br><span class="line"><span class="string">    :param prefs:数据集</span></span><br><span class="line"><span class="string">    :param n: 最为相近的物品数量</span></span><br><span class="line"><span class="string">    :return: 相近物品数据集</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    result = &#123;&#125;  <span class="comment"># 建立字典，以给出与这些物品最为相近的所有其他物品</span></span><br><span class="line">    item_prefs = transform_prefs(prefs)  <span class="comment"># 以物品为中心，对偏好矩阵实施倒置处理</span></span><br><span class="line">    count = <span class="number">0</span></span><br><span class="line">    <span class="keyword">for</span> item <span class="keyword">in</span> item_prefs:</span><br><span class="line">        count += <span class="number">1</span></span><br><span class="line">        <span class="keyword">if</span> count % <span class="number">100</span> == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">print</span> <span class="string">"%d / %d"</span> % (count, len(item_prefs))</span><br><span class="line">        <span class="comment"># 寻找最为相近的n个物品</span></span><br><span class="line">        scores = top_matches(item_prefs, item, n=n, similarity=sim_distance)</span><br><span class="line">        result[item] = scores</span><br><span class="line">    <span class="keyword">return</span> result</span><br></pre></td></tr></table></figure></p>
+<p>构造数据集函数，首先利用一个transform_prefs函数，对反映评价值的字典进行倒置处理，从而得到一个有关物品及用户评价情况的列表。然后，循环遍历每项物品，并将转换了的字典传入top_matches函数，求得最为相近的物品及其相似度评价值。最后，建立并返回一个包含物品及其最相近物品列表的字典。</p>
+<h3 id="3-2-给出推荐"><a href="#3-2-给出推荐" class="headerlink" title="3.2 给出推荐"></a>3.2 给出推荐</h3><p>在3.1中，已经可以计算出物品的相似度字典，我们可以取到用户评价过的商品，找出其相近的物品，并根据相似度对其进行加权。<br><img src="/img/user-based-recommendations.jpg" alt=""><br>表中给出了为Toby提供的基于物品的推荐，每一行列出了评价过的影片，以及对该片的评价，每一列列出了还未看过的影片，以及它与已经看过的影片的相似度，R.x列表示的是对影片的评价值与相似度的乘积，求得乘积之和，然后除以相似度之和，得到最终的评价值。相关代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_recommended_items</span><span class="params">(prefs, item_match, user)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    基于物品的过滤（item-based collaborative filtering）</span></span><br><span class="line"><span class="string">    为某一用户user推荐商品</span></span><br><span class="line"><span class="string">    :param prefs:数据集</span></span><br><span class="line"><span class="string">    :param item_match:物品相似度</span></span><br><span class="line"><span class="string">    :param user:用户</span></span><br><span class="line"><span class="string">    :return:推荐商品列表</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line">    user_ratings = prefs[user]  <span class="comment"># user评论过的商品字典</span></span><br><span class="line">    scores = &#123;&#125;</span><br><span class="line">    total_sim = &#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 循环遍历user评论过的商品</span></span><br><span class="line">    <span class="keyword">for</span> (goods_name, rating) <span class="keyword">in</span> user_ratings.items():</span><br><span class="line">        <span class="comment"># 循环遍历与当前物品相近的物品</span></span><br><span class="line">        <span class="keyword">for</span> (similarity, item2) <span class="keyword">in</span> item_match[goods_name]:</span><br><span class="line">            <span class="comment"># ignore goods that the user has commented on</span></span><br><span class="line">            <span class="keyword">if</span> item2 <span class="keyword">in</span> user_ratings:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            scores.setdefault(item2, <span class="number">0</span>)</span><br><span class="line">            scores[item2] += similarity*rating</span><br><span class="line"></span><br><span class="line">            total_sim.setdefault(item2, <span class="number">0</span>)</span><br><span class="line">            total_sim[item2] += similarity</span><br><span class="line"></span><br><span class="line">    rankings = [(score/total_sim[goods_name], goods_name) <span class="keyword">for</span> goods_name, score <span class="keyword">in</span> scores.items()]</span><br><span class="line"></span><br><span class="line">    rankings.sort()</span><br><span class="line">    rankings.reverse()</span><br><span class="line">    <span class="keyword">return</span> rankings</span><br></pre></td></tr></table></figure></p>
+<h2 id="4、小结"><a href="#4、小结" class="headerlink" title="4、小结"></a>4、小结</h2><p>两种协同过滤算法，各有利弊。在针对大数据集生成推荐列表时，基于物品的协同过滤算法明显要更快一些，但有维护物品相似度表的额外开销。基于用户的协同过滤算法更易于实现，且无需额外的步骤，更适用于规模较小的变化非常频繁的内存数据集。</p>
+<hr>
+<p>完整代码已上传<a href="https://github.com/rootlu/PCI" target="_blank" rel="noopener">github</a><br>参考资料：<br><a href="http://shiyanjun.cn/archives/1429.html" target="_blank" rel="noopener">http://shiyanjun.cn/archives/1429.html</a><br><a href="http://wuchong.me/blog/2014/04/19/recsys-cf-study/" target="_blank" rel="noopener">http://wuchong.me/blog/2014/04/19/recsys-cf-study/</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的还不错？那就来个红包吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechat-reward-image.jpg" alt="YFLu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay-reward-image.jpg" alt="YFLu 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/python/" rel="tag"># python</a>
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/Programming-Collective-Intelligence/" rel="tag"># Programming Collective Intelligence</a>
+          
+            <a href="/tags/札记/" rel="tag"># 札记</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2016/11/30/PythonDatime.html/" rel="next" title="Python 日期时间处理函数 ---转载">
+                <i class="fa fa-chevron-left"></i> Python 日期时间处理函数 ---转载
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2016/12/12/PythonReSub.html/" rel="prev" title="Python 之 re.sub用法">
+                Python 之 re.sub用法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTkxMi82NDc3"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="YFLu" />
+            
+              <p class="site-author-name" itemprop="name">YFLu</p>
+              <p class="site-description motion-element" itemprop="description">NUPTer、BUPTer、MachineLearning、DataMining、伪文青</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/rootlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:luyfroot@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/yf.lu.946" target="_blank" title="Facebook"><i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎"><i class="fa fa-fw fa-Follow me on ZhiHu"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.paperweekly.site/user/YFLu" target="_blank" title="PaperWeekly"><i class="fa fa-fw fa-Follow me on PaperWeekly"></i>PaperWeekly</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.paperweekly.site/home" title="PaperWeekly" target="_blank">PaperWeekly</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1、两种相似度评价值计算方法"><span class="nav-text">1、两种相似度评价值计算方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-欧几里德距离-Euclidean-Distance-Score"><span class="nav-text">1.1 欧几里德距离(Euclidean Distance Score)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-皮尔逊相关度-Pearson-Correlation-Score"><span class="nav-text">1.2 皮尔逊相关度(Pearson Correlation Score)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2、基于用户的协同过滤-User-Based-Collaborative-Filtering"><span class="nav-text">2、基于用户的协同过滤(User-Based Collaborative Filtering)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-找到与你有相似兴趣的用户"><span class="nav-text">2.1 找到与你有相似兴趣的用户</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-加权推荐物品"><span class="nav-text">2.2 加权推荐物品</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3、基于物品的协同过滤-Item-Based-Collaborative-Filtering"><span class="nav-text">3、基于物品的协同过滤(Item-Based Collaborative Filtering)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#3-1-构造物品比较数据集"><span class="nav-text">3.1 构造物品比较数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-2-给出推荐"><span class="nav-text">3.2 给出推荐</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4、小结"><span class="nav-text">4、小结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YFLu</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '/blog/2016/12/08/CollaborativeFiltering.html/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz",
+                'X-LC-Key': "0hAkU75j3ti2wICPYsRit8R7",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="进程和线程都是由操作系统所体会的程序运行的基本单元，系统利用该基本单元实现系统对应用的并发性。两者的区别是各种面试笔试都会涉及的内容，应届党还是有必要好好了解一下的…">
+<meta name="keywords" content="操作系统">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统----进程与线程">
+<meta property="og:url" content="http://www.rootlu.com/blog/2016/04/21/ProcessThread.html/index.html">
+<meta property="og:site_name" content="ROOTLu">
+<meta property="og:description" content="进程和线程都是由操作系统所体会的程序运行的基本单元，系统利用该基本单元实现系统对应用的并发性。两者的区别是各种面试笔试都会涉及的内容，应届党还是有必要好好了解一下的…">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://www.rootlu.com/img/threeStatus.jpg">
+<meta property="og:image" content="http://www.rootlu.com/img/pcb.jpg">
+<meta property="og:updated_time" content="2016-08-30T02:38:48.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="操作系统----进程与线程">
+<meta name="twitter:description" content="进程和线程都是由操作系统所体会的程序运行的基本单元，系统利用该基本单元实现系统对应用的并发性。两者的区别是各种面试笔试都会涉及的内容，应届党还是有必要好好了解一下的…">
+<meta name="twitter:image" content="http://www.rootlu.com/img/threeStatus.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://www.rootlu.com/blog/2016/04/21/ProcessThread.html/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>操作系统----进程与线程 | ROOTLu</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-life">
+    <a href="/life" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />拾荒</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2016/04/21/ProcessThread.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="NUPTer、BUPTer、MachineLearning、DataMining、伪文青">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">操作系统----进程与线程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2016-04-21 19:26:21" itemprop="dateCreated datePublished" datetime="2016-04-21T19:26:21+08:00">2016-04-21</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2016-08-30 10:38:48" itemprop="dateModified" datetime="2016-08-30T10:38:48+08:00">2016-08-30</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/OperatingSystem/" itemprop="url" rel="index"><span itemprop="name">OperatingSystem</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/2016/04/21/ProcessThread.html/" class="leancloud_visitors" data-flag-title="操作系统----进程与线程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>进程和线程都是由操作系统所体会的程序运行的基本单元，系统利用该基本单元实现系统对应用的并发性。两者的区别是各种面试笔试都会涉及的内容，应届党还是有必要好好了解一下的…<br><a id="more"></a></p>
+<h2 id="1-进程"><a href="#1-进程" class="headerlink" title="1. 进程"></a>1. 进程</h2><h3 id="1-1-定义"><a href="#1-1-定义" class="headerlink" title="1.1 定义"></a>1.1 定义</h3><p>具有独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的独立单位</p>
+<ul>
+<li>程序的一次执行</li>
+<li>正在运行程序的抽象</li>
+<li>系统资源以进程为单位分配，如内存、文件….每个具有<strong>独立的地址空间</strong></li>
+<li>操作系统将CPU调度给需要的进程<br><em>ps命令查看进程数(linux)</em></li>
+</ul>
+<h3 id="1-2-进程的类型"><a href="#1-2-进程的类型" class="headerlink" title="1.2 进程的类型"></a>1.2 进程的类型</h3><ul>
+<li>系统进程<ul>
+<li>系统进程优于用户进程</li>
+<li>系统进程在核心态下执行操作系统的代码，提供系统功能，如：作业调度、各种资源的管理和控制</li>
+</ul>
+</li>
+<li>用户进程<ul>
+<li>用户进程在用户态下执行用户程序，提供用户功能</li>
+</ul>
+</li>
+</ul>
+<h3 id="1-3-进程的特征"><a href="#1-3-进程的特征" class="headerlink" title="1.3 进程的特征"></a>1.3 进程的特征</h3><ul>
+<li>动态性，有一定的生命周期</li>
+<li>并发性</li>
+<li>独立性 系统进行资源分配和调度的基本单位</li>
+<li>制约性 </li>
+<li>异步性</li>
+<li>结构性 三要素：程序、数据和进程控制块</li>
+</ul>
+<h3 id="1-4-进程的状态"><a href="#1-4-进程的状态" class="headerlink" title="1.4 进程的状态"></a>1.4 进程的状态</h3><ul>
+<li>三态模型<br>运行态（Running）：进程占有CPU，并在CPU上运行<br>就绪态（Ready）：一个进程已经具备运行条件，但由于无CPU暂时不能运行的状态(当调度给其CPU时，可立即运行)<br>等待态（Blocked）：阻塞态、封锁态、睡眠态指进程因等待某件事件的发生二杂事不能运行的状态(即使CPU空闲，该进程也不会运行)<br><img src="/img/threeStatus.jpg" alt=""></li>
+<li>五态模型<br>。。。</li>
+</ul>
+<h3 id="1-5-进程控制块PCB"><a href="#1-5-进程控制块PCB" class="headerlink" title="1.5 进程控制块PCB"></a>1.5 进程控制块PCB</h3><p>进程描述符，进程属性<br>用于管理控制进程的一个专门的数据结构，记录进程的各种属性，描述进程的动态变化过程<br>系统感知进程的唯一标志，进程与PCB一一对应<br>PCB内容：<br><img src="/img/pcb.jpg" alt=""></p>
+<ul>
+<li>进程描述信息：<br>进程标识符(process ID)，唯一，通常是一个整数；<br>进程名，通常基于可执行文件名（不唯一）；<br>用户标识符(user ID)：进程组关系</li>
+<li>进程控制信息：<br>进程当前状态、优先级、代码执行入口地址、程序的外存地址、运行统计信息(执行时间、页面调度)、进程间同步和通信、阻塞原因、进程的队列指针、进程的消息队列指针</li>
+<li>资源信息和使用情况：<br>占有内存大小及其管理用数据结构指针</li>
+<li>CPU现场保护信息：<br>寄存器值、指向赋予该进程的段/页表的指针</li>
+</ul>
+<h3 id="1-6-进程上下文"><a href="#1-6-进程上下文" class="headerlink" title="1.6 进程上下文"></a>1.6 进程上下文</h3><p>程序段、相关的数据段和PCB构成进程实体。<br>进程物理实体和支持进程运行的环境合称为进程上下文。<br>进程上下文分为：用户级上下文、寄存器级上下文和系统级上下文</p>
+<h3 id="1-7-进程间通信"><a href="#1-7-进程间通信" class="headerlink" title="1.7 进程间通信"></a>1.7 进程间通信</h3><p>进程间互相交换信息的工作称为进程间的通信IPC。<br>linux下进程间通信机制：</p>
+<ul>
+<li>信号通信机制</li>
+<li>共享存储区</li>
+<li>消息通信机制</li>
+<li>管道通信机制：管道指能够连接一个写进程和一个读进程、并润许他们以生产者-消费者方式进行通信的一个通向文件。</li>
+</ul>
+<h3 id="1-8-进程同步与互斥"><a href="#1-8-进程同步与互斥" class="headerlink" title="1.8 进程同步与互斥"></a>1.8 进程同步与互斥</h3><p>同步：系统中多个进程中发生的事件存在某种时序关系，需要相互合作，共同完成一项任务。<br>互斥：“千军万马过独木桥”<br>临界资源：在一段时间内，临界资源  只允许一个进程访问，打印机<br>临界区：进程访问临界资源的那段代码</p>
+<h3 id="1-9-PV操作"><a href="#1-9-PV操作" class="headerlink" title="1.9 PV操作"></a>1.9 PV操作</h3><p>解决互斥和同步的操作<a href="http://www.cnblogs.com/bizhu/archive/2012/05/17/2506285.html" target="_blank" rel="noopener">http://www.cnblogs.com/bizhu/archive/2012/05/17/2506285.html</a><br>P操作：使S=S-1，若S&gt;=0，则该进程继续执行，否则该进程排入等待队列<br>V操作：使S=S+1，若S&gt;0，唤醒等待队列中的一个进程<br>生产者与消费者<br>即不允许消费者进程到一个空缓冲区去取产品，也不允许生产者进程向一个已装满产品且尚未被取走的缓冲区中投放产品。<br>生产者：S1初值为1，S2初值为0<br><figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">while</span><span class="comment">(true)</span>&#123;</span><br><span class="line">生产一个产品；</span><br><span class="line">P<span class="comment">(s1)</span>;</span><br><span class="line">送产品到缓冲区；</span><br><span class="line">V<span class="comment">(s2)</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>消费者：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">P(<span class="built_in">s2</span>)<span class="comment">;</span></span><br><span class="line">从缓冲区取产品；</span><br><span class="line">V(<span class="built_in">s1</span>)<span class="comment">;</span></span><br><span class="line">消费产品；</span><br></pre></td></tr></table></figure></p>
+<h2 id="2-线程"><a href="#2-线程" class="headerlink" title="2. 线程"></a>2. 线程</h2><h3 id="2-1-目的"><a href="#2-1-目的" class="headerlink" title="2.1 目的"></a>2.1 目的</h3><p>将进程以更细的粒度加以切分，以低开销进一步提高系统的并发度，减少处理机的空转时间和调度切换的时间，以及便于系统管理。</p>
+<h3 id="2-2-定义"><a href="#2-2-定义" class="headerlink" title="2.2 定义"></a>2.2 定义</h3><p>轻量级进程，是进程中的一个运行实体，作为CPU的调度单位，自己基本不拥有资源，只拥有一点在运行时必不可少的资源，一个进程中的所有线程可共享地址空间及系统的其他资源。<br>线程控制块（TCB）：标志线程存在的数据结构。</p>
+<h3 id="2-3-线程共享的内容"><a href="#2-3-线程共享的内容" class="headerlink" title="2.3 线程共享的内容"></a>2.3 线程共享的内容</h3><ul>
+<li>进程代码段</li>
+<li>进程的公有数据data section</li>
+<li>进程打开的文件描述符file fd</li>
+<li>信号的处理器register set</li>
+<li>进程的当前目录</li>
+<li>进程用户ID和进程组ID</li>
+</ul>
+<h3 id="2-4-线程独有的内容"><a href="#2-4-线程独有的内容" class="headerlink" title="2.4 线程独有的内容"></a>2.4 线程独有的内容</h3><ul>
+<li>线程ID</li>
+<li>寄存器组的值</li>
+<li>线程的堆栈stack</li>
+<li>错误的返回码</li>
+<li>线程的信号屏蔽码</li>
+<li>线程优先级</li>
+</ul>
+<h2 id="3-进程VS线程"><a href="#3-进程VS线程" class="headerlink" title="3. 进程VS线程"></a>3. 进程VS线程</h2><ul>
+<li>进程是资源分配的基本单位，线程与资源分配无关，它属于某一个进程，并与进程内的其他线程一起共享进程的资源；</li>
+<li>进程发生调度时，不同的进程拥有不同的虚拟地址空间，而同一进程内的不同线程共享同一地址空间；</li>
+<li>线程只有相关的堆栈(系统栈或用户栈)寄存器和线程控制块TCB组成；</li>
+</ul>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的还不错？那就来个红包吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechat-reward-image.jpg" alt="YFLu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay-reward-image.jpg" alt="YFLu 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/操作系统/" rel="tag"># 操作系统</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2016/04/21/OsUserMode.html/" rel="next" title="操作系统----用户态和内核态">
+                <i class="fa fa-chevron-left"></i> 操作系统----用户态和内核态
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2016/05/21/JobSchedule.html/" rel="prev" title="操作系统----处理器调度">
+                操作系统----处理器调度 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTkxMi82NDc3"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="YFLu" />
+            
+              <p class="site-author-name" itemprop="name">YFLu</p>
+              <p class="site-description motion-element" itemprop="description">NUPTer、BUPTer、MachineLearning、DataMining、伪文青</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/rootlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:luyfroot@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/yf.lu.946" target="_blank" title="Facebook"><i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎"><i class="fa fa-fw fa-Follow me on ZhiHu"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.paperweekly.site/user/YFLu" target="_blank" title="PaperWeekly"><i class="fa fa-fw fa-Follow me on PaperWeekly"></i>PaperWeekly</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.paperweekly.site/home" title="PaperWeekly" target="_blank">PaperWeekly</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-进程"><span class="nav-text">1. 进程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-定义"><span class="nav-text">1.1 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-进程的类型"><span class="nav-text">1.2 进程的类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-进程的特征"><span class="nav-text">1.3 进程的特征</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-进程的状态"><span class="nav-text">1.4 进程的状态</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-进程控制块PCB"><span class="nav-text">1.5 进程控制块PCB</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-进程上下文"><span class="nav-text">1.6 进程上下文</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-7-进程间通信"><span class="nav-text">1.7 进程间通信</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-8-进程同步与互斥"><span class="nav-text">1.8 进程同步与互斥</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-9-PV操作"><span class="nav-text">1.9 PV操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-线程"><span class="nav-text">2. 线程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-目的"><span class="nav-text">2.1 目的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-2-定义"><span class="nav-text">2.2 定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-3-线程共享的内容"><span class="nav-text">2.3 线程共享的内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-4-线程独有的内容"><span class="nav-text">2.4 线程独有的内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-进程VS线程"><span class="nav-text">3. 进程VS线程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YFLu</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '/blog/2016/04/21/ProcessThread.html/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz",
+                'X-LC-Key': "0hAkU75j3ti2wICPYsRit8R7",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

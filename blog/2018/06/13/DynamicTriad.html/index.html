@@ -1,0 +1,1174 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="这篇论文是AAAI18年的一个工作，主要做的是动态网络的表示学习。在实际生活中，网络是动态演变的，不断有新的节点、新的边添加，同时也有旧的节点和边消失。论文立足于动态网络embedding，旨在保留网络结构特征的同时，能够刻画网络的演变模式(evloution patterns)。">
+<meta name="keywords" content="Network Embedding,Representation Learning,PaperNote">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Dynamic Network Embedding by Moding Tridaic Closure Process》— 论文笔记">
+<meta property="og:url" content="http://www.rootlu.com/blog/2018/06/13/DynamicTriad.html/index.html">
+<meta property="og:site_name" content="ROOTLu">
+<meta property="og:description" content="这篇论文是AAAI18年的一个工作，主要做的是动态网络的表示学习。在实际生活中，网络是动态演变的，不断有新的节点、新的边添加，同时也有旧的节点和边消失。论文立足于动态网络embedding，旨在保留网络结构特征的同时，能够刻画网络的演变模式(evloution patterns)。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fs9v0umq87j30i20b8abq.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fse7emu5uvj30nu07k0tm.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fse6pa763gj30pm0j6dof.jpg">
+<meta property="og:updated_time" content="2018-06-17T07:37:18.077Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Dynamic Network Embedding by Moding Tridaic Closure Process》— 论文笔记">
+<meta name="twitter:description" content="这篇论文是AAAI18年的一个工作，主要做的是动态网络的表示学习。在实际生活中，网络是动态演变的，不断有新的节点、新的边添加，同时也有旧的节点和边消失。论文立足于动态网络embedding，旨在保留网络结构特征的同时，能够刻画网络的演变模式(evloution patterns)。">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fs9v0umq87j30i20b8abq.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://www.rootlu.com/blog/2018/06/13/DynamicTriad.html/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>《Dynamic Network Embedding by Moding Tridaic Closure Process》— 论文笔记 | ROOTLu</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-life">
+    <a href="/life" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />拾荒</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2018/06/13/DynamicTriad.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="NUPTer、BUPTer、MachineLearning、DataMining、伪文青">
+      <meta itemprop="image" content="/uploads/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">《Dynamic Network Embedding by Moding Tridaic Closure Process》— 论文笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-06-13 20:45:26" itemprop="dateCreated datePublished" datetime="2018-06-13T20:45:26+08:00">2018-06-13</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-17 15:37:18" itemprop="dateModified" datetime="2018-06-17T15:37:18+08:00">2018-06-17</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/Representation-Learning/" itemprop="url" rel="index"><span itemprop="name">Representation Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/2018/06/13/DynamicTriad.html/" class="leancloud_visitors" data-flag-title="《Dynamic Network Embedding by Moding Tridaic Closure Process》— 论文笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>这篇论文是AAAI18年的一个工作，主要做的是动态网络的表示学习。在实际生活中，网络是动态演变的，不断有新的节点、新的边添加，同时也有旧的节点和边消失。论文立足于动态网络embedding，旨在<strong>保留网络结构特征</strong>的同时，能够<strong>刻画网络的演变模式(evloution patterns)</strong>。</p>
+<a id="more"></a>
+<p>论文利用了网络分析中的<strong>三角闭合过程（triadic closure process）</strong>来建模动态网络，通过<strong>预测由开三角演变成闭三角的概率</strong>，来学习每个节点的隐含表示。</p>
+<h4 id="1、Motivation"><a href="#1、Motivation" class="headerlink" title="1、Motivation"></a>1、Motivation</h4><p>在实际生活中，网络是动态演变的，也就是说网络中的节点和边都在动态的增加或者消亡。现有的一些网络嵌入方法大多数都局限于静态网络的表示学习，而忽略了<strong>网络的动态性</strong>这一重要信息。网络演变过程中，<strong>不同节点或边有不同的演变模式，而不同的演变模式反映了节点或边之间的不同特征和性质</strong>。因此，动态网络embedding要学到<strong>网络演变的结构特征</strong>。（网络演变模式）</p>
+<p>论文基于<strong>三角闭合过程</strong>，建模网络的动态演变过程。三角闭合过程即是：从一个开三角 演变为 一个闭三角的过程，其中开三角指三个节点中有两个节点是没有连接的，闭三角指三个节点互相连接。其过程可以看下图。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs9v0umq87j30i20b8abq.jpg" alt=""></p>
+<h4 id="2、Model"><a href="#2、Model" class="headerlink" title="2、Model"></a>2、Model</h4><p>论文给出了动态网络及动态网络embedding的定义。对于动态网络的定义，论文假设网络中<strong>节点数不发生改变，只有边及其权重发生变化</strong>。对于动态网络embedding的定义，论文定义，对于每一个时间步的网络快照    $G^t$, 模型都学习一个映射函数$f^t: v_i \to \mathbb{R}^d$, 其中函数<strong>保留网络的结构特性和网络的演变趋势</strong>。</p>
+<p>值得注意的是，DynamicTriad对于每个节点$v_i$在每个时间步t上都会学到一个表示$u^t_i=f^t(v_i)$, 然后构成一个张量     $u={u_i^t}_{i={1,…,M},t={1,..,T}}$. (M是节点总数，T是时间总数。)</p>
+<p>一个开三角定义为$(v_i,v_j,v_k)$，其中$v_i$和$v_j$互相没有连接，但都和$v_k$有连接。论文<strong>假设$v_i$和$v_j$ 只会经过他们共同的朋友$v_k$的介绍认识</strong>，而$v_k$是否介绍取决于他们之间的相似程度（距离），通过一个d维的向量表示：<br>$$<br>x_{ijk}^t = w_{ik}^t<em>(u_k^t-u_i^t)+w^t_{jk}</em>(u_k^t-u_i^t)<br>$$<br>论文还定义了一个社交策略参数$\theta$，是一个从节点隐含表示中抽取的d维的向量，表示社交策略信息。</p>
+<p>对于一个开三角$(v_i,v_j,v_k)$，在t+1时刻演变为闭三角的概率为：<br>$$<br>P_{tr}^t(i,j,k)= \frac{1}{1+\exp({-\langle{\theta,x_{ijk}^t\rangle}})}<br>$$</p>
+<p>考虑到$v_i$和$v_j$ 会有不止一个共同邻接，所以定义一个t时刻的共同邻居集合$B^t(i,j)$，和一个向量$\alpha^{t,i,j}=(\alpha{<em>k^{t,i,j}})</em>{k\in{B^t(i,j)}}$. 当$\alpha{_k^{t,i,j}}=1$表示在下一时刻，开三角$(u_i,u_j,u_k)$会闭合。</p>
+<p>定义一个新连接会在$t+1$时刻建立的概率为：<br>$$<br>P_{tr_+}^t(i,j)=\sum_{\alpha^{t,i,j\neq0}}{\prod_{k\in{B^t(i,j)}}(P_{tr}^t(i,j,k))^{\alpha^{t,i,j}<em>k}}\times{(1-P</em>{tr}^t(i,j,k))^(1-\alpha^{t,i,j}_k)}<br>$$</p>
+<p>$$<br>p_{tr_+}^t(i,j)=\sum_{\alpha^{t,i,j}\neq0}{\prod_{ k\in{B^t(i,j)}}{(P^t_{tr}(i,j,k)} )^{\alpha^{t,i,j}<em>k}} \times {(1-P^t</em>{tr}(i,j,k)} )^{(1-\alpha^{t,i,j}_k)}<br>$$</p>
+<p>对于<strong>不受共同邻居影响的节点，不会建立连接</strong>，定其概率为：<br>$$<br>P_{tr_-}^t(i,j)= \prod <em>{k\in{B^t{(i,j)}}}{( 1-P^t</em>{tr}(i,j,k))}<br>$$<br>合并两部分，<br>$$<br>L_{tr}^t=-\sum_{(i,j)\in{S^t_+}}{logP^t_{tr_+}(i,j)} - \sum_{(i,j)\in{S^t_-}}{logP^t_{tr_-}(i,j)}<br>$$<br>这里的$S^t_+$表示在当前t时刻没有边连接的节点对集合，但在下一时刻会有边连接；$S_-^t$表示在当前时刻和下一时刻都不会有边连接的节点对集合。</p>
+<p>论文还定义了两个常用假设，<strong>社交的趋同性和时序平滑性</strong>，从而定义一下两个损失函数：<br>$$<br>L_{sh}^t = \sum_{(j,k)\in{E^t_+},(j’,k’)\in{E_-^t}}{h(w_{jk},[g^t(j,k)-g^t(j’,k’)+\xi]<em>+)}<br>$$<br>和<br>$$<br>L</em>{smooth}^t =<br>\begin{cases}<br>\sum_{i=1}^N||u_i^t-u^{t-1}_i||^2_2&amp; t&gt;1 \<br>0&amp; t=1<br>\end{cases}<br>$$</p>
+<p>总的损失函数为：<br>$$<br>\arg {\min{\sum_{t=1}^T{L_{sh}^t}+\beta_0L_{tr}^t+\beta_1L_{smooth}^t}}<br>$$</p>
+<p>模型的基本内容到这就介绍的差不多了，最后论文中还介绍了如何学习模型，以及采样的一些问题，在这里就不再细写了，感兴趣可以参考论文。</p>
+<h4 id="3、Experiments"><a href="#3、Experiments" class="headerlink" title="3、Experiments"></a>3、Experiments</h4><p>论文实验比较充分，用了三个数据集，其中两个是通话网络，还有一个学术合作网络，数据量都在万级以上，可以看下面的统计表。</p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fse7emu5uvj30nu07k0tm.jpg" alt=""></p>
+<p>实验共有6个，可以分类两类：一类是在t时刻进行常规任务，包括：节点分类，链路重构和变化链路重构；还有一类是对t+1时刻的预测任务，包括节点预测，链路预测和变化链路预测。实验效果可以看下图：</p>
+<p><img src="https://ws4.sinaimg.cn/large/006tNc79ly1fse6pa763gj30pm0j6dof.jpg" alt="">实验的详细描述可以参考论文。</p>
+<h4 id="4、Summary"><a href="#4、Summary" class="headerlink" title="4、Summary"></a>4、Summary</h4><p>总结一下，个人觉得论文想法很新颖，通过复杂网络分析中的<strong>三角闭合问题</strong>，建模动态网络的演变，很好的描述了网络的变化。论文的基本思路也很清晰，做法也比较容易理解。但其中我觉得存在几个问题：首先，从损失函数来看，还是沿用了<strong>以正则来建模动态性的思路</strong>，整体的损失函数还是以社交趋同性为主，而三角闭合过程和时序平滑性作为一种正则，建模网络的动态演变过程；其次，在三角闭合过程中，论文假设$v_i$和$v_j$只会经过$v_k$的介绍(作用)才会互相认识（建立连接），但是否存在<strong>不经过$v_k$而自行认识的情况？？</strong>，对于这种情况，如何建模是否需要考虑呢？最后，论文似乎没有考虑<strong>不同邻居对$v_i$和$v_j$是否建立连接的影响权重</strong>，这个权重是否都一样？值得区别怼大不同的邻居吧？</p>
+<p>上面只是个人的一些理解和疑问，可能存在问题，欢迎指正。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的还不错？那就来个红包吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/uploads/wechat-reward-image.jpg" alt="YFLu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/uploads/alipay-reward-image.jpg" alt="YFLu 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Network-Embedding/" rel="tag"># Network Embedding</a>
+          
+            <a href="/tags/Representation-Learning/" rel="tag"># Representation Learning</a>
+          
+            <a href="/tags/PaperNote/" rel="tag"># PaperNote</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2017/12/17/EOE.html/" rel="next" title="《Embedding of Embedding (EOE) Joint Embedding for Coupled Heterogeneous Networks》---论文笔记">
+                <i class="fa fa-chevron-left"></i> 《Embedding of Embedding (EOE) Joint Embedding for Coupled Heterogeneous Networks》---论文笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/blog/2018/06/17/DynHPE.html/" rel="prev" title="《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记">
+                《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTkxMi82NDc3"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/uploads/avatar.png"
+                alt="YFLu" />
+            
+              <p class="site-author-name" itemprop="name">YFLu</p>
+              <p class="site-description motion-element" itemprop="description">NUPTer、BUPTer、MachineLearning、DataMining、伪文青</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">84</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/rootlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:luyfroot@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/yf.lu.946" target="_blank" title="Facebook"><i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎"><i class="fa fa-fw fa-Follow me on ZhiHu"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.paperweekly.site/user/YFLu" target="_blank" title="PaperWeekly"><i class="fa fa-fw fa-Follow me on PaperWeekly"></i>PaperWeekly</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.paperweekly.site/home" title="PaperWeekly" target="_blank">PaperWeekly</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Motivation"><span class="nav-text">1、Motivation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Model"><span class="nav-text">2、Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Experiments"><span class="nav-text">3、Experiments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Summary"><span class="nav-text">4、Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YFLu</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.1</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Mist</a> v6.4.1</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '/blog/2018/06/13/DynamicTriad.html/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz",
+                'X-LC-Key': "0hAkU75j3ti2wICPYsRit8R7",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
