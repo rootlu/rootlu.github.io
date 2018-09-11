@@ -238,6 +238,14 @@
         
         
           
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
@@ -458,11 +466,23 @@
 <p>上图中，因为节点6和节点7直接相连，而且连接边的权重值很大（线很粗），所以节点6和节点7之间存在很强的一阶相似性，它们在嵌入空间中的表示应该很接近。节点5和节点6之间虽然没有直接连接，但是由于它们有很多更同的邻居节点（阴影），所以节点5和节点6之间存在二阶相似性，它们在嵌入空间中的表示也应该很接近。</p>
 <p>因为网络节点之间的权重不同，边上的权重值通常有很大的方差，所以传统的SGD算法会导致梯度爆炸。论文提出了一种边采样的方法来解决该问题，根据边权重的概率分布进行边采样，然后使用采样到的边进行参数更新。</p>
 <h5 id="2、LINE"><a href="#2、LINE" class="headerlink" title="2、LINE"></a>2、LINE</h5><h6 id="2-1、一阶相似性-First-order-Proximity"><a href="#2-1、一阶相似性-First-order-Proximity" class="headerlink" title="2.1、一阶相似性(First-order Proximity)"></a>2.1、一阶相似性(First-order Proximity)</h6><p>一阶相似性定义为：图中两个相连节点$(u,v)$的连接边上的权重$w_{uv}$，如果节点之间没有连接，一阶相似性为0。一阶相似性是网络中局部点对的相似度，在真实网路中，有连接的节点很少，因此只用一阶相似性刻画网络结构是不完善的。</p>
-<p>对于每条无向边$(i,j)$，节点$v_i$和节点$v_j$之间的联合概率分布定义为：<br>$$<br>p_1(v_i,v_j)=\frac{1}{1+exp(-\vec{u_i}^T\cdot{\vec{u_j}})}<br>$$<br>经验概率分布可以定义为：$\widehat{p}<em>(i,j)=\frac{w</em>{ij}}{W}$，其中$\vec{u_i}\in{R^d}$是节点$v_i$的低维度特征向量表示，$W=\sum_{(i,j)\in{E}}{w_{ij}}$。</p>
-<p>为保持其一阶相似性，一种直接的方法是最小化目标函数$O_1=d(\widehat{p}_1(\cdot,\cdot),p_1(\cdot,\cdot))$，其中$d(\cdot,\cdot)$表示两种分布间的距离，论文通过最小化两种分布的KL散度（KL-divergence）来计算它们之间的距离。代入计算，目标函数化简为：<br>$$<br>O_1=-\sum_{(i,j)\in{E}}{w_{ij}log(p_1(v_i,u_j))}<br>$$<br>一阶相似性只适用于无向图，通过优化目标函数学习每个节点的特征表示。</p>
+<p>对于每条无向边$(i,j)$，节点$v_i$和节点$v_j$之间的联合概率分布定义为：</p>
+<script type="math/tex; mode=display">
+p_1(v_i,v_j)=\frac{1}{1+exp(-\vec{u_i}^T\cdot{\vec{u_j}})}</script><p>经验概率分布可以定义为：$\widehat{p}_(i,j)=\frac{w_{ij}}{W}$，其中$\vec{u_i}\in{R^d}$是节点$v_i$的低维度特征向量表示，$W=\sum_{(i,j)\in{E}}{w_{ij}}$。</p>
+<p>为保持其一阶相似性，一种直接的方法是最小化目标函数$O_1=d(\widehat{p}_1(\cdot,\cdot),p_1(\cdot,\cdot))$，其中$d(\cdot,\cdot)$表示两种分布间的距离，论文通过最小化两种分布的KL散度（KL-divergence）来计算它们之间的距离。代入计算，目标函数化简为：</p>
+<script type="math/tex; mode=display">
+O_1=-\sum_{(i,j)\in{E}}{w_{ij}log(p_1(v_i,u_j))}</script><p>一阶相似性只适用于无向图，通过优化目标函数学习每个节点的特征表示。</p>
 <h6 id="2-2、二阶相似性-Second-order-Proximity"><a href="#2-2、二阶相似性-Second-order-Proximity" class="headerlink" title="2.2、二阶相似性(Second -order Proximity)"></a>2.2、二阶相似性(Second -order Proximity)</h6><p>二阶相似性是指一对顶点对之间的相似性和它们邻居网络结构之间的相似性是相似的。从数学的角度定义，$p_u=(w_{u,1},……,w_{u,|V|})$表示节点$u$与其他所有节点的一阶相似性，节点$u$和节点$v$之间的二阶相似性定义为$p_u$和$p_v $之间的相似性。如果没有一个节点同时和节点$u$和节点$v$连接，那么它们之间的二阶相似性为0。</p>
-<p>二阶相似性既适用于有向图，也适用于无向图，其假设共享许多邻居节点的节点是相似的，每个节点充当两个角色：一个是其本身，一个是其它节点的上下文，定义两个向量：$\vec{u_i}$表示$v_i$作为节点时候的特征表示，$\vec{u_i}’$表示$v_i$作为上下文时候的特征表示。对于每一条有向边$(i,j)$，由节点$v_i$生成上下文$v_j$的概率为：<br>$$<br>p_2(v_j|v_i)=\frac{exp(\vec{u}_j’^T\cdot{\vec{u}<em>i})}{\sum</em>{k=1}^{|V|}{exp(\vec{u}_k’^T\cdot{\vec{u}_i})}}<br>$$<br>其中，$|V|$表示节点或上下文的数量，对于每一个节点$v_i$，公式（3）定义了一个条件分布 $p_2(\cdot|v_i)$。同样为了保持其二阶相似性，条件概率分布应该尽可能的与经验分布$\widehat{p}_2(v_j|v_i)=\frac{w_{ij}}{d_i}$接近，通过最小化两者的最小KL散度$O_2=d(\widehat{p}_2(\cdot,\cdot),p_2(\cdot,\cdot))$，优化目标函数：<br>$$<br>O_2=\sum_{(i,j)\in{E}}{w_{ij}logp_2(v_j|v_i)}<br>$$<br>通过学习${\vec{u_i}}_{i=1…|V|}$和${\vec{u_i}’}_{i=1…|V|}$最下化目标函数，并用于节点的特征表示。</p>
-<h6 id="2-3、模型优化"><a href="#2-3、模型优化" class="headerlink" title="2.3、模型优化"></a>2.3、模型优化</h6><p>由于目标函数（6）的优化过程非常复杂，因此论文在优化时使用<strong>负采样</strong>的方法(negative sampling)[1]，为每条边定义以下的目标函数：<br>$$<br>log\sigma(\vec{u}_j’^T\cdot{\vec{u}<em>i})+\sum</em>{i=1}^{K}{E_{v_n\sim{P_n(v)}}[log\sigma({-\vec{u}_n’^T\cdot{\vec{u}_i}})]}<br>$$<br>目标函数使用异步随机梯度下降方法优化，每一步采样小批量的边，然后更新模型参数，如果一条边$(i,j)$被采样到，那么节点$i$的embedding向量$\vec{u_i}$的计算公式如下：<br>$$<br>\frac{\partial{O_2}}{\partial{\vec{u}<em>i}}=w</em>{ij}\cdot{\frac{\partial{logp_2(v_j|v_i)}}{\partial{\vec{u}_i}}}<br>$$<br>可以看到，计算过程中需要乘以边的权重，这就带来了一个问题：网络中边的权重有很大的方差时，会导致梯度爆炸。因此边采样也需要优化，从初始边采样，然后将其作为二进制边，采样概率和初始边的权重成正比。</p>
+<p>二阶相似性既适用于有向图，也适用于无向图，其假设共享许多邻居节点的节点是相似的，每个节点充当两个角色：一个是其本身，一个是其它节点的上下文，定义两个向量：$\vec{u_i}$表示$v_i$作为节点时候的特征表示，$\vec{u_i}’$表示$v_i$作为上下文时候的特征表示。对于每一条有向边$(i,j)$，由节点$v_i$生成上下文$v_j$的概率为：</p>
+<script type="math/tex; mode=display">
+p_2(v_j|v_i)=\frac{exp(\vec{u}_j'^T\cdot{\vec{u}_i})}{\sum_{k=1}^{|V|}{exp(\vec{u}_k'^T\cdot{\vec{u}_i})}}</script><p>其中，$|V|$表示节点或上下文的数量，对于每一个节点$v_i$，公式（3）定义了一个条件分布 $p_2(\cdot|v_i)$。同样为了保持其二阶相似性，条件概率分布应该尽可能的与经验分布$\widehat{p}_2(v_j|v_i)=\frac{w_{ij}}{d_i}$接近，通过最小化两者的最小KL散度$O_2=d(\widehat{p}_2(\cdot,\cdot),p_2(\cdot,\cdot))$，优化目标函数：</p>
+<script type="math/tex; mode=display">
+O_2=\sum_{(i,j)\in{E}}{w_{ij}logp_2(v_j|v_i)}</script><p>通过学习$\{\vec{u_i}\}_{i=1…|V|}$和$\{\vec{u_i}’\}_{i=1…|V|}$最下化目标函数，并用于节点的特征表示。</p>
+<h6 id="2-3、模型优化"><a href="#2-3、模型优化" class="headerlink" title="2.3、模型优化"></a>2.3、模型优化</h6><p>由于目标函数（6）的优化过程非常复杂，因此论文在优化时使用<strong>负采样</strong>的方法(negative sampling)[1]，为每条边定义以下的目标函数：</p>
+<script type="math/tex; mode=display">
+log\sigma(\vec{u}_j'^T\cdot{\vec{u}_i})+\sum_{i=1}^{K}{E_{v_n\sim{P_n(v)}}[log\sigma({-\vec{u}_n'^T\cdot{\vec{u}_i}})]}</script><p>目标函数使用异步随机梯度下降方法优化，每一步采样小批量的边，然后更新模型参数，如果一条边$(i,j)$被采样到，那么节点$i$的embedding向量$\vec{u_i}$的计算公式如下：</p>
+<script type="math/tex; mode=display">
+\frac{\partial{O_2}}{\partial{\vec{u}_i}}=w_{ij}\cdot{\frac{\partial{logp_2(v_j|v_i)}}{\partial{\vec{u}_i}}}</script><p>可以看到，计算过程中需要乘以边的权重，这就带来了一个问题：网络中边的权重有很大的方差时，会导致梯度爆炸。因此边采样也需要优化，从初始边采样，然后将其作为二进制边，采样概率和初始边的权重成正比。</p>
 <h5 id="3、Experiment"><a href="#3、Experiment" class="headerlink" title="3、Experiment"></a>3、Experiment</h5><p>论文在一个语言网络、两个社交网络和两个引用网络上进行实验验证，对比实验包括GF、DeepWalk、LINE-SGD、LINE和LINE(1st+2nnd)几种模型。实验结果不再叙述，详情可以参考论文。</p>
 <h5 id="4、Conclusion"><a href="#4、Conclusion" class="headerlink" title="4、Conclusion"></a>4、Conclusion</h5><p>论文提出了一个网路嵌入模型LINE，能够用于处理大规模网络，其目标函数既保留了一阶相似性又保留了二阶相似性，同时还提出了一种边采样方法，解决了在带权重边上SGD的限制问题。</p>
 <h5 id="5、Summary"><a href="#5、Summary" class="headerlink" title="5、Summary"></a>5、Summary</h5><p>个人认为，这边论文的主要亮点有两个：首先，定义出了一阶相似性和二阶相似性，并分别设计了不同的目标函数。其次，论文提出的边采样方法在不影响效率的前提下，解决了带权重边上的随机梯度下降的限制问题。</p>
@@ -1126,7 +1146,7 @@
         }
     });
 </script>
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>

@@ -240,6 +240,14 @@
         
         
           
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
@@ -460,16 +468,32 @@
 <p>论文基于<strong>三角闭合过程</strong>，建模网络的动态演变过程。三角闭合过程即是：从一个开三角 演变为 一个闭三角的过程，其中开三角指三个节点中有两个节点是没有连接的，闭三角指三个节点互相连接。其过程可以看下图。</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fs9v0umq87j30i20b8abq.jpg" alt=""></p>
 <h4 id="2、Model"><a href="#2、Model" class="headerlink" title="2、Model"></a>2、Model</h4><p>论文给出了动态网络及动态网络embedding的定义。对于动态网络的定义，论文假设网络中<strong>节点数不发生改变，只有边及其权重发生变化</strong>。对于动态网络embedding的定义，论文定义，对于每一个时间步的网络快照    $G^t$, 模型都学习一个映射函数$f^t: v_i \to \mathbb{R}^d$, 其中函数<strong>保留网络的结构特性和网络的演变趋势</strong>。</p>
-<p>值得注意的是，DynamicTriad对于每个节点$v_i$在每个时间步t上都会学到一个表示$u^t_i=f^t(v_i)$, 然后构成一个张量     $u={u_i^t}_{i={1,…,M},t={1,..,T}}$. (M是节点总数，T是时间总数。)</p>
-<p>一个开三角定义为$(v_i,v_j,v_k)$，其中$v_i$和$v_j$互相没有连接，但都和$v_k$有连接。论文<strong>假设$v_i$和$v_j$ 只会经过他们共同的朋友$v_k$的介绍认识</strong>，而$v_k$是否介绍取决于他们之间的相似程度（距离），通过一个d维的向量表示：<br>$$<br>x_{ijk}^t = w_{ik}^t<em>(u_k^t-u_i^t)+w^t_{jk}</em>(u_k^t-u_i^t)<br>$$<br>论文还定义了一个社交策略参数$\theta$，是一个从节点隐含表示中抽取的d维的向量，表示社交策略信息。</p>
-<p>对于一个开三角$(v_i,v_j,v_k)$，在t+1时刻演变为闭三角的概率为：<br>$$<br>P_{tr}^t(i,j,k)= \frac{1}{1+\exp({-\langle{\theta,x_{ijk}^t\rangle}})}<br>$$</p>
-<p>考虑到$v_i$和$v_j$ 会有不止一个共同邻接，所以定义一个t时刻的共同邻居集合$B^t(i,j)$，和一个向量$\alpha^{t,i,j}=(\alpha{<em>k^{t,i,j}})</em>{k\in{B^t(i,j)}}$. 当$\alpha{_k^{t,i,j}}=1$表示在下一时刻，开三角$(u_i,u_j,u_k)$会闭合。</p>
-<p>定义一个新连接会在$t+1$时刻建立的概率为：<br>$$<br>P_{tr_+}^t(i,j)=\sum_{\alpha^{t,i,j\neq0}}{\prod_{k\in{B^t(i,j)}}(P_{tr}^t(i,j,k))^{\alpha^{t,i,j}<em>k}}\times{(1-P</em>{tr}^t(i,j,k))^(1-\alpha^{t,i,j}_k)}<br>$$</p>
-<p>$$<br>p_{tr_+}^t(i,j)=\sum_{\alpha^{t,i,j}\neq0}{\prod_{ k\in{B^t(i,j)}}{(P^t_{tr}(i,j,k)} )^{\alpha^{t,i,j}<em>k}} \times {(1-P^t</em>{tr}(i,j,k)} )^{(1-\alpha^{t,i,j}_k)}<br>$$</p>
-<p>对于<strong>不受共同邻居影响的节点，不会建立连接</strong>，定其概率为：<br>$$<br>P_{tr_-}^t(i,j)= \prod <em>{k\in{B^t{(i,j)}}}{( 1-P^t</em>{tr}(i,j,k))}<br>$$<br>合并两部分，<br>$$<br>L_{tr}^t=-\sum_{(i,j)\in{S^t_+}}{logP^t_{tr_+}(i,j)} - \sum_{(i,j)\in{S^t_-}}{logP^t_{tr_-}(i,j)}<br>$$<br>这里的$S^t_+$表示在当前t时刻没有边连接的节点对集合，但在下一时刻会有边连接；$S_-^t$表示在当前时刻和下一时刻都不会有边连接的节点对集合。</p>
-<p>论文还定义了两个常用假设，<strong>社交的趋同性和时序平滑性</strong>，从而定义一下两个损失函数：<br>$$<br>L_{sh}^t = \sum_{(j,k)\in{E^t_+},(j’,k’)\in{E_-^t}}{h(w_{jk},[g^t(j,k)-g^t(j’,k’)+\xi]<em>+)}<br>$$<br>和<br>$$<br>L</em>{smooth}^t =<br>\begin{cases}<br>\sum_{i=1}^N||u_i^t-u^{t-1}_i||^2_2&amp; t&gt;1 \<br>0&amp; t=1<br>\end{cases}<br>$$</p>
-<p>总的损失函数为：<br>$$<br>\arg {\min{\sum_{t=1}^T{L_{sh}^t}+\beta_0L_{tr}^t+\beta_1L_{smooth}^t}}<br>$$</p>
-<p>模型的基本内容到这就介绍的差不多了，最后论文中还介绍了如何学习模型，以及采样的一些问题，在这里就不再细写了，感兴趣可以参考论文。</p>
+<p>值得注意的是，DynamicTriad对于每个节点$v_i$在每个时间步t上都会学到一个表示$u^t_i=f^t(v_i)$, 然后构成一个张量     $u=\{u_i^t\}_{i=\{1,…,M\},t=\{1,..,T\}}$. (M是节点总数，T是时间总数。)</p>
+<p>一个开三角定义为$(v_i,v_j,v_k)$，其中$v_i$和$v_j$互相没有连接，但都和$v_k$有连接。论文<strong>假设$v_i$和$v_j$ 只会经过他们共同的朋友$v_k$的介绍认识</strong>，而$v_k$是否介绍取决于他们之间的相似程度（距离），通过一个d维的向量表示：</p>
+<script type="math/tex; mode=display">
+x_{ijk}^t = w_{ik}^t*(u_k^t-u_i^t)+w^t_{jk}*(u_k^t-u_i^t)</script><p>论文还定义了一个社交策略参数$\theta$，是一个从节点隐含表示中抽取的d维的向量，表示社交策略信息。</p>
+<p>对于一个开三角$(v_i,v_j,v_k)$，在t+1时刻演变为闭三角的概率为：</p>
+<script type="math/tex; mode=display">
+P_{tr}^t(i,j,k)= \frac{1}{1+\exp({-\langle{\theta,x_{ijk}^t\rangle}})}</script><p>考虑到$v_i$和$v_j$ 会有不止一个共同邻接，所以定义一个t时刻的共同邻居集合$B^t(i,j)$，和一个向量$\alpha^{t,i,j}=(\alpha{_k^{t,i,j}})_{k\in{B^t(i,j)}}$. 当$\alpha{_k^{t,i,j}}=1$表示在下一时刻，开三角$(u_i,u_j,u_k)$会闭合。</p>
+<p>定义一个新连接会在$t+1$时刻建立的概率为：</p>
+<script type="math/tex; mode=display">
+P_{tr_+}^t(i,j)=\sum_{\alpha^{t,i,j\neq0}}{\prod_{k\in{B^t(i,j)}}(P_{tr}^t(i,j,k))^{\alpha^{t,i,j}_k}}\times{(1-P_{tr}^t(i,j,k))^(1-\alpha^{t,i,j}_k)}</script><script type="math/tex; mode=display">
+p_{tr_+}^t(i,j)=\sum_{\alpha^{t,i,j}\neq0}{\prod_{ k\in{B^t(i,j)}}{(P^t_{tr}(i,j,k)} )^{\alpha^{t,i,j}_k}} \times {(1-P^t_{tr}(i,j,k)} )^{(1-\alpha^{t,i,j}_k)}</script><p>对于<strong>不受共同邻居影响的节点，不会建立连接</strong>，定其概率为：</p>
+<script type="math/tex; mode=display">
+P_{tr_-}^t(i,j)= \prod _{k\in{B^t{(i,j)}}}{( 1-P^t_{tr}(i,j,k))}</script><p>合并两部分，</p>
+<script type="math/tex; mode=display">
+L_{tr}^t=-\sum_{(i,j)\in{S^t_+}}{logP^t_{tr_+}(i,j)} - \sum_{(i,j)\in{S^t_-}}{logP^t_{tr_-}(i,j)}</script><p>这里的$S^t_+$表示在当前t时刻没有边连接的节点对集合，但在下一时刻会有边连接；$S_-^t$表示在当前时刻和下一时刻都不会有边连接的节点对集合。</p>
+<p>论文还定义了两个常用假设，<strong>社交的趋同性和时序平滑性</strong>，从而定义一下两个损失函数：</p>
+<script type="math/tex; mode=display">
+L_{sh}^t = \sum_{(j,k)\in{E^t_+},(j',k')\in{E_-^t}}{h(w_{jk},[g^t(j,k)-g^t(j',k')+\xi]_+)}</script><p>和</p>
+<script type="math/tex; mode=display">
+L_{smooth}^t = 
+\begin{cases}
+\sum_{i=1}^N||u_i^t-u^{t-1}_i||^2_2& t>1 \\
+0& t=1
+\end{cases}</script><p>总的损失函数为：</p>
+<script type="math/tex; mode=display">
+\arg {\min{\sum_{t=1}^T{L_{sh}^t}+\beta_0L_{tr}^t+\beta_1L_{smooth}^t}}</script><p>模型的基本内容到这就介绍的差不多了，最后论文中还介绍了如何学习模型，以及采样的一些问题，在这里就不再细写了，感兴趣可以参考论文。</p>
 <h4 id="3、Experiments"><a href="#3、Experiments" class="headerlink" title="3、Experiments"></a>3、Experiments</h4><p>论文实验比较充分，用了三个数据集，其中两个是通话网络，还有一个学术合作网络，数据量都在万级以上，可以看下面的统计表。</p>
 <p><img src="https://ws2.sinaimg.cn/large/006tNc79ly1fse7emu5uvj30nu07k0tm.jpg" alt=""></p>
 <p>实验共有6个，可以分类两类：一类是在t时刻进行常规任务，包括：节点分类，链路重构和变化链路重构；还有一类是对t+1时刻的预测任务，包括节点预测，链路预测和变化链路预测。实验效果可以看下图：</p>
@@ -1134,7 +1158,7 @@
         }
     });
 </script>
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>

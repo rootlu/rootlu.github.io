@@ -238,6 +238,14 @@
         
         
           
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
@@ -464,11 +472,21 @@
 <h4 id="2、SDNE"><a href="#2、SDNE" class="headerlink" title="2、SDNE"></a>2、SDNE</h4><h5 id="2-1、Framework"><a href="#2-1、Framework" class="headerlink" title="2.1、Framework"></a>2.1、Framework</h5><p>SDNE是一种半监督深度模型，包含有监督和无监督两部分。<strong>有监督部分由Laplacian矩阵建模一阶相似性，无监督部分由深度自编码机对二阶相似性建模</strong>。模型框架如下图，<em>需要注意的是自编码器应该对应的应该是Global structure preserved cost，而图中标注为local structure preserved cost不知是否是图中标错了</em>。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/SDNE1.png" alt=""></p>
 <h5 id="2-2、Loss-Functions"><a href="#2-2、Loss-Functions" class="headerlink" title="2.2、Loss Functions"></a>2.2、Loss Functions</h5><p>SDNE模型的损失函数分为两部分，一部分是由深度自编码机建模得到，一部分是通过laplace矩阵建模定义。</p>
-<p>自编码机部分，编码器对输入$x_i$进行编码，其中每一层的隐含表示计算为：<br>$$<br>y_i^{(1)}=\sigma{W^{(1)}x_i+b^{(1)}}<br>$$</p>
-<p>$$<br>y_i^{(k)}=\sigma{(W^{(k)}y_i^{(k-1)}+b^{(k)})}, k=2,…,K<br>$$</p>
-<p>再用解码器对隐含层表示进行解码得到$\hat{x_i}$，因此自编码器的优化目标是<strong>最小化输入与输出之间的重构误差</strong>，损失函数定义为：<br>$$<br>\mathcal{L}=\sum_{i=1}^n{||\hat{x_i}-x_i||^2_2}<br>$$<br>论文[1]证明了虽然最小化重构损失并不明确保留样本之间的相似性，但重建准则可以平滑地捕获数据流形，从而保持样本之间的相似性。因此SDNE把网络的邻接矩阵作为输入，即$x_i=s_i$，$s_i\in{S}, s_i={s_{i,j}}^n_{j=1}， s_{i,j}&gt;0$ 当且仅当节点$v_i, v_j$之间有边连接，$s_i$表示节点$v_i$的邻居结构。自编码器对输入进行重构，能够保证<strong>有相似邻居结构的节点会有相似的隐含表示。</strong></p>
-<p>但是，在真实网络中，邻接矩阵往往是非常稀疏的，非零元素的个数远低于零元素的个数，因此论文对原始自编码器的损失函数进行了改进，定义为：<br>$$<br>\mathcal{L_{2nd}}=\sum_{i=1}^n||(\hat{x_i}-x_i)\odot{b_i}||^2_2=||\hat{X}-X\odot{B}||^2_F<br>$$<br>其中，$\odot$表示哈达马乘积（对应元素相乘），$b_i={b_{i,j}}^n_{j=1}$，如果$s_{i,j}=0，$那么$b_{i,j}=1$，否则$b_{i,j}=\beta&gt;1$。</p>
-<p>为了保留网络结构的一阶相似性，论文借鉴<strong>拉普拉斯特征映射（Laplacian Eigenmaps）</strong>的思想，即当两个相似的节点在嵌入空间中被映射到相距很远的位置时候，增加惩罚项。论文定义了如下的损失函数：<br>$$<br>\mathcal{L_{1st}}=\sum_{i,j=1}^n{s_{i,j}||y_i^{(K)}-y_j^{(K)}||^2_2}=\sum_{i.j=1}^n{s_{i,j}||y_i-y_j||^2_2}<br>$$<br>SDNE模型的最终损失函数定义为：<br>$$<br>\mathcal{L_{mix}}=\mathcal{L_{2nd}+\alpha{\mathcal{L_{1st}}}}+\nu{\mathcal{L_{reg}}}<br>=||\hat{X}-X\odot{B}||^2_F+\alpha{\sum_{i.j=1}^n{s_{i,j}||y_i-y_j||^2_2}}+\nu{\mathcal{L_{reg}}}<br>$$<br>其中，$\mathcal{L_{reg}}=\frac{1}{2}\sum_{k=1}^k{||W^{(k)}||^2_F+||\hat{W}^{k}||_F^2}$</p>
+<p>自编码机部分，编码器对输入$x_i$进行编码，其中每一层的隐含表示计算为：</p>
+<script type="math/tex; mode=display">
+y_i^{(1)}=\sigma{W^{(1)}x_i+b^{(1)}}</script><script type="math/tex; mode=display">
+y_i^{(k)}=\sigma{(W^{(k)}y_i^{(k-1)}+b^{(k)})}, k=2,...,K</script><p>再用解码器对隐含层表示进行解码得到$\hat{x_i}$，因此自编码器的优化目标是<strong>最小化输入与输出之间的重构误差</strong>，损失函数定义为：</p>
+<script type="math/tex; mode=display">
+\mathcal{L}=\sum_{i=1}^n{||\hat{x_i}-x_i||^2_2}</script><p>论文[1]证明了虽然最小化重构损失并不明确保留样本之间的相似性，但重建准则可以平滑地捕获数据流形，从而保持样本之间的相似性。因此SDNE把网络的邻接矩阵作为输入，即$x_i=s_i$，$s_i\in{S}, s_i=\{s_{i,j}\}^n_{j=1}， s_{i,j}&gt;0$ 当且仅当节点$v_i, v_j$之间有边连接，$s_i$表示节点$v_i$的邻居结构。自编码器对输入进行重构，能够保证<strong>有相似邻居结构的节点会有相似的隐含表示。</strong></p>
+<p>但是，在真实网络中，邻接矩阵往往是非常稀疏的，非零元素的个数远低于零元素的个数，因此论文对原始自编码器的损失函数进行了改进，定义为：</p>
+<script type="math/tex; mode=display">
+\mathcal{L_{2nd}}=\sum_{i=1}^n||(\hat{x_i}-x_i)\odot{b_i}||^2_2=||\hat{X}-X\odot{B}||^2_F</script><p>其中，$\odot$表示哈达马乘积（对应元素相乘），$b_i=\{b_{i,j}\}^n_{j=1}$，如果$s_{i,j}=0，$那么$b_{i,j}=1$，否则$b_{i,j}=\beta&gt;1$。</p>
+<p>为了保留网络结构的一阶相似性，论文借鉴<strong>拉普拉斯特征映射（Laplacian Eigenmaps）</strong>的思想，即当两个相似的节点在嵌入空间中被映射到相距很远的位置时候，增加惩罚项。论文定义了如下的损失函数：</p>
+<script type="math/tex; mode=display">
+\mathcal{L_{1st}}=\sum_{i,j=1}^n{s_{i,j}||y_i^{(K)}-y_j^{(K)}||^2_2}=\sum_{i.j=1}^n{s_{i,j}||y_i-y_j||^2_2}</script><p>SDNE模型的最终损失函数定义为：</p>
+<script type="math/tex; mode=display">
+\mathcal{L_{mix}}=\mathcal{L_{2nd}+\alpha{\mathcal{L_{1st}}}}+\nu{\mathcal{L_{reg}}} 
+=||\hat{X}-X\odot{B}||^2_F+\alpha{\sum_{i.j=1}^n{s_{i,j}||y_i-y_j||^2_2}}+\nu{\mathcal{L_{reg}}}</script><p>其中，$\mathcal{L_{reg}}=\frac{1}{2}\sum_{k=1}^k{||W^{(k)}||^2_F+||\hat{W}^{k}||_F^2}$</p>
 <h4 id="3、Summary"><a href="#3、Summary" class="headerlink" title="3、Summary"></a>3、Summary</h4><p>这篇论文整体思路比较清晰，想法也很简单，论文提出的SDNE模型融合一阶相似性和二阶相似性，构建了一个半监督的深度模型。其中，<strong>一阶相似性保留网络的局部结构信息，由Laplacian Eigenmaps建模定义损失函数，二阶相似性保留网络的全局结构信息，通过两个自编码器对节点对的邻接向量进行重构</strong>。值得注意的是，在自编码器对输入的邻接向量进行重构时，论文在原有的自编码器损失函数上添加了一个B，可以看作是一种”权重“，来解决网络构重构过程中邻接向量过于稀疏（零元素个数远大于非零元素个数），这种做法似乎比较常见，在以后的模型设计中也可参考借鉴。</p>
 <h6 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h6><p><em>[1]R. Salakhutdinov and G. Hinton. Semantic hashing. International Journal of Approximate Reasoning, 50(7):969–978, 2009.</em></p>
 
@@ -1129,7 +1147,7 @@
         }
     });
 </script>
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>

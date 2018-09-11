@@ -236,6 +236,14 @@
         
         
           
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
@@ -459,7 +467,7 @@
 <h2 id="2-传值（passed-by-value）"><a href="#2-传值（passed-by-value）" class="headerlink" title="2. 传值（passed by value）"></a>2. 传值（passed by value）</h2><p>实参的值拷贝给形参，形参与实参是两个独立的对象，对形参的所有操作不会影响实参<br>当函数内部需要修改参数，并且不希望这个改变影响调用者时，采用值传递<br>单向的（实参-&gt;形参）</p>
 <h3 id="2-1-传形参的值"><a href="#2-1-传形参的值" class="headerlink" title="2.1 传形参的值"></a>2.1 传形参的值</h3><p>举个栗子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> a, <span class="keyword">int</span> b)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="keyword">int</span> temp=a;</span><br><span class="line">	a=b;</span><br><span class="line">	b=a;</span><br><span class="line">&#125;</span><br><span class="line">swap(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">//1，2不会交换！！！</span></span><br></pre></td></tr></table></figure></p>
 <p>原因：传入的实参实际上是a和b的副本而非其本身，所以对副本的改变并不会反应到a和b本身上</p>
-<h2 id="3-传指针-—-本质是值传递，地址值"><a href="#3-传指针-—-本质是值传递，地址值" class="headerlink" title="3. 传指针 —-本质是值传递，地址值"></a>3. 传指针 —-本质是值传递，地址值</h2><p>形参为指向实参地址的指针，当对形参的指向操作时，就相当于对实参本身进行的操作<br>举个栗子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="keyword">int</span> *temp=a;</span><br><span class="line">	a=b;</span><br><span class="line">	b=a;</span><br><span class="line">&#125;</span><br><span class="line">swap(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">//1，2不会交换！！改变的是指针本身</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-传指针-——本质是值传递，地址值"><a href="#3-传指针-——本质是值传递，地址值" class="headerlink" title="3. 传指针 ——本质是值传递，地址值"></a>3. 传指针 ——本质是值传递，地址值</h2><p>形参为指向实参地址的指针，当对形参的指向操作时，就相当于对实参本身进行的操作<br>举个栗子：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="keyword">int</span> *temp=a;</span><br><span class="line">	a=b;</span><br><span class="line">	b=a;</span><br><span class="line">&#125;</span><br><span class="line">swap(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">//1，2不会交换！！改变的是指针本身</span></span><br></pre></td></tr></table></figure></p>
 <p>原因：实参实际上是a和b的指针的副本，而且改变的是副本本身而非其间接引用，所以不会影响的指针所指向的值，即a和b本身上。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">swap</span><span class="params">(<span class="keyword">int</span> *a, <span class="keyword">int</span> *b)</span></span></span><br><span class="line"><span class="function"></span>&#123;	</span><br><span class="line">	<span class="keyword">int</span> temp=*a;</span><br><span class="line">	*a=*b;</span><br><span class="line">	*b=*a;</span><br><span class="line">&#125;</span><br><span class="line">swap(<span class="number">1</span>,<span class="number">2</span>);</span><br><span class="line"><span class="comment">//1，2交换！！改变的是指针的间接引用</span></span><br></pre></td></tr></table></figure></p>
 <p>原因：传入的实参是a和b的指针的副本，改变的是副本的间接引用，无论是指针本身还是其副本，都指向相同的值，所以这个改变会反应到a和b本身上。</p>
 
@@ -839,7 +847,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-传引用（passed-by-reference）"><span class="nav-text">1. 传引用（passed by reference）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-适用情况："><span class="nav-text">1.1 适用情况：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-优点"><span class="nav-text">1.2 优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-传值（passed-by-value）"><span class="nav-text">2. 传值（passed by value）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-传形参的值"><span class="nav-text">2.1 传形参的值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-传指针-—-本质是值传递，地址值"><span class="nav-text">3. 传指针 —-本质是值传递，地址值</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-传引用（passed-by-reference）"><span class="nav-text">1. 传引用（passed by reference）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-适用情况："><span class="nav-text">1.1 适用情况：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2-优点"><span class="nav-text">1.2 优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-传值（passed-by-value）"><span class="nav-text">2. 传值（passed by value）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#2-1-传形参的值"><span class="nav-text">2.1 传形参的值</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-传指针-——本质是值传递，地址值"><span class="nav-text">3. 传指针 ——本质是值传递，地址值</span></a></li></ol></div>
             
 
           </div>
@@ -1116,7 +1124,7 @@
         }
     });
 </script>
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>

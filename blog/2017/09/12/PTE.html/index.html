@@ -239,6 +239,14 @@
         
         
           
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
@@ -463,11 +471,16 @@
 <h6 id="Word-Document-Network"><a href="#Word-Document-Network" class="headerlink" title="Word-Document Network"></a>Word-Document Network</h6><p>$G_{wd}=(V\cup{D},E_{wd})$表示词与文档的二分网络，$V$表示词语的集合，$D$表示文档的集合，$E_{wd}$表示单词和文档之间的边的集合，单词$v_i$和文档$d_j$间边的权重$w_{ij}$定义为：单词$v_i$共同出现在文档$d_j$中的次数。</p>
 <h6 id="Word-Label-Network"><a href="#Word-Label-Network" class="headerlink" title="Word-Label Network"></a>Word-Label Network</h6><p>$ G_{wl}=(V\cup{L},E_{wl})$表示词与文档类别标签的二分网络，$V$表示词语的集合，$L$表示文档类别标签的集合，$E_{wl}$表示单词和标签之间的边的集合，单词$v_i$和类别标签$c_j$间边的权重$w_{ij}$定义为：$w_{ij}=\sum_{(d:l_d=j)}{n_{di}}$，其中$n_di$表示单词$v_i$在文档$d$中的词频，$l_d$表示文档d的类别标签。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/PTE2.png" alt=""></p>
-<h6 id="PTE"><a href="#PTE" class="headerlink" title="PTE"></a>PTE</h6><p>论文基于LINE(2nd)模型，对每个子网络分别进行建模，模型假设有相同邻居的节点是相似的，有相似的特征表示。模型的目标函数定义为：<br>$$<br>O=-\sum_{(i,j)\inE}{w_{ij}logp(v_j|v_i)}<br>$$<br>目标函数使用边采样和负采样技术，基于随机梯度下降方法进行优化。</p>
-<p>异质文本网络嵌入通过简单的讲三个二分网络的目标函数想加，得到目标函数，<br>$$<br>O_{pte}=O_{wd}+O_{wd}+O_{wl}<br>$$<br>其中，<br>$$<br>O_{ww}=-\sum_{(i,j)\in{E_{ww}}}{w_{ij}logp(v_i|v_j)}<br>$$</p>
-<p>$$<br>O_{wd}=-\sum_{(i,j)\in{E_{wd}}}{w_{ij}logp(v_j|d_j)}<br>$$</p>
-<p>$$<br>O_{wl}=-\sum_{(i,j)\in{E_{wl}}}{w_{ij}logp(v_i|l_j)}<br>$$</p>
-<p>针对目标函数（2）的优化，论文提出了两种方案，一种是采用joint training的方式训练，即同时训练有标签数据和无标签数据 ，另一种是先训练无标签数据，再训练有标签数据。</p>
+<h6 id="PTE"><a href="#PTE" class="headerlink" title="PTE"></a>PTE</h6><p>论文基于LINE(2nd)模型，对每个子网络分别进行建模，模型假设有相同邻居的节点是相似的，有相似的特征表示。模型的目标函数定义为：</p>
+<script type="math/tex; mode=display">
+O=-\sum_{(i,j)\inE}{w_{ij}logp(v_j|v_i)}</script><p>目标函数使用边采样和负采样技术，基于随机梯度下降方法进行优化。</p>
+<p>异质文本网络嵌入通过简单的讲三个二分网络的目标函数想加，得到目标函数，</p>
+<script type="math/tex; mode=display">
+O_{pte}=O_{wd}+O_{wd}+O_{wl}</script><p>其中，</p>
+<script type="math/tex; mode=display">
+O_{ww}=-\sum_{(i,j)\in{E_{ww}}}{w_{ij}logp(v_i|v_j)}</script><script type="math/tex; mode=display">
+O_{wd}=-\sum_{(i,j)\in{E_{wd}}}{w_{ij}logp(v_j|d_j)}</script><script type="math/tex; mode=display">
+O_{wl}=-\sum_{(i,j)\in{E_{wl}}}{w_{ij}logp(v_i|l_j)}</script><p>针对目标函数（2）的优化，论文提出了两种方案，一种是采用joint training的方式训练，即同时训练有标签数据和无标签数据 ，另一种是先训练无标签数据，再训练有标签数据。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/PTE3.png" alt=""></p>
 <p>通过优化上面的模型，可以学习的到词的向量表示，而文本的特征表示就可以直接取词向量的均值。</p>
 <h4 id="3、Experiment"><a href="#3、Experiment" class="headerlink" title="3、Experiment"></a>3、Experiment</h4><h4 id="4、Conclusion"><a href="#4、Conclusion" class="headerlink" title="4、Conclusion"></a>4、Conclusion</h4><p>PTE作为LINE工作的一个扩展，同时利用有标签数据和无标签数据，以半监督的方式学习文本的嵌入表示。它通过将异质文本网络嵌入到一个低维度的向量空间中，学习到文本的表示分布。</p>
@@ -1131,7 +1144,7 @@
         }
     });
 </script>
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>

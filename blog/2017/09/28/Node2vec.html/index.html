@@ -240,6 +240,14 @@
         
         
           
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
@@ -455,14 +463,20 @@
       
         <p>node2vec是16年KDD的一个工作，论文提出了一种学习网络节点的特征表示的算法框架。论文定义了一个网络节点邻居的灵活概念，并设计了一个带偏置的随机游走过程来获得不同邻居节点。论文的亮点主要在：采用<strong>深度优先搜索（DFS）</strong>和<strong>宽度优先搜索（BFS）</strong>两种策略，随机游走生成节点的邻居节点集合。</p>
 <a id="more"></a>
-<h4 id="1、Feature-Learning-Framework"><a href="#1、Feature-Learning-Framework" class="headerlink" title="1、Feature Learning Framework"></a>1、Feature Learning Framework</h4><p>论文将网络的特征学习看作是最大化似然估计的优化问题，定义网络$G=(V,E)$，映射函数$f:V \to {R^d}$表示将节点映射到d维度的特征表示中，其实$f$就是大小为$|V|\times{d}$的矩阵。对于源节点$u$，定义$N_S(u)\subset{V}$表示通过采样策略S采样得到的邻居节点集合。论文同样也是酱Skip-gram模型扩展到网络表示学习中，优化下面的目标函数：<br>$$<br>\max \limits_{f} \sum_{u\in{V}}{\log{Pr(N_S(u)|f(u))}}<br>$$<br>为了让目标函数更容易训练，论文做了两个假设：</p>
+<h4 id="1、Feature-Learning-Framework"><a href="#1、Feature-Learning-Framework" class="headerlink" title="1、Feature Learning Framework"></a>1、Feature Learning Framework</h4><p>论文将网络的特征学习看作是最大化似然估计的优化问题，定义网络$G=(V,E)$，映射函数$f:V \to {R^d}$表示将节点映射到d维度的特征表示中，其实$f$就是大小为$|V|\times{d}$的矩阵。对于源节点$u$，定义$N_S(u)\subset{V}$表示通过采样策略S采样得到的邻居节点集合。论文同样也是酱Skip-gram模型扩展到网络表示学习中，优化下面的目标函数：</p>
+<script type="math/tex; mode=display">
+\max \limits_{f} \sum_{u\in{V}}{\log{Pr(N_S(u)|f(u))}}</script><p>为了让目标函数更容易训练，论文做了两个假设：</p>
 <ul>
-<li><p>条件独立假设，观察到邻居节点的可能性独立于观察给定源节点特征表示的任何其他邻居节点，也就有如下公式：<br>$$<br>Pr(N_S(u)|f(u)) = \prod_{n_i\in{N_S(u)}}{Pr(n_i|f(u))}<br>$$</p>
-</li>
-<li><p>特征空间的对称性，源节点和邻居节点之间的相互影响是对称的。于是有如下定义：<br>$$<br>Pr(n_i|f(u)) = \frac{\exp(f(n_i)\cdot{f(u)})}{\sum_{v\in{V}}{\exp(f(v)\cdot{f(u)})}}<br>$$</p>
-</li>
+<li><p>条件独立假设，观察到邻居节点的可能性独立于观察给定源节点特征表示的任何其他邻居节点，也就有如下公式：</p>
+<script type="math/tex; mode=display">
+Pr(N_S(u)|f(u)) = \prod_{n_i\in{N_S(u)}}{Pr(n_i|f(u))}</script></li>
+<li><p>特征空间的对称性，源节点和邻居节点之间的相互影响是对称的。于是有如下定义：</p>
+<script type="math/tex; mode=display">
+Pr(n_i|f(u)) = \frac{\exp(f(n_i)\cdot{f(u)})}{\sum_{v\in{V}}{\exp(f(v)\cdot{f(u)})}}</script></li>
 </ul>
-<p>综合上面的(1)(2)(3)式，得到最终的目标函数：<br>$$<br>\max \limits_{f}  \sum_{u\in{V]}}{[-\log{Z_u+\sum_{n_i\in{N_S(u)}}{f(n_i)\cdot{f(u)}}]}}<br>$$<br>其中，$Z_u=\sum_{u\in{V}}{\exp(f(u)\cdot{f(v)})}$，但当处理大的网络时候，$Z_u$的计算量非常大，所以论文采用<strong>负采样(negative sample)</strong>进行近似计算。</p>
+<p>综合上面的(1)(2)(3)式，得到最终的目标函数：</p>
+<script type="math/tex; mode=display">
+\max \limits_{f}  \sum_{u\in{V]}}{[-\log{Z_u+\sum_{n_i\in{N_S(u)}}{f(n_i)\cdot{f(u)}}]}}</script><p>其中，$Z_u=\sum_{u\in{V}}{\exp(f(u)\cdot{f(v)})}$，但当处理大的网络时候，$Z_u$的计算量非常大，所以论文采用<strong>负采样(negative sample)</strong>进行近似计算。</p>
 <h5 id="1-1、Search-Strategies"><a href="#1-1、Search-Strategies" class="headerlink" title="1.1、Search Strategies"></a>1.1、Search Strategies</h5><p>论文把对接点邻居的采样看作一种局部搜索，分别利用深度优先和宽度优先搜索，构造源节点的邻居节点集合，集合的大小固定。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/Node2vec1.png" alt=""></p>
 <ul>
@@ -475,8 +489,21 @@
 <p>搜索与源节点距离递增的节点序列，如上图中的$s_4，s_5，s_6$。</p>
 </li>
 </ul>
-<h5 id="1-2、node2vec"><a href="#1-2、node2vec" class="headerlink" title="1.2、node2vec"></a>1.2、node2vec</h5><p>定义随机游走的开始节点为$c_0=u$，游走路径长度为$l$，路径中第i个节点的生成服从下面的分布：<br>$$<br>P(c_i=x|c_{i-1}=v) =<br>\begin{cases}<br>\frac{\pi_{vx}}{Z}&amp; \text{if(v,x)}\in{E} \<br>0&amp; \text{otherwise}<br>\end{cases}<br>$$<br>其中，$\pi_{vx}$是节点$v$和节点$x$之间的未归一化的转移概率，$Z$是归一化常数。</p>
-<p>假设随机游走刚刚经过了边$(t,v)$，<strong>游走的当前节点是v</strong>，游走策略需要判断下一节点x的选择，因此论文将$\pi_{vx}$定义为$\pi_{vx}=\alpha_{pq}(t,x)\cdot{w_{vx}}$，其中，$\alpha_{pq}$表示搜索偏置，参数p和q用于指导随机游走下一节点的选择，具体定义为：<br>$$<br>\alpha_{pq}(t,x) =<br>\begin{cases}<br>\frac{1}{p}&amp;  \text{if }    d_{tx}=0 \<br>1&amp;  \text{if  }    d_{tx}=1\<br>\frac{1}{q}&amp; \text{if } d_{tx}=2<br>\end{cases}<br>$$<br>其中，$d_{tx}$表示节点t到节点x的最短距离，等于0时表示，下一节点x回跳到上一节点t；等于1表示下一节点x和上一节点t直接相连；等于2表示，下一节点x与上一节点t必须经由一个节点才能连接。【当前节点是v】</p>
+<h5 id="1-2、node2vec"><a href="#1-2、node2vec" class="headerlink" title="1.2、node2vec"></a>1.2、node2vec</h5><p>定义随机游走的开始节点为$c_0=u$，游走路径长度为$l$，路径中第i个节点的生成服从下面的分布：</p>
+<script type="math/tex; mode=display">
+P(c_i=x|c_{i-1}=v) =
+\begin{cases}
+\frac{\pi_{vx}}{Z}& \text{if(v,x)}\in{E} \\
+0& \text{otherwise}
+\end{cases}</script><p>其中，$\pi_{vx}$是节点$v$和节点$x$之间的未归一化的转移概率，$Z$是归一化常数。</p>
+<p>假设随机游走刚刚经过了边$(t,v)$，<strong>游走的当前节点是v</strong>，游走策略需要判断下一节点x的选择，因此论文将$\pi_{vx}$定义为$\pi_{vx}=\alpha_{pq}(t,x)\cdot{w_{vx}}$，其中，$\alpha_{pq}$表示搜索偏置，参数p和q用于指导随机游走下一节点的选择，具体定义为：</p>
+<script type="math/tex; mode=display">
+\alpha_{pq}(t,x) =
+\begin{cases}
+\frac{1}{p}&  \text{if }    d_{tx}=0 \\
+1&  \text{if  }    d_{tx}=1\\
+\frac{1}{q}& \text{if } d_{tx}=2
+\end{cases}</script><p>其中，$d_{tx}$表示节点t到节点x的最短距离，等于0时表示，下一节点x回跳到上一节点t；等于1表示下一节点x和上一节点t直接相连；等于2表示，下一节点x与上一节点t必须经由一个节点才能连接。【当前节点是v】</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/Node2vec2.png" alt=""></p>
 <p>论文给出了程序的伪代码，算法分为三步：首先预处理计算转移概率，然后随机游走得到游走路径，最后使用SGD优化目标函数。</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/Node2vec3.png" alt=""></p>
@@ -1139,7 +1166,7 @@
         }
     });
 </script>
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>

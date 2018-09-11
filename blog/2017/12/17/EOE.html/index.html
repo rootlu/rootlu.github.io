@@ -240,6 +240,14 @@
         
         
           
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
           <li class="menu-item menu-item-tags">
     <a href="/tags/" rel="section">
       <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
@@ -454,9 +462,17 @@
 <li>实验充分。</li>
 </ul>
 <h4 id="2、The-EOE-Model"><a href="#2、The-EOE-Model" class="headerlink" title="2、The EOE Model"></a>2、The EOE Model</h4><p>论文用符号$G_{uv}(G_u,E_{uv},W_{u,v},G_v)$表示耦合异质网络，其中$G_u(U,E_u,W_u)$、$G_v(V,E_v,W_v)$分别表示两个子网络，$U$和$V$表示节点集合，$E_u, E_v$表示子网络内部边集合，$E_{uv}$表示跨越两个子网络之间的连接边集合。$W_u,W_v$分别表示子网络中边的权重，$W_{uv}$表示跨网络边的权重。</p>
-<p>论文定义：<strong>如果两个节点之间存在边连接的概率非常大，那么它们在隐含向量空间的表示应该也是很相近的</strong>，而节点间有边连接的概率定义为：<br>$$<br>p(u_i,u_j)=\frac{1}{1+exp(-u_i^Tu_j)}<br>$$<br>其中$u_i,u_j$表示两个同类型节点的向量表示（在同一子网络内）。</p>
-<p>针对跨网络的节点，论文定义节点间有边连接的概率为：<br>$$<br>p(u_i,v_j)=\frac{1}{1+exp(-u_i^TMv_j)}<br>$$<br>其中，M定义为一个大小为$d_u\times{d_v}$的<strong>harmonious embnedding matrix（和谐的嵌入矩阵？）</strong>，$d_u,d_v$分别是隐含特征U，V的大小。</p>
-<p>EOE模型<strong>不仅保证有边连接的节点对在隐含向量空间中的表示是相近的，而且还保证没有边连接的节点对在隐含向量空间中的表示是相距甚远的</strong>。基于此，模型的损失函数可以由两部分组成，对于有边连接的节点对的损失定义为（以一个子网络U为例）：<br>$$<br>L(U)=-\sum_{(i,j)\in{E_u}}{(w_u)_{ij}\times{\log(p(u_i,u_j))}}<br>$$<br>对于没有边连接的节点对的损失函数定义为：<br>$$<br>L(U)=-\sum_{(h,k)\notin{E_u}}{\log(1-p(u_h,u_k))}<br>$$<br>两部分损失函数，保证了对于<strong>大概率连接（有边）的情况，损失值是很小的，对于小概率的连接（无边）的情况，损失值很大</strong>。</p>
+<p>论文定义：<strong>如果两个节点之间存在边连接的概率非常大，那么它们在隐含向量空间的表示应该也是很相近的</strong>，而节点间有边连接的概率定义为：</p>
+<script type="math/tex; mode=display">
+p(u_i,u_j)=\frac{1}{1+exp(-u_i^Tu_j)}</script><p>其中$u_i,u_j$表示两个同类型节点的向量表示（在同一子网络内）。</p>
+<p>针对跨网络的节点，论文定义节点间有边连接的概率为：</p>
+<script type="math/tex; mode=display">
+p(u_i,v_j)=\frac{1}{1+exp(-u_i^TMv_j)}</script><p>其中，M定义为一个大小为$d_u\times{d_v}$的<strong>harmonious embnedding matrix（和谐的嵌入矩阵？）</strong>，$d_u,d_v$分别是隐含特征U，V的大小。</p>
+<p>EOE模型<strong>不仅保证有边连接的节点对在隐含向量空间中的表示是相近的，而且还保证没有边连接的节点对在隐含向量空间中的表示是相距甚远的</strong>。基于此，模型的损失函数可以由两部分组成，对于有边连接的节点对的损失定义为（以一个子网络U为例）：</p>
+<script type="math/tex; mode=display">
+L(U)=-\sum_{(i,j)\in{E_u}}{(w_u)_{ij}\times{\log(p(u_i,u_j))}}</script><p>对于没有边连接的节点对的损失函数定义为：</p>
+<script type="math/tex; mode=display">
+L(U)=-\sum_{(h,k)\notin{E_u}}{\log(1-p(u_h,u_k))}</script><p>两部分损失函数，保证了对于<strong>大概率连接（有边）的情况，损失值是很小的，对于小概率的连接（无边）的情况，损失值很大</strong>。</p>
 <p>因此，EOE模型的整体损失函数定义为：</p>
 <p><img src="http://ou5bxfpku.bkt.clouddn.com/EOE3.png" alt=""></p>
 <p>针对上述的损失函数，论文给出了一种优化方案：基于梯度，一次只优化一种类型的参数，直到当前变量收敛，在优化下一个参数。算法伪代码如下图。</p>
@@ -1121,7 +1137,7 @@
         }
     });
 </script>
-<script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
