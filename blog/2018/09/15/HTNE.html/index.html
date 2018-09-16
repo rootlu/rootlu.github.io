@@ -1,0 +1,1191 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-CN">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.4.1" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon.ico?v=6.4.1">
+
+
+  <link rel="mask-icon" href="/favicon.ico?v=6.4.1" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '6.4.1',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="HTNE是北航老师提出的针对时序网络(temporal network)嵌入的一个模型，论文发表在2018年KDD上。时序网络，即网络是随时间动态变化的（节点和边会增加或减少）。文章研究了时序网络的embedding问题，旨在建模网络的时序形成模式，从而提升网络embedding的效果。">
+<meta name="keywords" content="Network Embedding,Representation Learning,PaperNote">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Embedding Temporal Network via Neighborhood Formation">
+<meta property="og:url" content="http://www.rootlu.com/blog/2018/09/15/HTNE.html/index.html">
+<meta property="og:site_name" content="ROOTLu">
+<meta property="og:description" content="HTNE是北航老师提出的针对时序网络(temporal network)嵌入的一个模型，论文发表在2018年KDD上。时序网络，即网络是随时间动态变化的（节点和边会增加或减少）。文章研究了时序网络的embedding问题，旨在建模网络的时序形成模式，从而提升网络embedding的效果。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fvb4n3svw0j30f40ga41m.jpg">
+<meta property="og:updated_time" content="2018-09-16T13:31:00.188Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Embedding Temporal Network via Neighborhood Formation">
+<meta name="twitter:description" content="HTNE是北航老师提出的针对时序网络(temporal network)嵌入的一个模型，论文发表在2018年KDD上。时序网络，即网络是随时间动态变化的（节点和边会增加或减少）。文章研究了时序网络的embedding问题，旨在建模网络的时序形成模式，从而提升网络embedding的效果。">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fvb4n3svw0j30f40ga41m.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="ROOTLu" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://www.rootlu.com/blog/2018/09/15/HTNE.html/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Embedding Temporal Network via Neighborhood Formation | ROOTLu</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?223d3797086c88f199650e7b3c2006b7";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">ROOTLu</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Do Better, For Better!</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-life">
+    <a href="/life" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />拾荒</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+    <a href="/about/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-user"></i> <br />关于</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://www.rootlu.com/blog/2018/09/15/HTNE.html/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="YFLu">
+      <meta itemprop="description" content="NUPTer、BUPTer、MachineLearning、DataMining、伪文青">
+      <meta itemprop="image" content="/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="ROOTLu">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Embedding Temporal Network via Neighborhood Formation
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-09-15 12:02:03" itemprop="dateCreated datePublished" datetime="2018-09-15T12:02:03+08:00">2018-09-15</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-09-16 21:31:00" itemprop="dateModified" datetime="2018-09-16T21:31:00+08:00">2018-09-16</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Machine-Learning/Representation-Learning/" itemprop="url" rel="index"><span itemprop="name">Representation Learning</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/blog/2018/09/15/HTNE.html/" class="leancloud_visitors" data-flag-title="Embedding Temporal Network via Neighborhood Formation">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数：</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>HTNE是北航老师提出的针对时序网络(<strong>temporal networ</strong>k)嵌入的一个模型，论文发表在2018年KDD上。时序网络，即网络是随时间动态变化的（节点和边会增加或减少）。文章研究了时序网络的embedding问题，旨在建模网络的时序形成模式，从而提升网络embedding的效果。</p>
+<a id="more"></a>
+<p>文章通过节点的邻居形成序列（<strong>neighborhood formation sequence</strong>）建模节点的演变过程，然后利用霍克斯过程（<strong>Hawkes process</strong>）捕获历史邻居对当前邻居形成序列的影响，从而得到节点的embedding。由于历史节点对当前邻居形成会有不同的影响，论文还采用<strong>attention机制</strong>，学习历史邻居对当前邻居的影响权重。</p>
+<h4 id="1、Movitation"><a href="#1、Movitation" class="headerlink" title="1、Movitation"></a>1、Movitation</h4><p>已有的一些network embedding方法大多聚焦于<strong>静态网络</strong>，也就是网络的结构是保持不变的，节点和边的数量不会发生变化。因此这些方法通常有一个假设：一个节点的邻居是无序的，也就是它们通常<strong>忽略连接（link）的形成过程</strong>。因为网络在动态变化时，节点的邻居不是同时增加的，连接也不是一蹴而就的增加。如果只是观察网络的一个快照（snapshot），只能观测到一个时间段内网络的积累，而<strong>忽略了节点增加的这个过程（什么时候，怎么增加）</strong>。因此，网络中边的建立是通过<strong>序列事件</strong>逐渐建立的，即定义为<strong>时序网络（temporal network）</strong>。建模网络中<strong>节点和邻居建立连接的过程</strong>，可以更好的反映出网络的动态变化。</p>
+<h4 id="2、Model"><a href="#2、Model" class="headerlink" title="2、Model"></a>2、Model</h4><p>论文首先给出了时序网络（<strong>temporal netowork</strong>）的定义 $\mathcal{G}=\langle\mathcal{V}, \mathcal{E}; \mathcal{A} \rangle$，其中$\mathcal{V, E}$分别表示节点和边的集合，$\mathcal{A}$表示事件（event）集合。<strong>每条边 $\langle x,y \rangle$ 可以看作是按时间先后顺序排列的事件</strong>，即：$\mathbf{a}_{x,y}=\{a_1\to{a_2}\to{…}\}\subset\mathcal{A}$，其中 $\mathbf{a}_i$表示在事件i时刻的一个事件。</p>
+<p>在时序网络中，根据一个节点与其邻居建立连接的时间，从前到后组织为一个序列，这个序列也就反应了节点（网络）演变的过程。论文中形式化定义了邻居的形成序列。给定一个源节点（source node）$x\in{\mathcal{V}}$，其邻居定义为：$\mathcal{N}(x)=\{y_i=1,2,3,…\}$，源节点与邻居节点（目标节点）的边可以看作是按时间顺序排列的事件 $\mathcal{a}_{x,y_i}$。因此，<strong>邻居形成序列可以定义为一些列目标节点到达事件</strong>，即：$\{x:(y_1,t_1)\to(y_2,t_2)\to…\to(y_n,t_n)\}$，其中每一个元组表示一个事件：在 $t$ 时刻，节点 $ y_i$ 和 $x$ 建立联系，成为其邻居。</p>
+<p>图示是时序网络的一个简单实例以及邻居形成序列。可以看到，如果只是观察网络的一个快照片，那么只能通过边上的权重反映出来。而通过邻居形成序列（图b），节点的邻居可能出现不止一次，可以显式地建模出网络中边的形成过程。同时，目标节点之间可能会相互影响（1是源节点，其邻居是目标节点），也就是说<strong>历史的邻居会影响当前邻居的形成。</strong>这个影响可能会因为节点的不同而不同，所以可以通过<strong>attention机制</strong>，学习其中的权重。</p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNc79ly1fvb4n3svw0j30f40ga41m.jpg" alt=""></p>
+<p>时序网络embedding目的在于：<strong>考虑网络中的时序信息，学习网络中节点的表示</strong>。这篇论文通过考虑邻居的形成序列，并考虑邻居间的相互影响，从而学习节点的表示。</p>
+<p>论文基于<strong>Hawkes Process</strong>建模邻居形成序列。Hawkes 过程是一种典型的时序点过程（point process），其假设历史事件会影响当前事件的发生，以此建模分离的时序事件。在point process 中，通常定义一个条件强度函数（conditionl intensity function），描述序列事件的到达率（发生率）。因此，对于一个源节点 $x$，目标节点 $y$ 与其建立连接的条件强度函数可以定义为：</p>
+<script type="math/tex; mode=display">
+\tilde{\lambda}_{y|x}(t)=\mu_{x,y}+\sum_{t_h<t}{\alpha_{h,y}\kappa(t-t_{h})},</script><p>其中 $\mu_{x,y}$ 是 $x$和 $y$ 之间建立边的基强度，$h$ 是邻居形成序列中的历史目标节点，也就是说在 $t$ 时刻之前，$h$ 和 $x$ 是已经建立连接的。$\alpha _{h,y}$ 表示历史邻居 $h$ 对当前邻居 $y$ 的影响度，$\kappa(·)$ 是一个核函数，表示随时间的衰减影响，通常表示为指数函数：$\kappa(t-t_h)=\exp(-\delta_s(t-t_h)$ 。这里的衰减率 $\delta_s$ 是一个依赖于源节点 $s$ 的参数，因为对于每个源节点，其历史邻居节点对当前邻居的形成是不同的。</p>
+<p>为了学习节点的低维表示，假设节点 $i$ 的表示为 $\mathbf{e}_i\in{\mathbb{R}^D}$，然后将其送入强度函数（公式1），如果强度越大，节点应该更有可能建立连接。很明显，<strong>基强度反映了源节点和目标节点之间的相似性，越相似，基强度的数值也应该越大</strong>。因此，论文定义<strong>负的欧式距离平方（negative squared Euclidean）</strong>去度量节点间的相似度，即：</p>
+<script type="math/tex; mode=display">
+\mu_{x,y}=f(\mathbf{e}_x,\mathbf{e}_y)=-||\mathbf{e}_x-\mathbf{e}_y||^2</script><p>由于强度函数 $\lambda_{y|x}(t)$ 应该是正数值，而公式 (2) 是一个非正数值，所以论文采用<strong>指数函数</strong>将条件强度率转化为一个正数值，即：</p>
+<script type="math/tex; mode=display">
+\lambda_{y|x}(t)=\exp(\tilde\lambda_{y|x}(t))</script><p>其实这里也可以采用其他一些函数，论文这里使用指数函数主要是为了方便后面的求解。</p>
+<p>考虑到不同历史节点对当前邻居节点（目标节点）的影响不同，而这个影响应该是和源节点有直接关系的（<strong>取决于目标节点</strong>），论文定义源节点和历史节点之间的权重：</p>
+<script type="math/tex; mode=display">
+w_{h,x} = \frac{\exp(-||\mathbf{e}_x-\mathbf{e}_h||^2)}{\sum_{h'}{\exp(-||\mathbf{e}_x-\mathbf{e}_{h'}||^2)}}</script><p>所以历史节点对当前邻居节点（目标节点）的影响可以定义为：</p>
+<script type="math/tex; mode=display">
+\alpha_{h,y}=w_{h,x}f(\mathbf{e}_h,\mathbf{e}_y)=w_{h,x}(-||\mathbf{e}_h-\mathbf{e}_y||^2)</script><p>注意这里目标节点和历史节点之间的类似性 $ f(\mathbf{e}_h,\mathbf{e}_y) $ 也定义为负的欧式距离平方（negative squared Euclidean），主要是和前面的保持一致。</p>
+<p>至此，给定历史事件，在t时刻，源节点和目标目标节点建立边的强度 $\lambda_{y|x}(t)$ 已经给出完整定义。因此，源节点和目标节点之间建立边的概率就可以定义为：</p>
+<script type="math/tex; mode=display">
+p(y|x, \mathcal{H}_x(t)) = \frac{\lambda_{y|x}(t)}{\sum_{y'}{\lambda_{y'|x}(t)}}</script><p>对于网络中所有节点，邻居形成序列的log-likehood（似然函数）可以定义为（即优化目标）：</p>
+<script type="math/tex; mode=display">
+\log \mathcal{L}=\sum_{x\in{\mathcal{V}}}{\sum_{y\in{\mathcal{H}_x}}}{\log{p(y|x,\mathcal{H}(t))}}</script><p>根据公式 (3)和公式 (6)，可以得到 $p(y|x, \mathcal{H}_x(t)) = \frac{\exp{(\tilde{\lambda}_{y|x}(t)})}{\sum{\exp{…}}}$，，所以最大化公式 (7)可以通过负采样的简化计算，最后的优化优化目标为：</p>
+<script type="math/tex; mode=display">
+\log{\sigma{(\tilde{\lambda}_{y|x}(t)))}}+\sum_{k=1}^K{\mathbb{E}_{v^k\sim{P_n(v)}[-\log(\tilde{\lambda}_{v^k|x}(t)))]}}</script><p>其中 $\sigma(·)=\frac{1}{1+\exp(-x)}$ 是一个sigmoid函数。</p>
+<p>需要注意的是，因为历史邻居序列的长度影响强度函数的计算复杂度，论文<strong>固定最大邻居序列长度，并且只保留最近的目标节点。</strong></p>
+<h4 id="3、Experiment"><a href="#3、Experiment" class="headerlink" title="3、Experiment"></a>3、Experiment</h4><p>实验部分，论文首先通过<strong>节点分类</strong>和<strong>链路预测</strong>验证了节点表示的<strong>有效性</strong>，然后验证了通过<strong>时序推荐任务</strong>验证了条件强度函数的有效性，最后是网络可视化和参数实验。</p>
+<p>节点分类和链路预测任务比较常规，具体分析和结果可以参考论文。值得注意的是，这里的时序推荐任务（temporal recommendation），本质上是一个排序任务，只不过训练集和测试集的划分按照时间节点划分。论文以条件强度函数作为两个节点是够建立连接的概率（评分 ranking score），用t时刻以前的数据作为训练，然后预测t时刻之后，给定节点的之间建立连接的可能。</p>
+<h4 id="4、Summary"><a href="#4、Summary" class="headerlink" title="4、Summary"></a>4、Summary</h4><p>总结一下，不同于常规的network embedding模型，这篇论文立足于<strong>temporal network embedding</strong>问题，考虑了真实网络的动态变化性，这应该是一个比较大的亮点。其次，论文从<strong>邻居节点的形成序列</strong>描述网络的动态演变模式，也是一种比较新颖的角度，这一点感觉和最近很火的graph convolution network有一些相似（从邻居聚合节点的表示）。最后，论文很好的利用了point process 中的<strong>Hawkes process</strong>去建模这种时间序列事件，同时采用<strong>attention机制</strong>考虑不同节点之间的不同影响，最终将问题转化为最大似然估计问题求解。论文写作也挺好，实验也比较充分，基本验证了模型的各个方面。</p>
+<p>在看这篇论文过程中，同时也有几个问题。首先是强度函数没有考虑<strong>历史节点之间本身存在的联系</strong>，每个历史节点对当前节点的影响也只是<strong>简单叠加</strong>，是不是可以考虑的更复杂一些？其次对于条件强度函数中的 $\delta_s$ 是如何取值确定的，论文好像没有给出说明，不清楚这个是不是Hawkes process 中的常见参数，且有常用取值。最后，论文实验部分的，每个数据集中有静态边和时序边，论文好像没有叙述清楚具体的实验是怎么进行的。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>写的还不错？那就来个红包吧！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/wechat-reward-image.jpg" alt="YFLu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/alipay-reward-image.jpg" alt="YFLu 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Network-Embedding/" rel="tag"># Network Embedding</a>
+          
+            <a href="/tags/Representation-Learning/" rel="tag"># Representation Learning</a>
+          
+            <a href="/tags/PaperNote/" rel="tag"># PaperNote</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/blog/2018/06/17/DynHPE.html/" rel="next" title="《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记">
+                <i class="fa fa-chevron-left"></i> 《High-order Proximity Preserved Embedding For Dynamic Networks》— 论文笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="lv-container" data-id="city" data-uid="MTAyMC8yOTkxMi82NDc3"></div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/avatar.png"
+                alt="YFLu" />
+            
+              <p class="site-author-name" itemprop="name">YFLu</p>
+              <p class="site-description motion-element" itemprop="description">NUPTer、BUPTer、MachineLearning、DataMining、伪文青</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">85</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">38</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/rootlu" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:luyfroot@gmail.com" target="_blank" title="E-Mail"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.facebook.com/yf.lu.946" target="_blank" title="Facebook"><i class="fa fa-fw fa-facebook"></i>Facebook</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/rootlu" target="_blank" title="知乎"><i class="fa fa-fw fa-Follow me on ZhiHu"></i>知乎</a>
+                  
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="http://www.paperweekly.site/user/YFLu" target="_blank" title="PaperWeekly"><i class="fa fa-fw fa-Follow me on PaperWeekly"></i>PaperWeekly</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.csdn.net/" title="CSDN" target="_blank">CSDN</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://stackoverflow.com/" title="Stack Overflow" target="_blank">Stack Overflow</a>
+                  </li>
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.paperweekly.site/home" title="PaperWeekly" target="_blank">PaperWeekly</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#1、Movitation"><span class="nav-text">1、Movitation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2、Model"><span class="nav-text">2、Model</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3、Experiment"><span class="nav-text">3、Experiment</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4、Summary"><span class="nav-text">4、Summary</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+<div class="copyright">&copy; 2015 – <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">YFLu</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+<span class="post-meta-divider">|</span>
+<span id="busuanzi_container_site_uv">
+  本站访客数<span id="busuanzi_value_site_uv"></span>人次
+</span>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.4.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.4.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.4.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.4.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.4.1"></script>
+
+
+
+  
+
+
+
+  
+    <script type="text/javascript">
+      window.livereOptions = {
+        refer: '/blog/2018/09/15/HTNE.html/'
+      };
+      (function(d, s) {
+        var j, e = d.getElementsByTagName(s)[0];
+        if (typeof LivereTower === 'function') { return; }
+        j = d.createElement(s);
+        j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+        j.async = true;
+        e.parentNode.insertBefore(j, e);
+      })(document, 'script');
+    </script>
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+  <script>
+    
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+
+      Counter('get', '/classes/Counter', { where: JSON.stringify({ url }) })
+        .done(function ({ results }) {
+          if (results.length > 0) {
+            var counter = results[0];
+            
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+            
+            .done(function () {
+                  var $element = $(document.getElementById(url));
+                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
+            })
+            
+            .fail(function ({ responseJSON }) {
+                console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
+            })
+          } else {
+            
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text('Counter not initialized! See more at console err msg.');
+              console.error('ATTENTION! LeanCloud counter has security bug, see here how to solve it: https://github.com/theme-next/hexo-leancloud-counter-security. \n But you also can use LeanCloud without security, by set \'security\' option to \'false\'.');
+            
+          }
+        })
+      .fail(function ({ responseJSON }) {
+        console.log('LeanCloud Counter Error:' + responseJSON.code + " " + responseJSON.error);
+      });
+    }
+    
+
+    $(function() {
+      $.get('https://app-router.leancloud.cn/2/route?appId=' + "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz")
+        .done(function ({ api_server }) {
+          var Counter = function (method, url, data) {
+            return $.ajax({
+              method: method,
+              url: `https://${api_server}/1.1${url}`,
+              headers: {
+                'X-LC-Id': "qJQNI4qO8uKlyDqYOekRCByh-gzGzoHsz",
+                'X-LC-Key': "0hAkU75j3ti2wICPYsRit8R7",
+                'Content-Type': 'application/json',
+              },
+              data: data,
+            });
+          };
+          
+          addCount(Counter);
+          
+        })
+    });
+  </script>
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
