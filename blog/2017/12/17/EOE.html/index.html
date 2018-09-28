@@ -1064,6 +1064,11 @@ L(U)=-\sum_{(h,k)\notin{E_u}}{\log(1-p(u_h,u_k))}</script><p>两部分损失函�
         pageSize:'10' || 10,
         visitor: false
     });
+    var infoEle = document.querySelector('#comments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+      infoEle.childNodes.forEach(function(item) {
+        item.parentNode.removeChild(item);
+      });
   </script>
 
 

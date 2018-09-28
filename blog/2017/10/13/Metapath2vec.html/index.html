@@ -1078,6 +1078,11 @@ p(c_t|v;\theta)=\frac{e^{X_{c_t}\cdot{X_v}}}{\sum_{u_t\in{V_t}}{e^{X_{u_t}\cdot{
         pageSize:'10' || 10,
         visitor: false
     });
+    var infoEle = document.querySelector('#comments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+      infoEle.childNodes.forEach(function(item) {
+        item.parentNode.removeChild(item);
+      });
   </script>
 
 

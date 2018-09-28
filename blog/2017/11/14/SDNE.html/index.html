@@ -1074,6 +1074,11 @@ y_i^{(k)}=\sigma{(W^{(k)}y_i^{(k-1)}+b^{(k)})}, k=2,...,K</script><p>再用解�
         pageSize:'10' || 10,
         visitor: false
     });
+    var infoEle = document.querySelector('#comments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+      infoEle.childNodes.forEach(function(item) {
+        item.parentNode.removeChild(item);
+      });
   </script>
 
 

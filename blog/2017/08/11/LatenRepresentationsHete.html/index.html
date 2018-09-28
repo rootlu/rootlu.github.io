@@ -1075,6 +1075,11 @@ L(z.\theta)=\sum_{i=1}^l{\triangle{(f_\theta^{t_i}(z_i),y_i)}}+\lambda{\sum_{i,j
         pageSize:'10' || 10,
         visitor: false
     });
+    var infoEle = document.querySelector('#comments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+      infoEle.childNodes.forEach(function(item) {
+        item.parentNode.removeChild(item);
+      });
   </script>
 
 
