@@ -1073,6 +1073,12 @@ log\sigma(\vec{u}_j'^T\cdot{\vec{u}_i})+\sum_{i=1}^{K}{E_{v_n\sim{P_n(v)}}[log\s
         pageSize:'10' || 10,
         visitor: false
     });
+    var infoEle = document.querySelector('#comments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+      infoEle.childNodes.forEach(function(item) {
+        item.parentNode.removeChild(item);
+      });
+    }
   </script>
 
 

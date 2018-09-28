@@ -1092,6 +1092,12 @@ Pr(P_{e_1\to{e_L}}|u_1,M) = \prod_{s=1}^L\prod_{t=s}^L{Pr(v_t|u_s,M_{s,t})}</scr
         pageSize:'10' || 10,
         visitor: false
     });
+    var infoEle = document.querySelector('#comments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+      infoEle.childNodes.forEach(function(item) {
+        item.parentNode.removeChild(item);
+      });
+    }
   </script>
 
 

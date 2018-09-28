@@ -1085,6 +1085,12 @@ L_{smooth}^t =
         pageSize:'10' || 10,
         visitor: false
     });
+    var infoEle = document.querySelector('#comments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+      infoEle.childNodes.forEach(function(item) {
+        item.parentNode.removeChild(item);
+      });
+    }
   </script>
 
 

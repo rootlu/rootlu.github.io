@@ -1097,6 +1097,12 @@ x_i^T\Delta M_bx_i = \lambda_ix_i^T \Delta M_ax_i + \Delta\lambda_ix_i^TM_ax_i</
         pageSize:'10' || 10,
         visitor: false
     });
+    var infoEle = document.querySelector('#comments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+      infoEle.childNodes.forEach(function(item) {
+        item.parentNode.removeChild(item);
+      });
+    }
   </script>
 
 

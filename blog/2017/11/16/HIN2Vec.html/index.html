@@ -1083,6 +1083,12 @@ P(r|x,y)=sigmoid(\sum{W'_X\vec{x}\odot{W'_Y\vec{y}}\odot{f_{01}(W_R'\vec{r})}})<
         pageSize:'10' || 10,
         visitor: false
     });
+    var infoEle = document.querySelector('#comments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0){
+      infoEle.childNodes.forEach(function(item) {
+        item.parentNode.removeChild(item);
+      });
+    }
   </script>
 
 
