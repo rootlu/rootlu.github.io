@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
@@ -117,7 +117,7 @@
 <meta property="og:description" content="HTNE是北航老师提出的针对时序网络(temporal network)嵌入的一个模型，论文发表在2018年KDD上。时序网络，即网络是随时间动态变化的（节点和边会增加或减少）。文章研究了时序网络的embedding问题，旨在建模网络的时序形成模式，从而提升网络embedding的效果。">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNc79ly1fvb4n3svw0j30f40ga41m.jpg">
-<meta property="og:updated_time" content="2018-09-16T13:31:00.188Z">
+<meta property="og:updated_time" content="2018-09-17T03:32:39.686Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Embedding Temporal Network via Neighborhood Formation">
 <meta name="twitter:description" content="HTNE是北航老师提出的针对时序网络(temporal network)嵌入的一个模型，论文发表在2018年KDD上。时序网络，即网络是随时间动态变化的（节点和边会增加或减少）。文章研究了时序网络的embedding问题，旨在建模网络的时序形成模式，从而提升网络embedding的效果。">
@@ -186,7 +186,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</noscript>
 
 </head>
 
@@ -197,7 +197,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -390,7 +390,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2018-09-16 21:31:00" itemprop="dateModified" datetime="2018-09-16T21:31:00+08:00">2018-09-16</time>
+                <time title="修改时间：2018-09-17 11:32:39" itemprop="dateModified" datetime="2018-09-17T11:32:39+08:00">2018-09-17</time>
               
             
           </span>
@@ -492,7 +492,7 @@ p(y|x, \mathcal{H}_x(t)) = \frac{\lambda_{y|x}(t)}{\sum_{y'}{\lambda_{y'|x}(t)}}
 <h4 id="3、Experiment"><a href="#3、Experiment" class="headerlink" title="3、Experiment"></a>3、Experiment</h4><p>实验部分，论文首先通过<strong>节点分类</strong>和<strong>链路预测</strong>验证了节点表示的<strong>有效性</strong>，然后验证了通过<strong>时序推荐任务</strong>验证了条件强度函数的有效性，最后是网络可视化和参数实验。</p>
 <p>节点分类和链路预测任务比较常规，具体分析和结果可以参考论文。值得注意的是，这里的时序推荐任务（temporal recommendation），本质上是一个排序任务，只不过训练集和测试集的划分按照时间节点划分。论文以条件强度函数作为两个节点是够建立连接的概率（评分 ranking score），用t时刻以前的数据作为训练，然后预测t时刻之后，给定节点的之间建立连接的可能。</p>
 <h4 id="4、Summary"><a href="#4、Summary" class="headerlink" title="4、Summary"></a>4、Summary</h4><p>总结一下，不同于常规的network embedding模型，这篇论文立足于<strong>temporal network embedding</strong>问题，考虑了真实网络的动态变化性，这应该是一个比较大的亮点。其次，论文从<strong>邻居节点的形成序列</strong>描述网络的动态演变模式，也是一种比较新颖的角度，这一点感觉和最近很火的graph convolution network有一些相似（从邻居聚合节点的表示）。最后，论文很好的利用了point process 中的<strong>Hawkes process</strong>去建模这种时间序列事件，同时采用<strong>attention机制</strong>考虑不同节点之间的不同影响，最终将问题转化为最大似然估计问题求解。论文写作也挺好，实验也比较充分，基本验证了模型的各个方面。</p>
-<p>在看这篇论文过程中，同时也有几个问题。首先是强度函数没有考虑<strong>历史节点之间本身存在的联系</strong>，每个历史节点对当前节点的影响也只是<strong>简单叠加</strong>，是不是可以考虑的更复杂一些？其次对于条件强度函数中的 $\delta_s$ 是如何取值确定的，论文好像没有给出说明，不清楚这个是不是Hawkes process 中的常见参数，且有常用取值。最后，论文实验部分的，每个数据集中有静态边和时序边，论文好像没有叙述清楚具体的实验是怎么进行的。</p>
+<p>在看这篇论文过程中，同时也有几个问题。首先是强度函数没有考虑<strong>历史节点之间本身存在的联系</strong>，每个历史节点对当前节点的影响也只是<strong>简单叠加</strong>，是不是可以考虑的更复杂一些？其次，对于历史邻居序列的长度，如果考虑有很多邻居很长，就会导致 $\lambda$的计算复杂度较高，所以论文只考虑较短的邻居序列，这样是否会损失很多信息？同时，对于条件强度函数中的 $\delta_s$ 是如何取值确定的，论文好像没有给出说明，不清楚这个是不是Hawkes process 中的常见参数，且有常用取值。最后，论文实验部分的，每个数据集中有静态边和时序边，论文好像没有叙述清楚具体的实验是怎么进行的。</p>
 
       
     </div>
@@ -1072,12 +1072,10 @@ p(y|x, \mathcal{H}_x(t)) = \frac{\lambda_{y|x}(t)}{\sum_{y'}{\lambda_{y'|x}(t)}}
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
@@ -1151,24 +1149,7 @@ p(y|x, \mathcal{H}_x(t)) = \frac{\lambda_{y|x}(t)}{\sum_{y'}{\lambda_{y'|x}(t)}}
         }
     });
 </script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
     
   

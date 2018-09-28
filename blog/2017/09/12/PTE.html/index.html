@@ -16,7 +16,7 @@
 
 <html class="theme-next mist use-motion" lang="zh-CN">
 <head>
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8"/>
+  <meta charset="UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
 <meta name="theme-color" content="#222">
@@ -187,7 +187,7 @@
       .logo-line-after i { right: initial; }
     }
   </style>
-</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</noscript>
 
 </head>
 
@@ -198,7 +198,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+  <div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -552,8 +552,8 @@ O_{wl}=-\sum_{(i,j)\in{E_{wl}}}{w_{ij}logp(v_i|l_j)}</script><p>针对目标函�
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/blog/2017/08/11/LatenRepresentationsHete.html/" rel="next" title="《Learning Latent Representations of Nodes for Classifying in Heterogeneous Social Networks》----论文笔记">
-                <i class="fa fa-chevron-left"></i> 《Learning Latent Representations of Nodes for Classifying in Heterogeneous Social Networks》----论文笔记
+              <a href="/blog/2017/09/12/LINE.html/" rel="next" title="《LINE:Large-scale Information Network Embedding》 ---论文笔记">
+                <i class="fa fa-chevron-left"></i> 《LINE:Large-scale Information Network Embedding》 ---论文笔记
               </a>
             
           </div>
@@ -562,8 +562,8 @@ O_{wl}=-\sum_{(i,j)\in{E_{wl}}}{w_{ij}logp(v_i|l_j)}</script><p>针对目标函�
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/blog/2017/09/12/LINE.html/" rel="prev" title="《LINE:Large-scale Information Network Embedding》 ---论文笔记">
-                《LINE:Large-scale Information Network Embedding》 ---论文笔记 <i class="fa fa-chevron-right"></i>
+              <a href="/blog/2017/09/28/Node2vec.html/" rel="prev" title="《node2vec:Scable Feature Learning for Network》—论文笔记">
+                《node2vec:Scable Feature Learning for Network》—论文笔记 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -1069,12 +1069,10 @@ O_{wl}=-\sum_{(i,j)\in{E_{wl}}}{w_{ij}logp(v_i|l_j)}</script><p>针对目标函�
           if (results.length > 0) {
             var counter = results[0];
             
-            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
+              var $element = $(document.getElementById(url));
+              $element.find('.leancloud-visitors-count').text(counter.time + 1);
             
-            .done(function () {
-                  var $element = $(document.getElementById(url));
-                  $element.find('.leancloud-visitors-count').text(counter.time + 1);
-            })
+            Counter('put', `/classes/Counter/${counter.objectId}`, JSON.stringify({ time: { "__op":"Increment", "amount":1 } }))
             
             .fail(function ({ responseJSON }) {
                 console.log('Failed to save Visitor num, with error message: ' + responseJSON.error);
@@ -1148,24 +1146,7 @@ O_{wl}=-\sum_{(i,j)\in{E_{wl}}}{w_{ij}logp(v_i|l_j)}</script><p>针对目标函�
         }
     });
 </script>
-<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
-  });
-</script>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+<script type="text/javascript" src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
     
   
