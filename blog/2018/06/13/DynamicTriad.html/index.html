@@ -119,7 +119,7 @@
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fs9v0umq87j30i20b8abq.jpg">
 <meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNc79ly1fse7emu5uvj30nu07k0tm.jpg">
 <meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNc79ly1fse6pa763gj30pm0j6dof.jpg">
-<meta property="og:updated_time" content="2018-09-15T03:54:54.599Z">
+<meta property="og:updated_time" content="2018-11-09T06:12:22.748Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Dynamic Network Embedding by Moding Tridaic Closure Process》— 论文笔记">
 <meta name="twitter:description" content="这篇论文是AAAI18年的一个工作，主要做的是动态网络的表示学习。在实际生活中，网络是动态演变的，不断有新的节点、新的边添加，同时也有旧的节点和边消失。论文立足于动态网络embedding，旨在保留网络结构特征的同时，能够刻画网络的演变模式(evloution patterns)。">
@@ -471,7 +471,7 @@ x_{ijk}^t = w_{ik}^t*(u_k^t-u_i^t)+w^t_{jk}*(u_k^t-u_i^t)</script><p>论文还�
 P_{tr}^t(i,j,k)= \frac{1}{1+\exp({-\langle{\theta,x_{ijk}^t\rangle}})}</script><p>考虑到$v_i$和$v_j$ 会有不止一个共同邻接，所以定义一个t时刻的共同邻居集合$B^t(i,j)$，和一个向量$\alpha^{t,i,j}=(\alpha{_k^{t,i,j}})_{k\in{B^t(i,j)}}$. 当$\alpha{_k^{t,i,j}}=1$表示在下一时刻，开三角$(u_i,u_j,u_k)$会闭合。</p>
 <p>定义一个新连接会在$t+1$时刻建立的概率为：</p>
 <script type="math/tex; mode=display">
-P_{tr_+}^t(i,j)=\sum_{\alpha^{t,i,j\neq0}}{\prod_{k\in{B^t(i,j)}}(P_{tr}^t(i,j,k))^{\alpha^{t,i,j}_k}}\times{(1-P_{tr}^t(i,j,k))^(1-\alpha^{t,i,j}_k)}</script><script type="math/tex; mode=display">
+P_{tr_+}^t(i,j)=\sum_{\alpha^{t,i,j\neq0}}{\prod_{k\in{B^t(i,j)}}(P_{tr}^t(i,j,k))^{\alpha^{t,i,j}_k}}\times{(1-P_{tr}^t(i,j,k))^{(1-\alpha^{t,i,j}_k)}}</script><script type="math/tex; mode=display">
 p_{tr_+}^t(i,j)=\sum_{\alpha^{t,i,j}\neq0}{\prod_{ k\in{B^t(i,j)}}{(P^t_{tr}(i,j,k)} )^{\alpha^{t,i,j}_k}} \times {(1-P^t_{tr}(i,j,k)} )^{(1-\alpha^{t,i,j}_k)}</script><p>对于<strong>不受共同邻居影响的节点，不会建立连接</strong>，定其概率为：</p>
 <script type="math/tex; mode=display">
 P_{tr_-}^t(i,j)= \prod _{k\in{B^t{(i,j)}}}{( 1-P^t_{tr}(i,j,k))}</script><p>合并两部分，</p>
@@ -852,7 +852,7 @@ L_{smooth}^t =
                   </li>
                 
                   <li class="links-of-blogroll-item">
-                    <a href="https://jhy1993.github.io" title="Houye Ji" target="_blank">Houye Ji</a>
+                    <a href="https://jhy1993.github.io" title="Jimmy" target="_blank">Jimmy</a>
                   </li>
                 
               </ul>
