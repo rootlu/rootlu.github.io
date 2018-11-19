@@ -116,18 +116,18 @@
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="在Ubuntu:14.04上安装Docker，并完成相应配置。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://www.rootlu.com/img/dockerList.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/dockerDeb.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/dockerEngine.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/dockerStart.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/dockerInfo.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/dockerGroup.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/dockerHello.jpg">
-<meta property="og:updated_time" content="2016-11-17T01:13:32.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkl7iulqj30ea032q2u.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fxdklcuyegj30f304kjrl.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdklje9l9j30p00ccwfm.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdklpx0xcj309u02da9v.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fxdklx5w65j30hx0eddgb.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkm3oem0j309j023q2s.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkmebc76j30gj0ccq3l.jpg">
+<meta property="og:updated_time" content="2018-11-19T10:57:31.640Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 安装">
 <meta name="twitter:description" content="在Ubuntu:14.04上安装Docker，并完成相应配置。">
-<meta name="twitter:image" content="http://www.rootlu.com/img/dockerList.jpg">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkl7iulqj30ea032q2u.jpg">
 
 
 
@@ -473,19 +473,19 @@
 <li>检查内核 <code>uname -a</code>. 如果内核版本过低, 使用apt-get升级: <code>sudo apt-get update</code> . 更新过后记得重新加载内核并重启.</li>
 <li>更新安装包信息，添加证书 <code>apt-get install apt-transport-https ca-certificates</code></li>
 <li>添加新的GPG秘钥 <code>sudo apt-key adv --keyserver hkp://p80.pool.sks-keyserver.net:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D</code></li>
-<li>添加docker安装包信息<br>对于Ubuntu 14.04 ：在<code>/etc/apt/sources.list.d/docker.list</code>文件（手动创建）中添加<br><code>deb https://apt.dockerproject.org/repo ubuntu-trusty main</code>，保存退出<br><img src="/img/dockerList.jpg" alt=""></li>
-<li>更新安装包信息 <code>sudo apt-get update</code>，这一步不可缺少，否则下一步安装docker时会提示<code>Unable to locate package docker-engine</code><br><img src="/img/dockerDeb.jpg" alt=""></li>
-<li>安装Docker <code>sudo apt-get install docker-engine</code><br><img src="/img/dockerEngine.jpg" alt=""></li>
-<li>启动docker 服务<code>sudo service docker start</code> （这一步在ubuntu14.04上可以省略，安装完成后服务已经自动启动）<br><img src="/img/dockerStart.jpg" alt=""></li>
-<li>验证是否正确安装 <code>sudo docker info</code>,打印Docker的相关信息，记得一定要以sudo权限查看，否则可能会报错<code>Cannot connect to the Docker daemon. Is the docker daemon running on this host?</code><br><img src="/img/dockerInfo.jpg" alt=""></li>
+<li>添加docker安装包信息<br>对于Ubuntu 14.04 ：在<code>/etc/apt/sources.list.d/docker.list</code>文件（手动创建）中添加<br><code>deb https://apt.dockerproject.org/repo ubuntu-trusty main</code>，保存退出<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkl7iulqj30ea032q2u.jpg" alt=""></li>
+<li>更新安装包信息 <code>sudo apt-get update</code>，这一步不可缺少，否则下一步安装docker时会提示<code>Unable to locate package docker-engine</code><br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fxdklcuyegj30f304kjrl.jpg" alt=""></li>
+<li>安装Docker <code>sudo apt-get install docker-engine</code><br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxdklje9l9j30p00ccwfm.jpg" alt=""></li>
+<li>启动docker 服务<code>sudo service docker start</code> （这一步在ubuntu14.04上可以省略，安装完成后服务已经自动启动）<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxdklpx0xcj309u02da9v.jpg" alt=""></li>
+<li>验证是否正确安装 <code>sudo docker info</code>,打印Docker的相关信息，记得一定要以sudo权限查看，否则可能会报错<code>Cannot connect to the Docker daemon. Is the docker daemon running on this host?</code><br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fxdklx5w65j30hx0eddgb.jpg" alt=""></li>
 </ul>
 <h3 id="1-4-创建Docker用户组"><a href="#1-4-创建Docker用户组" class="headerlink" title="1.4 创建Docker用户组"></a>1.4 创建Docker用户组</h3><p> 方便在使用dcoker命令时，不需要输入sudo</p>
 <ul>
 <li>使用sudo权限登陆系统</li>
 <li>创建docker用户组<br><code>sudo groupadd docker</code></li>
 <li>添加用户到docker组<br><code>sudo usermod -aG docker $USER</code></li>
-<li>重启登陆<br><img src="/img/dockerGroup.jpg" alt=""></li>
-<li>验证<code>docker run hello-world</code><br><img src="/img/dockerHello.jpg" alt=""></li>
+<li>重启登陆<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkm3oem0j309j023q2s.jpg" alt=""></li>
+<li>验证<code>docker run hello-world</code><br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkmebc76j30gj0ccq3l.jpg" alt=""></li>
 </ul>
 <h2 id="2-更新Docker"><a href="#2-更新Docker" class="headerlink" title="2. 更新Docker"></a>2. 更新Docker</h2><ul>
 <li>添加docker仓库秘钥到本地 <code>sudo apt-key adv --keyserver keyserver.ubuntu.com  --recv-keys 36A1D7869245C8950F966E92D8576A8BA88D21E9</code></li>

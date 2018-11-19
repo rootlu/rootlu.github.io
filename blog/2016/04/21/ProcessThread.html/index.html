@@ -116,13 +116,13 @@
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="进程和线程都是由操作系统所体会的程序运行的基本单元，系统利用该基本单元实现系统对应用的并发性。两者的区别是各种面试笔试都会涉及的内容，应届党还是有必要好好了解一下的…">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://www.rootlu.com/img/threeStatus.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/pcb.jpg">
-<meta property="og:updated_time" content="2016-08-30T02:38:48.000Z">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkhg14joj30c5095js0.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkhnukxrj30c005jwer.jpg">
+<meta property="og:updated_time" content="2018-11-19T10:53:04.905Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统----进程与线程">
 <meta name="twitter:description" content="进程和线程都是由操作系统所体会的程序运行的基本单元，系统利用该基本单元实现系统对应用的并发性。两者的区别是各种面试笔试都会涉及的内容，应届党还是有必要好好了解一下的…">
-<meta name="twitter:image" content="http://www.rootlu.com/img/threeStatus.jpg">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkhg14joj30c5095js0.jpg">
 
 
 
@@ -475,10 +475,10 @@
 <li>结构性 三要素：程序、数据和进程控制块</li>
 </ul>
 <h3 id="1-4-进程的状态"><a href="#1-4-进程的状态" class="headerlink" title="1.4 进程的状态"></a>1.4 进程的状态</h3><ul>
-<li>三态模型<br>运行态（Running）：进程占有CPU，并在CPU上运行<br>就绪态（Ready）：一个进程已经具备运行条件，但由于无CPU暂时不能运行的状态(当调度给其CPU时，可立即运行)<br>等待态（Blocked）：阻塞态、封锁态、睡眠态指进程因等待某件事件的发生二杂事不能运行的状态(即使CPU空闲，该进程也不会运行)<br><img src="/img/threeStatus.jpg" alt=""></li>
+<li>三态模型<br>运行态（Running）：进程占有CPU，并在CPU上运行<br>就绪态（Ready）：一个进程已经具备运行条件，但由于无CPU暂时不能运行的状态(当调度给其CPU时，可立即运行)<br>等待态（Blocked）：阻塞态、封锁态、睡眠态指进程因等待某件事件的发生二杂事不能运行的状态(即使CPU空闲，该进程也不会运行)<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkhg14joj30c5095js0.jpg" alt=""></li>
 <li>五态模型<br>。。。</li>
 </ul>
-<h3 id="1-5-进程控制块PCB"><a href="#1-5-进程控制块PCB" class="headerlink" title="1.5 进程控制块PCB"></a>1.5 进程控制块PCB</h3><p>进程描述符，进程属性<br>用于管理控制进程的一个专门的数据结构，记录进程的各种属性，描述进程的动态变化过程<br>系统感知进程的唯一标志，进程与PCB一一对应<br>PCB内容：<br><img src="/img/pcb.jpg" alt=""></p>
+<h3 id="1-5-进程控制块PCB"><a href="#1-5-进程控制块PCB" class="headerlink" title="1.5 进程控制块PCB"></a>1.5 进程控制块PCB</h3><p>进程描述符，进程属性<br>用于管理控制进程的一个专门的数据结构，记录进程的各种属性，描述进程的动态变化过程<br>系统感知进程的唯一标志，进程与PCB一一对应<br>PCB内容：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkhnukxrj30c005jwer.jpg" alt=""></p>
 <ul>
 <li>进程描述信息：<br>进程标识符(process ID)，唯一，通常是一个整数；<br>进程名，通常基于可执行文件名（不唯一）；<br>用户标识符(user ID)：进程组关系</li>
 <li>进程控制信息：<br>进程当前状态、优先级、代码执行入口地址、程序的外存地址、运行统计信息(执行时间、页面调度)、进程间同步和通信、阻塞原因、进程的队列指针、进程的消息队列指针</li>

@@ -116,14 +116,14 @@
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="TCP/IP协议族（TCP/IP Protocol Suite），简称TCP/IP，这个协议家族有两个核心协议，包括TCP（传输控制协议）和IP（网际协议）。TCP/IP提供点对点的链接机制，将数据应该如何封装、定址、传输、路由以及在目的地如何接收，都加以标准化。它将软件通信过程抽象化为四个抽象层，采取协议堆栈的方式，分别实现出不同通信协议。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://www.rootlu.com/img/tcpipStruct.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/tcpCmpOSI.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/threeWayHandshake.jpg">
-<meta property="og:updated_time" content="2016-08-30T02:42:04.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkj6q7tcj30eo07rmxu.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkjcfbhcj305j04jt8u.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkjrf8skj30c5095js0.jpg">
+<meta property="og:updated_time" content="2018-11-19T10:55:01.256Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="TCP&#x2F;IP协议">
 <meta name="twitter:description" content="TCP/IP协议族（TCP/IP Protocol Suite），简称TCP/IP，这个协议家族有两个核心协议，包括TCP（传输控制协议）和IP（网际协议）。TCP/IP提供点对点的链接机制，将数据应该如何封装、定址、传输、路由以及在目的地如何接收，都加以标准化。它将软件通信过程抽象化为四个抽象层，采取协议堆栈的方式，分别实现出不同通信协议。">
-<meta name="twitter:image" content="http://www.rootlu.com/img/tcpipStruct.jpg">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkj6q7tcj30eo07rmxu.jpg">
 
 
 
@@ -449,7 +449,7 @@
 
       
         <p>TCP/IP协议族（TCP/IP Protocol Suite），简称TCP/IP，这个协议家族有两个核心协议，包括TCP（传输控制协议）和IP（网际协议）。TCP/IP提供点对点的链接机制，将数据应该如何封装、定址、传输、路由以及在目的地如何接收，都加以标准化。它将软件通信过程抽象化为四个抽象层，采取协议堆栈的方式，分别实现出不同通信协议。<br><a id="more"></a></p>
-<h2 id="1-TCP-IP体系结构"><a href="#1-TCP-IP体系结构" class="headerlink" title="1. TCP/IP体系结构"></a>1. TCP/IP体系结构</h2><p>四层模型：网络接入层、互联网络层、传输层、应用层<br><img src="/img/tcpipStruct.jpg" alt=""><br>其中，网络层包括IP协议、ICMP(因特网控制消息)协议、IGMP(因特网组管理)协议、ARR(地址解析)协议、RARP(反向地址解析)协议<br>传输层 包括TCP、UDP协议；应用层包括SMTP、FTP、DNS、HTTP等协议<br>注意与OSI/RM体系结构的对比：<br><img src="/img/tcpCmpOSI.jpg" alt=""></p>
+<h2 id="1-TCP-IP体系结构"><a href="#1-TCP-IP体系结构" class="headerlink" title="1. TCP/IP体系结构"></a>1. TCP/IP体系结构</h2><p>四层模型：网络接入层、互联网络层、传输层、应用层<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkj6q7tcj30eo07rmxu.jpg" alt=""><br>其中，网络层包括IP协议、ICMP(因特网控制消息)协议、IGMP(因特网组管理)协议、ARR(地址解析)协议、RARP(反向地址解析)协议<br>传输层 包括TCP、UDP协议；应用层包括SMTP、FTP、DNS、HTTP等协议<br>注意与OSI/RM体系结构的对比：<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkjcfbhcj305j04jt8u.jpg" alt=""></p>
 <h2 id="2-TCP协议"><a href="#2-TCP协议" class="headerlink" title="2. TCP协议"></a>2. TCP协议</h2><h3 id="2-1-特点"><a href="#2-1-特点" class="headerlink" title="2.1 特点"></a>2.1 特点</h3><ul>
 <li>TCP是面向连接的，通信前需要建立TCP连接；</li>
 <li>提供可靠的服务</li>
@@ -460,7 +460,7 @@
 <h3 id="2-2-三次握手"><a href="#2-2-三次握手" class="headerlink" title="2.2 三次握手"></a>2.2 三次握手</h3><ul>
 <li>客户端向服务器发送请求连接报文，其首部中的同步比特SYN置1，同时选择一个初始序号Seq=x;</li>
 <li>服务器收到请求，发回确认，ACK置1，确认序号为ACK=1，服务器此时的确认号应为x+1，服务器也发送和客户端连接的请求，在报文中将SYN置1，同时选择一个初始序号Seq=y；</li>
-<li>刻划断收到报文给服务器确认回复，确认序号为Seq=x+1，ACK=y+1。<br><img src="/img/threeWayHandshake.jpg" alt=""></li>
+<li>刻划断收到报文给服务器确认回复，确认序号为Seq=x+1，ACK=y+1。<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkjrf8skj30c5095js0.jpg" alt=""></li>
 </ul>
 <h3 id="2-3-四次挥手"><a href="#2-3-四次挥手" class="headerlink" title="2.3 四次挥手"></a>2.3 四次挥手</h3><ul>
 <li>主机A完成数据传输后，将控制位FIN置1，提出停止TCP连接的请求</li>

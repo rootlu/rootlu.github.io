@@ -116,12 +116,12 @@
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="操作系统中存储管理的目的及管理方式，有待补充…">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://www.rootlu.com/img/pageStorage.jpg">
-<meta property="og:updated_time" content="2016-08-30T02:32:28.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkg6mlgtj30dr0ahaan.jpg">
+<meta property="og:updated_time" content="2018-11-19T10:51:33.480Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="操作系统----存储管理">
 <meta name="twitter:description" content="操作系统中存储管理的目的及管理方式，有待补充…">
-<meta name="twitter:image" content="http://www.rootlu.com/img/pageStorage.jpg">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkg6mlgtj30dr0ahaan.jpg">
 
 
 
@@ -466,7 +466,7 @@
 <li>动态重定位<br>程序执行期间每次访问内存之前进行重定位</li>
 </ul>
 <h2 id="4-分区存储管理"><a href="#4-分区存储管理" class="headerlink" title="4. 分区存储管理"></a>4. 分区存储管理</h2><p>基本思想：给进入内存的用户作业（进程）划分成一块连续存储区域，把作业装入该连续的存储区域，并且每道作业智能在其所占据的区域中执行，每个内存区域称为分区。<br>固定分区<br>可变分区</p>
-<h2 id="5-页式存储管理"><a href="#5-页式存储管理" class="headerlink" title="5. 页式存储管理"></a>5. 页式存储管理</h2><p>减少碎片、提高内存利用率<br>基本原理：<br>页框：把内存控件划分成大小相等的若干存储区域，每一区域称为一块，又称页框，从0开始编号<br>页面：程序逻辑地址按页框大小分成若干片，不足一页 部分补齐一页，一次从0、1.。。编号，称为页面，每个区成为一个页面，又称页<br>逻辑地址形式：分页存储器的逻辑地址由：页号和页内地址组成<br><img src="/img/pageStorage.jpg" alt=""><br>地址转换<br><strong>物理地址=页框号x页长+页内地址</strong><br>地址转换解体思路：<br>页面大小转成2的n次方，注意1KB=2^10，n即为页内偏移位数，将逻辑地址写成二进制形式，0~n-1位为页内位移，其余为页号，转成10进制，若页号不小于页表长度，产生越界中断；否则以页号去检索页表中的块号，与页内位移行程物理地址。<br>例题：分页式存储管理系统，32个页面，每页1KB，主存16KB，第0、1、2、3页分别分配的物理块号位5、10、4、7，将虚拟地址0A5C和093C转成物理地址<br>答：页面大小1KB=2^10，页内偏移量占10位地址。<br>虚拟地址0A5C，对应二进制：0000 0=1010 0101 1100，其中10 0101 1100=25C，0000 10=2，对应4号块，<br>物理地址为000100 10 0101 1100 即：0001 0010 0101 1100</p>
+<h2 id="5-页式存储管理"><a href="#5-页式存储管理" class="headerlink" title="5. 页式存储管理"></a>5. 页式存储管理</h2><p>减少碎片、提高内存利用率<br>基本原理：<br>页框：把内存控件划分成大小相等的若干存储区域，每一区域称为一块，又称页框，从0开始编号<br>页面：程序逻辑地址按页框大小分成若干片，不足一页 部分补齐一页，一次从0、1.。。编号，称为页面，每个区成为一个页面，又称页<br>逻辑地址形式：分页存储器的逻辑地址由：页号和页内地址组成<br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkg6mlgtj30dr0ahaan.jpg" alt=""><br>地址转换<br><strong>物理地址=页框号x页长+页内地址</strong><br>地址转换解体思路：<br>页面大小转成2的n次方，注意1KB=2^10，n即为页内偏移位数，将逻辑地址写成二进制形式，0~n-1位为页内位移，其余为页号，转成10进制，若页号不小于页表长度，产生越界中断；否则以页号去检索页表中的块号，与页内位移行程物理地址。<br>例题：分页式存储管理系统，32个页面，每页1KB，主存16KB，第0、1、2、3页分别分配的物理块号位5、10、4、7，将虚拟地址0A5C和093C转成物理地址<br>答：页面大小1KB=2^10，页内偏移量占10位地址。<br>虚拟地址0A5C，对应二进制：0000 0=1010 0101 1100，其中10 0101 1100=25C，0000 10=2，对应4号块，<br>物理地址为000100 10 0101 1100 即：0001 0010 0101 1100</p>
 
       
     </div>

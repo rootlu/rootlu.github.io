@@ -116,7 +116,7 @@
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="论文《DeepWalk Online Learning of Social Representations》是KDD‘14年的一篇文章，目前谷歌引用量已达到400多次。论文的创新点在于首次将语言模型中的SkipGram应用于图结构的表示学习中，并基于随机游走，将随机游走的路径是做语言模型中的句子。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2017-09-10T03:17:40.000Z">
+<meta property="og:updated_time" content="2018-11-19T11:20:38.827Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DeepWalk---论文笔记">
 <meta name="twitter:description" content="论文《DeepWalk Online Learning of Social Representations》是KDD‘14年的一篇文章，目前谷歌引用量已达到400多次。论文的创新点在于首次将语言模型中的SkipGram应用于图结构的表示学习中，并基于随机游走，将随机游走的路径是做语言模型中的句子。">
@@ -455,7 +455,7 @@
 <a id="more"></a>
 <h5 id="1、思想"><a href="#1、思想" class="headerlink" title="1、思想"></a>1、思想</h5><p>从图结构中学习节点的隐含表示，这些隐含表示将社会关系映射到一个连续的向量空间中。</p>
 <p>实验输入：图结构，输出：二维的向量表示</p>
-<center>![deepwalk1](http://ou5bxfpku.bkt.clouddn.com/img/deepwalk1.png)</center>
+<center>![](https://ws1.sinaimg.cn/large/006tNbRwly1fxdl7gndiwj30uk0c2q5g.jpg)</center>
 
 <h5 id="2、主要贡献"><a href="#2、主要贡献" class="headerlink" title="2、主要贡献"></a>2、主要贡献</h5><ul>
 <li>利用深度学习分析图结构，学习随机游走中的规律性表示</li>
@@ -467,26 +467,26 @@
 <p>随机游走可以被用来度量节点相似性、获取图的局部结构信息。</p>
 <p>论文灵感来自，可以<strong>将随机游走看作是图结构的局部结构信息，以此来表示图结构中节点的隐含信息。</strong></p>
 <h5 id="4、幂法则PowLaws"><a href="#4、幂法则PowLaws" class="headerlink" title="4、幂法则PowLaws"></a>4、幂法则PowLaws</h5><p>在图结构中，随机游走中节点的频率在极其稀疏的图结构中服从幂法则，这一点与语言模型中的词频相似。</p>
-<center>![deepwalk2](http://ou5bxfpku.bkt.clouddn.com/deepwalk2.png)</center>
+<center>![](https://ws2.sinaimg.cn/large/006tNbRwly1fxdl95qqecj30me0demzl.jpg)</center>
 
 <h5 id="5、语言模型"><a href="#5、语言模型" class="headerlink" title="5、语言模型"></a>5、语言模型</h5><p>语言模型的核心目标是估计一个词序列在语料中出现的可能性，学习词的向量表示，将词映射到向量空间中。用统计的方式表示就是，给定一个词序列$W^n_1=(w_0,w_1,w_2……w_n)$，目标是在整个语料库中最大化概率$Pr(w_n|w_0,w_1,w_2……w_{n-1})$。</p>
 <p>在论文中，作者以此为出发点，将<strong>随机游走的路程看作短句子</strong>，以一种特殊的语言解析，语言模型对应图结构模型，优化目标就变成了：<strong>给定随机游走已经走过的所有节点$v_1……v_{i-1}$，估算节点$v_i$的概率，</strong>概率表示为：$Pr(v_i|v_0,v_1,v_2……v_{i-1})$。</p>
 <p>本文的目标是学习图节点的隐含表示，而不仅仅是学习一个概率分布，因此，论文提出了一个映射函数$𝜱:v∈V↦R^{|V|×d}$，概率分布表示为：$Pr(v_i|𝜱(v_0),𝜱(v_1),𝜱(v_2)……𝜱(v_{i-1})$。</p>
 <p>但是，随着随机游走路径长度的增加，上述概率的计算会非常复杂，计算概率会变得行不通。因此，论文借鉴了Mikolov的两篇关于语言模型的论文^[1][2]^，进行了三种处理：首先，<strong>用一个词预测整篇文章</strong>，而不是用一篇文章预测一个词；其次，文章由给定单词的左右单词，即邻居词组成；最后，忽略单词顺序，不再受限于词与词之间的顺序关系。由此，优化目标表示为：$min(𝜱)         -logPr(\{v_{i-w},……,v_{i+w}\} \v_i|𝜱(v_i))$。</p>
 <h5 id="6、DeepWalk"><a href="#6、DeepWalk" class="headerlink" title="6、DeepWalk"></a>6、DeepWalk</h5><p>本文将<strong>随机游走路径看作语料库，图节点看作词汇表</strong>，提出了deepwalk算法，算法分为两部分：随机游走+参数更新，整个学习过程可以可以用作者的演讲ppt中的一张图^[3]^表示，算法代码也已经在github上开源^[4]^。</p>
-<center>![deepwalk3](http://ou5bxfpku.bkt.clouddn.com/img/deepwalk3.png)</center>
+<center>![](https://ws3.sinaimg.cn/large/006tNbRwly1fxdl9d5mg9j30p20j00wy.jpg)</center>
 
 <p>算法的随机游走部分包括图中①②③，参数更新包括图中的④⑤。</p>
 <h6 id="6-1、随机游走"><a href="#6-1、随机游走" class="headerlink" title="6.1、随机游走"></a>6.1、随机游走</h6><p>算法以图G作为模型输入，对图中每一个节点生成$𝛾$个随机游走。每一个随机游走过程$W_{v_i}$均匀抽样（sample uniformly）一个随机节点$v_i$作为游走的根节点，然后从当前节点的邻居节点中均匀选取随机游走的下一节点，直到游走路径达到了最大长度$t$，即$|W_{v_i}|=t$。算法伪代码如下图。</p>
-<center>![deepwalk4](http://ou5bxfpku.bkt.clouddn.com/img/deepwalk4.png)</center>
+<center>![](https://ws1.sinaimg.cn/large/006tNbRwly1fxdl9ph1sxj30ms0h2tb9.jpg)</center>
 
 <h6 id="6-2、SkipGram"><a href="#6-2、SkipGram" class="headerlink" title="6.2、SkipGram"></a>6.2、SkipGram</h6><p>对于随机游走中的每一个节点，将其映射到表示向量𝜱中，给定节点的表示向量，基于SkipGrams模型最大化邻居节点出现在随机游走中的概率。</p>
 <p>具体怎么进行特征映射，没怎么看懂，论文里似乎也没有说的很清楚。。。。ppt上给出了一个特征映射的示例：</p>
-<center>![deepwalk](http://ou5bxfpku.bkt.clouddn.com/img/deepwalk5.png)</center>
+<center>![](https://ws1.sinaimg.cn/large/006tNbRwly1fxdl9w6wp3j30m207edgt.jpg)</center>
 
-<center>![deepwalk6](http://ou5bxfpku.bkt.clouddn.com/img/deepwalk6.png)</center>
+<center>![](https://ws2.sinaimg.cn/large/006tNbRwly1fxdla4mh8wj30ci083gmh.jpg)</center>
 
-<h6 id="6-3、Hierarchial-Softmax"><a href="#6-3、Hierarchial-Softmax" class="headerlink" title="6.3、Hierarchial Softmax"></a>6.3、Hierarchial Softmax</h6><center>![deepwalk7](http://ou5bxfpku.bkt.clouddn.com/img/deepwalk7.png)</center>
+<h6 id="6-3、Hierarchial-Softmax"><a href="#6-3、Hierarchial-Softmax" class="headerlink" title="6.3、Hierarchial Softmax"></a>6.3、Hierarchial Softmax</h6><center>![](https://ws3.sinaimg.cn/large/006tNbRwly1fxdlabtispj30se0k4n2i.jpg)</center>
 
 <h5 id="7、实验"><a href="#7、实验" class="headerlink" title="7、实验"></a>7、实验</h5><p>论文以半监督网络分类问题作为实验任务，在不同实验数据上进行对比实验。</p>
 <h5 id="8、总结"><a href="#8、总结" class="headerlink" title="8、总结"></a>8、总结</h5><p>论文的一大亮点在于将语言模型用于网络表示学习，将随机游走的路程视作语言模型中的句子，随机游走的节点视作句子中的单词。语言模型中的优化目标是，给定一个单词，预测其邻居单词，即最大化给定单词的邻居单词的出现概率。应用于网络表示学习中，在图结构上进行随机游走，随机游走的路径类比为语言模型中的句子，给定图节点的表示特征，最大化游走中邻居节点的概率。</p>

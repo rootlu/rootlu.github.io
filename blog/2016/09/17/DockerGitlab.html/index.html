@@ -116,24 +116,24 @@
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库。GitLab拥有与GitHub类似的功能，能够浏览源代码，管理缺陷和注释，可以管理团队对仓库的访问，还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://www.rootlu.com/img/runGit.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkng3vfaj30e80193yi.jpg">
 <meta property="og:image" content="http://www.rootlu.com/img/dependencies.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/successDependencies.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/dpkgGit.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/gitlabRb.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/handStart.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/gitStatus.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/curlContainer.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/curlLocal.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/stopGit.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/commitImage.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/loadImage.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/useImage.jpg">
-<meta property="og:updated_time" content="2016-11-21T12:19:06.000Z">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdknluqvpj31180e346h.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkntk0csj30iq08rabx.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkobzwywj30f506q3zh.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkoqxv6ej30ow02naav.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkozbtzmj30fz05vgms.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkp6obyrj30pc01ojrk.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkpb86n2j30mw01uaa6.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkpg9u45j309p05e0t7.jpg">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkpo8aecj30kk022weu.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkpu38qbj30kr02kaaj.jpg">
+<meta property="og:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkq255paj30c603vwez.jpg">
+<meta property="og:updated_time" content="2018-11-19T11:01:04.661Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="利用Dcoker搭建GitLab版本管理服务">
 <meta name="twitter:description" content="GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库。GitLab拥有与GitHub类似的功能，能够浏览源代码，管理缺陷和注释，可以管理团队对仓库的访问，还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。">
-<meta name="twitter:image" content="http://www.rootlu.com/img/runGit.jpg">
+<meta name="twitter:image" content="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkng3vfaj30e80193yi.jpg">
 
 
 
@@ -466,7 +466,7 @@
 
       
         <p>GitLab是一个利用Ruby on Rails开发的开源应用程序，实现一个自托管的Git项目仓库。GitLab拥有与GitHub类似的功能，能够浏览源代码，管理缺陷和注释，可以管理团队对仓库的访问，还提供一个代码片段收集功能可以轻松实现代码复用，便于日后有需要的时候进行查找。<br><a id="more"></a><br>利用docker搭建GitLab服务，可以很方便地部署迁移。在DockerHub中已经存在由GitLab官方提供的Docker<a href="https://hub.docker.com/r/gitlab/gitlab-ce/" target="_blank" rel="noopener">镜像</a>，可以直接拉取使用。在本文中，介绍手动创建gitlab服务镜像，并导出导入使用。</p>
-<h2 id="1、创建容器"><a href="#1、创建容器" class="headerlink" title="1、创建容器"></a>1、创建容器</h2><p><code>docker run -i -t -p :80:80 --name gitlab ubuntu /bin/bash</code><br><img src="/img/runGit.jpg" alt=""></p>
+<h2 id="1、创建容器"><a href="#1、创建容器" class="headerlink" title="1、创建容器"></a>1、创建容器</h2><p><code>docker run -i -t -p :80:80 --name gitlab ubuntu /bin/bash</code><br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkng3vfaj30e80193yi.jpg" alt=""></p>
 <ul>
 <li>添加端口映射为80—&gt;80 ，未添加ip，默认映射所有接口地址</li>
 <li><code>-t</code> 让Docker分配一个伪终端并绑定到容器的标准输入上</li>
@@ -477,26 +477,26 @@
 <li>安装过程中，会出现邮箱配置选项，可根据环境所需自行配置</li>
 <li>安装成功</li>
 </ul>
-<p><img src="/img/successDependencies.jpg" alt=""></p>
-<h2 id="3、安装gitlab"><a href="#3、安装gitlab" class="headerlink" title="3、安装gitlab"></a>3、安装gitlab</h2><p>有多种安装方式，可参考<a href="https://about.gitlab.com/downloads/#ubuntu1604" target="_blank" rel="noopener">官网</a><br>这里采用先下载deb，然后安装的方式。<br><code>dpkg -i gitlab-ce_8.10.5-ce.0_amd64.deb</code><br><img src="/img/dpkgGit.jpg" alt=""></p>
-<h2 id="4、配置gitlab"><a href="#4、配置gitlab" class="headerlink" title="4、配置gitlab"></a>4、配置gitlab</h2><p>进入<code>/etc/gitlab</code>目录，修改gitlab.rb配置文件，把external_url修改为gitlab的webUI访问地址，默认开放80端口<br><img src="/img/gitlabRb.jpg" alt=""></p>
+<p><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxdknluqvpj31180e346h.jpg" alt=""></p>
+<h2 id="3、安装gitlab"><a href="#3、安装gitlab" class="headerlink" title="3、安装gitlab"></a>3、安装gitlab</h2><p>有多种安装方式，可参考<a href="https://about.gitlab.com/downloads/#ubuntu1604" target="_blank" rel="noopener">官网</a><br>这里采用先下载deb，然后安装的方式。<br><code>dpkg -i gitlab-ce_8.10.5-ce.0_amd64.deb</code><br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkntk0csj30iq08rabx.jpg" alt=""></p>
+<h2 id="4、配置gitlab"><a href="#4、配置gitlab" class="headerlink" title="4、配置gitlab"></a>4、配置gitlab</h2><p>进入<code>/etc/gitlab</code>目录，修改gitlab.rb配置文件，把external_url修改为gitlab的webUI访问地址，默认开放80端口<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkobzwywj30f506q3zh.jpg" alt=""></p>
 <h2 id="5、启动gitlab"><a href="#5、启动gitlab" class="headerlink" title="5、启动gitlab"></a>5、启动gitlab</h2><ul>
 <li><code>gitlab-ctl reconfigure</code><br>过程中需要等一会…</li>
-<li>如果一直卡住不动，在另一终端中进入该容器，并手动启动redis<br><code>docker exec -it gitlab /bin/bash</code><br><code>/opt/gitlab/embedded/bin/runsvdir-start</code><br><img src="/img/handStart.jpg" alt=""></li>
-<li>配置启动成功<br><img src="/img/gitStatus.jpg" alt=""></li>
+<li>如果一直卡住不动，在另一终端中进入该容器，并手动启动redis<br><code>docker exec -it gitlab /bin/bash</code><br><code>/opt/gitlab/embedded/bin/runsvdir-start</code><br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkoqxv6ej30ow02naav.jpg" alt=""></li>
+<li>配置启动成功<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkozbtzmj30fz05vgms.jpg" alt=""></li>
 </ul>
-<h2 id="6、访问webUI"><a href="#6、访问webUI" class="headerlink" title="6、访问webUI"></a>6、访问webUI</h2><h3 id="6-1-容器内访问"><a href="#6-1-容器内访问" class="headerlink" title="6.1 容器内访问"></a>6.1 容器内访问</h3><p>在当前终端内输入 <code>curl 0.0.0.0</code><br>出现如下图所示，即表示gitlab<strong>在容器内</strong>安装成功<br><img src="/img/curlContainer.jpg" alt=""></p>
-<h3 id="6-2-容器外访问webUI"><a href="#6-2-容器外访问webUI" class="headerlink" title="6.2 容器外访问webUI"></a>6.2 容器外访问webUI</h3><p>在虚拟机终端内输入 <code>curl 0.0.0.0</code><br>出现如下图所示，即表示gitlab<strong>容器外端口映射</strong>成功<br><img src="/img/curlLocal.jpg" alt=""></p>
+<h2 id="6、访问webUI"><a href="#6、访问webUI" class="headerlink" title="6、访问webUI"></a>6、访问webUI</h2><h3 id="6-1-容器内访问"><a href="#6-1-容器内访问" class="headerlink" title="6.1 容器内访问"></a>6.1 容器内访问</h3><p>在当前终端内输入 <code>curl 0.0.0.0</code><br>出现如下图所示，即表示gitlab<strong>在容器内</strong>安装成功<br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkp6obyrj30pc01ojrk.jpg" alt=""></p>
+<h3 id="6-2-容器外访问webUI"><a href="#6-2-容器外访问webUI" class="headerlink" title="6.2 容器外访问webUI"></a>6.2 容器外访问webUI</h3><p>在虚拟机终端内输入 <code>curl 0.0.0.0</code><br>出现如下图所示，即表示gitlab<strong>容器外端口映射</strong>成功<br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkpb86n2j30mw01uaa6.jpg" alt=""></p>
 <h2 id="7、停止gitlab服务"><a href="#7、停止gitlab服务" class="headerlink" title="7、停止gitlab服务"></a>7、停止gitlab服务</h2><p>容器内执行 <code>gitlab-ctl stop</code></p>
-<p><img src="/img/stopGit.jpg" alt=""></p>
+<p><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkpg9u45j309p05e0t7.jpg" alt=""></p>
 <h2 id="8、导出镜像"><a href="#8、导出镜像" class="headerlink" title="8、导出镜像"></a>8、导出镜像</h2><ul>
-<li>基于容器创建镜像：<code>docker commit gitlab gitlab-ubuntu:16.04</code><br><img src="/img/commitImage.jpg" alt=""></li>
+<li>基于容器创建镜像：<code>docker commit gitlab gitlab-ubuntu:16.04</code><br><img src="https://ws1.sinaimg.cn/large/006tNbRwly1fxdkpo8aecj30kk022weu.jpg" alt=""></li>
 <li>导出tar镜像文件：<code>docker save -o gitlab-ubuntu.tar gitlab-ubuntu:16.04</code></li>
 </ul>
 <h2 id="9、导入镜像"><a href="#9、导入镜像" class="headerlink" title="9、导入镜像"></a>9、导入镜像</h2><p><code>docker load --input gitlab-ubuntu.tar</code></p>
-<p><img src="/img/loadImage.jpg" alt=""></p>
+<p><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkpu38qbj30kr02kaaj.jpg" alt=""></p>
 <h2 id="10、使用镜像"><a href="#10、使用镜像" class="headerlink" title="10、使用镜像"></a>10、使用镜像</h2><h3 id="10-1-创建镜像容器"><a href="#10-1-创建镜像容器" class="headerlink" title="10.1 创建镜像容器"></a>10.1 创建镜像容器</h3><p><code>run -it gitlab-ubuntu:16.04 /bin/bash</code></p>
-<h3 id="10-2-查看gitlab状态"><a href="#10-2-查看gitlab状态" class="headerlink" title="10.2 查看gitlab状态"></a>10.2 查看gitlab状态</h3><p><code>gitlab-ctl status</code><br><img src="/img/useImage.jpg" alt=""></p>
+<h3 id="10-2-查看gitlab状态"><a href="#10-2-查看gitlab状态" class="headerlink" title="10.2 查看gitlab状态"></a>10.2 查看gitlab状态</h3><p><code>gitlab-ctl status</code><br><img src="https://ws2.sinaimg.cn/large/006tNbRwly1fxdkq255paj30c603vwez.jpg" alt=""></p>
 <h3 id="10-3-启动gitlab服务"><a href="#10-3-启动gitlab服务" class="headerlink" title="10.3 启动gitlab服务"></a>10.3 启动gitlab服务</h3><ul>
 <li>清除gitlab.socket文件，以防止在启动过程中unicorn服务启动失败，导致网页502错误。<br>删除<code>/var/opt/gitlab/gitlab-rails/sockets</code>目录下gitlab.socket文件</li>
 <li>启动gitlab<br><code>/opt/gitlab/embedded/bin/runsvdir-start</code></li>

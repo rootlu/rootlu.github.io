@@ -116,17 +116,17 @@
 <meta property="og:site_name" content="ROOTLu">
 <meta property="og:description" content="Swarm是Docker公司在2014年12月初新发布的容器管理工具，，用以管理Docker集群，使得Docker集群暴露给用户时相当于一个虚拟的整体。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://www.rootlu.com/img/swarm-version.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/cluster.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/manage.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/listSwarm.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/swarm.jpg">
-<meta property="og:image" content="http://www.rootlu.com/img/runSwarm.jpg">
-<meta property="og:updated_time" content="2017-01-25T04:30:48.000Z">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkr3bu94j30cp01zdft.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkrak6sdj306i02uwei.jpg">
+<meta property="og:image" content="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkrkyvx4j30u002h74n.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkrqmiy6j30sx03j0t7.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkry4wobj30ky0mngpj.jpg">
+<meta property="og:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdks77iaqj30z5073gol.jpg">
+<meta property="og:updated_time" content="2018-11-19T11:03:07.045Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Docker 集群管理工具 Swarm 的安装配置">
 <meta name="twitter:description" content="Swarm是Docker公司在2014年12月初新发布的容器管理工具，，用以管理Docker集群，使得Docker集群暴露给用户时相当于一个虚拟的整体。">
-<meta name="twitter:image" content="http://www.rootlu.com/img/swarm-version.jpg">
+<meta name="twitter:image" content="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkr3bu94j30cp01zdft.jpg">
 
 
 
@@ -460,8 +460,8 @@
       
         <p>Swarm是Docker公司在2014年12月初新发布的容器管理工具，，用以管理Docker集群，使得Docker集群暴露给用户时相当于一个虚拟的整体。<br><a id="more"></a></p>
 <h2 id="1、swarm安装及配置（内网）"><a href="#1、swarm安装及配置（内网）" class="headerlink" title="1、swarm安装及配置（内网）"></a>1、swarm安装及配置（内网）</h2><h3 id="1-1下载官方swarm镜像"><a href="#1-1下载官方swarm镜像" class="headerlink" title="1.1下载官方swarm镜像"></a>1.1下载官方swarm镜像</h3><p><code>docker pull  swarm</code><br>如在内网环境中搭建，可提前下载，然后导入Docker中。</p>
-<h3 id="1-2-查看是否安装成功"><a href="#1-2-查看是否安装成功" class="headerlink" title="1.2 查看是否安装成功"></a>1.2 查看是否安装成功</h3><p><code>docker run --rm swarm -v</code><br>输出结果（不同版本，版本号可能不同）<br><code>swarm version 1.2.4 (5d5f7f0)</code><br><img src="/img/swarm-version.jpg" alt=""></p>
-<h3 id="1-3-在swarm管理节点创建配置文件cluster"><a href="#1-3-在swarm管理节点创建配置文件cluster" class="headerlink" title="1.3 在swarm管理节点创建配置文件cluster"></a>1.3 在swarm管理节点创建配置文件<code>cluster</code></h3><p>文件中写入要管理的节点，格式形如：<code>ip:2375</code>，2375端口为swarm默认开放端口。配置结果如下图：<br><img src="/img/cluster.jpg" alt=""></p>
+<h3 id="1-2-查看是否安装成功"><a href="#1-2-查看是否安装成功" class="headerlink" title="1.2 查看是否安装成功"></a>1.2 查看是否安装成功</h3><p><code>docker run --rm swarm -v</code><br>输出结果（不同版本，版本号可能不同）<br><code>swarm version 1.2.4 (5d5f7f0)</code><br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkr3bu94j30cp01zdft.jpg" alt=""></p>
+<h3 id="1-3-在swarm管理节点创建配置文件cluster"><a href="#1-3-在swarm管理节点创建配置文件cluster" class="headerlink" title="1.3 在swarm管理节点创建配置文件cluster"></a>1.3 在swarm管理节点创建配置文件<code>cluster</code></h3><p>文件中写入要管理的节点，格式形如：<code>ip:2375</code>，2375端口为swarm默认开放端口。配置结果如下图：<br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkrak6sdj306i02uwei.jpg" alt=""></p>
 <h3 id="1-4-启动swarm"><a href="#1-4-启动swarm" class="headerlink" title="1.4 启动swarm"></a>1.4 启动swarm</h3><p><code>docker run -d -p [swarm_port]:2375 -v /your/path/cluster:/tmp/cluster --privileged=true [swarmName] manage file:///tmp/cluster</code></p>
 <ul>
 <li>[swarm_port]替换成未被占用的其他端口，例如2376，一定不能是2375</li>
@@ -472,13 +472,13 @@
 </ul>
 </li>
 </ul>
-<h3 id="1-5-查看是否启动成功"><a href="#1-5-查看是否启动成功" class="headerlink" title="1.5 查看是否启动成功"></a>1.5 查看是否启动成功</h3><p><code>docker ps</code><br><img src="/img/manage.jpg" alt=""></p>
-<h3 id="1-6-查看节点"><a href="#1-6-查看节点" class="headerlink" title="1.6 查看节点"></a>1.6 查看节点</h3><p><code>docker run --rm=true --privileged=true -v /your/path/cluster:/tmp/cluster  [swarmName] list  file:///tmp/cluster</code><br><img src="/img/listSwarm.jpg" alt=""></p>
-<h3 id="1-7-查看集群节点信息"><a href="#1-7-查看集群节点信息" class="headerlink" title="1.7 查看集群节点信息"></a>1.7 查看集群节点信息</h3><p><code>docker -H [swarm_ip]:[swarm_port] info</code><br><img src="/img/swarm.jpg" alt=""></p>
+<h3 id="1-5-查看是否启动成功"><a href="#1-5-查看是否启动成功" class="headerlink" title="1.5 查看是否启动成功"></a>1.5 查看是否启动成功</h3><p><code>docker ps</code><br><img src="https://ws3.sinaimg.cn/large/006tNbRwly1fxdkrkyvx4j30u002h74n.jpg" alt=""></p>
+<h3 id="1-6-查看节点"><a href="#1-6-查看节点" class="headerlink" title="1.6 查看节点"></a>1.6 查看节点</h3><p><code>docker run --rm=true --privileged=true -v /your/path/cluster:/tmp/cluster  [swarmName] list  file:///tmp/cluster</code><br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkrqmiy6j30sx03j0t7.jpg" alt=""></p>
+<h3 id="1-7-查看集群节点信息"><a href="#1-7-查看集群节点信息" class="headerlink" title="1.7 查看集群节点信息"></a>1.7 查看集群节点信息</h3><p><code>docker -H [swarm_ip]:[swarm_port] info</code><br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxdkry4wobj30ky0mngpj.jpg" alt=""></p>
 <h2 id="2-、使用"><a href="#2-、使用" class="headerlink" title="2.、使用"></a>2.、使用</h2><p>！！！调度器（三种模式）和过滤器</p>
 <ul>
 <li>创建容器node1，运行一个web用例<br><code>docker -H [swarm_ip]:[swarm_port] run --name node1 -d -P training/webapp python app.py</code></li>
-<li>查看集群中所有的容器<br><code>docker -H [swarm_ip]:[swarm_port] ps -a</code><br><img src="/img/runSwarm.jpg" alt=""></li>
+<li>查看集群中所有的容器<br><code>docker -H [swarm_ip]:[swarm_port] ps -a</code><br><img src="https://ws4.sinaimg.cn/large/006tNbRwly1fxdks77iaqj30z5073gol.jpg" alt=""></li>
 </ul>
 
       
